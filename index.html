@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faith n Muscle | Online Fitness Coaching</title>
+  <meta name="description" content="Faith n Muscle – Online personal training and nutrition coaching by certified coach Bernil. Custom workout plans, meal plans, and 1-on-1 coaching tailored to your goals."/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #004aad;
+      --blue-mid:   #1565c0;
+      --blue-light: #4285f4;
+      --blue-glow:  rgba(0, 74, 173, 0.35);
+      --bg:         #0a0a0a;
+      --bg2:        #101010;
+      --bg3:        #171717;
+      --text:       #f0f0f0;
+      --muted:      #888;
+      --border:     #1e1e1e;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10,10,10,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 2px;
+      color: var(--blue-light); text-decoration: none;
+    }
+    .nav-logo img {
+      width: 36px; height: 36px; border-radius: 6px;
+      object-fit: cover;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue-light); }
+    .nav-cta {
+      background: var(--blue) !important; color: #fff !important;
+      padding: 0.45rem 1.2rem; border-radius: 4px; font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--blue-mid) !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); display: block; transition: all 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; width: 100%;
+      background: var(--bg2); padding: 1.5rem 5%;
+      border-bottom: 1px solid var(--border); z-index: 99;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; color: var(--text); text-decoration: none;
+      padding: 0.75rem 0; border-bottom: 1px solid var(--border);
+      font-weight: 500; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--blue-light); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 70vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 100px 5% 70px;
+      background:
+        linear-gradient(to bottom, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.78) 50%, rgba(10,10,10,0.96) 100%),
+        url('images/hero-bg.jpg') center/cover no-repeat;
+    }
+    .hero-content { position: relative; max-width: 700px; }
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--blue-light);
+      color: var(--blue-light);
+      font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.35rem 1rem; border-radius: 2px; margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: 0.95; letter-spacing: 2px; margin-bottom: 1.5rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .hero-title span { color: var(--blue-light); }
+    .hero-subtitle {
+      font-size: 1.1rem; color: #e8e8e8;
+      max-width: 520px; margin-bottom: 2.5rem; line-height: 1.7;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 4px;
+      font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;
+      text-decoration: none; text-transform: uppercase;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--blue-mid); transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid #555; color: var(--text);
+      padding: 0.85rem 2rem; border-radius: 4px;
+      font-weight: 500; font-size: 0.9rem; letter-spacing: 0.5px;
+      text-decoration: none; text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--blue-light); color: var(--blue-light); }
+    .hero-stats { margin-top: 3.5rem; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .hero-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem; color: var(--blue-light); letter-spacing: 1px;
+    }
+    .hero-stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 5%; }
+    .section-label { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 0.75rem; }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 1px; line-height: 1; margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--muted); max-width: 540px; line-height: 1.7; margin-bottom: 3rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-photo {
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .about-photo img { width: 100%; height: auto; display: block; }
+    .about-question {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+      letter-spacing: 0.6px;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--blue-light);
+      padding-left: 0.85rem;
+    }
+    .about-text p { color: #aaa; line-height: 1.8; margin-bottom: 1.2rem; }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+    .creds { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+    .cred-badge {
+      border: 1px solid var(--blue-light); color: var(--blue-light);
+      padding: 0.4rem 0.9rem; font-size: 0.78rem; letter-spacing: 1px;
+      border-radius: 3px; font-weight: 600; text-transform: uppercase;
+    }
+
+    /* ── PHOTO STRIP ── */
+    #gallery { background: var(--bg); padding: 0; overflow: hidden; }
+    .photo-strip { display: flex; height: 280px; }
+    .photo-strip img { flex: 1; object-fit: cover; filter: brightness(0.75); transition: flex 0.4s ease, filter 0.3s; }
+    .photo-strip img:hover { flex: 2.5; filter: brightness(1); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg2); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .service-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .service-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+    .service-card-img { height: 200px; overflow: hidden; }
+    .service-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .service-card:hover .service-card-img img { transform: scale(1.05); }
+    .service-card-body { padding: 1.75rem; }
+    .service-card-body h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 0.5rem;
+    }
+    .service-card-body p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+    .service-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; color: var(--blue-light); letter-spacing: 1px; margin-bottom: 1.25rem;
+    }
+    .service-price span { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+    .service-card ul { list-style: none; margin-bottom: 1.5rem; }
+    .service-card ul li {
+      color: #bbb; font-size: 0.85rem; padding: 0.3rem 0;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .service-card ul li::before { content: ''; width: 5px; height: 5px; background: var(--blue-light); border-radius: 50%; flex-shrink: 0; }
+    .service-card .btn-primary { width: 100%; justify-content: center; }
+
+    /* ── HOW IT WORKS ── */
+    #how-it-works { background: var(--bg); }
+    .steps { display: flex; flex-direction: column; gap: 0; max-width: 700px; }
+    .step { display: flex; gap: 2rem; padding-bottom: 2.5rem; position: relative; }
+    .step:not(:last-child)::after {
+      content: ''; position: absolute; left: 22px; top: 45px;
+      width: 1px; bottom: 0; background: var(--border);
+    }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid var(--blue-light); color: var(--blue-light);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; background: var(--bg); z-index: 1;
+    }
+    .step-content h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .step-content p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ── APPLY / FORMS ── */
+    #apply { background: var(--bg2); }
+    .apply-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+    .apply-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+    }
+    .apply-card-header {
+      background: var(--blue); padding: 1.5rem 1.5rem 1.25rem;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .apply-card-header:hover { background: var(--blue-mid); }
+    .apply-card-label {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      color: #fff; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 0.25rem 0.75rem; border-radius: 20px;
+      margin-bottom: 0.6rem;
+    }
+    .apply-card-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: 1px; color: #fff; margin-bottom: 0.4rem;
+    }
+    .apply-card-header p { color: rgba(255,255,255,0.8); font-size: 0.85rem; line-height: 1.5; }
+    .form-embed-wrapper {
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+    .form-embed-wrapper.open {
+      display: block;
+    }
+    .form-embed-wrapper iframe {
+      width: 100%; border: none; display: block;
+      min-height: 540px; background: #fff;
+    }
+    .form-open-link {
+      display: none; align-items: center; justify-content: center; gap: 0.4rem;
+      color: var(--blue-light); font-size: 0.82rem; text-decoration: none;
+      padding: 0.65rem 1rem; border-bottom: 1px solid var(--border);
+      background: rgba(66,133,244,0.06);
+      transition: background 0.2s;
+    }
+    .form-open-link.open {
+      display: flex;
+    }
+    .form-open-link:hover { background: rgba(66,133,244,0.14); text-decoration: underline; }
+    .form-toggle-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%; padding: 1rem 1.5rem;
+      background: transparent; border: none; border-top: 1px solid var(--border);
+      color: var(--blue-light); font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .form-toggle-btn:hover { background: rgba(66,133,244,0.1); }
+    .form-toggle-btn.open { background: rgba(66,133,244,0.06); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+    .contact-wrapper { max-width: 600px; }
+    .contact-wrapper p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: var(--text);
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 1rem 1.25rem; border-radius: 8px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--blue-light); color: var(--blue-light); }
+    .contact-link svg { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: var(--blue-light); }
+    .contact-link-label { font-size: 0.75rem; color: var(--muted); display: block; }
+    .contact-link-value { font-size: 0.9rem; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border); padding: 3rem 5%;
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 2rem;
+      margin-bottom: 2rem; padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .footer-brand .nav-logo { display: inline-block; margin-bottom: 0.5rem; }
+    .footer-brand p { color: var(--muted); font-size: 0.85rem; max-width: 260px; line-height: 1.6; }
+    .footer-links { display: flex; gap: 3rem; flex-wrap: wrap; }
+    .footer-col h5 { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 1rem; }
+    .footer-col a { display: block; color: var(--muted); text-decoration: none; font-size: 0.85rem; padding: 0.2rem 0; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { color: var(--muted); font-size: 0.8rem; }
+    .footer-bottom .legal-links { display: flex; gap: 1.5rem; }
+    .footer-bottom .legal-links a { color: var(--muted); font-size: 0.8rem; text-decoration: none; }
+    .footer-bottom .legal-links a:hover { color: var(--text); }
+    .footer-tagline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      letter-spacing: 2px; color: var(--blue);
+      text-align: center; padding: 2rem 0;
+      border-top: 1px solid var(--border); margin-top: 2rem;
+    }
+
+    /* ── FAQ ── */
+    #faq { background: var(--bg); }
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.35rem 0;
+    }
+    .faq-item:first-of-type { padding-top: 0; }
+    .faq-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+    .faq-item p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; }
+    .faq-item p a { color: var(--blue-light); }
+
+    /* ── DISCLAIMER ── */
+    #disclaimer { background: var(--bg2); }
+    .disclaimer-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+    }
+    .disclaimer-box p {
+      color: #b7b7b7;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-bottom: 0.9rem;
+    }
+    .disclaimer-box p:last-child { margin-bottom: 0; }
+
+    /* ── POLICIES ── */
+    #policies { background: var(--bg2); }
+    .policy-list { max-width: 900px; margin: 0 auto; display: grid; gap: 1.5rem; }
+    .policy-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .policy-item h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+    .policy-item p {
+      color: #b7b7b7;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-bottom: 0.8rem;
+    }
+    .policy-item p:last-child { margin-bottom: 0; }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99;
+      background: #25D366; border-radius: 50%;
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-photo { aspect-ratio: auto; }
+      .photo-strip { height: 160px; }
+      section { padding: 60px 5%; }
+      .footer-top { flex-direction: column; }
+      .footer-links { gap: 2rem; }
+      #how-it-works > div[style*="grid"] { grid-template-columns: 1fr !important; }
+      #how-it-works .steps { max-width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo"><img src="images/logo.jpg" alt="Faith n Muscle logo"/>Faith n Muscle</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#apply">Apply</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#apply" class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#how-it-works" onclick="toggleMenu()">How It Works</a>
+  <a href="#apply" onclick="toggleMenu()">Apply</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Online Fitness Coaching · Sri Lanka</div>
+    <h1 class="hero-title">Where Faith<br/><span>Meets</span><br/>Strength</h1>
+    <p class="hero-subtitle">
+      Real results through honest coaching. No gimmicks, no shortcuts -
+      just a program built around your body, your life, and your goals.
+    </p>
+    <div class="hero-buttons">
+      <a href="#apply" class="btn-primary">Apply Now</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">NVQ 4</div>
+        <div class="hero-stat-label">Certified Coach</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Custom Programs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">FOFATO</div>
+        <div class="hero-stat-label">Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<div id="gallery">
+  <div class="photo-strip">
+    <img src="images/photo5.jpg" alt="Coach Bernil training"/>
+    <img src="images/photo1.jpg" alt="Bench press training"/>
+    <img src="images/photo4.jpg" alt="Incline press training"/>
+    <img src="images/photo7.jpg" alt="Cable training"/>
+    <img src="images/photo8.jpg" alt="Pull-up training"/>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-photo">
+      <img src="images/bernil-coach.jpg" alt="Coach Bernil"/>
+    </div>
+    <div class="about-text">
+      <p class="section-label">About the Coach</p>
+      <h2 class="section-title">Hi, I'm Bernil</h2>
+      <p class="about-question">Free information is everywhere, but why invest in coaching with me?</p>
+      <p>
+        Because I believe real results come from real knowledge and real experience - not from shortcuts, fad diets or copy-paste workout plans. I am an NVQ Level 4 Sports Massage Therapist, NVQ Level 4 Fitness Trainer and FOFATO Emergency First Responder.
+      </p>
+      <p>
+        I have worked in multiple gyms after dropping out of school during advanced level classes. I was blessed with the opportunity to train, meet and talk to many different and amazing people, serving as a strength and conditioning coach at my own school. I worked with bodybuilders, powerlifters, school and full-time athletes, complete beginners and patients under medical guidance - helping them improve strength, fitness and overall health step by step.
+      </p>
+      <p>
+        I started online coaching once I kept procrastinating this opportunity amid many of my client requests. The reason I did that was that I was not confident enough - I don't have many pictures of me training another. It's just me. But here I am, ready to help you reach your goals safely and realistically.
+      </p>
+      <div class="creds">
+        <span class="cred-badge">NVQ L4 Fitness</span>
+        <span class="cred-badge">NVQ L4 Sports Massage</span>
+        <span class="cred-badge">FOFATO First Responder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION STRIP -->
+<section style="background: var(--blue); padding: 60px 5%;">
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 2.5rem; max-width:1100px; margin:0 auto; text-align:center;">
+    <div>
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">My Mission</h3>
+      <p style="color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.7;">Help you become content with yourself by losing body fat, gaining strength and building muscle without extreme diets or fake fitness advice - with real and sustainable methods you can follow for life.</p>
+    </div>
+    <div>
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">My Approach</h3>
+      <p style="color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.7;">Training and nutrition don't need to be complicated. Progressive training, flexible and sustainable nutritional guidance, and consistent habits - to get realistic results without starving or overtraining.</p>
+    </div>
+    <div>
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">What You Get</h3>
+      <p style="color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.7;">Personalised workout plans, detailed meal guides and honest coaching. Whether you choose full coaching or just a plan, everything is built to help you progress step by step.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">Programs & Pricing</p>
+  <h2 class="section-title">Choose Your Plan</h2>
+  <p class="section-sub">Every program is built from scratch for you. No templates, no one-size-fits-all.</p>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-card-img">
+        <img src="images/photo5.jpg" alt="1-on-1 Coaching"/>
+      </div>
+      <div class="service-card-body">
+        <h3>Online 1-on-1 Coaching</h3>
+        <p>Full online coaching with daily check-ins, workout tracking and nutritional guidance. A personalised workout plan, nutrition plan and program tracking sheet - all managed through messages and video calls.</p>
+        <div class="service-price">LKR 10,000 <span>/ month</span></div>
+        <ul>
+          <li>Personalised workout program</li>
+          <li>Custom nutrition plan</li>
+          <li>Daily check-ins &amp; ongoing program adjustments</li>
+          <li>WhatsApp &amp; video call support</li>
+          <li>Progress tracking sheet</li>
+        </ul>
+        <a href="#form-coaching" class="btn-primary" onclick="event.preventDefault();openFormById('form-coaching');">Apply for Coaching</a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-img">
+        <img src="images/svc-workout.jpg" alt="Workout Plan"/>
+      </div>
+      <div class="service-card-body">
+        <h3>Detailed Workout Plan</h3>
+        <p>A detailed workout plan based on your experience, goals and weekly schedule. You can choose your preferred training style - full body, PPL, push/pull, or antagonist/posterior.</p>
+        <div class="service-price">LKR 4,500 <span>/ plan</span></div>
+        <ul>
+          <li>Built for your equipment &amp; level</li>
+          <li>Your choice of training split</li>
+          <li>Progressive overload built in</li>
+          <li>Clear exercise instructions</li>
+        </ul>
+        <a href="#form-workout" class="btn-primary" onclick="event.preventDefault();openFormById('form-workout');">Get Workout Plan</a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-img">
+        <img src="images/svc-meal.jpg" alt="Meal Plan"/>
+      </div>
+      <div class="service-card-body">
+        <h3>Detailed Meal Plan</h3>
+        <p>Flexible and sustainable plans based on your goals, budget and lifestyle. Includes food alternatives so you can enjoy your meals while still making progress.</p>
+        <div class="service-price">LKR 6,000 <span>/ plan</span></div>
+        <ul>
+          <li>Custom calorie &amp; macro targets</li>
+          <li>Budget &amp; lifestyle friendly</li>
+          <li>Food alternatives included</li>
+          <li>Allergen considerations</li>
+        </ul>
+        <a href="#form-meal" class="btn-primary" onclick="event.preventDefault();openFormById('form-meal');">Get Meal Plan</a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-img">
+        <img src="images/svc-athletes.jpg" alt="Youth &amp; School Athletes Training"/>
+      </div>
+      <div class="service-card-body">
+        <h3>Youth &amp; School Athletes Training</h3>
+        <p>Performance training designed for youth and school athletes to improve strength, speed, power and overall performance while reducing injury risk. Can be coordinated with school coaches when required.</p>
+        <div class="service-price">LKR 4,500 <span>/ plan</span></div>
+        <ul>
+          <li>Sport-specific strength training</li>
+          <li>Speed &amp; agility development</li>
+          <li>Explosive power training</li>
+          <li>Injury prevention exercises</li>
+          <li>Conditioning for matches &amp; tournaments</li>
+          <li>Bodyweight &amp; gym options</li>
+        </ul>
+        <a href="#form-athletes" class="btn-primary" onclick="event.preventDefault();openFormById('form-athletes');">Get Athletes Plan</a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-img">
+        <img src="images/photo3.jpg" alt="Rehab and flexibility recovery training"/>
+      </div>
+      <div class="service-card-body">
+        <h3>Rehab &amp; Flexibility</h3>
+        <p>Programs focused on safe recovery, improving mobility and restoring strength after injury or long periods without training. Suitable for beginners and athletes alike.</p>
+        <div class="service-price">LKR 5,000 <span>/ plan</span></div>
+        <ul>
+          <li>Injury rehabilitation exercises</li>
+          <li>Mobility &amp; flexibility training</li>
+          <li>Stretching routines</li>
+          <li>Strengthening post-injury</li>
+          <li>Safe return to heavy training</li>
+          <li>Long-term health focus</li>
+        </ul>
+        <a href="#form-rehab" class="btn-primary" onclick="event.preventDefault();openFormById('form-rehab');">Get Rehab Plan</a>
+      </div>
+    </div>
+
+  </div>
+  <p style="color:var(--muted); font-size:0.82rem; margin-top:2rem; max-width:700px; border-top:1px solid var(--border); padding-top:1.5rem; line-height:1.6;">
+    <strong style="color:var(--text);">Important:</strong> Programs will only be created after complete payment is confirmed. Filling the questionnaire does not guarantee service until payment has been completed. Once the plan has been prepared, cancellation is not allowed (see <a href="#refund-policy" style="color:var(--blue-light);">Refund Policy</a>). All plans are made for personal use only - copying, sharing, reselling or distributing without permission is strictly prohibited (see <a href="#terms-and-conditions" style="color:var(--blue-light);">Terms &amp; Conditions</a>). For rehab/flexibility programs, consult a doctor before starting if you have a serious or medical condition (see <a href="#privacy-policy" style="color:var(--blue-light);">Privacy Policy</a> and Disclaimer).
+  </p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" style="background:var(--bg2);">
+  <p class="section-label">The Process</p>
+  <h2 class="section-title">How It Works</h2>
+  <p class="section-sub">Getting started is straightforward. Here's what happens from day one.</p>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto;">
+    <div class="steps" style="max-width:100%;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Fill in the Questionnaire</h4>
+          <p>Use the Apply section below to fill in the relevant Google Form for your chosen service. Tell me about your goals, fitness level, schedule, equipment and dietary preferences - the more detail, the better your program.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Confirm Payment via WhatsApp</h4>
+          <p>After reviewing your form I'll get in touch via WhatsApp with payment instructions. Your program only begins once full payment is confirmed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Receive Your Custom Program</h4>
+          <p>Your fully personalised plan is delivered - typically within 48-72 hours of payment confirmation. Built from scratch for you, not from a template.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Ongoing Support (1-on-1 Clients)</h4>
+          <p>Coaching clients receive daily check-ins plus program adjustments as you progress. I'm available on WhatsApp and for video calls throughout your journey.</p>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <img src="images/photo2.jpg" alt="Coach Bernil training" style="width:100%; border-radius:8px; display:block; object-fit:cover; aspect-ratio:1/1; border:1px solid var(--border);"/>
+      <div style="position:absolute; bottom:0; left:0; right:0; padding:1.5rem; background:linear-gradient(to top, rgba(10,10,10,0.92) 0%, transparent 100%); border-radius:0 0 8px 8px;">
+        <p style="color:#fff; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:1px; margin:0;">Personalised. Progressive. Results-driven.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY / FORMS -->
+<section id="apply">
+  <p class="section-label">Apply Now</p>
+  <h2 class="section-title">Fill in Your Form</h2>
+  <p class="section-sub">Pick your plan below, fill in the form, and I'll be in touch on WhatsApp within 24 hours to confirm and arrange payment.</p>
+
+  <div class="apply-cards-grid">
+
+    <div class="apply-card" id="form-coaching">
+      <div class="apply-card-header">
+        <span class="apply-card-label">LKR 10,000 / mo</span>
+        <h3>Online 1-on-1 Coaching</h3>
+        <p>Full coaching with daily check-ins, workout plan, nutrition plan, progress tracking and WhatsApp support.</p>
+      </div>
+      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
+      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLScovykqWtf5sXLCIn9Lh0dZ8BW31-BDoqwL-iwbR6buvDrGcg/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
+      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLScovykqWtf5sXLCIn9Lh0dZ8BW31-BDoqwL-iwbR6buvDrGcg/viewform?embedded=true" data-title="Online 1-on-1 Coaching Application">
+      </div>
+    </div>
+
+    <div class="apply-card" id="form-workout">
+      <div class="apply-card-header">
+        <span class="apply-card-label">LKR 4,500 one-time</span>
+        <h3>Workout Plan</h3>
+        <p>A detailed custom workout program built around your equipment, level and goals.</p>
+      </div>
+      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
+      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdAwLlrFPpaxpdoJBkXPcc1i4pEE2Dxq6E6ZRQjdn37GRRqxw/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
+      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSdAwLlrFPpaxpdoJBkXPcc1i4pEE2Dxq6E6ZRQjdn37GRRqxw/viewform?embedded=true" data-title="Workout Plan Application">
+      </div>
+    </div>
+
+    <div class="apply-card" id="form-meal">
+      <div class="apply-card-header">
+        <span class="apply-card-label">LKR 6,000 one-time</span>
+        <h3>Meal Plan</h3>
+        <p>A flexible, sustainable nutrition plan tailored to your goals, budget and lifestyle.</p>
+      </div>
+      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
+      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSed617lRa0qmidm2TBP3I1jS4CTE7ALXk5SWulDBdOAAvnwhg/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
+      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSed617lRa0qmidm2TBP3I1jS4CTE7ALXk5SWulDBdOAAvnwhg/viewform?embedded=true" data-title="Meal Plan Application">
+      </div>
+    </div>
+
+    <div class="apply-card" id="form-athletes">
+      <div class="apply-card-header">
+        <span class="apply-card-label">LKR 4,500 one-time</span>
+        <h3>Youth &amp; School Athletes Training</h3>
+        <p>Performance and strength program for youth and school athletes - rugby, cricket, football, track &amp; field and more.</p>
+      </div>
+      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
+      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdiBwkcFT4jiAIpKB3ZiFHQRT4C4FWOOqQy_Da_aIVrtWUOWw/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
+      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSdiBwkcFT4jiAIpKB3ZiFHQRT4C4FWOOqQy_Da_aIVrtWUOWw/viewform?embedded=true" data-title="Youth and School Athletes Training Application">
+      </div>
+    </div>
+
+    <div class="apply-card" id="form-rehab">
+      <div class="apply-card-header">
+        <span class="apply-card-label">LKR 5,000 one-time</span>
+        <h3>Rehab &amp; Flexibility</h3>
+        <p>Recovery, mobility and flexibility programs for safe return to training after injury or long breaks.</p>
+      </div>
+      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
+      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeBllVnpeWdXhCVeW6krVmNaKomsMcVMB86S24GuKD7NA20XA/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
+      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSeBllVnpeWdXhCVeW6krVmNaKomsMcVMB86S24GuKD7NA20XA/viewform?embedded=true" data-title="Rehab and Flexibility Application">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2);">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Contact Bernil</h2>
+  <div class="contact-wrapper">
+    <p>The fastest way to reach me is WhatsApp. If you've already submitted a form, I'll get back to you within 24 hours. Feel free to message me with any questions before applying.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/+94761167303?text=Hi%20Bernil%2C%20I%20found%20your%20website%20and%20I'm%20interested%20in%20coaching!" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#4285f4" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <div>
+          <span class="contact-link-label">WhatsApp</span>
+          <span class="contact-link-value">+94 76 116 7303</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/bernil500b.c" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" stroke-linecap="round" stroke-linejoin="round"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"/></svg>
+        <div>
+          <span class="contact-link-label">Instagram</span>
+          <span class="contact-link-value">@bernil500b.c</span>
+        </div>
+      </a>
+      <a href="https://tiktok.com/@ichbinbernil" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-13c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+        <div>
+          <span class="contact-link-label">TikTok</span>
+          <span class="contact-link-value">@ichbinbernil</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--bg);">
+  <p class="section-label">Questions</p>
+  <h2 class="section-title">Frequently Asked</h2>
+  <p class="section-sub">Quick answers about coaching, plans, payment and policies.</p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <h4>What's the difference between 1-on-1 coaching and a standalone plan?</h4>
+      <p>Coaching (LKR 10,000/month) includes daily check-ins, workout and nutrition plans, tracking and ongoing adjustments on WhatsApp and video calls. Standalone workout, meal, athletes or rehab plans are one-time programs with the depth described on each card—without the full month-to-month coaching relationship.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How do I pay, and when does my program start?</h4>
+      <p>After you submit the right Google Form, I'll reply on WhatsApp with payment instructions (e.g. bank transfer). Work begins only after <strong>full payment is confirmed</strong>. Submitting the form does not reserve a slot until payment is complete.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How long until I receive my plan?</h4>
+      <p>Custom plans are usually delivered within <strong>48–72 hours</strong> after payment is confirmed, depending on workload and how complete your questionnaire answers are.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can I cancel or get a refund after my plan is ready?</h4>
+      <p>Once a plan has been prepared, cancellation is not offered. See the <a href="#refund-policy">Refund Policy</a> below for details.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can I share or resell my plan?</h4>
+      <p>No. All material is for <strong>your personal use only</strong>. Copying, sharing, reselling or distributing plans without permission is not allowed.</p>
+    </div>
+    <div class="faq-item">
+      <h4>I have an injury or medical condition—can I still sign up?</h4>
+      <p>For rehab and flexibility work, get clearance from your doctor if the condition is serious or medical. Coaching and plans are educational and not a substitute for medical diagnosis or treatment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section id="disclaimer" style="background:var(--bg2);">
+  <p class="section-label">Important</p>
+  <h2 class="section-title">Disclaimer</h2>
+  <p class="section-sub">Please read this before starting any coaching, workout or nutrition plan.</p>
+  <div class="disclaimer-box">
+    <p>All coaching, workout plans and nutrition plans on this website are for educational and fitness guidance purposes only. They do not replace medical diagnosis, treatment or professional healthcare advice.</p>
+    <p>I provide structured guidance and support, but each client is responsible for following the program safely and consistently. If you have a pre-existing injury, illness or any medical condition, get clearance from your doctor before starting.</p>
+    <p>All workout plans and nutrition plans are made for personal use only. Copying, sharing, reselling or distributing any plan without permission is strictly prohibited.</p>
+  </div>
+</section>
+
+<!-- POLICIES -->
+<section id="policies">
+  <p class="section-label">Legal</p>
+  <h2 class="section-title">Policies</h2>
+  <p class="section-sub">These policies apply to all services and programs listed on this website.</p>
+  <div class="policy-list">
+    <article class="policy-item" id="privacy-policy">
+      <h3>Privacy Policy</h3>
+      <p>Your personal information is collected only to assess your application, deliver your program and communicate about your coaching service. This can include your contact details, training background, health-related information you voluntarily provide and progress updates.</p>
+      <p>Your information is not sold. It may be shared only when required to process payments, meet legal obligations, or protect safety. By submitting forms on this site, you consent to this use of your information for coaching and support purposes.</p>
+    </article>
+    <article class="policy-item" id="terms-and-conditions">
+      <h3>Terms &amp; Conditions</h3>
+      <p>All plans are created for individual, personal use. Copying, sharing, distributing or reselling any program content without permission is prohibited. Services begin only after full payment confirmation.</p>
+      <p>Coaching and plans provide fitness and nutrition guidance, not medical diagnosis or treatment. You are responsible for seeking medical advice when needed, especially if you have a pre-existing injury, illness or other health concern.</p>
+    </article>
+    <article class="policy-item" id="refund-policy">
+      <h3>Refund Policy</h3>
+      <p>Payments are non-refundable once a custom plan has been prepared or coaching delivery has started. Because each program is created based on your submitted details, completed work cannot be returned.</p>
+      <p>If payment is made but service delivery has not started, requests can be reviewed case by case at the coach's discretion. Submitting a form alone does not confirm service until payment has been completed.</p>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo">Faith n Muscle</a>
+      <p>Online fitness coaching built on faith, honesty, and real results. Based in Sri Lanka, coaching worldwide.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#apply">Online 1-on-1 Coaching</a>
+        <a href="#apply">Workout Plan</a>
+        <a href="#apply">Meal Plan</a>
+        <a href="#apply">Youth &amp; School Athletes</a>
+        <a href="#apply">Rehab &amp; Flexibility</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <a href="https://wa.me/+94761167303" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/bernil500b.c" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://tiktok.com/@ichbinbernil" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Faith n Muscle. All rights reserved.</p>
+    <div class="legal-links">
+      <a href="#privacy-policy">Privacy Policy</a>
+      <a href="#terms-and-conditions">Terms &amp; Conditions</a>
+      <a href="#refund-policy">Refund Policy</a>
+    </div>
+  </div>
+  <div class="footer-tagline">WITH FAITH, IT'S LIGHT WEIGHT</div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/+94761167303?text=Hi%20Bernil%2C%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20coaching!" class="wa-float" target="_blank" rel="noopener" title="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function toggleForm(btn) {
+    var card = btn.closest('.apply-card');
+    var wrapper = card.querySelector('.form-embed-wrapper');
+    var link = card.querySelector('.form-open-link');
+    var isOpen = wrapper.classList.contains('open');
+
+    // Close all other open cards first
+    document.querySelectorAll('.apply-card').forEach(function(otherCard) {
+      if (otherCard === card) return;
+      var otherWrapper = otherCard.querySelector('.form-embed-wrapper');
+      var otherLink = otherCard.querySelector('.form-open-link');
+      var otherBtn = otherCard.querySelector('.form-toggle-btn');
+      if (otherWrapper && otherWrapper.classList.contains('open')) {
+        otherWrapper.classList.remove('open');
+        if (otherLink) otherLink.classList.remove('open');
+        if (otherBtn) {
+          otherBtn.classList.remove('open');
+          otherBtn.textContent = 'Apply Now ▾';
+        }
+      }
+    });
+
+    if (isOpen) {
+      wrapper.classList.remove('open');
+      link.classList.remove('open');
+      btn.classList.remove('open');
+      btn.textContent = 'Apply Now ▾';
+    } else {
+      // Lazy-load iframe on first open
+      if (!wrapper.querySelector('iframe')) {
+        var iframe = document.createElement('iframe');
+        iframe.src = wrapper.getAttribute('data-src');
+        iframe.title = wrapper.getAttribute('data-title');
+        iframe.textContent = 'Loading…';
+        wrapper.appendChild(iframe);
+      }
+      wrapper.classList.add('open');
+      link.classList.add('open');
+      btn.classList.add('open');
+      btn.textContent = 'Close Form ▴';
+    }
+  }
+
+  function openFormById(formId) {
+    var card = document.getElementById(formId);
+    if (!card) return;
+    var btn = card.querySelector('.form-toggle-btn');
+    var wrapper = card.querySelector('.form-embed-wrapper');
+    if (!wrapper.classList.contains('open')) {
+      toggleForm(btn);
+    }
+    setTimeout(function() { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+  }
+
+  // Make entire card header clickable
+  document.querySelectorAll('.apply-card-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      var btn = this.closest('.apply-card').querySelector('.form-toggle-btn');
+      if (btn) toggleForm(btn);
+    });
+  });
+
+  // Check hash on page load to auto-open a specific form
+  document.addEventListener('DOMContentLoaded', function() {
+    var hash = window.location.hash;
+    if (hash && hash.startsWith('#form-')) {
+      openFormById(hash.substring(1));
+    }
+  });
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    sections.forEach(section => {
+      const top = section.offsetTop - 80;
+      if (scrollY >= top && scrollY < top + section.offsetHeight) {
+        document.querySelectorAll('.nav-links a').forEach(a => {
+          a.style.color = '';
+          if (a.getAttribute('href') === '#' + section.id) a.style.color = 'var(--blue-light)';
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
