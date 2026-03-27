@@ -279,12 +279,12 @@
     .apply-card {
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 8px; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
     }
+    .apply-card:hover { border-color: var(--blue-light); transform: translateY(-2px); }
     .apply-card-header {
       background: var(--blue); padding: 1.5rem 1.5rem 1.25rem;
-      cursor: pointer; transition: background 0.2s;
     }
-    .apply-card-header:hover { background: var(--blue-mid); }
     .apply-card-label {
       display: inline-block;
       background: rgba(255,255,255,0.15);
@@ -298,37 +298,75 @@
       font-size: 1.6rem; letter-spacing: 1px; color: #fff; margin-bottom: 0.4rem;
     }
     .apply-card-header p { color: rgba(255,255,255,0.8); font-size: 0.85rem; line-height: 1.5; }
-    .form-embed-wrapper {
-      border-top: 1px solid var(--border);
-      display: none;
-    }
-    .form-embed-wrapper.open {
-      display: block;
-    }
-    .form-embed-wrapper iframe {
-      width: 100%; border: none; display: block;
-      min-height: 540px; background: #fff;
-    }
-    .form-open-link {
-      display: none; align-items: center; justify-content: center; gap: 0.4rem;
-      color: var(--blue-light); font-size: 0.82rem; text-decoration: none;
-      padding: 0.65rem 1rem; border-bottom: 1px solid var(--border);
-      background: rgba(66,133,244,0.06);
-      transition: background 0.2s;
-    }
-    .form-open-link.open {
-      display: flex;
-    }
-    .form-open-link:hover { background: rgba(66,133,244,0.14); text-decoration: underline; }
-    .form-toggle-btn {
+    .form-apply-btn {
       display: flex; align-items: center; justify-content: center; gap: 0.5rem;
       width: 100%; padding: 1rem 1.5rem;
       background: transparent; border: none; border-top: 1px solid var(--border);
       color: var(--blue-light); font-size: 0.95rem; font-weight: 600;
       cursor: pointer; transition: background 0.2s;
+      text-align: center;
     }
-    .form-toggle-btn:hover { background: rgba(66,133,244,0.1); }
-    .form-toggle-btn.open { background: rgba(66,133,244,0.06); }
+    .form-apply-btn:hover { background: rgba(66,133,244,0.1); }
+
+    /* ── FORM MODAL ── */
+    .form-modal {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .form-modal.open { display: flex; }
+    .form-modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(6px);
+    }
+    .form-modal-box {
+      position: relative; z-index: 1;
+      width: min(700px, 100%);
+      height: min(92vh, 820px);
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; display: flex; flex-direction: column;
+      overflow: hidden;
+      animation: modalIn 0.22s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .form-modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+      background: var(--blue); flex-shrink: 0;
+    }
+    .form-modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 1px; color: #fff;
+    }
+    .form-modal-close {
+      background: rgba(255,255,255,0.15); border: none; color: #fff;
+      font-size: 1.1rem; width: 34px; height: 34px; border-radius: 6px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    .form-modal-close:hover { background: rgba(255,255,255,0.3); }
+    .form-modal-body { flex: 1; position: relative; overflow: hidden; }
+    .form-modal-loading {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.9rem; background: var(--bg3);
+    }
+    .form-modal-body iframe {
+      width: 100%; height: 100%; border: none; display: block;
+      background: #fff; position: relative; z-index: 1;
+    }
+    .form-modal-footer {
+      padding: 0.7rem 1.5rem; border-top: 1px solid var(--border);
+      text-align: center; flex-shrink: 0; background: var(--bg3);
+    }
+    .form-modal-newtab {
+      color: var(--blue-light); font-size: 0.82rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .form-modal-newtab:hover { text-decoration: underline; }
 
     /* ── CONTACT ── */
     #contact { background: var(--bg); }
@@ -744,10 +782,7 @@
         <h3>Online 1-on-1 Coaching</h3>
         <p>Full coaching with daily check-ins, workout plan, nutrition plan, progress tracking and WhatsApp support.</p>
       </div>
-      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
-      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLScovykqWtf5sXLCIn9Lh0dZ8BW31-BDoqwL-iwbR6buvDrGcg/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
-      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLScovykqWtf5sXLCIn9Lh0dZ8BW31-BDoqwL-iwbR6buvDrGcg/viewform?embedded=true" data-title="Online 1-on-1 Coaching Application">
-      </div>
+      <button class="form-apply-btn" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLScovykqWtf5sXLCIn9Lh0dZ8BW31-BDoqwL-iwbR6buvDrGcg/viewform?embedded=true','Online 1-on-1 Coaching Application','https://docs.google.com/forms/d/e/1FAIpQLScovykqWtf5sXLCIn9Lh0dZ8BW31-BDoqwL-iwbR6buvDrGcg/viewform')">Apply Now</button>
     </div>
 
     <div class="apply-card" id="form-workout">
@@ -756,10 +791,7 @@
         <h3>Workout Plan</h3>
         <p>A detailed custom workout program built around your equipment, level and goals.</p>
       </div>
-      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
-      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdAwLlrFPpaxpdoJBkXPcc1i4pEE2Dxq6E6ZRQjdn37GRRqxw/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
-      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSdAwLlrFPpaxpdoJBkXPcc1i4pEE2Dxq6E6ZRQjdn37GRRqxw/viewform?embedded=true" data-title="Workout Plan Application">
-      </div>
+      <button class="form-apply-btn" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLSdAwLlrFPpaxpdoJBkXPcc1i4pEE2Dxq6E6ZRQjdn37GRRqxw/viewform?embedded=true','Workout Plan Application','https://docs.google.com/forms/d/e/1FAIpQLSdAwLlrFPpaxpdoJBkXPcc1i4pEE2Dxq6E6ZRQjdn37GRRqxw/viewform')">Apply Now</button>
     </div>
 
     <div class="apply-card" id="form-meal">
@@ -768,10 +800,7 @@
         <h3>Meal Plan</h3>
         <p>A flexible, sustainable nutrition plan tailored to your goals, budget and lifestyle.</p>
       </div>
-      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
-      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSed617lRa0qmidm2TBP3I1jS4CTE7ALXk5SWulDBdOAAvnwhg/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
-      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSed617lRa0qmidm2TBP3I1jS4CTE7ALXk5SWulDBdOAAvnwhg/viewform?embedded=true" data-title="Meal Plan Application">
-      </div>
+      <button class="form-apply-btn" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLSed617lRa0qmidm2TBP3I1jS4CTE7ALXk5SWulDBdOAAvnwhg/viewform?embedded=true','Meal Plan Application','https://docs.google.com/forms/d/e/1FAIpQLSed617lRa0qmidm2TBP3I1jS4CTE7ALXk5SWulDBdOAAvnwhg/viewform')">Apply Now</button>
     </div>
 
     <div class="apply-card" id="form-athletes">
@@ -780,10 +809,7 @@
         <h3>Youth &amp; School Athletes Training</h3>
         <p>Performance and strength program for youth and school athletes - rugby, cricket, football, track &amp; field and more.</p>
       </div>
-      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
-      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdiBwkcFT4jiAIpKB3ZiFHQRT4C4FWOOqQy_Da_aIVrtWUOWw/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
-      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSdiBwkcFT4jiAIpKB3ZiFHQRT4C4FWOOqQy_Da_aIVrtWUOWw/viewform?embedded=true" data-title="Youth and School Athletes Training Application">
-      </div>
+      <button class="form-apply-btn" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLSdiBwkcFT4jiAIpKB3ZiFHQRT4C4FWOOqQy_Da_aIVrtWUOWw/viewform?embedded=true','Youth &amp; School Athletes Training Application','https://docs.google.com/forms/d/e/1FAIpQLSdiBwkcFT4jiAIpKB3ZiFHQRT4C4FWOOqQy_Da_aIVrtWUOWw/viewform')">Apply Now</button>
     </div>
 
     <div class="apply-card" id="form-rehab">
@@ -792,10 +818,7 @@
         <h3>Rehab &amp; Flexibility</h3>
         <p>Recovery, mobility and flexibility programs for safe return to training after injury or long breaks.</p>
       </div>
-      <button class="form-toggle-btn" onclick="toggleForm(this)">Apply Now ▾</button>
-      <a class="form-open-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeBllVnpeWdXhCVeW6krVmNaKomsMcVMB86S24GuKD7NA20XA/viewform" target="_blank" rel="noopener">↗ Open form in new tab</a>
-      <div class="form-embed-wrapper" data-src="https://docs.google.com/forms/d/e/1FAIpQLSeBllVnpeWdXhCVeW6krVmNaKomsMcVMB86S24GuKD7NA20XA/viewform?embedded=true" data-title="Rehab and Flexibility Application">
-      </div>
+      <button class="form-apply-btn" onclick="openModal('https://docs.google.com/forms/d/e/1FAIpQLSeBllVnpeWdXhCVeW6krVmNaKomsMcVMB86S24GuKD7NA20XA/viewform?embedded=true','Rehab &amp; Flexibility Application','https://docs.google.com/forms/d/e/1FAIpQLSeBllVnpeWdXhCVeW6krVmNaKomsMcVMB86S24GuKD7NA20XA/viewform')">Apply Now</button>
     </div>
 
   </div>
@@ -938,6 +961,24 @@
   <div class="footer-tagline">WITH FAITH, IT'S LIGHT WEIGHT</div>
 </footer>
 
+<!-- FORM MODAL -->
+<div id="form-modal" class="form-modal" role="dialog" aria-modal="true" aria-labelledby="form-modal-title">
+  <div class="form-modal-backdrop"></div>
+  <div class="form-modal-box">
+    <div class="form-modal-header">
+      <span id="form-modal-title" class="form-modal-title"></span>
+      <button class="form-modal-close" onclick="closeModal()" aria-label="Close form">✕</button>
+    </div>
+    <div class="form-modal-body">
+      <div class="form-modal-loading">Loading form…</div>
+      <iframe id="form-modal-iframe" src="" title="Application Form"></iframe>
+    </div>
+    <div class="form-modal-footer">
+      <a id="form-modal-newtab" class="form-modal-newtab" href="#" target="_blank" rel="noopener">↗ Open in new tab</a>
+    </div>
+  </div>
+</div>
+
 <!-- WhatsApp Floating Button -->
 <a href="https://wa.me/+94761167303?text=Hi%20Bernil%2C%20I%20found%20your%20website%20and%20I%27m%20interested%20in%20coaching!" class="wa-float" target="_blank" rel="noopener" title="Chat on WhatsApp">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -948,67 +989,39 @@
     document.getElementById('mobileMenu').classList.toggle('open');
   }
 
-  function toggleForm(btn) {
-    var card = btn.closest('.apply-card');
-    var wrapper = card.querySelector('.form-embed-wrapper');
-    var link = card.querySelector('.form-open-link');
-    var isOpen = wrapper.classList.contains('open');
+  var formModal = document.getElementById('form-modal');
+  var formModalIframe = document.getElementById('form-modal-iframe');
+  var formModalTitle = document.getElementById('form-modal-title');
+  var formModalNewtab = document.getElementById('form-modal-newtab');
 
-    // Close all other open cards first
-    document.querySelectorAll('.apply-card').forEach(function(otherCard) {
-      if (otherCard === card) return;
-      var otherWrapper = otherCard.querySelector('.form-embed-wrapper');
-      var otherLink = otherCard.querySelector('.form-open-link');
-      var otherBtn = otherCard.querySelector('.form-toggle-btn');
-      if (otherWrapper && otherWrapper.classList.contains('open')) {
-        otherWrapper.classList.remove('open');
-        if (otherLink) otherLink.classList.remove('open');
-        if (otherBtn) {
-          otherBtn.classList.remove('open');
-          otherBtn.textContent = 'Apply Now ▾';
-        }
-      }
-    });
-
-    if (isOpen) {
-      wrapper.classList.remove('open');
-      link.classList.remove('open');
-      btn.classList.remove('open');
-      btn.textContent = 'Apply Now ▾';
-    } else {
-      // Lazy-load iframe on first open
-      if (!wrapper.querySelector('iframe')) {
-        var iframe = document.createElement('iframe');
-        iframe.src = wrapper.getAttribute('data-src');
-        iframe.title = wrapper.getAttribute('data-title');
-        iframe.textContent = 'Loading…';
-        wrapper.appendChild(iframe);
-      }
-      wrapper.classList.add('open');
-      link.classList.add('open');
-      btn.classList.add('open');
-      btn.textContent = 'Close Form ▴';
-    }
+  function openModal(embedSrc, title, directUrl) {
+    formModalTitle.textContent = title;
+    formModalNewtab.href = directUrl;
+    formModalIframe.src = embedSrc;
+    formModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
+
+  function closeModal() {
+    formModal.classList.remove('open');
+    document.body.style.overflow = '';
+    formModalIframe.src = '';
+  }
+
+  // Close on backdrop click
+  formModal.querySelector('.form-modal-backdrop').addEventListener('click', closeModal);
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
 
   function openFormById(formId) {
     var card = document.getElementById(formId);
     if (!card) return;
-    var btn = card.querySelector('.form-toggle-btn');
-    var wrapper = card.querySelector('.form-embed-wrapper');
-    if (!wrapper.classList.contains('open')) {
-      toggleForm(btn);
-    }
-    setTimeout(function() { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    var btn = card.querySelector('.form-apply-btn');
+    if (btn) btn.click();
   }
-
-  // Make entire card header clickable
-  document.querySelectorAll('.apply-card-header').forEach(function(header) {
-    header.addEventListener('click', function() {
-      var btn = this.closest('.apply-card').querySelector('.form-toggle-btn');
-      if (btn) toggleForm(btn);
-    });
-  });
 
   // Check hash on page load to auto-open a specific form
   document.addEventListener('DOMContentLoaded', function() {
