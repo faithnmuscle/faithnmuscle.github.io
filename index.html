@@ -311,7 +311,8 @@
     /* ── FORM MODAL ── */
     .form-modal {
       display: none; position: fixed; inset: 0; z-index: 500;
-      align-items: center; justify-content: center; padding: 1rem;
+      align-items: flex-start; justify-content: center;
+      padding: 1rem; overflow-y: auto;
     }
     .form-modal.open { display: flex; }
     .form-modal-backdrop {
@@ -322,7 +323,8 @@
     .form-modal-box {
       position: relative; z-index: 1;
       width: min(700px, 100%);
-      height: min(92vh, 820px);
+      height: min(88vh, 820px);
+      margin: auto 0;
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 12px; display: flex; flex-direction: column;
       overflow: hidden;
@@ -999,6 +1001,7 @@
     formModalNewtab.href = directUrl;
     formModalIframe.src = embedSrc;
     formModal.classList.add('open');
+    formModal.scrollTop = 0;
     document.body.style.overflow = 'hidden';
   }
 
