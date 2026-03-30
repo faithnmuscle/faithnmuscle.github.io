@@ -239,29 +239,7 @@
   <p>&copy; 2026 Faith n Muscle. All rights reserved. &nbsp;|&nbsp; <a href="../">faithnmuscle.com</a></p>
 </footer>
 
-<script>
-  document.getElementById('mealForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    const errEl = document.getElementById('formError');
-    errEl.style.display = 'none';
-    btn.disabled = true;
-    btn.textContent = 'Submitting…';
-    const data = new FormData(this);
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
-      const json = await res.json();
-      if (json.success) {
-        this.style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else { throw new Error(); }
-    } catch {
-      errEl.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Submit Application';
-    }
-  });
-</script>
+<script src="https://www.google.com/recaptcha/api.js?render=YOUR_RECAPTCHA_SITE_KEY"></script>
+<script src="forms.js"></script>
 </body>
 </html>
