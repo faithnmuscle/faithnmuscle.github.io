@@ -1,6 +1,6 @@
 // Faith n Muscle — Shared form handler
-// Replace YOUR_RECAPTCHA_SITE_KEY with your key from google.com/recaptcha (v3)
-const RECAPTCHA_SITE_KEY = 'YOUR_RECAPTCHA_SITE_KEY';
+// Replace 6LdW5J0sAAAAAFwI7pNZOsvq_NrUoaqJeNpyxMOp with your key from google.com/recaptcha (v3)
+const RECAPTCHA_SITE_KEY = '6LdW5J0sAAAAAFwI7pNZOsvq_NrUoaqJeNpyxMOp';
 
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form[id]');
