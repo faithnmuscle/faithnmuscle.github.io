@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
         successEl.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        throw new Error(json.message);
+        throw new Error(json.message || 'Unknown error');
       }
-    } catch {
+    } catch (err) {
+      errEl.textContent = 'Error: ' + (err.message || 'Something went wrong. Please try again or contact via WhatsApp.');
       errEl.style.display = 'block';
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit Application';
