@@ -114,7 +114,7 @@ nav {
   cursor: pointer; font-size: 0.85rem; font-weight: 600;
   transition: border-color 0.18s, background 0.18s; user-select: none;
 }
-.yn-label input[type="radio"] { display: none; }
+.yn-label input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
 .yn-label:has(input:checked) {
   border-color: var(--blue-light); background: rgba(66,133,244,0.12); color: var(--blue-light);
 }
@@ -129,7 +129,7 @@ nav {
   cursor: pointer; font-size: 0.85rem;
   transition: border-color 0.18s, background 0.18s; user-select: none;
 }
-.radio-label input[type="radio"] { display: none; }
+.radio-label input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
 .radio-label:has(input:checked) {
   border-color: var(--blue-light); background: rgba(66,133,244,0.12); color: var(--blue-light);
 }
@@ -144,7 +144,7 @@ nav {
   cursor: pointer; font-size: 0.85rem;
   transition: border-color 0.18s, background 0.18s; user-select: none;
 }
-.check-label input[type="checkbox"] { display: none; }
+.check-label input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
 .check-icon {
   width: 15px; height: 15px; border: 2px solid #444; border-radius: 3px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center; transition: 0.18s;
@@ -164,7 +164,7 @@ nav {
   border-radius: 6px; cursor: pointer; font-size: 0.88rem; font-weight: 600;
   transition: border-color 0.18s, background 0.18s; user-select: none;
 }
-.scale-label input[type="radio"] { display: none; }
+.scale-label input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
 .scale-label:has(input:checked) { border-color: var(--blue-light); background: var(--blue); color: #fff; }
 
 /* ── CONSENT ── */
