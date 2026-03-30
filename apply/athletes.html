@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply – Youth & School Athletes Plan | Faith n Muscle</title>
+  <meta name="robots" content="noindex"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="forms.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="../" class="nav-logo">
+    <img src="../images/logo.jpg" alt="Faith n Muscle"/>
+    Faith n Muscle
+  </a>
+  <a href="../" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="form-page-header">
+  <p class="form-page-label">Apply Now</p>
+  <h1 class="form-page-title">Youth & School Athletes Plan</h1>
+  <p class="form-page-price">LKR 4,500 / one-time — Custom plan delivered within 48–72 hours</p>
+</div>
+
+<div class="form-container">
+  <form id="athletesForm" novalidate>
+    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY"/>
+    <input type="hidden" name="subject" value="New Application: Youth & School Athletes Plan"/>
+    <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
+    <input type="checkbox" name="botcheck" style="display:none;"/>
+
+    <!-- SECTION 1: PARQ – Athlete -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 1</p>
+        <h2 class="form-section-title">Athlete Readiness (PAR-Q)</h2>
+      </div>
+      <div class="form-section-body">
+        <p class="parq-notice">If you answer <strong>Yes</strong> to any question below, consult your doctor or sports-medicine professional before starting this plan.</p>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Has a doctor ever said you have a heart condition or any medical issue that limits your sports performance?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_heart" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_heart" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Do you ever feel chest pain, dizziness, or extreme shortness of breath during intense training or competition?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_symptoms" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_symptoms" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Have you had any recent injuries in the past 6 months that still affect your training?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_recent_injury" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_recent_injury" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Are you currently rehabbing any injury or surgery?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_rehab" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_rehab" value="No"/> No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Personal Info -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 2</p>
+        <h2 class="form-section-title">Personal Information</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" name="full_name" required placeholder="Athlete's full name"/>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Age <span class="req">*</span></label>
+            <input type="number" name="age" required min="8" max="25" placeholder="e.g. 16"/>
+          </div>
+          <div class="field">
+            <label>Sex <span class="req">*</span></label>
+            <div class="radio-group inline" style="margin-top:0.2rem;">
+              <label class="radio-label"><input type="radio" name="sex" value="Male" required/> Male</label>
+              <label class="radio-label"><input type="radio" name="sex" value="Female"/> Female</label>
+              <label class="radio-label"><input type="radio" name="sex" value="Other"/> Other</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Contact Number <span class="req">*</span></label>
+          <input type="tel" name="contact" required placeholder="+94 76 000 0000"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Sport & Level -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 3</p>
+        <h2 class="form-section-title">Sport & Level</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>Sport <span class="req">*</span></label>
+          <input type="text" name="sport" required placeholder="e.g. Football, Swimming, Athletics, Cricket"/>
+        </div>
+
+        <div class="field">
+          <label>Position / Role</label>
+          <input type="text" name="position" placeholder="e.g. Midfielder, Sprinter, Batsman"/>
+        </div>
+
+        <div class="field">
+          <label>Current level: <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="level" value="Recreational" required/> Recreational</label>
+            <label class="radio-label"><input type="radio" name="level" value="Amateur"/> Amateur</label>
+            <label class="radio-label"><input type="radio" name="level" value="Semi-professional"/> Semi-professional</label>
+            <label class="radio-label"><input type="radio" name="level" value="Professional"/> Professional</label>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Training days per week <span class="req">*</span></label>
+            <input type="number" name="training_days" required min="1" max="7" placeholder="e.g. 4"/>
+          </div>
+          <div class="field">
+            <label>Training hours per week <span class="req">*</span></label>
+            <input type="number" name="training_hours" required min="1" max="40" placeholder="e.g. 8"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Main goal for this plan: <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="goal" value="Increase speed & power" required/> Speed &amp; power</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Increase strength & muscle"/> Strength &amp; muscle</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Improve endurance"/> Endurance</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Improve injury resilience"/> Injury resilience</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Restrictions & Preferences -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 4</p>
+        <h2 class="form-section-title">Restrictions & Current Training</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>Any areas you want to avoid overloading?</label>
+          <textarea name="avoid_areas" placeholder="e.g. left knee, lower back — or leave blank if none"></textarea>
+        </div>
+
+        <div class="field">
+          <label>What type of training do you already do? (tick all that apply)</label>
+          <div class="check-group inline">
+            <label class="check-label"><input type="checkbox" name="current_training" value="On-field / in-game"/><span class="check-icon"></span> On-field / in-game</label>
+            <label class="check-label"><input type="checkbox" name="current_training" value="Speed / agility"/><span class="check-icon"></span> Speed / agility</label>
+            <label class="check-label"><input type="checkbox" name="current_training" value="Strength training"/><span class="check-icon"></span> Strength training</label>
+            <label class="check-label"><input type="checkbox" name="current_training" value="Conditioning"/><span class="check-icon"></span> Conditioning</label>
+            <label class="check-label"><input type="checkbox" name="current_training" value="Technical skill"/><span class="check-icon"></span> Technical skill</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: Consent -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 5</p>
+        <h2 class="form-section-title">Acknowledgement</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="consent-box">
+          <p class="consent-text">I understand this is an athlete workout-only plan and does not include daily or weekly check-ins. I confirm that the information I provided is true and accurate to the best of my knowledge. I acknowledge that I am responsible for managing my own recovery and will inform my coach, doctor, or medical staff if I experience pain, injury, or health changes.</p>
+          <label class="consent-agree">
+            <input type="checkbox" name="consent" required/>
+            I agree and accept these terms.
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-submit-area">
+      <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+      <p class="form-note">After submitting, Bernil will contact you on WhatsApp within 24 hours with payment details. Plan delivered within 48–72 hours of payment.</p>
+      <div class="form-error" id="formError">Something went wrong. Please try again or contact via WhatsApp.</div>
+    </div>
+  </form>
+
+  <div class="form-success" id="formSuccess">
+    <div class="form-success-icon">✅</div>
+    <h3>Application Received!</h3>
+    <p>Thank you for applying for the Athletes Plan. Bernil will review your details and reach out on WhatsApp within 24 hours with payment instructions.</p>
+    <a href="../" class="back-link">← Back to Faith n Muscle</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Faith n Muscle. All rights reserved. &nbsp;|&nbsp; <a href="../">faithnmuscle.com</a></p>
+</footer>
+
+<script>
+  document.getElementById('athletesForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errEl = document.getElementById('formError');
+    errEl.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    const data = new FormData(this);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      const json = await res.json();
+      if (json.success) {
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else { throw new Error(); }
+    } catch {
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Submit Application';
+    }
+  });
+</script>
+</body>
+</html>

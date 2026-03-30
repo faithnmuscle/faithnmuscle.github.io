@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply – Rehab & Flexibility Plan | Faith n Muscle</title>
+  <meta name="robots" content="noindex"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="forms.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="../" class="nav-logo">
+    <img src="../images/logo.jpg" alt="Faith n Muscle"/>
+    Faith n Muscle
+  </a>
+  <a href="../" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="form-page-header">
+  <p class="form-page-label">Apply Now</p>
+  <h1 class="form-page-title">Rehab & Flexibility Plan</h1>
+  <p class="form-page-price">LKR 5,000 / one-time — Custom plan delivered within 48–72 hours</p>
+</div>
+
+<div class="form-container">
+  <form id="rehabForm" novalidate>
+    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY"/>
+    <input type="hidden" name="subject" value="New Application: Rehab & Flexibility Plan"/>
+    <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
+    <input type="checkbox" name="botcheck" style="display:none;"/>
+
+    <!-- SECTION 1: PARQ – Rehab -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 1</p>
+        <h2 class="form-section-title">Flexibility & Rehab Readiness (PAR-Q)</h2>
+      </div>
+      <div class="form-section-body">
+        <p class="parq-notice">If you answer <strong>Yes</strong> to any question below, consult your doctor or physiotherapist before starting this plan.</p>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Do you have any medical condition that limits your movement or flexibility? (e.g. arthritis, back pain, joint replacements, chronic pain)</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_condition" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_condition" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Have you had any recent injuries, surgeries, or ongoing pain in the past 6 months?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_recent_injury" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_recent_injury" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Are you currently under the care of a physiotherapist, doctor, or pain specialist?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_physio" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_physio" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Do you feel sharp pain, dizziness, or loss of balance when stretching or moving in certain positions?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_pain" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_pain" value="No"/> No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Personal Info -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 2</p>
+        <h2 class="form-section-title">Personal Information</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" name="full_name" required placeholder="Your full name"/>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Age <span class="req">*</span></label>
+            <input type="number" name="age" required min="10" max="99" placeholder="e.g. 35"/>
+          </div>
+          <div class="field">
+            <label>Sex <span class="req">*</span></label>
+            <div class="radio-group inline" style="margin-top:0.2rem;">
+              <label class="radio-label"><input type="radio" name="sex" value="Male" required/> Male</label>
+              <label class="radio-label"><input type="radio" name="sex" value="Female"/> Female</label>
+              <label class="radio-label"><input type="radio" name="sex" value="Other"/> Other</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Contact Number <span class="req">*</span></label>
+          <input type="tel" name="contact" required placeholder="+94 76 000 0000"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Condition & Injury History -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 3</p>
+        <h2 class="form-section-title">Condition & Injury History</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>Main area(s) of concern: (tick all that apply) <span class="req">*</span></label>
+          <div class="check-group inline">
+            <label class="check-label"><input type="checkbox" name="concern_area" value="Lower back"/><span class="check-icon"></span> Lower back</label>
+            <label class="check-label"><input type="checkbox" name="concern_area" value="Neck / shoulders"/><span class="check-icon"></span> Neck / shoulders</label>
+            <label class="check-label"><input type="checkbox" name="concern_area" value="Hips"/><span class="check-icon"></span> Hips</label>
+            <label class="check-label"><input type="checkbox" name="concern_area" value="Knees"/><span class="check-icon"></span> Knees</label>
+            <label class="check-label"><input type="checkbox" name="concern_area" value="Ankle / foot"/><span class="check-icon"></span> Ankle / foot</label>
+            <label class="check-label"><input type="checkbox" name="concern_area" value="Other"/><span class="check-icon"></span> Other</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>How long have you had this issue? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="issue_duration" value="Less than 1 month" required/> &lt;1 month</label>
+            <label class="radio-label"><input type="radio" name="issue_duration" value="1–3 months"/> 1–3 months</label>
+            <label class="radio-label"><input type="radio" name="issue_duration" value="3–6 months"/> 3–6 months</label>
+            <label class="radio-label"><input type="radio" name="issue_duration" value="6+ months"/> 6+ months</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Have you had any relevant surgeries or injuries?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="has_surgery" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="has_surgery" value="No"/> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>If yes, please describe:</label>
+          <textarea name="surgery_detail" placeholder="Leave blank if No above"></textarea>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Are you currently seeing a physiotherapist or doctor for this?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="seeing_physio" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="seeing_physio" value="No"/> No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Movement & Goals -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 4</p>
+        <h2 class="form-section-title">Movement & Goals</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>How would you describe your current flexibility? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="flexibility" value="Very stiff" required/> Very stiff</label>
+            <label class="radio-label"><input type="radio" name="flexibility" value="Moderately stiff"/> Moderately stiff</label>
+            <label class="radio-label"><input type="radio" name="flexibility" value="Average"/> Average</label>
+            <label class="radio-label"><input type="radio" name="flexibility" value="Flexible"/> Flexible</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>How many days per week can you do gentle stretching or rehab exercises? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="session_days" value="1–2" required/> 1–2</label>
+            <label class="radio-label"><input type="radio" name="session_days" value="3–4"/> 3–4</label>
+            <label class="radio-label"><input type="radio" name="session_days" value="5–7"/> 5–7</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Main goal: <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="goal" value="Reduce pain" required/> Reduce pain</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Improve flexibility"/> Improve flexibility</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Improve posture"/> Improve posture</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Support rehab from injury/surgery"/> Rehab from injury/surgery</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: Consent -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 5</p>
+        <h2 class="form-section-title">Acknowledgement</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="consent-box">
+          <p class="consent-text">I understand this is a flexibility and rehabilitation workout-only plan and does not include daily or weekly check-ins. I confirm that the information I provided is true and accurate to the best of my knowledge. I acknowledge that I am responsible for my own safety and will stop any exercise if I feel sharp pain or discomfort, and will consult my doctor or physiotherapist if my symptoms worsen.</p>
+          <label class="consent-agree">
+            <input type="checkbox" name="consent" required/>
+            I agree and accept these terms.
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-submit-area">
+      <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+      <p class="form-note">After submitting, Bernil will contact you on WhatsApp within 24 hours with payment details. Plan delivered within 48–72 hours of payment.</p>
+      <div class="form-error" id="formError">Something went wrong. Please try again or contact via WhatsApp.</div>
+    </div>
+  </form>
+
+  <div class="form-success" id="formSuccess">
+    <div class="form-success-icon">✅</div>
+    <h3>Application Received!</h3>
+    <p>Thank you for applying for the Rehab & Flexibility Plan. Bernil will review your details and reach out on WhatsApp within 24 hours with payment instructions.</p>
+    <a href="../" class="back-link">← Back to Faith n Muscle</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Faith n Muscle. All rights reserved. &nbsp;|&nbsp; <a href="../">faithnmuscle.com</a></p>
+</footer>
+
+<script>
+  document.getElementById('rehabForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errEl = document.getElementById('formError');
+    errEl.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    const data = new FormData(this);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      const json = await res.json();
+      if (json.success) {
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else { throw new Error(); }
+    } catch {
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Submit Application';
+    }
+  });
+</script>
+</body>
+</html>

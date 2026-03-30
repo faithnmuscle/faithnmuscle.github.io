@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply – Detailed Workout Plan | Faith n Muscle</title>
+  <meta name="robots" content="noindex"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="forms.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="../" class="nav-logo">
+    <img src="../images/logo.jpg" alt="Faith n Muscle"/>
+    Faith n Muscle
+  </a>
+  <a href="../" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="form-page-header">
+  <p class="form-page-label">Apply Now</p>
+  <h1 class="form-page-title">Detailed Workout Plan</h1>
+  <p class="form-page-price">LKR 4,500 / one-time — Custom plan delivered within 48–72 hours</p>
+</div>
+
+<div class="form-container">
+  <form id="workoutForm" novalidate>
+    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY"/>
+    <input type="hidden" name="subject" value="New Application: Detailed Workout Plan"/>
+    <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
+    <input type="checkbox" name="botcheck" style="display:none;"/>
+
+    <!-- SECTION 1: PARQ -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 1</p>
+        <h2 class="form-section-title">Physical Activity Readiness (PAR-Q)</h2>
+      </div>
+      <div class="form-section-body">
+        <p class="parq-notice">If you answer <strong>Yes</strong> to any question below, consult your doctor before starting this plan.</p>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Has a doctor ever said you have a heart condition and that you should only do physical activity recommended by a doctor?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_heart" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_heart" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Do you feel chest pain when you do physical activity?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_chest_active" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_chest_active" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">In the past month, have you had chest pain when you were not doing physical activity?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_chest_rest" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_chest_rest" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Do you lose your balance from dizziness or ever lose consciousness?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_dizziness" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_dizziness" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Do you have a bone or joint problem that could get worse with exercise?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_joint" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_joint" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Is your doctor currently prescribing medication for your blood pressure or heart condition?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_medication" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_medication" value="No"/> No</label>
+          </div>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Do you know of any other reason you should not exercise?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="parq_other" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="parq_other" value="No"/> No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Personal Info -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 2</p>
+        <h2 class="form-section-title">Personal Information</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" name="full_name" required placeholder="Your full name"/>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Age <span class="req">*</span></label>
+            <input type="number" name="age" required min="10" max="99" placeholder="e.g. 24"/>
+          </div>
+          <div class="field">
+            <label>Sex <span class="req">*</span></label>
+            <div class="radio-group inline" style="margin-top:0.2rem;">
+              <label class="radio-label"><input type="radio" name="sex" value="Male" required/> Male</label>
+              <label class="radio-label"><input type="radio" name="sex" value="Female"/> Female</label>
+              <label class="radio-label"><input type="radio" name="sex" value="Other"/> Other</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Contact Number <span class="req">*</span></label>
+          <input type="tel" name="contact" required placeholder="+94 76 000 0000"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Health & Injuries -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 3</p>
+        <h2 class="form-section-title">Health & Injuries</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="parq-q">
+          <p class="parq-q-text">Do you have any current injuries or medical conditions?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="has_injuries" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="has_injuries" value="No"/> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>If yes, please describe:</label>
+          <textarea name="injuries_detail" placeholder="Leave blank if No above"></textarea>
+        </div>
+
+        <div class="parq-q">
+          <p class="parq-q-text">Are you taking any medications?</p>
+          <div class="yn-group">
+            <label class="yn-label"><input type="radio" name="has_meds" value="Yes" required/> Yes</label>
+            <label class="yn-label"><input type="radio" name="has_meds" value="No"/> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>If yes, please list:</label>
+          <textarea name="meds_detail" placeholder="Leave blank if No above"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Training & Lifestyle -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 4</p>
+        <h2 class="form-section-title">Training & Lifestyle</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>How many days per week can you train? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="training_days" value="1–2" required/> 1–2</label>
+            <label class="radio-label"><input type="radio" name="training_days" value="3"/> 3</label>
+            <label class="radio-label"><input type="radio" name="training_days" value="4–5"/> 4–5</label>
+            <label class="radio-label"><input type="radio" name="training_days" value="6–7"/> 6–7</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>How many minutes per session can you commit? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="session_duration" value="20–30 min" required/> 20–30 min</label>
+            <label class="radio-label"><input type="radio" name="session_duration" value="30–45 min"/> 30–45 min</label>
+            <label class="radio-label"><input type="radio" name="session_duration" value="45–60 min"/> 45–60 min</label>
+            <label class="radio-label"><input type="radio" name="session_duration" value="60+ min"/> 60+ min</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Do you prefer home workouts, gym workouts, or both? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="location" value="Home" required/> Home</label>
+            <label class="radio-label"><input type="radio" name="location" value="Gym"/> Gym</label>
+            <label class="radio-label"><input type="radio" name="location" value="Both"/> Both</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>What is your main goal? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="goal" value="Build muscle" required/> Build muscle</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Lose fat"/> Lose fat</label>
+            <label class="radio-label"><input type="radio" name="goal" value="General strength"/> General strength</label>
+            <label class="radio-label"><input type="radio" name="goal" value="Improve endurance"/> Improve endurance</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>How would you rate your current fitness level? <span class="req">*</span></label>
+          <div class="radio-group inline">
+            <label class="radio-label"><input type="radio" name="fitness_level" value="Beginner" required/> Beginner</label>
+            <label class="radio-label"><input type="radio" name="fitness_level" value="Intermediate"/> Intermediate</label>
+            <label class="radio-label"><input type="radio" name="fitness_level" value="Advanced"/> Advanced</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: Consent -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 5</p>
+        <h2 class="form-section-title">Acknowledgement</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="consent-box">
+          <p class="consent-text">I understand this is a workout-only plan and does not include daily or weekly check-ins. I confirm that the information I provided is true and accurate to the best of my knowledge. I acknowledge that I am responsible for my own safety while exercising and will stop any exercise if I feel pain or discomfort, and will consult my doctor if needed.</p>
+          <label class="consent-agree">
+            <input type="checkbox" name="consent" required/>
+            I agree and accept these terms.
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-submit-area">
+      <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+      <p class="form-note">After submitting, Bernil will contact you on WhatsApp within 24 hours with payment details. Plan delivered within 48–72 hours of payment.</p>
+      <div class="form-error" id="formError">Something went wrong. Please try again or contact via WhatsApp.</div>
+    </div>
+  </form>
+
+  <div class="form-success" id="formSuccess">
+    <div class="form-success-icon">✅</div>
+    <h3>Application Received!</h3>
+    <p>Thank you for your interest in the Workout Plan. Bernil will review your details and reach out on WhatsApp within 24 hours with payment instructions.</p>
+    <a href="../" class="back-link">← Back to Faith n Muscle</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Faith n Muscle. All rights reserved. &nbsp;|&nbsp; <a href="../">faithnmuscle.com</a></p>
+</footer>
+
+<script>
+  document.getElementById('workoutForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errEl = document.getElementById('formError');
+    errEl.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    const data = new FormData(this);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      const json = await res.json();
+      if (json.success) {
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else { throw new Error(); }
+    } catch {
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Submit Application';
+    }
+  });
+</script>
+</body>
+</html>
