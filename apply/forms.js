@@ -2,10 +2,10 @@
 const RECAPTCHA_SITE_KEY = '6LdW5J0sAAAAAFwI7pNZOsvq_NrUoaqJeNpyxMOp';
 
 document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('form[id]');
-  const submitBtn = document.getElementById('submitBtn');
-  const errEl = document.getElementById('formError');
-  const successEl = document.getElementById('formSuccess');
+  var form = document.querySelector('form[id]');
+  var submitBtn = document.getElementById('submitBtn');
+  var errEl = document.getElementById('formError');
+  var successEl = document.getElementById('formSuccess');
 
   if (!form) return;
 
@@ -13,32 +13,36 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     errEl.style.display = 'none';
 
-    // Clear previous highlights
+    // Clear previous error highlights
     form.querySelectorAll('.field-error').forEach(function (el) { el.classList.remove('field-error'); });
 
-    // Validate: iterate form controls, mark invalid ones
-    var seenRadioNames = {};
     var hasErrors = false;
 
-    Array.from(form.elements).forEach(function (el) {
-      if (!el.willValidate || el.disabled) return;
-
-      // For radio buttons, check the group by name once
-      if (el.type === 'radio') {
-        if (seenRadioNames[el.name] !== undefined) return; // already processed this group
-        seenRadioNames[el.name] = true;
-        var groupChecked = form.querySelector('input[type="radio"][name="' + el.name + '"]:checked');
-        var isRequired = form.querySelector('input[type="radio"][name="' + el.name + '"][required]');
-        if (isRequired && !groupChecked) {
-          var container = el.closest('.yn-group, .radio-group, .scale-group');
-          if (container) { container.classList.add('field-error'); hasErrors = true; }
-        }
-        return;
+    // Required radio groups — check each unique name
+    var seenNames = {};
+    form.querySelectorAll('input[type="radio"][required]').forEach(function (radio) {
+      if (seenNames[radio.name]) return;
+      seenNames[radio.name] = true;
+      var checked = form.querySelector('input[type="radio"][name="' + radio.name + '"]:checked');
+      if (!checked) {
+        var group = radio.closest('.yn-group') || radio.closest('.radio-group') || radio.closest('.scale-group');
+        if (group) { group.classList.add('field-error'); hasErrors = true; }
       }
+    });
 
-      if (!el.validity.valid) {
-        var container = el.closest('.check-group, .consent-box, .field');
-        if (container) { container.classList.add('field-error'); hasErrors = true; }
+    // Required checkboxes
+    form.querySelectorAll('input[type="checkbox"][required]').forEach(function (cb) {
+      if (!cb.checked) {
+        var group = cb.closest('.consent-box') || cb.closest('.field');
+        if (group) { group.classList.add('field-error'); hasErrors = true; }
+      }
+    });
+
+    // Required text/email/tel/number inputs
+    form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"])').forEach(function (input) {
+      if (!input.value.trim()) {
+        var field = input.closest('.field');
+        if (field) { field.classList.add('field-error'); hasErrors = true; }
       }
     });
 
@@ -52,16 +56,16 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.textContent = 'Submitting…';
 
     try {
-      const data = new FormData(form);
+      var data = new FormData(form);
 
       // Try reCAPTCHA — skip gracefully if it fails (e.g. unlisted domain in testing)
       try {
-        const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
+        var token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
         data.set('g-recaptcha-response', token);
       } catch (_) { /* reCAPTCHA unavailable — submit without token */ }
 
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
-      const json = await res.json();
+      var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      var json = await res.json();
 
       if (json.success) {
         form.style.display = 'none';
