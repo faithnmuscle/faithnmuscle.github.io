@@ -213,13 +213,16 @@ nav {
 }
 
 /* ── VALIDATION ERRORS ── */
-.yn-group.field-error .yn-label { border-color: #f08080; }
-.radio-group.field-error .radio-label { border-color: #f08080; }
-.check-group.field-error .check-label { border-color: #f08080; }
-.scale-group.field-error .scale-label { border-color: #f08080; }
+.yn-group.field-error .yn-label,
+.radio-group.field-error .radio-label,
+.check-group.field-error .check-label,
+.scale-group.field-error .scale-label {
+  border-color: #e05555;
+  background: rgba(224,85,85,0.12);
+}
 .field.field-error > input,
-.field.field-error > textarea { border-color: #f08080; }
-.consent-box.field-error { border-color: #f08080; }
+.field.field-error > textarea { border-color: #e05555; background: rgba(224,85,85,0.08); }
+.consent-box.field-error { border-color: #e05555; background: rgba(224,85,85,0.06); }
 
 /* ── FOOTER ── */
 footer {

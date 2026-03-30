@@ -1,5 +1,4 @@
 // Faith n Muscle — Shared form handler
-// Replace 6LdW5J0sAAAAAFwI7pNZOsvq_NrUoaqJeNpyxMOp with your key from google.com/recaptcha (v3)
 const RECAPTCHA_SITE_KEY = '6LdW5J0sAAAAAFwI7pNZOsvq_NrUoaqJeNpyxMOp';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -17,12 +16,33 @@ document.addEventListener('DOMContentLoaded', function () {
     // Clear previous highlights
     form.querySelectorAll('.field-error').forEach(function (el) { el.classList.remove('field-error'); });
 
-    // Highlight any invalid fields and stop
-    if (!form.checkValidity()) {
-      form.querySelectorAll(':invalid').forEach(function (input) {
-        var container = input.closest('.yn-group, .radio-group, .check-group, .scale-group, .consent-box, .field');
-        if (container) container.classList.add('field-error');
-      });
+    // Validate: iterate form controls, mark invalid ones
+    var seenRadioNames = {};
+    var hasErrors = false;
+
+    Array.from(form.elements).forEach(function (el) {
+      if (!el.willValidate || el.disabled) return;
+
+      // For radio buttons, check the group by name once
+      if (el.type === 'radio') {
+        if (seenRadioNames[el.name] !== undefined) return; // already processed this group
+        seenRadioNames[el.name] = true;
+        var groupChecked = form.querySelector('input[type="radio"][name="' + el.name + '"]:checked');
+        var isRequired = form.querySelector('input[type="radio"][name="' + el.name + '"][required]');
+        if (isRequired && !groupChecked) {
+          var container = el.closest('.yn-group, .radio-group, .scale-group');
+          if (container) { container.classList.add('field-error'); hasErrors = true; }
+        }
+        return;
+      }
+
+      if (!el.validity.valid) {
+        var container = el.closest('.check-group, .consent-box, .field');
+        if (container) { container.classList.add('field-error'); hasErrors = true; }
+      }
+    });
+
+    if (hasErrors) {
       var first = form.querySelector('.field-error');
       if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
