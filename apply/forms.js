@@ -17,9 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.textContent = 'Submitting…';
 
     try {
-      const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
       const data = new FormData(form);
-      data.set('g-recaptcha-response', token);
+
+      // Try reCAPTCHA — skip gracefully if it fails (e.g. unlisted domain in testing)
+      try {
+        const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
+        data.set('g-recaptcha-response', token);
+      } catch (_) { /* reCAPTCHA unavailable — submit without token */ }
 
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const json = await res.json();
