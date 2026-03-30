@@ -1,5 +1,4 @@
 // Faith n Muscle — Shared form handler
-const RECAPTCHA_SITE_KEY = '6LdW5J0sAAAAAFwI7pNZOsvq_NrUoaqJeNpyxMOp';
 
 document.addEventListener('DOMContentLoaded', function () {
   var form = document.querySelector('form[id]');
@@ -8,6 +7,34 @@ document.addEventListener('DOMContentLoaded', function () {
   var successEl = document.getElementById('formSuccess');
 
   if (!form) return;
+
+  function clearFieldError(el) {
+    el.classList.remove('field-error');
+    el.style.removeProperty('border-color');
+    el.style.removeProperty('background');
+  }
+
+  // Clear error highlight as soon as the field is filled
+  form.addEventListener('input', function (e) {
+    var input = e.target;
+    var field = input.closest('.field');
+    if (field && field.classList.contains('field-error') && input.value.trim()) {
+      clearFieldError(field);
+    }
+  });
+
+  form.addEventListener('change', function (e) {
+    var input = e.target;
+    // Radio group — clear all siblings once one is picked
+    if (input.type === 'radio' || input.type === 'checkbox') {
+      form.querySelectorAll('input[name="' + input.name + '"]').forEach(function (r) {
+        var parent = r.parentElement;
+        if (parent && parent.classList.contains('field-error')) clearFieldError(parent);
+        var box = r.closest('.consent-box');
+        if (box && box.classList.contains('field-error') && input.checked) clearFieldError(box);
+      });
+    }
+  });
 
   function markError(el) {
     el.classList.add('field-error');
@@ -37,11 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!firstError) firstError = el;
     }
 
-    // Required radio groups
-    var seenNames = {};
+    // Required radio groups — at least one must be selected
+    var seenRadioNames = {};
     form.querySelectorAll('input[type="radio"][required]').forEach(function (radio) {
-      if (seenNames[radio.name]) return;
-      seenNames[radio.name] = true;
+      if (seenRadioNames[radio.name]) return;
+      seenRadioNames[radio.name] = true;
       if (!form.querySelector('input[type="radio"][name="' + radio.name + '"]:checked')) {
         form.querySelectorAll('input[type="radio"][name="' + radio.name + '"]').forEach(function (r) {
           if (r.parentElement) addError(r.parentElement);
@@ -49,16 +76,26 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // Required checkboxes
+    // Required checkboxes — groups need at least one; single (consent) must be checked
+    var seenCbNames = {};
     form.querySelectorAll('input[type="checkbox"][required]').forEach(function (cb) {
-      if (!cb.checked) {
-        var target = cb.closest('.consent-box') || cb.parentElement;
-        if (target) addError(target);
+      if (cb.name === 'botcheck') return;
+      if (seenCbNames[cb.name]) return;
+      seenCbNames[cb.name] = true;
+      var allInGroup = form.querySelectorAll('input[type="checkbox"][name="' + cb.name + '"]');
+      var anyChecked = form.querySelector('input[type="checkbox"][name="' + cb.name + '"]:checked');
+      if (!anyChecked) {
+        if (allInGroup.length > 1) {
+          allInGroup.forEach(function (c) { if (c.parentElement) addError(c.parentElement); });
+        } else {
+          var target = cb.closest('.consent-box') || cb.parentElement;
+          if (target) addError(target);
+        }
       }
     });
 
-    // Required text / email / tel / number inputs
-    form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"])').forEach(function (input) {
+    // Required text / email / tel / number / textarea inputs
+    form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"]), textarea[required]').forEach(function (input) {
       if (!input.value.trim()) {
         var field = input.closest('.field');
         if (field) addError(field);
@@ -75,10 +112,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     try {
       var data = new FormData(form);
-      try {
-        var token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
-        data.set('g-recaptcha-response', token);
-      } catch (_) { /* reCAPTCHA unavailable — submit without token */ }
 
       var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       var json = await res.json();
