@@ -9,48 +9,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!form) return;
 
+  function markError(el) {
+    el.classList.add('field-error');
+    el.style.setProperty('border-color', '#e05555', 'important');
+    el.style.setProperty('background', 'rgba(224,85,85,0.15)', 'important');
+  }
+
+  function clearErrors() {
+    form.querySelectorAll('.field-error').forEach(function (el) {
+      el.classList.remove('field-error');
+      el.style.removeProperty('border-color');
+      el.style.removeProperty('background');
+    });
+  }
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     errEl.style.display = 'none';
-
-    // Clear previous error highlights
-    form.querySelectorAll('.field-error').forEach(function (el) { el.classList.remove('field-error'); });
+    clearErrors();
 
     var hasErrors = false;
     var firstError = null;
 
-    function markError(el) {
-      el.classList.add('field-error');
+    function addError(el) {
+      markError(el);
       hasErrors = true;
       if (!firstError) firstError = el;
     }
 
-    // Required radio groups — add field-error directly to each label in the group
+    // Required radio groups
     var seenNames = {};
     form.querySelectorAll('input[type="radio"][required]').forEach(function (radio) {
       if (seenNames[radio.name]) return;
       seenNames[radio.name] = true;
-      var checked = form.querySelector('input[type="radio"][name="' + radio.name + '"]:checked');
-      if (!checked) {
+      if (!form.querySelector('input[type="radio"][name="' + radio.name + '"]:checked')) {
         form.querySelectorAll('input[type="radio"][name="' + radio.name + '"]').forEach(function (r) {
-          if (r.parentElement) markError(r.parentElement);
+          if (r.parentElement) addError(r.parentElement);
         });
       }
     });
 
-    // Required checkboxes — mark their label or consent box
+    // Required checkboxes
     form.querySelectorAll('input[type="checkbox"][required]').forEach(function (cb) {
       if (!cb.checked) {
         var target = cb.closest('.consent-box') || cb.parentElement;
-        if (target) markError(target);
+        if (target) addError(target);
       }
     });
 
-    // Required text / email / tel / number inputs — mark the .field wrapper
+    // Required text / email / tel / number inputs
     form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"])').forEach(function (input) {
       if (!input.value.trim()) {
         var field = input.closest('.field');
-        if (field) markError(field);
+        if (field) addError(field);
       }
     });
 
@@ -64,8 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     try {
       var data = new FormData(form);
-
-      // Try reCAPTCHA — skip gracefully if it fails (e.g. unlisted domain in testing)
       try {
         var token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
         data.set('g-recaptcha-response', token);
