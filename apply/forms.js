@@ -17,38 +17,45 @@ document.addEventListener('DOMContentLoaded', function () {
     form.querySelectorAll('.field-error').forEach(function (el) { el.classList.remove('field-error'); });
 
     var hasErrors = false;
+    var firstError = null;
 
-    // Required radio groups — check each unique name
+    function markError(el) {
+      el.classList.add('field-error');
+      hasErrors = true;
+      if (!firstError) firstError = el;
+    }
+
+    // Required radio groups — add field-error directly to each label in the group
     var seenNames = {};
     form.querySelectorAll('input[type="radio"][required]').forEach(function (radio) {
       if (seenNames[radio.name]) return;
       seenNames[radio.name] = true;
       var checked = form.querySelector('input[type="radio"][name="' + radio.name + '"]:checked');
       if (!checked) {
-        var group = radio.closest('.yn-group') || radio.closest('.radio-group') || radio.closest('.scale-group');
-        if (group) { group.classList.add('field-error'); hasErrors = true; }
+        form.querySelectorAll('input[type="radio"][name="' + radio.name + '"]').forEach(function (r) {
+          if (r.parentElement) markError(r.parentElement);
+        });
       }
     });
 
-    // Required checkboxes
+    // Required checkboxes — mark their label or consent box
     form.querySelectorAll('input[type="checkbox"][required]').forEach(function (cb) {
       if (!cb.checked) {
-        var group = cb.closest('.consent-box') || cb.closest('.field');
-        if (group) { group.classList.add('field-error'); hasErrors = true; }
+        var target = cb.closest('.consent-box') || cb.parentElement;
+        if (target) markError(target);
       }
     });
 
-    // Required text/email/tel/number inputs
+    // Required text / email / tel / number inputs — mark the .field wrapper
     form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"])').forEach(function (input) {
       if (!input.value.trim()) {
         var field = input.closest('.field');
-        if (field) { field.classList.add('field-error'); hasErrors = true; }
+        if (field) markError(field);
       }
     });
 
     if (hasErrors) {
-      var first = form.querySelector('.field-error');
-      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
