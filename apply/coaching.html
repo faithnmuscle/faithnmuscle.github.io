@@ -32,6 +32,11 @@
     <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
     <input type="checkbox" name="botcheck" style="display:none;"/>
 
+    <div class="form-intro">
+      <div class="form-intro-welcome">Hey there, thank you for choosing online coaching. Please fill out this form honestly so I can understand your goals, lifestyle, and training background before we get started.</div>
+      <p class="form-intro-policy"><strong>Please read before filling in:</strong> Submitting this form does not confirm your place. After reviewing your answers, Bernil will contact you with payment details. Your program will only be created after payment is completed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
+    </div>
+
     <!-- SECTION 1: PARQ -->
     <div class="form-section">
       <div class="form-section-header">
@@ -42,7 +47,7 @@
         <p class="parq-notice">Please answer each question honestly. If you answer <strong>Yes</strong> to any question, you should consult your doctor before starting this program and inform your coach of their advice.</p>
 
         <div class="parq-q">
-          <p class="parq-q-text">Has a doctor ever said you have a heart condition and that you should only do physical activity recommended by a doctor?</p>
+          <p class="parq-q-text">Has a doctor ever said you have a heart condition and that you should only do physical activity recommended by a doctor? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_heart" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_heart" value="No"/> No</label>
@@ -50,7 +55,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you feel pain in your chest when you do physical activity?</p>
+          <p class="parq-q-text">Do you feel pain in your chest when you do physical activity? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_chest_active" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_chest_active" value="No"/> No</label>
@@ -58,7 +63,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">In the past month, have you had chest pain when you were not doing physical activity?</p>
+          <p class="parq-q-text">In the past month, have you had chest pain when you were not doing physical activity? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_chest_rest" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_chest_rest" value="No"/> No</label>
@@ -66,7 +71,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you lose your balance from dizziness or ever lose consciousness?</p>
+          <p class="parq-q-text">Do you lose your balance from dizziness or ever lose consciousness? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_dizziness" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_dizziness" value="No"/> No</label>
@@ -74,7 +79,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you have a bone or joint problem that could get worse with exercise (e.g. arthritis, recent surgery, or an injury)?</p>
+          <p class="parq-q-text">Do you have a bone or joint problem that could get worse with exercise (e.g. arthritis, recent surgery, or an injury)? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_joint" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_joint" value="No"/> No</label>
@@ -82,7 +87,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Is your doctor currently prescribing medication for your blood pressure or heart condition?</p>
+          <p class="parq-q-text">Is your doctor currently prescribing medication for your blood pressure or heart condition? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_medication" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_medication" value="No"/> No</label>
@@ -90,7 +95,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you know of any other reason you should not exercise?</p>
+          <p class="parq-q-text">Do you know of any other reason you should not exercise? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_other" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_other" value="No"/> No</label>
@@ -143,7 +148,7 @@
       </div>
       <div class="form-section-body">
         <div class="parq-q">
-          <p class="parq-q-text">Do you currently have any medical conditions or injuries? (e.g. heart disease, diabetes, asthma, joint problems, back pain, high blood pressure)</p>
+          <p class="parq-q-text">Do you currently have any medical conditions or injuries? (e.g. heart disease, diabetes, asthma, joint problems, back pain, high blood pressure) <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_conditions" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_conditions" value="No"/> No</label>
@@ -155,7 +160,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you currently taking any medications?</p>
+          <p class="parq-q-text">Are you currently taking any medications? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_meds" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_meds" value="No"/> No</label>
@@ -167,7 +172,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Have you had any recent surgeries or hospitalizations in the past 12 months?</p>
+          <p class="parq-q-text">Have you had any recent surgeries or hospitalizations in the past 12 months? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_surgery" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_surgery" value="No"/> No</label>
@@ -179,7 +184,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you experience dizziness, chest pain, shortness of breath, or severe joint pain during or after exercise?</p>
+          <p class="parq-q-text">Do you experience dizziness, chest pain, shortness of breath, or severe joint pain during or after exercise? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_symptoms" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_symptoms" value="No"/> No</label>
@@ -191,15 +196,16 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you pregnant or have you given birth in the last 3 months?</p>
+          <p class="parq-q-text">Are you pregnant or have you given birth in the last 3 months? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="pregnant" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="pregnant" value="No"/> No</label>
+            <label class="yn-label"><input type="radio" name="pregnant" value="Not applicable"/> Not applicable</label>
           </div>
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you have any allergies or special dietary restrictions?</p>
+          <p class="parq-q-text">Do you have any allergies or special dietary restrictions? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_allergies" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_allergies" value="No"/> No</label>
@@ -250,6 +256,7 @@
             <label class="radio-label"><input type="radio" name="stress" value="Low" required/> Low</label>
             <label class="radio-label"><input type="radio" name="stress" value="Moderate"/> Moderate</label>
             <label class="radio-label"><input type="radio" name="stress" value="High"/> High</label>
+            <label class="radio-label"><input type="radio" name="stress" value="Very high"/> Very high</label>
           </div>
         </div>
 
@@ -257,6 +264,7 @@
           <label>Do you smoke or use tobacco products? <span class="req">*</span></label>
           <div class="radio-group inline">
             <label class="radio-label"><input type="radio" name="smoke" value="Yes" required/> Yes</label>
+            <label class="radio-label"><input type="radio" name="smoke" value="Ex-smoker"/> Ex-smoker</label>
             <label class="radio-label"><input type="radio" name="smoke" value="No"/> No</label>
           </div>
         </div>
@@ -264,7 +272,8 @@
         <div class="field">
           <label>How often do you drink alcohol? <span class="req">*</span></label>
           <div class="radio-group inline">
-            <label class="radio-label"><input type="radio" name="alcohol" value="Rarely" required/> Rarely</label>
+            <label class="radio-label"><input type="radio" name="alcohol" value="Never" required/> Never</label>
+            <label class="radio-label"><input type="radio" name="alcohol" value="Rarely"/> Rarely</label>
             <label class="radio-label"><input type="radio" name="alcohol" value="Occasionally"/> Occasionally</label>
             <label class="radio-label"><input type="radio" name="alcohol" value="Frequently"/> Frequently</label>
           </div>
@@ -280,7 +289,7 @@
       </div>
       <div class="form-section-body">
         <div class="parq-q">
-          <p class="parq-q-text">Have you worked with a personal trainer or coach before?</p>
+          <p class="parq-q-text">Have you worked with a personal trainer or coach before? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="prev_coach" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="prev_coach" value="No"/> No</label>

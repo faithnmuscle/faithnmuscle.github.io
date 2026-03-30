@@ -1,6 +1,8 @@
 // Faith n Muscle — Shared form handler
 
+
 document.addEventListener('DOMContentLoaded', function () {
+
   var form = document.querySelector('form[id]');
   var submitBtn = document.getElementById('submitBtn');
   var errEl = document.getElementById('formError');
@@ -33,6 +35,22 @@ document.addEventListener('DOMContentLoaded', function () {
         var box = r.closest('.consent-box');
         if (box && box.classList.contains('field-error') && input.checked) clearFieldError(box);
       });
+    }
+    // Auto-select "No" for pregnant when Male is chosen; clear it for Female/Other
+    if (input.name === 'sex') {
+      if (input.value === 'Male') {
+        ['pregnant', 'parq_pregnant'].forEach(function (fieldName) {
+          var na = form.querySelector('input[name="' + fieldName + '"][value="Not applicable"]');
+          if (na && !na.checked) {
+            na.checked = true;
+            na.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      } else {
+        ['pregnant', 'parq_pregnant'].forEach(function (fieldName) {
+          form.querySelectorAll('input[name="' + fieldName + '"]').forEach(function (r) { r.checked = false; });
+        });
+      }
     }
   });
 
@@ -96,8 +114,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Required text / email / tel / number / textarea inputs
     form.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"]), textarea[required]').forEach(function (input) {
-      if (!input.value.trim()) {
-        var field = input.closest('.field');
+      var val = input.value.trim();
+      var field = input.closest('.field');
+      if (!val) {
+        if (field) addError(field);
+      } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
         if (field) addError(field);
       }
     });

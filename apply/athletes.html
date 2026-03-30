@@ -31,6 +31,11 @@
     <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
     <input type="checkbox" name="botcheck" style="display:none;"/>
 
+    <div class="form-intro">
+      <div class="form-intro-welcome">Hey there, thank you for choosing my athletes plan. Please fill out this form honestly so I can create a training plan suited to your sport, level, and goals.</div>
+      <p class="form-intro-policy"><strong>Please read before filling in:</strong> Submitting this form does not confirm your place. After reviewing your answers, Bernil will contact you with payment details. Your program will only be created after payment is completed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
+    </div>
+
     <!-- SECTION 1: PARQ – Athlete -->
     <div class="form-section">
       <div class="form-section-header">
@@ -41,7 +46,7 @@
         <p class="parq-notice">If you answer <strong>Yes</strong> to any question below, consult your doctor or sports-medicine professional before starting this plan.</p>
 
         <div class="parq-q">
-          <p class="parq-q-text">Has a doctor ever said you have a heart condition or any medical issue that limits your sports performance?</p>
+          <p class="parq-q-text">Has a doctor ever said you have a heart condition or any medical issue that limits your sports performance? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_heart" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_heart" value="No"/> No</label>
@@ -49,7 +54,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you ever feel chest pain, dizziness, or extreme shortness of breath during intense training or competition?</p>
+          <p class="parq-q-text">Do you ever feel chest pain, dizziness, or extreme shortness of breath during intense training or competition? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_symptoms" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_symptoms" value="No"/> No</label>
@@ -57,7 +62,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Have you had any recent injuries in the past 6 months that still affect your training?</p>
+          <p class="parq-q-text">Have you had any recent injuries in the past 6 months that still affect your training? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_recent_injury" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_recent_injury" value="No"/> No</label>
@@ -65,7 +70,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you currently rehabbing any injury or surgery?</p>
+          <p class="parq-q-text">Are you currently rehabbing any injury or surgery? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_rehab" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_rehab" value="No"/> No</label>

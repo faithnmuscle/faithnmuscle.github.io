@@ -31,6 +31,11 @@
     <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
     <input type="checkbox" name="botcheck" style="display:none;"/>
 
+    <div class="form-intro">
+      <div class="form-intro-welcome">Hey there, thank you for choosing my workout plans. Please feel free to fill out this form so I can create a workout plan suitable for your experience, goal, and weekly schedule.</div>
+      <p class="form-intro-policy"><strong>Please read before filling in:</strong> Submitting this form does not confirm your place. After reviewing your answers, Bernil will contact you with payment details. Your program will only be created after payment is completed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
+    </div>
+
     <!-- SECTION 1: PARQ -->
     <div class="form-section">
       <div class="form-section-header">
@@ -41,7 +46,7 @@
         <p class="parq-notice">If you answer <strong>Yes</strong> to any question below, consult your doctor before starting this plan.</p>
 
         <div class="parq-q">
-          <p class="parq-q-text">Has a doctor ever said you have a heart condition and that you should only do physical activity recommended by a doctor?</p>
+          <p class="parq-q-text">Has a doctor ever said you have a heart condition and that you should only do physical activity recommended by a doctor? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_heart" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_heart" value="No"/> No</label>
@@ -49,7 +54,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you feel chest pain when you do physical activity?</p>
+          <p class="parq-q-text">Do you feel chest pain when you do physical activity? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_chest_active" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_chest_active" value="No"/> No</label>
@@ -57,7 +62,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">In the past month, have you had chest pain when you were not doing physical activity?</p>
+          <p class="parq-q-text">In the past month, have you had chest pain when you were not doing physical activity? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_chest_rest" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_chest_rest" value="No"/> No</label>
@@ -65,7 +70,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you lose your balance from dizziness or ever lose consciousness?</p>
+          <p class="parq-q-text">Do you lose your balance from dizziness or ever lose consciousness? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_dizziness" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_dizziness" value="No"/> No</label>
@@ -73,7 +78,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you have a bone or joint problem that could get worse with exercise?</p>
+          <p class="parq-q-text">Do you have a bone or joint problem that could get worse with exercise? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_joint" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_joint" value="No"/> No</label>
@@ -81,7 +86,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Is your doctor currently prescribing medication for your blood pressure or heart condition?</p>
+          <p class="parq-q-text">Is your doctor currently prescribing medication for your blood pressure or heart condition? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_medication" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_medication" value="No"/> No</label>
@@ -89,7 +94,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you know of any other reason you should not exercise?</p>
+          <p class="parq-q-text">Do you know of any other reason you should not exercise? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_other" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_other" value="No"/> No</label>
@@ -142,7 +147,7 @@
       </div>
       <div class="form-section-body">
         <div class="parq-q">
-          <p class="parq-q-text">Do you have any current injuries or medical conditions?</p>
+          <p class="parq-q-text">Do you have any current injuries or medical conditions? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_injuries" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_injuries" value="No"/> No</label>
@@ -154,7 +159,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you taking any medications?</p>
+          <p class="parq-q-text">Are you taking any medications? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_meds" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_meds" value="No"/> No</label>
@@ -187,7 +192,8 @@
         <div class="field">
           <label>How many minutes per session can you commit? <span class="req">*</span></label>
           <div class="radio-group inline">
-            <label class="radio-label"><input type="radio" name="session_duration" value="20–30 min" required/> 20–30 min</label>
+            <label class="radio-label"><input type="radio" name="session_duration" value="Less than 20 min" required/> &lt;20 min</label>
+            <label class="radio-label"><input type="radio" name="session_duration" value="20–30 min"/> 20–30 min</label>
             <label class="radio-label"><input type="radio" name="session_duration" value="30–45 min"/> 30–45 min</label>
             <label class="radio-label"><input type="radio" name="session_duration" value="45–60 min"/> 45–60 min</label>
             <label class="radio-label"><input type="radio" name="session_duration" value="60+ min"/> 60+ min</label>

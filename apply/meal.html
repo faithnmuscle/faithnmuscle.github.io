@@ -31,6 +31,11 @@
     <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
     <input type="checkbox" name="botcheck" style="display:none;"/>
 
+    <div class="form-intro">
+      <div class="form-intro-welcome">Hey there, thank you for choosing my meal plans. Please fill out this form honestly so I can create a nutrition plan suited to your lifestyle, eating habits, and goals.</div>
+      <p class="form-intro-policy"><strong>Please read before filling in:</strong> Submitting this form does not confirm your place. After reviewing your answers, Bernil will contact you with payment details. Your program will only be created after payment is completed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
+    </div>
+
     <!-- SECTION 1: PARQ – Diet -->
     <div class="form-section">
       <div class="form-section-header">
@@ -41,7 +46,7 @@
         <p class="parq-notice">If you answer <strong>Yes</strong> to any question below, consult your doctor before starting this plan.</p>
 
         <div class="parq-q">
-          <p class="parq-q-text">Has a doctor ever told you that you have a heart condition, diabetes, kidney disease, high blood pressure, or another medical condition affected by diet?</p>
+          <p class="parq-q-text">Has a doctor ever told you that you have a heart condition, diabetes, kidney disease, high blood pressure, or another medical condition affected by diet? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_diet_condition" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_diet_condition" value="No"/> No</label>
@@ -49,7 +54,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Have you ever been diagnosed with an eating disorder?</p>
+          <p class="parq-q-text">Have you ever been diagnosed with an eating disorder? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_eating_disorder" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_eating_disorder" value="No"/> No</label>
@@ -57,7 +62,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you currently under medical supervision for weight, blood sugar, or any other health condition affected by diet?</p>
+          <p class="parq-q-text">Are you currently under medical supervision for weight, blood sugar, or any other health condition affected by diet? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_medical_supervision" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_medical_supervision" value="No"/> No</label>
@@ -65,15 +70,16 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you pregnant or breastfeeding?</p>
+          <p class="parq-q-text">Are you pregnant or breastfeeding? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_pregnant" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_pregnant" value="No"/> No</label>
+            <label class="yn-label"><input type="radio" name="parq_pregnant" value="Not applicable"/> Not applicable</label>
           </div>
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you have any food allergies or severe intolerances?</p>
+          <p class="parq-q-text">Do you have any food allergies or severe intolerances? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_allergies" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_allergies" value="No"/> No</label>
@@ -126,7 +132,7 @@
       </div>
       <div class="form-section-body">
         <div class="parq-q">
-          <p class="parq-q-text">Do you have any medical conditions affected by diet? (e.g. diabetes, high blood pressure, PCOS, thyroid issues, kidney disease)</p>
+          <p class="parq-q-text">Do you have any medical conditions affected by diet? (e.g. diabetes, high blood pressure, PCOS, thyroid issues, kidney disease) <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="diet_conditions" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="diet_conditions" value="No"/> No</label>
@@ -138,7 +144,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you taking any medications?</p>
+          <p class="parq-q-text">Are you taking any medications? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_meds" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_meds" value="No"/> No</label>
@@ -146,7 +152,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you have any food allergies or intolerances?</p>
+          <p class="parq-q-text">Do you have any food allergies or intolerances? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_food_allergies" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_food_allergies" value="No"/> No</label>
@@ -194,7 +200,8 @@
         <div class="field">
           <label>How often do you eat out or order takeout? <span class="req">*</span></label>
           <div class="radio-group inline">
-            <label class="radio-label"><input type="radio" name="eating_out" value="Rarely" required/> Rarely</label>
+            <label class="radio-label"><input type="radio" name="eating_out" value="Never" required/> Never</label>
+            <label class="radio-label"><input type="radio" name="eating_out" value="Rarely"/> Rarely</label>
             <label class="radio-label"><input type="radio" name="eating_out" value="1–2 times/week"/> 1–2×/week</label>
             <label class="radio-label"><input type="radio" name="eating_out" value="3–5 times/week"/> 3–5×/week</label>
             <label class="radio-label"><input type="radio" name="eating_out" value="Almost every day"/> Almost daily</label>

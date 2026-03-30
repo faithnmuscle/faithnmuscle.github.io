@@ -55,6 +55,21 @@ nav {
 /* ── FORM CONTAINER ── */
 .form-container { max-width: 960px; margin: 0 auto; padding: 56px 5% 80px; }
 
+/* ── FORM INTRO ── */
+.form-intro {
+  margin-bottom: 2rem;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.25rem 1.5rem;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.form-intro-welcome {
+  font-size: 0.9rem; color: var(--text); line-height: 1.7;
+}
+.form-intro-policy {
+  font-size: 0.82rem; color: #9cb8f0; line-height: 1.7;
+}
+.form-intro-policy strong { color: #c8d9f8; }
+
 /* ── FORM SECTIONS ── */
 .form-section {
   margin-bottom: 2rem; background: var(--bg3);
@@ -84,7 +99,7 @@ nav {
 /* ── FIELDS ── */
 .field { display: flex; flex-direction: column; gap: 0.4rem; }
 .field label { font-size: 0.88rem; font-weight: 500; color: var(--text); line-height: 1.4; }
-.field label .req { color: var(--blue-light); margin-left: 2px; }
+.req { color: var(--blue-light); margin-left: 2px; }
 .field input[type="text"],
 .field input[type="email"],
 .field input[type="tel"],
@@ -223,6 +238,7 @@ nav {
 .field.field-error > input,
 .field.field-error > textarea { border-color: #e05555 !important; background: rgba(224,85,85,0.08) !important; }
 .consent-box.field-error { border-color: #e05555 !important; }
+
 
 /* ── FOOTER ── */
 footer {

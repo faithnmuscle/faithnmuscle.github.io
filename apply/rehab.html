@@ -31,6 +31,11 @@
     <input type="hidden" name="from_name" value="Faith n Muscle Website"/>
     <input type="checkbox" name="botcheck" style="display:none;"/>
 
+    <div class="form-intro">
+      <div class="form-intro-welcome">Hey there, thank you for choosing my rehab & flexibility plan. Please fill out this form honestly so I can create a plan suited to your condition, mobility, and goals.</div>
+      <p class="form-intro-policy"><strong>Please read before filling in:</strong> Submitting this form does not confirm your place. After reviewing your answers, Bernil will contact you with payment details. Your program will only be created after payment is completed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
+    </div>
+
     <!-- SECTION 1: PARQ – Rehab -->
     <div class="form-section">
       <div class="form-section-header">
@@ -41,7 +46,7 @@
         <p class="parq-notice">If you answer <strong>Yes</strong> to any question below, consult your doctor or physiotherapist before starting this plan.</p>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you have any medical condition that limits your movement or flexibility? (e.g. arthritis, back pain, joint replacements, chronic pain)</p>
+          <p class="parq-q-text">Do you have any medical condition that limits your movement or flexibility? (e.g. arthritis, back pain, joint replacements, chronic pain) <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_condition" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_condition" value="No"/> No</label>
@@ -49,7 +54,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Have you had any recent injuries, surgeries, or ongoing pain in the past 6 months?</p>
+          <p class="parq-q-text">Have you had any recent injuries, surgeries, or ongoing pain in the past 6 months? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_recent_injury" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_recent_injury" value="No"/> No</label>
@@ -57,7 +62,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you currently under the care of a physiotherapist, doctor, or pain specialist?</p>
+          <p class="parq-q-text">Are you currently under the care of a physiotherapist, doctor, or pain specialist? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_physio" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_physio" value="No"/> No</label>
@@ -65,7 +70,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Do you feel sharp pain, dizziness, or loss of balance when stretching or moving in certain positions?</p>
+          <p class="parq-q-text">Do you feel sharp pain, dizziness, or loss of balance when stretching or moving in certain positions? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="parq_pain" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="parq_pain" value="No"/> No</label>
@@ -141,7 +146,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Have you had any relevant surgeries or injuries?</p>
+          <p class="parq-q-text">Have you had any relevant surgeries or injuries? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="has_surgery" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="has_surgery" value="No"/> No</label>
@@ -153,7 +158,7 @@
         </div>
 
         <div class="parq-q">
-          <p class="parq-q-text">Are you currently seeing a physiotherapist or doctor for this?</p>
+          <p class="parq-q-text">Are you currently seeing a physiotherapist or doctor for this? <span class="req">*</span></p>
           <div class="yn-group">
             <label class="yn-label"><input type="radio" name="seeing_physio" value="Yes" required/> Yes</label>
             <label class="yn-label"><input type="radio" name="seeing_physio" value="No"/> No</label>
@@ -176,6 +181,7 @@
             <label class="radio-label"><input type="radio" name="flexibility" value="Moderately stiff"/> Moderately stiff</label>
             <label class="radio-label"><input type="radio" name="flexibility" value="Average"/> Average</label>
             <label class="radio-label"><input type="radio" name="flexibility" value="Flexible"/> Flexible</label>
+            <label class="radio-label"><input type="radio" name="flexibility" value="Very flexible"/> Very flexible</label>
           </div>
         </div>
 
