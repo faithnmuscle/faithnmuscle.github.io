@@ -212,6 +212,15 @@ nav {
   color: #f08080; font-size: 0.85rem; margin-top: 1rem; text-align: center;
 }
 
+/* ── VALIDATION ERRORS ── */
+.yn-group.field-error .yn-label { border-color: #f08080; }
+.radio-group.field-error .radio-label { border-color: #f08080; }
+.check-group.field-error .check-label { border-color: #f08080; }
+.scale-group.field-error .scale-label { border-color: #f08080; }
+.field.field-error > input,
+.field.field-error > textarea { border-color: #f08080; }
+.consent-box.field-error { border-color: #f08080; }
+
 /* ── FOOTER ── */
 footer {
   background: var(--bg2); border-top: 1px solid var(--border);

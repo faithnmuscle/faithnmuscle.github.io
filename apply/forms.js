@@ -13,6 +13,21 @@ document.addEventListener('DOMContentLoaded', function () {
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     errEl.style.display = 'none';
+
+    // Clear previous highlights
+    form.querySelectorAll('.field-error').forEach(function (el) { el.classList.remove('field-error'); });
+
+    // Highlight any invalid fields and stop
+    if (!form.checkValidity()) {
+      form.querySelectorAll(':invalid').forEach(function (input) {
+        var container = input.closest('.yn-group, .radio-group, .check-group, .scale-group, .consent-box, .field');
+        if (container) container.classList.add('field-error');
+      });
+      var first = form.querySelector('.field-error');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting…';
 
