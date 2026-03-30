@@ -167,12 +167,18 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .btn-outline:hover { border-color: var(--blue-light); color: var(--blue-light); }
-    .hero-stats { margin-top: 3.5rem; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .hero-stats { margin-top: 3.5rem; display: flex; gap: 2.5rem; flex-wrap: nowrap; }
+    .hero-stat { min-width: 0; }
     .hero-stat-num {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2.2rem; color: var(--blue-light); letter-spacing: 1px;
     }
-    .hero-stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .hero-stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+    @media (max-width: 480px) {
+      .hero-stats { gap: 1.2rem; }
+      .hero-stat-num { font-size: 1.6rem; }
+      .hero-stat-label { font-size: 0.68rem; letter-spacing: 0.5px; }
+    }
 
     /* ── SECTIONS ── */
     section { padding: 90px 5%; }
