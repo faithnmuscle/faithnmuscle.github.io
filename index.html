@@ -188,7 +188,7 @@
     }
     .btn-outline:hover { border-color: var(--blue-light); color: var(--blue-light); }
     .hero-stats { margin-top: 3.5rem; display: flex; gap: 2.5rem; flex-wrap: nowrap; }
-    .hero-stat { min-width: 0; }
+    .hero-stat { min-width: 0; text-align: center; }
     .hero-stat-num {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2.2rem; color: var(--blue-light); letter-spacing: 1px;
@@ -237,7 +237,9 @@
       border: 1px solid var(--blue-light); color: var(--blue-light);
       padding: 0.4rem 0.9rem; font-size: 0.78rem; letter-spacing: 1px;
       border-radius: 3px; font-weight: 600; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 0.4rem;
     }
+    .cred-badge svg { flex-shrink: 0; }
 
     /* ── PHOTO STRIP ── */
     #gallery { background: var(--bg); padding: 0; overflow: hidden; }
@@ -628,9 +630,9 @@
         I started online coaching once I kept procrastinating this opportunity amid many of my client requests. The reason I did that was that I was not confident enough - I don't have many pictures of me training another. It's just me. But here I am, ready to help you reach your goals safely and realistically.
       </p>
       <div class="creds">
-        <span class="cred-badge">NVQ L4 Fitness</span>
-        <span class="cred-badge">NVQ L4 Sports Massage</span>
-        <span class="cred-badge">FOFATO First Responder</span>
+        <span class="cred-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M8 14l-2 7 6-3 6 3-2-7"/></svg>NVQ L4 Fitness</span>
+        <span class="cred-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>NVQ L4 Sports Massage</span>
+        <span class="cred-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4m-2-2h4"/></svg>FOFATO First Responder</span>
       </div>
     </div>
   </div>
