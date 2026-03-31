@@ -188,7 +188,7 @@
       font-size: clamp(2.5rem, 5vw, 4rem);
       letter-spacing: 1px; line-height: 1; margin-bottom: 1rem;
     }
-    .section-sub { color: var(--muted); max-width: 540px; line-height: 1.7; margin-bottom: 3rem; }
+    .section-sub { color: var(--muted); max-width: 720px; line-height: 1.7; margin-bottom: 3rem; }
 
     /* ── ABOUT ── */
     #about { background: var(--bg2); }
@@ -280,8 +280,8 @@
     #apply { background: var(--bg2); }
     .apply-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
       align-items: stretch;
     }
     .apply-card {
@@ -428,7 +428,7 @@
 
     /* ── FAQ ── */
     #faq { background: var(--bg); }
-    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-list { max-width: 1100px; margin: 0 auto; }
     .faq-item {
       border-bottom: 1px solid var(--border);
       padding: 1.35rem 0;
@@ -447,7 +447,7 @@
     /* ── DISCLAIMER ── */
     #disclaimer { background: var(--bg2); }
     .disclaimer-box {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -464,7 +464,7 @@
 
     /* ── POLICIES ── */
     #policies { background: var(--bg2); }
-    .policy-list { max-width: 900px; margin: 0 auto; display: grid; gap: 1.5rem; }
+    .policy-list { max-width: 1100px; margin: 0 auto; display: grid; gap: 1.5rem; }
     .policy-item {
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -499,6 +499,9 @@
     .wa-float svg { width: 28px; height: 28px; fill: white; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .apply-cards-grid { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
@@ -510,6 +513,10 @@
       .footer-links { gap: 2rem; }
       #how-it-works > div[style*="grid"] { grid-template-columns: 1fr !important; }
       #how-it-works .steps { max-width: 100% !important; }
+      .apply-cards-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .apply-cards-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -876,27 +883,47 @@
   <div class="faq-list">
     <div class="faq-item">
       <h4>What's the difference between 1-on-1 coaching and a standalone plan?</h4>
-      <p>Coaching (LKR 10,000/month) includes daily check-ins, workout and nutrition plans, tracking and ongoing adjustments on WhatsApp and video calls. Standalone workout, meal, athletes or rehab plans are one-time programs with the depth described on each card—without the full month-to-month coaching relationship.</p>
+      <p>With 1-on-1 coaching (LKR 10,000/month) you get the full package: a custom workout and nutrition plan, daily check-ins, progress tracking and ongoing adjustments throughout the month. Standalone plans are a one-time, detailed program built around your goals, but without the month-to-month coaching relationship.</p>
     </div>
     <div class="faq-item">
       <h4>How do I pay, and when does my program start?</h4>
-      <p>After you submit the application form, I'll reply on WhatsApp with payment instructions (e.g. bank transfer). Work begins only after <strong>full payment is confirmed</strong>. Submitting the form does not reserve a slot until payment is complete.</p>
+      <p>Once I've reviewed your application form, I'll reach out on WhatsApp with payment instructions. Your program only begins after <strong>full payment is confirmed</strong>. Submitting the form alone doesn't hold a spot.</p>
     </div>
     <div class="faq-item">
       <h4>How long until I receive my plan?</h4>
-      <p>Custom plans are usually delivered within <strong>48–72 hours</strong> after payment is confirmed, depending on workload and how complete your questionnaire answers are.</p>
+      <p>Most custom plans are delivered within <strong>48–72 hours</strong> of payment confirmation. The more detail you put into your form, the faster and more accurate your plan will be.</p>
     </div>
     <div class="faq-item">
       <h4>Can I cancel or get a refund after my plan is ready?</h4>
-      <p>Once a plan has been prepared, cancellation is not offered. See the <a href="#refund-policy">Refund Policy</a> below for details.</p>
+      <p>Because every plan is built from scratch for you personally, refunds aren't available once work has started. See the <a href="#refund-policy">Refund Policy</a> below for full details.</p>
     </div>
     <div class="faq-item">
       <h4>Can I share or resell my plan?</h4>
-      <p>No. All material is for <strong>your personal use only</strong>. Copying, sharing, reselling or distributing plans without permission is not allowed.</p>
+      <p>No. All plans are for <strong>your personal use only</strong>. Sharing, copying or reselling any program content without permission isn't allowed.</p>
     </div>
     <div class="faq-item">
-      <h4>I have an injury or medical condition—can I still sign up?</h4>
-      <p>For rehab and flexibility work, get clearance from your doctor if the condition is serious or medical. Coaching and plans are educational and not a substitute for medical diagnosis or treatment.</p>
+      <h4>I have an injury or medical condition - can I still sign up?</h4>
+      <p>Yes, but please get clearance from your doctor first if the condition is serious. The Rehab & Flexibility plan is specifically designed for recovery situations. All plans are fitness guidance, not a substitute for medical advice.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Do you coach clients outside Sri Lanka?</h4>
+      <p>Absolutely. Coaching is available worldwide. Live video calls may not always work across time zones, but form-check videos, feedback and check-ins are all handled through WhatsApp or wherever you're comfortable.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What equipment do I need?</h4>
+      <p>Just the basics, nothing fancy required. Equipment is flexible and we can work around what you have. We'll sort out the specifics when we connect after your application.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How do check-ins work for 1-on-1 coaching?</h4>
+      <p>Check-ins happen via WhatsApp, or whichever platform suits you. Instagram DM and Facebook Messenger are both fine if you'd rather not share your number.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What language is coaching available in?</h4>
+      <p>Coaching and plans are available in <strong>English</strong> and <strong>Sinhala</strong>.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can I upgrade from a standalone plan to full coaching?</h4>
+      <p>Yes. If you want to step up to monthly 1-on-1 coaching after getting a standalone plan, just reach out and we'll get you set up. The full coaching fee of LKR 10,000/month applies going forward.</p>
     </div>
   </div>
 </section>
