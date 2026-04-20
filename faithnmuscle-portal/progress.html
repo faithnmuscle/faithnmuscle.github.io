@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Body Stats | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Body Stats</span>
+    </div>
+
+    <div class="portal-content" id="page-content" style="display:none;">
+
+      <!-- ── Check-In ── -->
+      <div id="section-checkin" class="tab-panel active">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-bottom:1.5rem;">
+
+          <!-- Daily check-in -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Daily Check-In</div>
+                <div class="card-subtitle">Log once per day - Bernil sees these</div>
+              </div>
+            </div>
+            <div id="daily-submitted" style="display:none;" class="alert alert-success">Today's check-in logged.</div>
+            <div id="daily-alert" class="alert" style="display:none;"></div>
+            <form id="daily-form" novalidate>
+              <div class="form-group"><label>Energy Level <span id="energy-val" style="color:var(--blue-light); font-weight:700;">7</span>/10</label><input type="range" id="ci-energy" min="1" max="10" value="7"/></div>
+              <div class="form-group"><label>Mood <span id="mood-val" style="color:var(--blue-light); font-weight:700;">7</span>/10</label><input type="range" id="ci-mood" min="1" max="10" value="7"/></div>
+              <div class="form-group"><label>Sleep Quality <span id="sleep-val" style="color:var(--blue-light); font-weight:700;">7</span>/10</label><input type="range" id="ci-sleep" min="1" max="10" value="7"/></div>
+              <div class="form-group"><label>Stress Level <span id="stress-val" style="color:var(--blue-light); font-weight:700;">5</span>/10</label><input type="range" id="ci-stress" min="1" max="10" value="5"/></div>
+              <div class="form-group" id="adherence-group">
+                <label>Workout done today?</label>
+                <div style="display:flex; gap:0.5rem; margin-top:0.25rem;">
+                  <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:400;"><input type="radio" name="workout-done" value="yes" checked/> Yes</label>
+                  <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:400;"><input type="radio" name="workout-done" value="no"/> No</label>
+                  <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:400;"><input type="radio" name="workout-done" value="rest"/> Rest day</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="daily-note">Note to Bernil (optional)</label>
+                <textarea id="daily-note" rows="2" placeholder="How's it going today?"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full" id="btn-daily-save">
+                <span class="btn-spinner"></span><span class="btn-text">Log Today</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Weekly body stats -->
+          <div class="card" id="stats-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Weekly Body Stats</div>
+                <div class="card-subtitle">Week of <span id="week-label">-</span> · once per week</div>
+              </div>
+            </div>
+            <div id="already-submitted" style="display:none;" class="alert alert-success">This week's stats are logged. Body stats can only be submitted once per week. Come back next Monday to log again.</div>
+            <div id="stats-alert" class="alert" style="display:none;"></div>
+            <form id="stats-form" novalidate>
+              <div class="form-group"><label for="ci-weight">Weight (kg)</label><input type="number" id="ci-weight" placeholder="e.g. 75.0" min="30" max="300" step="0.1"/></div>
+              <div style="font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:0.5rem;">Measurements (cm, optional)</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+                <div class="form-group"><label for="ci-neck">Neck</label><input type="number" id="ci-neck" min="0" max="200" step="0.1"/></div>
+                <div class="form-group"><label for="ci-shoulder">Shoulder</label><input type="number" id="ci-shoulder" min="0" max="250" step="0.1"/></div>
+                <div class="form-group"><label for="ci-chest">Chest</label><input type="number" id="ci-chest" min="0" max="200" step="0.1"/></div>
+                <div class="form-group"><label for="ci-waist">Waist</label><input type="number" id="ci-waist" min="0" max="200" step="0.1"/></div>
+                <div class="form-group"><label for="ci-abdomen">Abdomen</label><input type="number" id="ci-abdomen" min="0" max="200" step="0.1"/></div>
+                <div class="form-group"><label for="ci-hip">Hip</label><input type="number" id="ci-hip" min="0" max="200" step="0.1"/></div>
+                <div class="form-group"><label for="ci-bicep-left">Biceps Left</label><input type="number" id="ci-bicep-left" min="0" max="100" step="0.1"/></div>
+                <div class="form-group"><label for="ci-bicep-right">Biceps Right</label><input type="number" id="ci-bicep-right" min="0" max="100" step="0.1"/></div>
+                <div class="form-group"><label for="ci-thigh-left">Thigh Left</label><input type="number" id="ci-thigh-left" min="0" max="150" step="0.1"/></div>
+                <div class="form-group"><label for="ci-thigh-right">Thigh Right</label><input type="number" id="ci-thigh-right" min="0" max="150" step="0.1"/></div>
+                <div class="form-group"><label for="ci-calf-left">Calf Left</label><input type="number" id="ci-calf-left" min="0" max="100" step="0.1"/></div>
+                <div class="form-group"><label for="ci-calf-right">Calf Right</label><input type="number" id="ci-calf-right" min="0" max="100" step="0.1"/></div>
+              </div>
+              <div class="form-group">
+                <label for="stats-note">Weekly note to Bernil (optional)</label>
+                <textarea id="stats-note" rows="2" placeholder="How was your week? Any wins or struggles?"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full" id="btn-stats-save">
+                <span class="btn-spinner"></span><span class="btn-text">Save Stats</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Past check-ins -->
+        <div class="card">
+          <div class="card-header"><div class="card-title">Past Check-Ins</div></div>
+          <div id="ci-history"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+        </div>
+      </div>
+
+      <!-- ── Trends ── -->
+      <div id="trends" class="tab-panel">
+
+        <!-- Weight trend - full width prominent -->
+        <div class="card mb-3" id="weight-chart-card">
+          <div class="card-header">
+            <div class="card-title">Body Weight</div>
+            <div id="weight-latest" style="font-size:0.875rem; color:var(--blue-light); font-weight:600;">-</div>
+          </div>
+          <svg id="chart-body_weight_kg" viewBox="0 0 560 130" style="width:100%; height:auto;" preserveAspectRatio="xMidYMid meet">
+            <text x="280" y="68" text-anchor="middle" fill="#888" font-size="12">No data yet</text>
+          </svg>
+        </div>
+
+        <!-- Workouts per week - full width bar chart -->
+        <div class="card mb-3 nav-workout" id="workouts-chart-card" style="display:none;">
+          <div class="card-header">
+            <div class="card-title">Workout days per week</div>
+            <div id="workouts-avg" style="font-size:0.875rem; color:var(--muted);">last 12 weeks</div>
+          </div>
+          <svg id="chart-workouts-per-week" viewBox="0 0 560 130" style="width:100%; height:auto;" preserveAspectRatio="xMidYMid meet">
+            <text x="280" y="68" text-anchor="middle" fill="#888" font-size="12">No data yet</text>
+          </svg>
+        </div>
+
+        <!-- Meals per week - full width bar chart -->
+        <div class="card mb-3" id="meals-chart-card" style="display:none;">
+          <div class="card-header">
+            <div class="card-title">Meals Logged Per Week</div>
+            <div id="meals-avg" style="font-size:0.875rem; color:var(--muted);">last 12 weeks</div>
+          </div>
+          <svg id="chart-meals-per-week" viewBox="0 0 560 130" style="width:100%; height:auto;" preserveAspectRatio="xMidYMid meet">
+            <text x="280" y="68" text-anchor="middle" fill="#888" font-size="12">No data yet</text>
+          </svg>
+        </div>
+
+        <!-- Energy / Sleep / Mood weekly averages -->
+        <div class="card mb-3">
+          <div class="card-header"><div class="card-title">Wellbeing (weekly avg)</div></div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem;" id="wellbeing-charts">
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Energy</div>
+              <svg id="chart-energy" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Sleep Quality</div>
+              <svg id="chart-sleep" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Mood</div>
+              <svg id="chart-mood" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body measurements grid -->
+        <div class="card" id="measurements-card">
+          <div class="card-header"><div class="card-title">Body Measurements</div></div>
+          <div id="measurements-charts" style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem;">
+            <div style="color:var(--muted); font-size:0.875rem;">Loading...</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, formatDate, escapeHtml, setBusy, toast, weekStartMonday, addCalendarDays, localCalendarDate } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+const profile = await getProfile();
+const plan    = await getActivePlan(profile.id);
+
+document.getElementById('page-content').style.display = 'block';
+
+// Tab switching (Check-In vs Trends)
+function activateTab(tabId) {
+  document.getElementById('section-checkin').classList.toggle('active', tabId === 'checkin');
+  document.getElementById('trends').classList.toggle('active', tabId === 'trends');
+}
+if (location.hash === '#trends') activateTab('trends');
+window.addEventListener('hashchange', () => {
+  activateTab(location.hash === '#trends' ? 'trends' : 'checkin');
+});
+
+// Plan feature flags
+const hasWorkout = plan && ['coaching','workout','athletes','rehab'].includes(plan.plan_type);
+const hasMeal    = plan && ['coaching','meal'].includes(plan.plan_type);
+
+// Meal-only plans: hide workout-specific fields and stats card
+if (!hasWorkout) {
+  document.getElementById('adherence-group').style.display = 'none';
+  document.getElementById('stats-card').style.display = 'none';
+}
+// Show plan-specific charts
+if (hasWorkout) document.getElementById('workouts-chart-card').style.display = '';
+if (hasMeal)    document.getElementById('meals-chart-card').style.display = '';
+
+// ─── Week utils ────────────────────────────────────────────────────────────
+const today     = localCalendarDate();
+const weekStart = weekStartMonday();
+const weekEnd   = addCalendarDays(weekStart, 6);
+document.getElementById('week-label').textContent =
+  new Date(weekStart + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short' }) + ' - ' +
+  new Date(weekEnd   + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+
+// ─── Slider live labels ───────────────────────────────────────────────────
+[['ci-energy','energy-val'],['ci-mood','mood-val'],['ci-sleep','sleep-val'],['ci-stress','stress-val']].forEach(([id, vid]) => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => { document.getElementById(vid).textContent = el.value; });
+});
+
+// ─── Daily check-in ───────────────────────────────────────────────────────
+const { data: todayEntry } = await supabase
+  .from('progress_checkins').select('id').eq('client_id', profile.id).eq('checkin_date', today).maybeSingle();
+if (todayEntry) lockDaily();
+
+document.getElementById('daily-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn   = document.getElementById('btn-daily-save');
+  const alert = document.getElementById('daily-alert');
+  alert.style.display = 'none';
+  setBusy(btn, true);
+
+  const workoutDone = hasWorkout ? document.querySelector('input[name="workout-done"]:checked')?.value : null;
+
+  const { error } = await supabase.from('progress_checkins').insert({
+    client_id:     profile.id,
+    plan_id:       plan?.id || null,
+    checkin_date:  today,
+    energy_level:  Number(document.getElementById('ci-energy').value),
+    mood_level:    Number(document.getElementById('ci-mood').value),
+    sleep_quality: Number(document.getElementById('ci-sleep').value),
+    notes:         [
+      document.getElementById('daily-note').value.trim(),
+      workoutDone ? 'Workout: ' + workoutDone : null,
+    ].filter(Boolean).join(' | ') || null,
+    created_at:    new Date().toISOString(),
+  });
+
+  setBusy(btn, false);
+  if (error) {
+    alert.className = 'alert alert-error'; alert.textContent = error.message; alert.style.display = 'block';
+  } else {
+    toast('Daily check-in logged!', 'success');
+    lockDaily();
+    loadHistory();
+  }
+});
+
+function lockDaily() {
+  document.getElementById('daily-submitted').style.display = 'block';
+  document.getElementById('daily-form').querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+}
+
+// ─── Weekly body stats ────────────────────────────────────────────────────
+if (hasWorkout) {
+  const { data: weekEntry } = await supabase
+    .from('weekly_checkins').select('id').eq('client_id', profile.id).eq('week_start_date', weekStart).maybeSingle();
+  if (weekEntry) lockStats();
+
+  document.getElementById('stats-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn   = document.getElementById('btn-stats-save');
+    const alert = document.getElementById('stats-alert');
+    alert.style.display = 'none';
+    setBusy(btn, true);
+
+    const weight = Number(document.getElementById('ci-weight').value) || null;
+    const measurementFields = {
+      neck_cm:        Number(document.getElementById('ci-neck').value)         || null,
+      shoulder_cm:    Number(document.getElementById('ci-shoulder').value)     || null,
+      chest_cm:       Number(document.getElementById('ci-chest').value)        || null,
+      waist_cm:       Number(document.getElementById('ci-waist').value)        || null,
+      abdomen_cm:     Number(document.getElementById('ci-abdomen').value)      || null,
+      hip_cm:         Number(document.getElementById('ci-hip').value)          || null,
+      bicep_left_cm:  Number(document.getElementById('ci-bicep-left').value)   || null,
+      bicep_right_cm: Number(document.getElementById('ci-bicep-right').value)  || null,
+      thigh_left_cm:  Number(document.getElementById('ci-thigh-left').value)   || null,
+      thigh_right_cm: Number(document.getElementById('ci-thigh-right').value)  || null,
+      calf_left_cm:   Number(document.getElementById('ci-calf-left').value)    || null,
+      calf_right_cm:  Number(document.getElementById('ci-calf-right').value)   || null,
+    };
+    const hasMeasurements = Object.values(measurementFields).some(v => v != null);
+
+    let pcRes = { error: null };
+    if (weight || hasMeasurements) {
+      pcRes = await supabase.from('progress_checkins').insert({
+        client_id:      profile.id,
+        plan_id:        plan?.id || null,
+        checkin_date:   weekStart,
+        body_weight_kg: weight,
+        ...measurementFields,
+        created_at:     new Date().toISOString(),
+      });
+    }
+
+    let wciRes = { error: null };
+    if (!pcRes.error) {
+      wciRes = await supabase.from('weekly_checkins').insert({
+        client_id:       profile.id,
+        plan_id:         plan?.id || null,
+        week_start_date: weekStart,
+        energy_level:    null,
+        sleep_quality:   null,
+        stress_level:    null,
+        adherence_pct:   null,
+        client_note:     document.getElementById('stats-note').value.trim() || null,
+        created_at:      new Date().toISOString(),
+      });
+    }
+
+    setBusy(btn, false);
+    const err = pcRes?.error || wciRes?.error;
+    if (err) {
+      alert.className = 'alert alert-error';
+      alert.textContent = err.code === '23505' ? 'Already logged this week.' : err.message;
+      alert.style.display = 'block';
+    } else {
+      toast('Body stats saved!', 'success');
+      lockStats();
+      loadHistory();
+    }
+  });
+}
+
+function lockStats() {
+  document.getElementById('already-submitted').style.display = 'block';
+  document.getElementById('stats-form').querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+}
+
+// ─── Metric definitions ───────────────────────────────────────────────────
+const BODY_METRICS = [
+  { key: 'body_weight_kg', label: 'Weight',       unit: 'kg' },
+  { key: 'neck_cm',        label: 'Neck',         unit: 'cm' },
+  { key: 'shoulder_cm',    label: 'Shoulder',     unit: 'cm' },
+  { key: 'chest_cm',       label: 'Chest',        unit: 'cm' },
+  { key: 'waist_cm',       label: 'Waist',        unit: 'cm' },
+  { key: 'abdomen_cm',     label: 'Abdomen',      unit: 'cm' },
+  { key: 'hip_cm',         label: 'Hip',          unit: 'cm' },
+  { key: 'bicep_left_cm',  label: 'Biceps Left',  unit: 'cm' },
+  { key: 'bicep_right_cm', label: 'Biceps Right', unit: 'cm' },
+  { key: 'thigh_left_cm',  label: 'Thigh Left',   unit: 'cm' },
+  { key: 'thigh_right_cm', label: 'Thigh Right',  unit: 'cm' },
+  { key: 'calf_left_cm',   label: 'Calf Left',    unit: 'cm' },
+  { key: 'calf_right_cm',  label: 'Calf Right',   unit: 'cm' },
+];
+const MEASUREMENT_METRICS = BODY_METRICS.filter(m => m.key !== 'body_weight_kg');
+
+// ─── Load all history & render ────────────────────────────────────────────
+async function loadHistory() {
+  const [checkinsRes, workoutsRes, mealsRes] = await Promise.all([
+    supabase.from('progress_checkins')
+      .select('*')
+      .eq('client_id', profile.id)
+      .order('checkin_date', { ascending: false })
+      .limit(90),
+    hasWorkout
+      ? supabase.from('workout_logs')
+          .select('log_date, is_rest_day')
+          .eq('client_id', profile.id)
+          .order('log_date', { ascending: true })
+          .limit(300)
+      : Promise.resolve({ data: [] }),
+    hasMeal
+      ? supabase.from('meal_logs')
+          .select('log_date')
+          .eq('client_id', profile.id)
+          .order('log_date', { ascending: true })
+          .limit(300)
+      : Promise.resolve({ data: [] }),
+  ]);
+
+  const checkins   = checkinsRes.data || [];
+  const workouts   = workoutsRes.data || [];
+  const meals      = mealsRes.data    || [];
+
+  const daily      = checkins.filter(c => c.energy_level != null);
+  const bodyStats  = checkins.filter(c => BODY_METRICS.some(m => c[m.key] != null)).reverse();
+
+  // ── Past check-ins list ────────────────────────────────────────────────
+  const el = document.getElementById('ci-history');
+  if (!daily.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">No daily check-ins yet.</div>';
+  } else {
+    el.innerHTML = `
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Energy</th><th>Sleep</th><th>Mood</th><th>Notes</th></tr></thead>
+          <tbody>
+            ${daily.slice(0, 14).map(ci => `
+              <tr>
+                <td style="white-space:nowrap;">${escapeHtml(new Date(ci.checkin_date + 'T12:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' }))}</td>
+                <td>${ci.energy_level}/10</td>
+                <td>${ci.sleep_quality}/10</td>
+                <td>${ci.mood_level}/10</td>
+                <td style="font-size:0.8rem; color:var(--muted);">${ci.notes ? escapeHtml(ci.notes) : '-'}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  // ── Weight trend (full-width) ──────────────────────────────────────────
+  const weightPoints = bodyStats.filter(c => c.body_weight_kg != null);
+  if (weightPoints.length) {
+    const latest = Number(weightPoints[weightPoints.length - 1].body_weight_kg).toFixed(1);
+    document.getElementById('weight-latest').textContent = latest + ' kg';
+    drawLineChart(document.getElementById('chart-body_weight_kg'), weightPoints, 'body_weight_kg', 'kg', 560, 130);
+  } else {
+    document.getElementById('weight-latest').textContent = 'No data';
+  }
+
+  // ── Workouts per week bar chart ───────────────────────────────────────
+  if (hasWorkout) renderWorkoutsPerWeek(workouts);
+
+  // ── Meals per week bar chart ──────────────────────────────────────────
+  if (hasMeal) renderMealsPerWeek(meals);
+
+  // ── Wellbeing charts (weekly avg from daily check-ins) ────────────────
+  renderWellbeingCharts(daily);
+
+  // ── Measurement charts grid ───────────────────────────────────────────
+  renderMeasurementCharts(bodyStats);
+}
+
+// ── Workouts per week ─────────────────────────────────────────────────────
+function renderWorkoutsPerWeek(workouts) {
+  const actual = workouts.filter(w => !w.is_rest_day);
+  if (!actual.length) return;
+
+  // Build week buckets (last 12 weeks, Monday-based, local timezone).
+  // Multiple logs on the same calendar day count as one training day.
+  const daySets = {};
+  for (let i = 11; i >= 0; i--) {
+    const key = addCalendarDays(weekStartMonday(), -i * 7);
+    daySets[key] = new Set();
+  }
+  actual.forEach(w => {
+    const key = weekStartMonday(new Date(w.log_date + 'T12:00:00'));
+    if (key in daySets && w.log_date) daySets[key].add(w.log_date);
+  });
+
+  const weeks  = Object.keys(daySets);
+  const counts = weeks.map(k => daySets[k].size);
+  const maxCount = Math.max(...counts, 1);
+  const avg = (counts.reduce((a, b) => a + b, 0) / counts.length).toFixed(1);
+  document.getElementById('workouts-avg').textContent = `avg ${avg} days/week · last 12 weeks`;
+
+  const W = 560, H = 130;
+  const padL = 24, padR = 10, padT = 10, padB = 28;
+  const n = weeks.length;
+  const slotW = (W - padL - padR) / n;
+  const barW  = Math.min(slotW * 0.55, 32);
+  const scaleY = v => padT + (1 - v / maxCount) * (H - padT - padB);
+
+  const bars = weeks.map((wk, i) => {
+    const cx  = padL + (i + 0.5) * slotW;
+    const bh  = counts[i] === 0 ? 2 : (counts[i] / maxCount) * (H - padT - padB);
+    const by  = H - padB - bh;
+    const lbl = new Date(wk + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+    const isCurrentWeek = wk === weekStartMonday();
+    return `
+      <rect x="${cx - barW / 2}" y="${by}" width="${barW}" height="${bh}"
+            rx="3" fill="${isCurrentWeek ? '#4285f4' : 'rgba(66,133,244,0.45)'}"/>
+      ${counts[i] > 0 ? `<text x="${cx}" y="${by - 3}" text-anchor="middle" fill="#c9d8ff" font-size="9">${counts[i]}</text>` : ''}
+      ${i % 2 === 0 || n <= 8 ? `<text x="${cx}" y="${H - 5}" text-anchor="middle" fill="#666" font-size="8">${lbl}</text>` : ''}
+    `;
+  }).join('');
+
+  const yLabels = [0, Math.ceil(maxCount / 2), maxCount].map(v =>
+    `<text x="${padL - 3}" y="${scaleY(v) + 3}" text-anchor="end" fill="#555" font-size="9">${v}</text>`
+  ).join('');
+
+  document.getElementById('chart-workouts-per-week').innerHTML = bars + yLabels;
+}
+
+// ── Meals per week ────────────────────────────────────────────────────────
+function renderMealsPerWeek(meals) {
+  if (!meals.length) return;
+
+  // Build week buckets (last 12 weeks, Monday-based, local timezone)
+  const buckets = {};
+  for (let i = 11; i >= 0; i--) {
+    const key = addCalendarDays(weekStartMonday(), -i * 7);
+    buckets[key] = 0;
+  }
+  meals.forEach(m => {
+    const key = weekStartMonday(new Date(m.log_date + 'T12:00:00'));
+    if (key in buckets) buckets[key]++;
+  });
+
+  const weeks  = Object.keys(buckets);
+  const counts = Object.values(buckets);
+  const maxCount = Math.max(...counts, 1);
+  const avg = (counts.reduce((a, b) => a + b, 0) / counts.length).toFixed(1);
+  document.getElementById('meals-avg').textContent = `avg ${avg}/week · last 12 weeks`;
+
+  const W = 560, H = 130;
+  const padL = 24, padR = 10, padT = 10, padB = 28;
+  const n = weeks.length;
+  const slotW = (W - padL - padR) / n;
+  const barW  = Math.min(slotW * 0.55, 32);
+  const scaleY = v => padT + (1 - v / maxCount) * (H - padT - padB);
+
+  const bars = weeks.map((wk, i) => {
+    const cx  = padL + (i + 0.5) * slotW;
+    const bh  = counts[i] === 0 ? 2 : (counts[i] / maxCount) * (H - padT - padB);
+    const by  = H - padB - bh;
+    const lbl = new Date(wk + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+    const isCurrentWeek = wk === weekStartMonday();
+    return `
+      <rect x="${cx - barW / 2}" y="${by}" width="${barW}" height="${bh}"
+            rx="3" fill="${isCurrentWeek ? '#34d399' : 'rgba(52,211,153,0.4)'}"/>
+      ${counts[i] > 0 ? `<text x="${cx}" y="${by - 3}" text-anchor="middle" fill="#a7f3d0" font-size="9">${counts[i]}</text>` : ''}
+      ${i % 2 === 0 || n <= 8 ? `<text x="${cx}" y="${H - 5}" text-anchor="middle" fill="#666" font-size="8">${lbl}</text>` : ''}
+    `;
+  }).join('');
+
+  const yLabels = [0, Math.ceil(maxCount / 2), maxCount].map(v =>
+    `<text x="${padL - 3}" y="${scaleY(v) + 3}" text-anchor="end" fill="#555" font-size="9">${v}</text>`
+  ).join('');
+
+  document.getElementById('chart-meals-per-week').innerHTML = bars + yLabels;
+}
+
+// ── Wellbeing (energy / sleep / mood) weekly averages ────────────────────
+function renderWellbeingCharts(daily) {
+  if (!daily.length) return;
+
+  // Group by week, compute averages
+  const byWeek = {};
+  daily.forEach(c => {
+    const d = new Date(c.checkin_date + 'T12:00:00');
+    const day = d.getDay();
+    d.setDate(d.getDate() + (day === 0 ? -6 : 1 - day));
+    const key = d.toISOString().split('T')[0];
+    if (!byWeek[key]) byWeek[key] = { energy: [], sleep: [], mood: [] };
+    if (c.energy_level != null) byWeek[key].energy.push(c.energy_level);
+    if (c.sleep_quality != null) byWeek[key].sleep.push(c.sleep_quality);
+    if (c.mood_level   != null) byWeek[key].mood.push(c.mood_level);
+  });
+
+  const weeks = Object.keys(byWeek).sort().slice(-12);
+  const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+
+  const energyPts = weeks.map((w, i) => ({ i, v: avg(byWeek[w].energy) })).filter(p => p.v != null);
+  const sleepPts  = weeks.map((w, i) => ({ i, v: avg(byWeek[w].sleep)  })).filter(p => p.v != null);
+  const moodPts   = weeks.map((w, i) => ({ i, v: avg(byWeek[w].mood)   })).filter(p => p.v != null);
+
+  drawIndexedChart(document.getElementById('chart-energy'), energyPts, weeks.length, '#4ade80', 180, 90, 10);
+  drawIndexedChart(document.getElementById('chart-sleep'),  sleepPts,  weeks.length, '#60a5fa', 180, 90, 10);
+  drawIndexedChart(document.getElementById('chart-mood'),   moodPts,   weeks.length, '#f472b6', 180, 90, 10);
+}
+
+// ── Body measurement charts ───────────────────────────────────────────────
+function renderMeasurementCharts(bodyStats) {
+  const wrap = document.getElementById('measurements-charts');
+  const withData = MEASUREMENT_METRICS.filter(m => bodyStats.some(c => c[m.key] != null));
+
+  if (!withData.length) {
+    wrap.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; grid-column:1/-1;">No measurement data yet. Log your weekly body stats to see trends here.</div>';
+    return;
+  }
+
+  wrap.innerHTML = withData.map(m => `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem;">
+        <div style="font-size:0.8rem;font-weight:600;">${m.label}</div>
+        <div id="latest-${m.key}" style="font-size:0.7rem;color:var(--muted);">-</div>
+      </div>
+      <svg id="chart-${m.key}" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet">
+        <text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text>
+      </svg>
+    </div>
+  `).join('');
+
+  withData.forEach(m => {
+    const pts = bodyStats.filter(c => c[m.key] != null);
+    const latest = pts.length ? Number(pts[pts.length - 1][m.key]).toFixed(1) + ' ' + m.unit : '-';
+    document.getElementById(`latest-${m.key}`).textContent = latest;
+    drawLineChart(document.getElementById(`chart-${m.key}`), pts, m.key, m.unit, 180, 90);
+  });
+}
+
+// ─── Chart helpers ────────────────────────────────────────────────────────
+function drawLineChart(svg, points, valueKey, unit, W = 260, H = 110) {
+  if (!svg || !points.length) return;
+  const pad = { t: 8, r: 8, b: 20, l: 26 };
+  const values = points.map(p => Number(p[valueKey]));
+  const minV = Math.min(...values), maxV = Math.max(...values);
+  const range = maxV - minV || 1;
+  const n = points.length;
+  const scaleX = i => pad.l + (n === 1 ? (W - pad.l - pad.r) / 2 : i * (W - pad.l - pad.r) / (n - 1));
+  const scaleY = v => pad.t + (1 - (v - minV) / range) * (H - pad.t - pad.b);
+  const gradId = `cg-${valueKey}-${W}`;
+
+  if (n === 1) {
+    svg.innerHTML = `
+      <circle cx="${scaleX(0)}" cy="${H / 2 - 8}" r="4" fill="#4285f4"/>
+      <text x="${scaleX(0)}" y="${H / 2 + 10}" text-anchor="middle" fill="#c9d8ff" font-size="10">${values[0].toFixed(1)} ${unit}</text>
+      <text x="${W / 2}" y="${H - 4}" text-anchor="middle" fill="#888" font-size="9">Need 2+ entries</text>
+    `;
+    return;
+  }
+
+  const polyline = points.map((p, i) => `${scaleX(i)},${scaleY(values[i])}`).join(' ');
+  svg.innerHTML = `
+    <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4285f4" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#4285f4" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${polyline} ${scaleX(n-1)},${H-pad.b} ${scaleX(0)},${H-pad.b}" fill="url(#${gradId})"/>
+    <polyline points="${polyline}" fill="none" stroke="#4285f4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    ${points.map((p, i) => `<circle cx="${scaleX(i)}" cy="${scaleY(values[i])}" r="2.5" fill="#4285f4"/>`).join('')}
+    <text x="${pad.l - 3}" y="${scaleY(minV) + 3}" text-anchor="end" fill="#555" font-size="9">${minV.toFixed(1)}</text>
+    <text x="${pad.l - 3}" y="${scaleY(maxV) + 3}" text-anchor="end" fill="#555" font-size="9">${maxV.toFixed(1)}</text>
+    <text x="${W - 2}" y="${H - 4}" text-anchor="end" fill="#555" font-size="9">${unit}</text>
+  `;
+}
+
+// For indexed (0-10) charts like energy/sleep/mood
+function drawIndexedChart(svg, points, nWeeks, color, W, H, maxVal) {
+  if (!svg || !points.length) return;
+  const pad = { t: 8, r: 8, b: 16, l: 20 };
+  const scaleX = i => pad.l + (nWeeks <= 1 ? (W - pad.l - pad.r) / 2 : i * (W - pad.l - pad.r) / (nWeeks - 1));
+  const scaleY = v => pad.t + (1 - v / maxVal) * (H - pad.t - pad.b);
+  const gradId = `cg-wb-${color.replace('#','')}-${W}`;
+
+  if (points.length === 1) {
+    svg.innerHTML = `
+      <circle cx="${scaleX(points[0].i)}" cy="${scaleY(points[0].v)}" r="3.5" fill="${color}"/>
+      <text x="${W/2}" y="${H-2}" text-anchor="middle" fill="#666" font-size="9">${points[0].v.toFixed(1)}</text>
+    `;
+    return;
+  }
+
+  const polyline = points.map(p => `${scaleX(p.i)},${scaleY(p.v)}`).join(' ');
+  const firstX = scaleX(points[0].i), lastX = scaleX(points[points.length-1].i);
+  svg.innerHTML = `
+    <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${polyline} ${lastX},${H-pad.b} ${firstX},${H-pad.b}" fill="url(#${gradId})"/>
+    <polyline points="${polyline}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    ${points.map(p => `<circle cx="${scaleX(p.i)}" cy="${scaleY(p.v)}" r="2.2" fill="${color}"/>`).join('')}
+    <text x="${pad.l - 3}" y="${scaleY(maxVal) + 3}" text-anchor="end" fill="#555" font-size="8">${maxVal}</text>
+    <text x="${pad.l - 3}" y="${scaleY(0) + 3}"      text-anchor="end" fill="#555" font-size="8">0</text>
+  `;
+}
+
+loadHistory();
+</script>
+</body>
+</html>

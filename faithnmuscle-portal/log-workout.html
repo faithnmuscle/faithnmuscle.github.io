@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log Workout | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Log Workout</span>
+      <div class="topbar-actions">
+        <a href="/workout-history.html" class="btn btn-secondary btn-sm">History</a>
+      </div>
+    </div>
+
+    <div id="gate-feature" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3><p>Workout logging is currently disabled.</p></div>
+    </div>
+    <div id="gate-plan" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">📋</div><h3>Not in Your Plan</h3><p>Workout logging is available with Coaching, Workout, Athletes, or Rehab plans.</p></div>
+    </div>
+
+    <div class="portal-content" id="page-content" style="display:none;">
+      <div id="last-session-banner" style="display:none;" class="alert alert-info mb-2"></div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">New Session</div>
+          <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer; font-size:0.875rem; font-weight:400;">
+            <input type="checkbox" id="w-rest-day" style="width:16px; height:16px; cursor:pointer;"/>
+            Rest day
+          </label>
+        </div>
+        <!-- Rest day banner (shown when rest day is checked) -->
+        <div id="rest-day-banner" style="display:none; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.4); border-radius:8px; padding:0.75rem 1rem; margin-bottom:1rem; font-size:0.875rem; color:var(--muted);">
+          Rest day - your streak will continue. You can add a note below if you'd like.
+        </div>
+        <form id="workout-form" novalidate>
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label for="w-date">Date</label>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <input type="date" id="w-date" style="flex:1;"/>
+              <button type="button" id="btn-cal" title="Pick date" style="background:var(--blue); border:1px solid var(--blue); border-radius:8px; padding:0.5rem 0.65rem; cursor:pointer; color:#fff; line-height:1; flex-shrink:0;" onclick="document.getElementById('w-date').showPicker()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="workout-fields">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="w-name">Session Name</label>
+              <input type="text" id="w-name" placeholder="e.g. Push Day A"/>
+            </div>
+            <div class="form-group">
+              <label for="w-duration">Duration (min)</label>
+              <input type="number" id="w-duration" placeholder="60" min="1" max="300"/>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="w-rpe">Perceived Effort (RPE 1-10)</label>
+              <div class="range-group">
+                <input type="range" id="w-rpe" min="1" max="10" value="7"/>
+                <span class="range-val" id="w-rpe-val">7</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="w-bw">Body Weight (kg, optional)</label>
+              <input type="number" id="w-bw" placeholder="e.g. 75.5" min="30" max="300" step="0.1"/>
+            </div>
+            <div class="form-group">
+              <label for="w-bpm">Avg Heart Rate (BPM, optional)</label>
+              <input type="number" id="w-bpm" placeholder="e.g. 145" min="40" max="220"/>
+            </div>
+          </div>
+
+          <!-- Exercises -->
+          <div style="margin-top:0.5rem; margin-bottom:0.5rem;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem;">
+              <label style="margin:0;">Exercises</label>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-add-ex">+ Add Exercise</button>
+            </div>
+            <div style="font-size:0.7rem; color:var(--muted); display:grid; grid-template-columns:1fr 60px 90px 90px 1fr auto; gap:0.5rem; padding:0 0 0.5rem; border-bottom:1px solid var(--border);" id="ex-header">
+              <span>Exercise</span><span>Sets</span><span>Reps</span><span>Weight (kg)</span><span>Notes</span><span></span>
+            </div>
+            <div id="exercises-container"></div>
+          </div>
+          </div><!-- end #workout-fields -->
+
+          <div class="form-group" style="margin-top:1rem;">
+            <label for="w-notes">Notes (optional)</label>
+            <textarea id="w-notes" rows="2" placeholder="How did it feel? Any issues?"></textarea>
+          </div>
+
+          <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+            <button type="button" class="btn btn-secondary" onclick="history.back()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-save-workout">
+              <span class="btn-spinner"></span>
+              <span class="btn-text">Save Workout</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, escapeHtml, setBusy, toast } from '/assets/portal.js';
+import { FEATURES } from '/assets/features.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+
+const profile = await getProfile();
+
+if (!FEATURES.workoutLogging) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  const plan = await getActivePlan(profile.id);
+  const allowed = ['coaching','workout','athletes','rehab'];
+  if (!plan || !allowed.includes(plan.plan_type)) {
+    document.getElementById('gate-plan').style.display = 'block';
+  } else {
+    document.getElementById('page-content').style.display = 'block';
+    gateClientNav(plan.plan_type);
+    init(plan);
+  }
+}
+
+function init(plan) {
+  document.getElementById('w-date').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('w-rpe').addEventListener('input', e => {
+    document.getElementById('w-rpe-val').textContent = e.target.value;
+  });
+
+  // Rest day toggle
+  const restDayCheckbox = document.getElementById('w-rest-day');
+  const restDayBanner   = document.getElementById('rest-day-banner');
+  const workoutFields   = document.getElementById('workout-fields');
+  const saveBtn         = document.getElementById('btn-save-workout');
+  restDayCheckbox.addEventListener('change', () => {
+    const isRest = restDayCheckbox.checked;
+    workoutFields.style.display = isRest ? 'none' : '';
+    restDayBanner.style.display = isRest ? 'block' : 'none';
+    saveBtn.querySelector('.btn-text').textContent = isRest ? 'Log Rest Day' : 'Save Workout';
+  });
+
+  // Show last session for reference
+  loadLastSession(profile.id);
+
+  // Start with 3 exercise rows
+  addExerciseRow(); addExerciseRow(); addExerciseRow();
+  document.getElementById('btn-add-ex').addEventListener('click', addExerciseRow);
+
+  document.getElementById('workout-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn     = document.getElementById('btn-save-workout');
+    const isRest  = document.getElementById('w-rest-day').checked;
+    setBusy(btn, true);
+
+    const exercises = isRest ? [] : collectExercises();
+    const logDate   = document.getElementById('w-date').value || new Date().toISOString().slice(0, 10);
+
+    const { data: logRow, error: logErr } = await supabase.from('workout_logs').insert({
+      client_id:        profile.id,
+      plan_id:          plan.id,
+      log_date:         logDate,
+      is_rest_day:      isRest,
+      session_name:     isRest ? 'Rest Day' : (document.getElementById('w-name').value.trim() || 'Workout'),
+      duration_min:     isRest ? null : (Number(document.getElementById('w-duration').value) || null),
+      perceived_effort: isRest ? null : Number(document.getElementById('w-rpe').value),
+      body_weight_kg:       Number(document.getElementById('w-bw').value) || null,
+      avg_heart_rate_bpm:   Number(document.getElementById('w-bpm').value) || null,
+      overall_notes:        document.getElementById('w-notes').value.trim() || null,
+      created_at:       new Date().toISOString(),
+    }).select().single();
+
+    if (logErr) { setBusy(btn, false); toast(logErr.message, 'error'); return; }
+
+    if (exercises.length > 0) {
+      const rows = exercises.map((ex, i) => ({ ...ex, log_id: logRow.id, sort_order: i }));
+      await supabase.from('workout_exercises').insert(rows);
+    }
+
+    setBusy(btn, false);
+    toast(isRest ? 'Rest day logged!' : 'Workout saved!', 'success');
+    setTimeout(() => window.location.href = '/workout-history.html', 800);
+  });
+}
+
+function addExerciseRow() {
+  const container = document.getElementById('exercises-container');
+  const row = document.createElement('div');
+  row.className = 'exercise-row';
+  row.innerHTML = `
+    <input type="text" placeholder="Exercise name" class="ex-name" list="exercise-list" autocomplete="off"/>
+    <input type="number" placeholder="3" min="1" max="20" class="ex-sets"/>
+    <input type="text" placeholder="8-10" class="ex-reps"/>
+    <input type="number" placeholder="kg" min="0" max="500" step="0.5" class="ex-weight"/>
+    <input type="text" placeholder="Notes" class="ex-notes"/>
+    <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.exercise-row').remove()" style="padding:0.35rem 0.6rem;">x</button>
+  `;
+  container.appendChild(row);
+}
+
+function collectExercises() {
+  const rows = document.querySelectorAll('.exercise-row');
+  const result = [];
+  rows.forEach((row, i) => {
+    const name = row.querySelector('.ex-name').value.trim();
+    if (!name) return;
+    result.push({
+      exercise_name:  name,
+      sets_completed: Number(row.querySelector('.ex-sets').value) || null,
+      reps_per_set:   row.querySelector('.ex-reps').value.trim() || null,
+      weight_kg:      Number(row.querySelector('.ex-weight').value) || null,
+      notes:          row.querySelector('.ex-notes').value.trim() || null,
+      sort_order:     i,
+    });
+  });
+  return result;
+}
+
+async function loadLastSession(userId) {
+  const { data } = await supabase.from('workout_logs').select('session_name, log_date, perceived_effort').eq('client_id', userId).order('log_date', { ascending: false }).limit(1);
+  if (data?.[0]) {
+    const banner = document.getElementById('last-session-banner');
+    banner.textContent = `Last session: ${data[0].session_name || 'Workout'} on ${new Date(data[0].log_date).toLocaleDateString('en-GB', { day:'numeric', month:'short' })} - RPE ${data[0].perceived_effort || '-'}`;
+    banner.style.display = 'block';
+  }
+}
+</script>
+
+<datalist id="exercise-list">
+  <option value="21s Bicep Curl"/>
+  <option value="Ab Scissors"/>
+  <option value="Ab Wheel"/>
+  <option value="Aerobics"/>
+  <option value="Air Bike"/>
+  <option value="Arnold Press (Dumbbell)"/>
+  <option value="Around The World"/>
+  <option value="Assisted Pistol Squats"/>
+  <option value="Back Extension (Hyperextension)"/>
+  <option value="Back Extension (Machine)"/>
+  <option value="Back Extension (Weighted Hyperextension)"/>
+  <option value="Ball Slams"/>
+  <option value="Band Pullaparts"/>
+  <option value="Battle Ropes"/>
+  <option value="Behind the Back Bicep Wrist Curl (Barbell)"/>
+  <option value="Behind the Back Curl (Cable)"/>
+  <option value="Belt Squat (Machine)"/>
+  <option value="Bench Dip"/>
+  <option value="Bench Press (Barbell)"/>
+  <option value="Bench Press (Cable)"/>
+  <option value="Bench Press (Dumbbell)"/>
+  <option value="Bench Press (Smith Machine)"/>
+  <option value="Bench Press - Close Grip (Barbell)"/>
+  <option value="Bench Press - Wide Grip (Barbell)"/>
+  <option value="Bent Over Row (Band)"/>
+  <option value="Bent Over Row (Barbell)"/>
+  <option value="Bent Over Row (Dumbbell)"/>
+  <option value="Bicep Curl (Barbell)"/>
+  <option value="Bicep Curl (Cable)"/>
+  <option value="Bicep Curl (Dumbbell)"/>
+  <option value="Bicep Curl (Machine)"/>
+  <option value="Bicep Curl (Suspension)"/>
+  <option value="Bicycle Crunch"/>
+  <option value="Bicycle Crunch Raised Legs"/>
+  <option value="Bird Dog"/>
+  <option value="Box Jump"/>
+  <option value="Box Squat (Barbell)"/>
+  <option value="Boxing"/>
+  <option value="Bulgarian Split Squat"/>
+  <option value="Burpee"/>
+  <option value="Burpee Over the Bar"/>
+  <option value="Butterfly (Pec Deck)"/>
+  <option value="Cable Core Palloff Press"/>
+  <option value="Cable Crunch"/>
+  <option value="Cable Fly Crossovers"/>
+  <option value="Cable Pull Through"/>
+  <option value="Cable Twist (Down to up)"/>
+  <option value="Cable Twist (Up to down)"/>
+  <option value="Calf Extension (Machine)"/>
+  <option value="Calf Press (Machine)"/>
+  <option value="Chest Dip"/>
+  <option value="Chest Dip (Assisted)"/>
+  <option value="Chest Dip (Weighted)"/>
+  <option value="Chest Fly (Band)"/>
+  <option value="Chest Fly (Dumbbell)"/>
+  <option value="Chest Fly (Machine)"/>
+  <option value="Chest Fly (Suspension)"/>
+  <option value="Chest Press (Band)"/>
+  <option value="Chest Press (Machine)"/>
+  <option value="Chest Supported Incline Row (Dumbbell)"/>
+  <option value="Chest Supported Reverse Fly (Dumbbell)"/>
+  <option value="Chest Supported Y Raise (Dumbbell)"/>
+  <option value="Chin Up"/>
+  <option value="Chin Up (Assisted)"/>
+  <option value="Chin Up (Weighted)"/>
+  <option value="Clamshell"/>
+  <option value="Clap Push Ups"/>
+  <option value="Clean"/>
+  <option value="Clean and Jerk"/>
+  <option value="Clean and Press"/>
+  <option value="Clean Pull"/>
+  <option value="Climbing"/>
+  <option value="Concentration Curl"/>
+  <option value="Cross Body Hammer Curl"/>
+  <option value="Crunch"/>
+  <option value="Crunch (Machine)"/>
+  <option value="Crunch (Weighted)"/>
+  <option value="Curtsy Lunge (Dumbbell)"/>
+  <option value="Cycling"/>
+  <option value="Dead Bug"/>
+  <option value="Dead Hang"/>
+  <option value="Deadlift (Band)"/>
+  <option value="Deadlift (Barbell)"/>
+  <option value="Deadlift (Dumbbell)"/>
+  <option value="Deadlift (Smith Machine)"/>
+  <option value="Deadlift (Trap bar)"/>
+  <option value="Deadlift High Pull"/>
+  <option value="Decline Bench Press (Barbell)"/>
+  <option value="Decline Bench Press (Dumbbell)"/>
+  <option value="Decline Bench Press (Machine)"/>
+  <option value="Decline Bench Press (Smith Machine)"/>
+  <option value="Decline Chest Fly (Dumbbell)"/>
+  <option value="Decline Crunch"/>
+  <option value="Decline Crunch (Weighted)"/>
+  <option value="Decline Push Up"/>
+  <option value="Diamond Push Up"/>
+  <option value="Downward Dog"/>
+  <option value="Drag Curl"/>
+  <option value="Dragon Flag"/>
+  <option value="Dragonfly"/>
+  <option value="Dumbbell Row"/>
+  <option value="Dumbbell Snatch"/>
+  <option value="Dumbbell Squeeze Press"/>
+  <option value="Dumbbell Step Up"/>
+  <option value="Elbow to Knee"/>
+  <option value="Elliptical Trainer"/>
+  <option value="EZ Bar Biceps Curl"/>
+  <option value="Face Pull"/>
+  <option value="Farmers Walk"/>
+  <option value="Feet Up Bench Press (Barbell)"/>
+  <option value="Fire Hydrants"/>
+  <option value="Floor Press (Barbell)"/>
+  <option value="Floor Press (Dumbbell)"/>
+  <option value="Floor Triceps Dip"/>
+  <option value="Flutter Kicks"/>
+  <option value="Frog Jumps"/>
+  <option value="Frog Pumps (Dumbbell)"/>
+  <option value="Front Lever Hold"/>
+  <option value="Front Lever Raise"/>
+  <option value="Front Raise (Band)"/>
+  <option value="Front Raise (Barbell)"/>
+  <option value="Front Raise (Cable)"/>
+  <option value="Front Raise (Dumbbell)"/>
+  <option value="Front Raise (Suspension)"/>
+  <option value="Front Squat"/>
+  <option value="Full Squat"/>
+  <option value="Glute Bridge"/>
+  <option value="Glute Ham Raise"/>
+  <option value="Glute Kickback (Machine)"/>
+  <option value="Glute Kickback on Floor"/>
+  <option value="Goblet Squat"/>
+  <option value="Good Morning (Barbell)"/>
+  <option value="Gorilla Row (Kettlebell)"/>
+  <option value="Hack Squat"/>
+  <option value="Hack Squat (Machine)"/>
+  <option value="Hammer Curl (Band)"/>
+  <option value="Hammer Curl (Cable)"/>
+  <option value="Hammer Curl (Dumbbell)"/>
+  <option value="Handstand Hold"/>
+  <option value="Handstand Push Up"/>
+  <option value="Hang Clean"/>
+  <option value="Hang Snatch"/>
+  <option value="Hanging Knee Raise"/>
+  <option value="Hanging Leg Raise"/>
+  <option value="Heel Taps"/>
+  <option value="Hex Press (Dumbbell)"/>
+  <option value="High Knee Skips"/>
+  <option value="High Knees"/>
+  <option value="HIIT"/>
+  <option value="Hiking"/>
+  <option value="Hip Abduction (Machine)"/>
+  <option value="Hip Adduction (Machine)"/>
+  <option value="Hip Thrust"/>
+  <option value="Hip Thrust (Barbell)"/>
+  <option value="Hip Thrust (Machine)"/>
+  <option value="Hip Thrust (Smith Machine)"/>
+  <option value="Hollow Rock"/>
+  <option value="Incline Bench Press (Barbell)"/>
+  <option value="Incline Bench Press (Dumbbell)"/>
+  <option value="Incline Bench Press (Smith Machine)"/>
+  <option value="Incline Chest Fly (Dumbbell)"/>
+  <option value="Incline Chest Press (Machine)"/>
+  <option value="Incline Push Ups"/>
+  <option value="Inverted Row"/>
+  <option value="Iso-Lateral Chest Press (Machine)"/>
+  <option value="Iso-Lateral High Row (Machine)"/>
+  <option value="Iso-Lateral Low Row"/>
+  <option value="Iso-Lateral Row (Machine)"/>
+  <option value="Jack Knife (Suspension)"/>
+  <option value="Jackknife Sit Up"/>
+  <option value="JM Press (Barbell)"/>
+  <option value="Jump Rope"/>
+  <option value="Jump Shrug"/>
+  <option value="Jump Squat"/>
+  <option value="Jumping Jack"/>
+  <option value="Jumping Lunge"/>
+  <option value="Kettlebell Around the World"/>
+  <option value="Kettlebell Clean"/>
+  <option value="Kettlebell Curl"/>
+  <option value="Kettlebell Goblet Squat"/>
+  <option value="Kettlebell Halo"/>
+  <option value="Kettlebell High Pull"/>
+  <option value="Kettlebell Shoulder Press"/>
+  <option value="Kettlebell Snatch"/>
+  <option value="Kettlebell Swing"/>
+  <option value="Kettlebell Turkish Get Up"/>
+  <option value="Kipping Pull Up"/>
+  <option value="Knee Raise Parallel Bars"/>
+  <option value="Kneeling Pulldown (band)"/>
+  <option value="Kneeling Push Up"/>
+  <option value="L-Sit Hold"/>
+  <option value="Landmine 180"/>
+  <option value="Landmine Row"/>
+  <option value="Landmine Squat and Press"/>
+  <option value="Lat Pulldown (Band)"/>
+  <option value="Lat Pulldown (Cable)"/>
+  <option value="Lat Pulldown (Machine)"/>
+  <option value="Lat Pulldown - Close Grip (Cable)"/>
+  <option value="Lateral Band Walks"/>
+  <option value="Lateral Box Jump"/>
+  <option value="Lateral Leg Raises"/>
+  <option value="Lateral Lunge"/>
+  <option value="Lateral Raise (Band)"/>
+  <option value="Lateral Raise (Cable)"/>
+  <option value="Lateral Raise (Dumbbell)"/>
+  <option value="Lateral Raise (Machine)"/>
+  <option value="Lateral Squat"/>
+  <option value="Leg Extension (Machine)"/>
+  <option value="Leg Press (Machine)"/>
+  <option value="Leg Press Horizontal (Machine)"/>
+  <option value="Leg Raise Parallel Bars"/>
+  <option value="Low Cable Fly Crossovers"/>
+  <option value="Low Row (Suspension)"/>
+  <option value="Lunge"/>
+  <option value="Lunge (Barbell)"/>
+  <option value="Lunge (Dumbbell)"/>
+  <option value="Lying Knee Raise"/>
+  <option value="Lying Leg Curl (Machine)"/>
+  <option value="Lying Leg Raise"/>
+  <option value="Lying Neck Curls"/>
+  <option value="Lying Neck Curls (Weighted)"/>
+  <option value="Lying Neck Extension"/>
+  <option value="Lying Neck Extension (Weighted)"/>
+  <option value="Meadows Rows (Barbell)"/>
+  <option value="Mountain Climber"/>
+  <option value="Muscle Up"/>
+  <option value="Negative Pull Up"/>
+  <option value="Nordic Hamstrings Curls"/>
+  <option value="Oblique Crunch"/>
+  <option value="One Arm Push Up"/>
+  <option value="Overhead Curl (Cable)"/>
+  <option value="Overhead Dumbbell Lunge"/>
+  <option value="Overhead Plate Raise"/>
+  <option value="Overhead Press (Barbell)"/>
+  <option value="Overhead Press (Dumbbell)"/>
+  <option value="Overhead Press (Smith Machine)"/>
+  <option value="Overhead Squat"/>
+  <option value="Overhead Triceps Extension (Cable)"/>
+  <option value="Partial Glute Bridge (Barbell)"/>
+  <option value="Pause Squat (Barbell)"/>
+  <option value="Pendlay Row (Barbell)"/>
+  <option value="Pendulum Squat (Machine)"/>
+  <option value="Pike Pushup"/>
+  <option value="Pilates"/>
+  <option value="Pinwheel Curl (Dumbbell)"/>
+  <option value="Pistol Squat"/>
+  <option value="Plank"/>
+  <option value="Plank Pushup"/>
+  <option value="Plate Curl"/>
+  <option value="Plate Front Raise"/>
+  <option value="Plate Press"/>
+  <option value="Plate Squeeze (Svend Press)"/>
+  <option value="Power Clean"/>
+  <option value="Power Snatch"/>
+  <option value="Preacher Curl (Barbell)"/>
+  <option value="Preacher Curl (Dumbbell)"/>
+  <option value="Preacher Curl (Machine)"/>
+  <option value="Press Under"/>
+  <option value="Pull Up"/>
+  <option value="Pull Up (Assisted)"/>
+  <option value="Pull Up (Band)"/>
+  <option value="Pull Up (Weighted)"/>
+  <option value="Pullover (Dumbbell)"/>
+  <option value="Pullover (Machine)"/>
+  <option value="Push Press"/>
+  <option value="Push Up"/>
+  <option value="Push Up (Weighted)"/>
+  <option value="Push Up - Close Grip"/>
+  <option value="Rack Pull"/>
+  <option value="Rear Delt Reverse Fly (Cable)"/>
+  <option value="Rear Delt Reverse Fly (Dumbbell)"/>
+  <option value="Rear Delt Reverse Fly (Machine)"/>
+  <option value="Rear Kick (Machine)"/>
+  <option value="Renegade Row (Dumbbell)"/>
+  <option value="Reverse Crunch"/>
+  <option value="Reverse Curl (Barbell)"/>
+  <option value="Reverse Curl (Cable)"/>
+  <option value="Reverse Curl (Dumbbell)"/>
+  <option value="Reverse Fly Single Arm (Cable)"/>
+  <option value="Reverse Grip Concentration Curl"/>
+  <option value="Reverse Grip Lat Pulldown (Cable)"/>
+  <option value="Reverse Hyperextension"/>
+  <option value="Reverse Lunge"/>
+  <option value="Reverse Lunge (Barbell)"/>
+  <option value="Reverse Lunge (Dumbbell)"/>
+  <option value="Reverse Plank"/>
+  <option value="Ring Dips"/>
+  <option value="Ring Pull Up"/>
+  <option value="Ring Push Up"/>
+  <option value="Romanian Deadlift (Barbell)"/>
+  <option value="Romanian Deadlift (Dumbbell)"/>
+  <option value="Rope Cable Curl"/>
+  <option value="Rope Straight Arm Pulldown"/>
+  <option value="Rowing Machine"/>
+  <option value="Running"/>
+  <option value="Russian Twist (Bodyweight)"/>
+  <option value="Russian Twist (Weighted)"/>
+  <option value="Scapular Pull Ups"/>
+  <option value="Seated Cable Row - Bar Grip"/>
+  <option value="Seated Cable Row - Bar Wide Grip"/>
+  <option value="Seated Cable Row - V Grip (Cable)"/>
+  <option value="Seated Calf Raise"/>
+  <option value="Seated Chest Flys (Cable)"/>
+  <option value="Seated Dip Machine"/>
+  <option value="Seated Incline Curl (Dumbbell)"/>
+  <option value="Seated Lateral Raise (Dumbbell)"/>
+  <option value="Seated Leg Curl (Machine)"/>
+  <option value="Seated Overhead Press (Barbell)"/>
+  <option value="Seated Overhead Press (Dumbbell)"/>
+  <option value="Seated Palms Up Wrist Curl"/>
+  <option value="Seated Row (Machine)"/>
+  <option value="Seated Shoulder Press (Machine)"/>
+  <option value="Seated Triceps Press"/>
+  <option value="Seated Wrist Extension (Barbell)"/>
+  <option value="Shoulder Press (Dumbbell)"/>
+  <option value="Shoulder Press (Machine Plates)"/>
+  <option value="Shoulder Taps"/>
+  <option value="Shrug (Barbell)"/>
+  <option value="Shrug (Cable)"/>
+  <option value="Shrug (Dumbbell)"/>
+  <option value="Shrug (Machine)"/>
+  <option value="Shrug (Smith Machine)"/>
+  <option value="Side Bend"/>
+  <option value="Side Bend (Dumbbell)"/>
+  <option value="Side Plank"/>
+  <option value="Single Arm Cable Crossover"/>
+  <option value="Single Arm Cable Row"/>
+  <option value="Single Arm Curl (Cable)"/>
+  <option value="Single Arm Landmine Press (Barbell)"/>
+  <option value="Single Arm Lat Pulldown"/>
+  <option value="Single Arm Lateral Raise (Cable)"/>
+  <option value="Single Arm Tricep Extension (Dumbbell)"/>
+  <option value="Single Arm Triceps Pushdown (Cable)"/>
+  <option value="Single Leg Extensions"/>
+  <option value="Single Leg Glute Bridge"/>
+  <option value="Single Leg Hip Thrust"/>
+  <option value="Single Leg Hip Thrust (Dumbbell)"/>
+  <option value="Single Leg Press (Machine)"/>
+  <option value="Single Leg Romanian Deadlift (Barbell)"/>
+  <option value="Single Leg Romanian Deadlift (Dumbbell)"/>
+  <option value="Single Leg Standing Calf Raise"/>
+  <option value="Single Leg Standing Calf Raise (Barbell)"/>
+  <option value="Single Leg Standing Calf Raise (Dumbbell)"/>
+  <option value="Single Leg Standing Calf Raise (Machine)"/>
+  <option value="Sissy Squat (Weighted)"/>
+  <option value="Sit Up"/>
+  <option value="Sit Up (Weighted)"/>
+  <option value="Skating"/>
+  <option value="Skiing"/>
+  <option value="Skullcrusher (Barbell)"/>
+  <option value="Skullcrusher (Dumbbell)"/>
+  <option value="Sled Push"/>
+  <option value="Snatch"/>
+  <option value="Snowboarding"/>
+  <option value="Spider Curl (Barbell)"/>
+  <option value="Spider Curl (Dumbbell)"/>
+  <option value="Spiderman"/>
+  <option value="Spinning"/>
+  <option value="Split Jerk"/>
+  <option value="Split Squat (Dumbbell)"/>
+  <option value="Sprints"/>
+  <option value="Squat (Band)"/>
+  <option value="Squat (Barbell)"/>
+  <option value="Squat (Bodyweight)"/>
+  <option value="Squat (Dumbbell)"/>
+  <option value="Squat (Machine)"/>
+  <option value="Squat (Smith Machine)"/>
+  <option value="Squat (Suspension)"/>
+  <option value="Squat Row"/>
+  <option value="Stair Machine (Floors)"/>
+  <option value="Stair Machine (Steps)"/>
+  <option value="Standing Cable Glute Kickbacks"/>
+  <option value="Standing Calf Raise"/>
+  <option value="Standing Calf Raise (Barbell)"/>
+  <option value="Standing Calf Raise (Dumbbell)"/>
+  <option value="Standing Calf Raise (Machine)"/>
+  <option value="Standing Calf Raise (Smith)"/>
+  <option value="Standing Leg Curls"/>
+  <option value="Standing Military Press (Barbell)"/>
+  <option value="Step Up"/>
+  <option value="Sternum Pull up (Gironda)"/>
+  <option value="Straight Arm Lat Pulldown (Cable)"/>
+  <option value="Straight Leg Deadlift"/>
+  <option value="Stretching"/>
+  <option value="Sumo Deadlift"/>
+  <option value="Sumo Squat"/>
+  <option value="Sumo Squat (Barbell)"/>
+  <option value="Sumo Squat (Dumbbell)"/>
+  <option value="Sumo Squat (Kettlebell)"/>
+  <option value="Superman"/>
+  <option value="Swimming"/>
+  <option value="T Bar Row"/>
+  <option value="Thruster (Barbell)"/>
+  <option value="Thruster (Kettlebell)"/>
+  <option value="Toe Touch"/>
+  <option value="Toes to Bar"/>
+  <option value="Torso Rotation"/>
+  <option value="Treadmill"/>
+  <option value="Triceps Dip"/>
+  <option value="Triceps Dip (Assisted)"/>
+  <option value="Triceps Dip (Weighted)"/>
+  <option value="Triceps Extension (Barbell)"/>
+  <option value="Triceps Extension (Cable)"/>
+  <option value="Triceps Extension (Dumbbell)"/>
+  <option value="Triceps Extension (Machine)"/>
+  <option value="Triceps Extension (Suspension)"/>
+  <option value="Triceps Kickback (Cable)"/>
+  <option value="Triceps Kickback (Dumbbell)"/>
+  <option value="Triceps Pressdown"/>
+  <option value="Triceps Pushdown"/>
+  <option value="Triceps Rope Pushdown"/>
+  <option value="Upright Row (Barbell)"/>
+  <option value="Upright Row (Cable)"/>
+  <option value="Upright Row (Dumbbell)"/>
+  <option value="V Up"/>
+  <option value="Vertical Traction (Machine)"/>
+  <option value="Waiter Curl (Dumbbell)"/>
+  <option value="Walking"/>
+  <option value="Walking Lunge"/>
+  <option value="Walking Lunge (Dumbbell)"/>
+  <option value="Wall Ball"/>
+  <option value="Wall Sit"/>
+  <option value="Warm Up"/>
+  <option value="Wide Pull Up"/>
+  <option value="Wide-Elbow Triceps Press (Dumbbell)"/>
+  <option value="Wrist Roller"/>
+  <option value="Yoga"/>
+  <option value="Zercher Squat"/>
+  <option value="Zottman Curl (Dumbbell)"/>
+</datalist>
+</body>
+</html>

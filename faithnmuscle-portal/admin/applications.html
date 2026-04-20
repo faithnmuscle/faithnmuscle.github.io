@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Applications | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/clients.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients</a>
+      <a href="/admin/applications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Applications</a>
+      <a href="/admin/bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings</a>
+      <a href="/admin/checkins.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Check-Ins<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <a href="/admin/renewals.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Renewals</a>
+      <a href="/admin/payments.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments</a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Admin</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Applications</span>
+    </div>
+
+    <div class="portal-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Website Applications</div>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <select id="filter-status" style="max-width:160px;">
+              <option value="pending">Pending</option>
+              <option value="">All</option>
+              <option value="converted">Converted</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+        <div id="app-list"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- View / action modal -->
+<div class="modal-overlay" id="modal-app">
+  <div class="modal" style="max-width:600px; max-height:90vh; overflow-y:auto;">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-app-title">Application</div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div id="modal-app-body"></div>
+    <div id="modal-app-alert" class="alert" style="display:none; margin:0 0 1rem;"></div>
+
+    <!-- Convert to client form (shown when converting) -->
+    <div id="convert-form-wrap" style="display:none; border-top:1px solid var(--border); padding-top:1rem; margin-top:0.5rem;">
+      <div style="font-weight:600; margin-bottom:0.75rem;">Create Client Account</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div class="form-group">
+          <label for="cv-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="cv-name"/>
+        </div>
+        <div class="form-group">
+          <label for="cv-email">Email <span class="required">*</span></label>
+          <input type="email" id="cv-email"/>
+        </div>
+        <div class="form-group">
+          <label for="cv-phone">Phone</label>
+          <input type="text" id="cv-phone"/>
+        </div>
+        <div class="form-group">
+          <label for="cv-plan">Plan Type <span class="required">*</span></label>
+          <select id="cv-plan">
+            <option value="coaching">Online 1-on-1 Coaching</option>
+            <option value="workout">Detailed Workout Plan</option>
+            <option value="meal">Detailed Meal Plan</option>
+            <option value="athletes">Youth & School Athletes</option>
+            <option value="rehab">Rehab & Flexibility</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cv-price">Price (LKR) <span class="required">*</span></label>
+          <input type="number" id="cv-price" min="0" step="100"/>
+        </div>
+        <div class="form-group">
+          <label for="cv-start">Start Date</label>
+          <input type="date" id="cv-start"/>
+        </div>
+        <div class="form-group">
+          <label for="cv-end">End Date (leave blank for open-ended)</label>
+          <input type="date" id="cv-end"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cv-notes">Notes (private)</label>
+        <textarea id="cv-notes" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="modal-footer" id="modal-app-footer">
+      <button class="btn btn-secondary modal-close">Close</button>
+      <button class="btn btn-secondary" id="btn-reject-app" style="display:none;color:#f87171;border-color:#f8717140;">Reject</button>
+      <button class="btn btn-secondary" id="btn-show-convert" style="display:none;">Convert to Client</button>
+      <button class="btn btn-primary" id="btn-confirm-convert" style="display:none;">
+        <span class="btn-spinner"></span><span class="btn-text">Create Account &amp; Invite</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAdmin, initSidebar, formatDate, planTypeLabel, escapeHtml, toast, openModal, initModals, setBusy, PLAN_DEFAULTS } from '/assets/portal.js';
+
+await requireAdmin();
+await initSidebar();
+initModals();
+
+const PLAN_DEFAULTS_MAP = {
+  coaching: { price: 10000 },
+  workout:  { price:  4500 },
+  meal:     { price:  6000 },
+  athletes: { price:  4500 },
+  rehab:    { price:  5000 },
+};
+
+let currentApp = null;
+
+document.getElementById('filter-status').addEventListener('change', loadApps);
+loadApps();
+
+async function loadApps() {
+  const status = document.getElementById('filter-status').value;
+  let q = supabase.from('applications').select('*').order('created_at', { ascending: false }).limit(100);
+  if (status) q = q.eq('status', status);
+
+  const { data, error } = await q;
+  const el = document.getElementById('app-list');
+
+  if (error) { el.innerHTML = `<div class="alert alert-error">${escapeHtml(error.message)}</div>`; return; }
+  if (!data?.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; padding:0.5rem 0;">No applications found.</div>';
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Name</th><th>Service</th><th>Submitted</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          ${data.map(a => `
+            <tr>
+              <td>
+                <div style="font-weight:600;">${escapeHtml(a.full_name)}</div>
+                <div style="font-size:0.75rem; color:var(--muted);">${escapeHtml(a.email)}</div>
+              </td>
+              <td>${escapeHtml(planTypeLabel(a.service_type))}</td>
+              <td style="font-size:0.8rem; color:var(--muted);">${escapeHtml(formatDate(a.created_at))}</td>
+              <td><span class="badge badge-${a.status === 'pending' ? 'pending' : a.status === 'converted' ? 'approved' : 'rejected'}">${escapeHtml(a.status)}</span></td>
+              <td><button class="btn btn-secondary btn-sm btn-view" data-id="${a.id}">Review</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  el.querySelectorAll('.btn-view').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const app = data.find(a => a.id === btn.dataset.id);
+      if (app) openAppModal(app);
+    });
+  });
+}
+
+function openAppModal(app) {
+  currentApp = app;
+  document.getElementById('modal-app-title').textContent = app.full_name;
+  document.getElementById('modal-app-alert').style.display = 'none';
+  document.getElementById('convert-form-wrap').style.display = 'none';
+
+  // Build details view
+  const formData = app.form_data || {};
+  const fields = [
+    ['Service', planTypeLabel(app.service_type)],
+    ['Email', app.email],
+    ['Phone', app.phone],
+    ['Age', app.age],
+    ['Sex', app.sex],
+    ['Height', app.height_cm ? app.height_cm + ' cm' : null],
+    ['Current Weight', app.weight_kg ? app.weight_kg + ' kg' : null],
+    ['Target Weight', app.target_weight_kg ? app.target_weight_kg + ' kg' : null],
+    ['Source', app.source],
+    ['Submitted', formatDate(app.created_at)],
+  ].filter(([, v]) => v != null && v !== '');
+
+  // Extra form_data fields (PAR-Q, goals, etc.)
+  const extras = Object.entries(formData).filter(([k]) => !['full_name','email','service_type'].includes(k));
+
+  document.getElementById('modal-app-body').innerHTML = `
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.375rem 1rem; margin-bottom:1rem; font-size:0.875rem;">
+      ${fields.map(([k,v]) => `
+        <div style="color:var(--muted);">${escapeHtml(k)}</div>
+        <div>${escapeHtml(String(v))}</div>
+      `).join('')}
+    </div>
+    ${extras.length ? `
+      <details style="margin-bottom:1rem;">
+        <summary style="cursor:pointer; font-size:0.875rem; color:var(--blue-light); margin-bottom:0.5rem;">Full form data (${extras.length} fields)</summary>
+        <div style="background:var(--bg2); border-radius:8px; padding:0.75rem; font-size:0.8rem; display:grid; grid-template-columns:1fr 1fr; gap:0.25rem 1rem;">
+          ${extras.map(([k,v]) => `
+            <div style="color:var(--muted); text-transform:capitalize;">${escapeHtml(k.replace(/_/g,' '))}</div>
+            <div>${escapeHtml(Array.isArray(v) ? v.join(', ') : String(v ?? '-'))}</div>
+          `).join('')}
+        </div>
+      </details>
+    ` : ''}
+    ${app.admin_notes ? `<div class="alert" style="margin-bottom:0.75rem;">${escapeHtml(app.admin_notes)}</div>` : ''}
+  `;
+
+  // Show action buttons based on status
+  const isPending = app.status === 'pending';
+  document.getElementById('btn-reject-app').style.display    = isPending ? '' : 'none';
+  document.getElementById('btn-show-convert').style.display  = isPending ? '' : 'none';
+  document.getElementById('btn-confirm-convert').style.display = 'none';
+
+  if (isPending) {
+    // Pre-fill convert form
+    document.getElementById('cv-name').value  = app.full_name;
+    document.getElementById('cv-email').value = app.email;
+    document.getElementById('cv-phone').value = app.phone || '';
+    document.getElementById('cv-plan').value  = app.service_type || 'coaching';
+    document.getElementById('cv-price').value = PLAN_DEFAULTS_MAP[app.service_type]?.price || 10000;
+    document.getElementById('cv-start').value = new Date().toISOString().split('T')[0];
+    document.getElementById('cv-end').value   = '';
+    document.getElementById('cv-notes').value = '';
+  }
+
+  openModal('modal-app');
+}
+
+// Show convert form inline
+document.getElementById('btn-show-convert').addEventListener('click', () => {
+  document.getElementById('convert-form-wrap').style.display = 'block';
+  document.getElementById('btn-show-convert').style.display  = 'none';
+  document.getElementById('btn-confirm-convert').style.display = '';
+});
+
+// Plan type → price prefill
+document.getElementById('cv-plan').addEventListener('change', e => {
+  document.getElementById('cv-price').value = PLAN_DEFAULTS_MAP[e.target.value]?.price || '';
+});
+
+// Confirm convert
+document.getElementById('btn-confirm-convert').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-confirm-convert');
+  const alert = document.getElementById('modal-app-alert');
+  alert.style.display = 'none';
+
+  const name    = document.getElementById('cv-name').value.trim();
+  const email   = document.getElementById('cv-email').value.trim();
+  const phone   = document.getElementById('cv-phone').value.trim();
+  const planType = document.getElementById('cv-plan').value;
+  const price   = Number(document.getElementById('cv-price').value);
+  const start   = document.getElementById('cv-start').value || null;
+  const end     = document.getElementById('cv-end').value   || null;
+  const notes   = document.getElementById('cv-notes').value.trim() || null;
+
+  if (!name || !email) {
+    alert.className = 'alert alert-error';
+    alert.textContent = 'Name and email are required.';
+    alert.style.display = 'block';
+    return;
+  }
+
+  setBusy(btn, true);
+
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/create-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+      body: JSON.stringify({ full_name: name, email, phone: phone || null, plan_type: planType, price_lkr: price, start_date: start, end_date: end, notes }),
+    });
+    const raw = await res.text();
+    let result = {};
+    try {
+      result = raw ? JSON.parse(raw) : {};
+    } catch {
+      throw new Error(
+        res.status === 404
+          ? 'API endpoint not found — deploy Cloudflare Pages with Functions or use wrangler pages dev.'
+          : res.status === 501
+            ? 'Server could not run this request (501). Confirm Pages Functions are deployed and try again.'
+            : `Server error (${res.status})`
+      );
+    }
+    if (!res.ok) throw new Error(result.error || `Failed (${res.status})`);
+
+    // Mark application as converted
+    await supabase.from('applications').update({
+      status:             'converted',
+      converted_client_id: result.user_id,
+      reviewed_at:        new Date().toISOString(),
+    }).eq('id', currentApp.id);
+
+    toast('Client account created. Invite email sent!', 'success');
+    document.getElementById('modal-app').classList.remove('open');
+    loadApps();
+  } catch (err) {
+    alert.className = 'alert alert-error';
+    alert.textContent = err.message;
+    alert.style.display = 'block';
+  } finally {
+    setBusy(btn, false);
+  }
+});
+
+// Reject
+document.getElementById('btn-reject-app').addEventListener('click', async () => {
+  if (!currentApp) return;
+  const { error } = await supabase.from('applications').update({
+    status:      'rejected',
+    reviewed_at: new Date().toISOString(),
+  }).eq('id', currentApp.id);
+
+  if (error) { toast(error.message, 'error'); return; }
+  toast('Application rejected', 'info');
+  document.getElementById('modal-app').classList.remove('open');
+  loadApps();
+});
+</script>
+</body>
+</html>

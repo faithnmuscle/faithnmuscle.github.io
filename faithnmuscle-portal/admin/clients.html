@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clients | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="/admin/clients.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clients
+      </a>
+      <a href="/admin/applications.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Applications
+      </a>
+      <a href="/admin/bookings.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Bookings
+      </a>
+      <a href="/admin/checkins.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Check-Ins
+        <span class="nav-badge" id="notif-badge" style="display:none"></span>
+      </a>
+      <a href="/admin/renewals.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Renewals
+      </a>
+      <a href="/admin/payments.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Payments
+      </a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">?</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="sidebar-name">Loading…</div>
+          <div class="sidebar-user-role" id="sidebar-role">Admin</div>
+        </div>
+      </div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title">Clients</span>
+      <div class="topbar-actions">
+        <button class="btn btn-primary btn-sm" id="btn-new-client">+ New Client</button>
+      </div>
+    </div>
+
+    <div class="portal-content">
+
+      <!-- Filters -->
+      <div style="display:flex; gap:0.75rem; margin-bottom:1.5rem; flex-wrap:wrap; align-items:center;">
+        <input type="search" id="search" placeholder="Search by name or email…" style="max-width:280px;"/>
+        <select id="filter-plan" style="max-width:200px;">
+          <option value="">All plan types</option>
+          <option value="coaching">1-on-1 Coaching</option>
+          <option value="workout">Workout Plan</option>
+          <option value="meal">Meal Plan</option>
+          <option value="athletes">Youth Athletes</option>
+          <option value="rehab">Rehab & Flexibility</option>
+        </select>
+        <select id="filter-status" style="max-width:160px;">
+          <option value="">All statuses</option>
+          <option value="active">Active</option>
+          <option value="pending">Pending</option>
+          <option value="expired">Expired</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div id="loading" style="color:var(--muted);font-size:0.875rem;padding:1rem 0;">Loading clients…</div>
+        <div id="empty" style="display:none;" class="empty-state">
+          <div class="empty-state-icon">👥</div>
+          <h3>No clients found</h3>
+          <p>Try adjusting your filters, or add a new client.</p>
+        </div>
+        <div id="table-wrap" style="display:none;" class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Status</th>
+                <th>Expires</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="clients-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- New Client Modal -->
+<div class="modal-overlay" id="modal-new-client">
+  <div class="modal" style="max-width:560px;">
+    <div class="modal-header">
+      <div class="modal-title">Create New Client</div>
+      <button class="modal-close" aria-label="Close">&times;</button>
+    </div>
+
+    <div id="modal-alert" class="alert" style="display:none;"></div>
+
+    <form id="new-client-form" novalidate>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label for="nc-name">Full Name *</label>
+          <input type="text" id="nc-name" placeholder="Jane Smith" required/>
+          <div class="form-error" id="nc-name-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="nc-email">Email *</label>
+          <input type="email" id="nc-email" placeholder="jane@example.com" required/>
+          <div class="form-error" id="nc-email-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="nc-phone">Phone / WhatsApp</label>
+          <input type="tel" id="nc-phone" placeholder="+94 76 xxx xxxx"/>
+        </div>
+        <div class="form-group">
+          <label for="nc-plan">Plan Type *</label>
+          <select id="nc-plan" required>
+            <option value="">- select -</option>
+            <option value="coaching">Online 1-on-1 Coaching</option>
+            <option value="workout">Detailed Workout Plan</option>
+            <option value="meal">Detailed Meal Plan</option>
+            <option value="athletes">Youth &amp; School Athletes Training</option>
+            <option value="rehab">Rehab &amp; Flexibility</option>
+          </select>
+          <div class="form-error" id="nc-plan-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="nc-price">Price (LKR)</label>
+          <div style="display:flex; align-items:center; gap:0.625rem;">
+            <input type="number" id="nc-price" placeholder="10000" min="0" style="flex:1;"/>
+            <span id="nc-period-hint" style="color:var(--muted); font-size:0.85rem; white-space:nowrap;"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nc-start">Start Date</label>
+          <input type="date" id="nc-start"/>
+        </div>
+        <div class="form-group">
+          <label for="nc-end">End Date</label>
+          <input type="date" id="nc-end"/>
+          <div class="form-hint">Leave blank for open-ended (monthly coaching)</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nc-notes">Notes (private, not visible to client)</label>
+        <textarea id="nc-notes" rows="2" placeholder="e.g. Paid via bank transfer on 15 Apr…"></textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btn-create-client">
+          <span class="btn-spinner"></span>
+          <span class="btn-text">Create & Send Invite</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import {
+  requireAdmin, initSidebar, formatDate, planTypeLabel, PLAN_DEFAULTS,
+  escapeHtml, setBusy, showFieldError, clearAllErrors, toast, openModal, initModals
+} from '/assets/portal.js';
+
+const session = await requireAdmin();
+if (!session) throw new Error('not admin');
+await initSidebar();
+initModals();
+
+// Open modal if ?action=new
+if (new URLSearchParams(location.search).get('action') === 'new') {
+  openModal('modal-new-client');
+  history.replaceState({}, '', location.pathname);
+}
+
+document.getElementById('btn-new-client').addEventListener('click', () => openModal('modal-new-client'));
+
+document.getElementById('nc-plan').addEventListener('change', (e) => {
+  const def = PLAN_DEFAULTS[e.target.value];
+  document.getElementById('nc-price').value          = def ? def.price : '';
+  document.getElementById('nc-period-hint').textContent = def ? '/ ' + def.period : '';
+});
+
+// ── Load clients ──
+let allClients = [];
+await loadClients();
+
+async function loadClients() {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('id, full_name, email, role, plans(id, plan_type, status, start_date, end_date, price_lkr)')
+    .neq('email', 'bernilwickramasinghe@gmail.com')
+    .order('full_name', { ascending: true });
+
+  document.getElementById('loading').style.display = 'none';
+
+  if (error || !data) { toast('Failed to load clients', 'error'); return; }
+
+  // Flatten: one row per latest plan
+  allClients = data.map(p => ({
+    ...p,
+    plan: p.plans?.sort((a,b) => new Date(b.start_date||0) - new Date(a.start_date||0))?.[0] || null,
+  }));
+
+  renderTable(allClients);
+}
+
+function renderTable(clients) {
+  const body    = document.getElementById('clients-body');
+  const wrap    = document.getElementById('table-wrap');
+  const emptyEl = document.getElementById('empty');
+
+  if (!clients.length) {
+    wrap.style.display  = 'none';
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+  wrap.style.display    = 'block';
+
+  body.innerHTML = clients.map(c => {
+    const plan     = c.plan;
+    const daysLeft = plan?.end_date ? Math.ceil((new Date(plan.end_date) - new Date()) / 86400000) : null;
+    return `
+      <tr>
+        <td style="font-weight:600;">
+          ${escapeHtml(c.full_name || '-')}
+          ${c.role === 'admin' ? '<span class="badge" style="margin-left:0.4rem;font-size:0.65rem;">Admin</span>' : ''}
+        </td>
+        <td style="color:var(--muted);font-size:0.8rem;">${escapeHtml(c.email)}</td>
+        <td>${plan ? escapeHtml(planTypeLabel(plan.plan_type)) : '<span style="color:var(--muted)">-</span>'}</td>
+        <td>${plan ? `<span class="badge badge-${plan.status}">${plan.status}</span>` : '-'}</td>
+        <td style="font-size:0.8rem;">
+          ${plan?.end_date
+            ? `<span style="color:${daysLeft <= 7 ? 'var(--warning)' : 'var(--text)'}">${escapeHtml(formatDate(plan.end_date))}</span>`
+            : '<span style="color:var(--muted)">-</span>'}
+        </td>
+        <td><a href="/admin/client-detail.html?id=${escapeHtml(c.id)}" class="btn btn-secondary btn-sm">View</a></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ── Filters ──
+function applyFilters() {
+  const q      = document.getElementById('search').value.toLowerCase();
+  const plan   = document.getElementById('filter-plan').value;
+  const status = document.getElementById('filter-status').value;
+
+  const filtered = allClients.filter(c => {
+    const matchName   = !q || (c.full_name||'').toLowerCase().includes(q) || c.email.toLowerCase().includes(q);
+    const matchPlan   = !plan   || c.plan?.plan_type === plan;
+    const matchStatus = !status || c.plan?.status === status;
+    return matchName && matchPlan && matchStatus;
+  });
+  renderTable(filtered);
+}
+
+['search','filter-plan','filter-status'].forEach(id =>
+  document.getElementById(id).addEventListener('input', applyFilters)
+);
+
+// ── Create new client ──
+const form      = document.getElementById('new-client-form');
+const modalAlert = document.getElementById('modal-alert');
+const btnCreate  = document.getElementById('btn-create-client');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearAllErrors(form);
+  modalAlert.style.display = 'none';
+
+  const name    = document.getElementById('nc-name').value.trim();
+  const email   = document.getElementById('nc-email').value.trim();
+  const planType = document.getElementById('nc-plan').value;
+
+  let valid = true;
+  if (!name)    { showFieldError('nc-name', 'Full name is required'); valid = false; }
+  if (!email)   { showFieldError('nc-email', 'Email is required'); valid = false; }
+  if (!planType){ showFieldError('nc-plan', 'Select a plan type'); valid = false; }
+  if (!valid) return;
+
+  setBusy(btnCreate, true);
+
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    const res = await fetch('/api/create-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({
+        full_name:   name,
+        email,
+        phone:       document.getElementById('nc-phone').value.trim() || null,
+        plan_type:   planType,
+        price_lkr:   Number(document.getElementById('nc-price').value) || null,
+        start_date:  document.getElementById('nc-start').value || null,
+        end_date:    document.getElementById('nc-end').value   || null,
+        notes:       document.getElementById('nc-notes').value.trim() || null,
+      }),
+    });
+
+    const raw = await res.text();
+    let result = {};
+    try {
+      result = raw ? JSON.parse(raw) : {};
+    } catch {
+      throw new Error(
+        res.status === 404
+          ? 'API endpoint not found — deploy Cloudflare Pages with Functions or use wrangler pages dev.'
+          : res.status === 501
+            ? 'Server could not run this request (501). Confirm Pages Functions are deployed and try again.'
+            : `Server error (${res.status})`
+      );
+    }
+
+    if (!res.ok) throw new Error(result.error || 'Failed to create client');
+
+    toast(`Invite sent to ${email}`, 'success');
+    form.reset();
+    document.querySelector('.modal-overlay').classList.remove('open');
+    await loadClients();
+
+  } catch (err) {
+    modalAlert.className = 'alert alert-error';
+    modalAlert.textContent = err.message;
+    modalAlert.style.display = 'block';
+  } finally {
+    setBusy(btnCreate, false);
+  }
+});
+</script>
+</body>
+</html>

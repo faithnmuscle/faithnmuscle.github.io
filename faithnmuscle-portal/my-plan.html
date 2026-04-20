@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Plan | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+
+  <!-- Sidebar (shared) -->
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+        <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">?</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="sidebar-name">Loading…</div>
+          <div class="sidebar-user-role" id="sidebar-role">Client</div>
+        </div>
+      </div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title">My Plan</span>
+      <div class="topbar-actions"></div>
+    </div>
+
+    <div class="portal-content">
+      <div id="loading" class="empty-state">
+        <p>Loading your plan…</p>
+      </div>
+
+      <div id="no-plan" style="display:none">
+        <div class="empty-state">
+          <div class="empty-state-icon">📋</div>
+          <h3>No Active Plan</h3>
+          <p>You don't have an active plan yet. Contact Bernil to get started.</p>
+          <a href="https://wa.me/94761167303" target="_blank" rel="noopener" class="btn btn-primary">WhatsApp Bernil</a>
+        </div>
+      </div>
+
+      <div id="plan-content" style="display:none">
+
+        <!-- Plan summary card -->
+        <div class="card mb-3" id="plan-summary-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title" id="plan-title">-</div>
+              <div class="card-subtitle" id="plan-dates">-</div>
+            </div>
+            <span class="badge" id="plan-badge">-</span>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:1rem; margin-top:0.5rem;">
+            <div>
+              <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;">Plan Type</div>
+              <div style="font-size:0.9rem;" id="plan-type-label">-</div>
+            </div>
+            <div id="price-cell">
+              <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;">Price</div>
+              <div style="font-size:0.9rem;" id="plan-price">-</div>
+            </div>
+          </div>
+          <div id="plan-notes-wrap" style="margin-top:1rem; display:none;">
+            <div style="font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;">Notes from Bernil</div>
+            <div style="font-size:0.875rem; color:var(--text);" id="plan-notes"></div>
+          </div>
+        </div>
+
+        <!-- Documents -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Documents</div>
+              <div class="card-subtitle">Click to download - links expire in 10 minutes</div>
+            </div>
+          </div>
+
+          <div id="docs-loading" style="color:var(--muted);font-size:0.875rem;">Loading documents…</div>
+
+          <div id="docs-empty" style="display:none" class="empty-state" style="padding:2rem 0;">
+            <div class="empty-state-icon">📄</div>
+            <h3>No Documents Yet</h3>
+            <p>Bernil will upload your program here once it's ready.</p>
+          </div>
+
+          <div id="docs-list" style="display:none"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDate, planTypeLabel, escapeHtml, toast } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('not authenticated');
+await initSidebar();
+
+const profile = await getProfile();
+const activePlan = await getActivePlan(profile.id);
+gateClientNav(activePlan?.plan_type || (profile.role === 'admin' ? 'coaching' : null));
+
+// Load most recent active/pending plan
+const { data: plans } = await supabase
+  .from('plans')
+  .select('*')
+  .eq('client_id', profile.id)
+  .in('status', ['active','pending'])
+  .order('created_at', { ascending: false })
+  .limit(1);
+
+const plan = plans?.[0];
+document.getElementById('loading').style.display = 'none';
+
+if (!plan) {
+  document.getElementById('no-plan').style.display = 'block';
+} else {
+  document.getElementById('plan-content').style.display = 'block';
+  renderPlan(plan);
+  await loadDocuments(plan.id);
+}
+
+function renderPlan(plan) {
+  document.getElementById('plan-title').textContent = planTypeLabel(plan.plan_type);
+  document.getElementById('plan-type-label').textContent = planTypeLabel(plan.plan_type);
+
+  const badge = document.getElementById('plan-badge');
+  badge.textContent = plan.status.charAt(0).toUpperCase() + plan.status.slice(1);
+  badge.className   = 'badge badge-' + plan.status;
+
+  const start = plan.start_date ? formatDate(plan.start_date) : null;
+  const end   = plan.end_date   ? formatDate(plan.end_date)   : null;
+  document.getElementById('plan-dates').textContent =
+    start && end ? `${start} → ${end}` :
+    start ? `Started ${start}` : '-';
+
+  document.getElementById('plan-price').textContent =
+    plan.price_lkr ? `LKR ${plan.price_lkr.toLocaleString()}` : '-';
+
+  if (plan.notes) {
+    document.getElementById('plan-notes').textContent = plan.notes;
+    document.getElementById('plan-notes-wrap').style.display = 'block';
+  }
+}
+
+async function loadDocuments(planId) {
+  const loadingEl = document.getElementById('docs-loading');
+  const emptyEl   = document.getElementById('docs-empty');
+  const listEl    = document.getElementById('docs-list');
+
+  const { data: docs, error } = await supabase
+    .from('plan_documents')
+    .select('*')
+    .eq('plan_id', planId)
+    .order('created_at', { ascending: false });
+
+  loadingEl.style.display = 'none';
+
+  if (error || !docs || docs.length === 0) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  listEl.style.display = 'block';
+  listEl.innerHTML = docs.map(doc => `
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:0.875rem 0; border-bottom:1px solid var(--border); gap:1rem; flex-wrap:wrap;">
+      <div style="min-width:0;">
+        <div style="font-weight:600; font-size:0.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(doc.file_name)}</div>
+        <div style="font-size:0.75rem; color:var(--muted); margin-top:0.15rem;">${escapeHtml(fileTypeLabel(doc.file_type))} &middot; Added ${formatDate(doc.created_at)}</div>
+        ${doc.description ? `<div style="font-size:0.8rem; color:var(--muted); margin-top:0.25rem;">${escapeHtml(doc.description)}</div>` : ''}
+      </div>
+      <button class="btn btn-secondary btn-sm" data-doc-id="${escapeHtml(doc.id)}" data-doc-name="${escapeHtml(doc.file_name)}">
+        Download
+      </button>
+    </div>
+  `).join('');
+
+  // Remove border from last item
+  listEl.querySelector('div:last-child').style.borderBottom = 'none';
+
+  // Download buttons
+  listEl.querySelectorAll('[data-doc-id]').forEach(btn => {
+    btn.addEventListener('click', () => downloadDocument(btn.dataset.docId, btn.dataset.docName, btn));
+  });
+}
+
+async function downloadDocument(docId, fileName, btn) {
+  btn.disabled = true;
+  btn.textContent = 'Downloading…';
+
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch(`/api/document-url?document_id=${encodeURIComponent(docId)}`, {
+      headers: { 'Authorization': `Bearer ${session.access_token}` },
+    });
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body.error || 'Download failed');
+    }
+
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    toast(err.message, 'error');
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = 'Download';
+  }
+}
+
+function fileTypeLabel(type) {
+  const labels = { workout_program: 'Workout Program', meal_program: 'Meal Program', general: 'Document' };
+  return labels[type] || 'Document';
+}
+</script>
+</body>
+</html>

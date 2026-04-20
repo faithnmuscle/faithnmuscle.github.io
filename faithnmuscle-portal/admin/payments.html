@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payments | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/clients.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients</a>
+      <a href="/admin/applications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Applications</a>
+      <a href="/admin/bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings</a>
+      <a href="/admin/checkins.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Check-Ins</a>
+      <a href="/admin/renewals.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Renewals</a>
+      <a href="/admin/payments.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments</a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Admin</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Payments</span>
+    </div>
+    <div class="portal-content" id="page-content" style="display:none;">
+      <div style="display:grid; grid-template-columns:340px 1fr; gap:1.5rem; align-items:start;">
+
+        <!-- Log payment form -->
+        <div class="card">
+          <div class="card-header"><div class="card-title">Log Payment</div></div>
+          <div id="pay-alert" class="alert" style="display:none;"></div>
+          <form id="pay-form" novalidate>
+            <div class="form-group">
+              <label for="pay-client">Client <span class="required">*</span></label>
+              <select id="pay-client" required>
+                <option value="">Select client...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pay-plan">Plan <span class="required">*</span></label>
+              <select id="pay-plan" required>
+                <option value="">Select plan...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pay-date">Payment Date <span class="required">*</span></label>
+              <input type="date" id="pay-date" required/>
+            </div>
+            <div class="form-group">
+              <label for="pay-amount">Amount (LKR) <span class="required">*</span></label>
+              <input type="number" id="pay-amount" min="0" step="50" placeholder="10000" required/>
+            </div>
+            <div class="form-group">
+              <label for="pay-method">Method</label>
+              <select id="pay-method">
+                <option value="bank_transfer">Bank Transfer</option>
+                <option value="cash">Cash</option>
+                <option value="card">Card</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pay-period">Period Label</label>
+              <input type="text" id="pay-period" placeholder="e.g. April 2026, One-time plan"/>
+              <div class="form-hint">Optional - helps identify which month or plan this covers</div>
+            </div>
+            <div class="form-group">
+              <label for="pay-notes">Notes</label>
+              <textarea id="pay-notes" rows="2" placeholder="Any additional notes..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="btn-log-payment">
+              <span class="btn-spinner"></span><span class="btn-text">Log Payment</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Payment history -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Payment History</div>
+            <select id="filter-pay-client" style="max-width:200px;">
+              <option value="">All clients</option>
+            </select>
+          </div>
+          <div id="payments-list"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, requireAdmin, initSidebar, getProfile, escapeHtml, toast, setBusy } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await requireAdmin();
+await initSidebar();
+
+const adminProfile = await getProfile();
+
+document.getElementById('page-content').style.display = 'block';
+
+// Set today's date as default
+document.getElementById('pay-date').value = new Date().toISOString().split('T')[0];
+
+let clients = [];
+await loadClients();
+await loadPayments();
+
+document.getElementById('filter-pay-client').addEventListener('change', loadPayments);
+document.getElementById('pay-client').addEventListener('change', loadClientPlans);
+
+async function loadClients() {
+  const { data } = await supabase.from('profiles').select('id, full_name').neq('role', 'admin').order('full_name');
+  clients = data || [];
+
+  const sel = document.getElementById('pay-client');
+  const filterSel = document.getElementById('filter-pay-client');
+  clients.forEach(c => {
+    const name = c.full_name || c.id;
+    sel.appendChild(new Option(name, c.id));
+    filterSel.appendChild(new Option(name, c.id));
+  });
+}
+
+async function loadClientPlans() {
+  const clientId = document.getElementById('pay-client').value;
+  const planSel  = document.getElementById('pay-plan');
+  planSel.innerHTML = '<option value="">Select plan...</option>';
+  if (!clientId) return;
+
+  const { data: plans } = await supabase.from('plans').select('id, plan_type, status, start_date').eq('client_id', clientId).order('created_at', { ascending: false });
+  (plans || []).forEach(p => {
+    const label = p.plan_type + ' - ' + p.status + (p.start_date ? ' (' + p.start_date + ')' : '');
+    planSel.appendChild(new Option(label, p.id));
+  });
+}
+
+async function loadPayments() {
+  const filterClient = document.getElementById('filter-pay-client').value;
+
+  let query = supabase.from('payments').select('*, profiles(full_name)').order('paid_date', { ascending: false }).limit(100);
+  if (filterClient) query = query.eq('client_id', filterClient);
+
+  const { data: payments } = await query;
+  const el = document.getElementById('payments-list');
+
+  if (!payments?.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; padding:1rem 0;">No payments recorded yet.</div>';
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Client</th><th>Date</th><th>Amount</th><th>Method</th><th>Period</th><th>Notes</th></tr></thead>
+        <tbody>
+          ${payments.map(p => `
+            <tr>
+              <td>${escapeHtml(p.profiles?.full_name || '-')}</td>
+              <td>${escapeHtml(p.paid_date || '-')}</td>
+              <td style="font-weight:600; color:var(--blue-light);">LKR ${Number(p.amount_lkr).toLocaleString()}</td>
+              <td>${escapeHtml(p.method || '-')}</td>
+              <td>${escapeHtml(p.period_label || '-')}</td>
+              <td style="color:var(--muted); font-size:0.8rem;">${escapeHtml(p.notes || '-')}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+document.getElementById('pay-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const alert = document.getElementById('pay-alert');
+  alert.style.display = 'none';
+
+  const clientId = document.getElementById('pay-client').value;
+  const planId   = document.getElementById('pay-plan').value;
+  const date     = document.getElementById('pay-date').value;
+  const amount   = document.getElementById('pay-amount').value;
+
+  if (!clientId || !date || !amount) {
+    alert.className = 'alert alert-error';
+    alert.textContent = 'Client, date, and amount are required.';
+    alert.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('btn-log-payment');
+  setBusy(btn, true);
+
+  const { error } = await supabase.from('payments').insert({
+    client_id:    clientId,
+    plan_id:      planId || null,
+    paid_date:    date,
+    amount_lkr:   Number(amount),
+    method:       document.getElementById('pay-method').value,
+    period_label: document.getElementById('pay-period').value.trim() || null,
+    notes:        document.getElementById('pay-notes').value.trim() || null,
+    recorded_by:  adminProfile?.id || null,
+    created_at:   new Date().toISOString(),
+  });
+
+  setBusy(btn, false);
+
+  if (error) {
+    alert.className = 'alert alert-error';
+    alert.textContent = error.message;
+    alert.style.display = 'block';
+    return;
+  }
+
+  toast('Payment logged!', 'success');
+  document.getElementById('pay-form').reset();
+  document.getElementById('pay-date').value = new Date().toISOString().split('T')[0];
+  await loadPayments();
+});
+</script>
+</body>
+</html>

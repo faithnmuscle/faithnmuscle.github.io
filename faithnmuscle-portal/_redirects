@@ -1,0 +1,8 @@
+# Redirect bare /admin to admin dashboard
+/admin /admin/dashboard.html 301
+
+# Redirect root to login
+/ /login.html 302
+
+# Pages not yet built - redirect to coming soon
+/progress-photos.html /coming-soon.html 302

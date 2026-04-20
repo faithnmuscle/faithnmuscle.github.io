@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bookings | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+  <style>
+    .avail-cal-wrap{overflow:auto;max-height:500px;border:1px solid var(--border);border-radius:8px;cursor:crosshair;}
+    .avail-cal-grid{display:grid;grid-template-columns:46px repeat(7,1fr);min-width:440px;user-select:none;}
+    .avail-cal-corner{position:sticky;top:0;left:0;z-index:4;background:var(--bg2);}
+    .avail-cal-day-hdr{position:sticky;top:0;z-index:3;background:var(--bg2);text-align:center;padding:0.5rem 0.25rem;font-weight:700;font-size:0.78rem;border-bottom:2px solid var(--border);border-left:1px solid var(--border);}
+    .avail-cal-time{position:sticky;left:0;z-index:1;background:var(--bg);font-size:0.65rem;color:var(--muted);text-align:right;padding:0 0.3rem;display:flex;align-items:flex-start;padding-top:2px;line-height:1;border-right:1px solid var(--border);}
+    .avail-cal-time.hour{font-weight:600;}
+    .avail-cal-cell{height:20px;border-bottom:1px solid rgba(255,255,255,0.035);border-left:1px solid var(--border);}
+    .avail-cal-cell.hour-mark{border-top:1px solid rgba(255,255,255,0.1);}
+    .avail-cal-cell:hover{background:rgba(0,74,173,0.25);}
+    .avail-cal-cell.sel{background:var(--blue);opacity:0.85;}
+    .avail-cal-cell.sel:hover{opacity:1;}
+    .avail-cal-cell.booked-approved{background:rgba(16,185,129,0.75)!important;cursor:default;}
+    .avail-cal-cell.booked-pending{background:rgba(245,158,11,0.7)!important;cursor:default;}
+    .avail-cal-cell.blocked{background:repeating-linear-gradient(45deg,rgba(239,68,68,0.18),rgba(239,68,68,0.18) 4px,transparent 4px,transparent 8px)!important;cursor:not-allowed;}
+    .avail-cal-cell.booked-approved:hover,.avail-cal-cell.booked-pending:hover,.avail-cal-cell.blocked:hover{opacity:1;}
+    .avail-cal-day-hdr.has-date{font-size:0.7rem;}
+    .avail-cal-day-hdr .dow-date{display:block;font-weight:400;color:var(--muted);font-size:0.65rem;}
+  </style>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/clients.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients</a>
+      <a href="/admin/applications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Applications</a>
+      <a href="/admin/bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings</a>
+      <a href="/admin/checkins.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Check-Ins</a>
+      <a href="/admin/renewals.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Renewals</a>
+      <a href="/admin/payments.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments</a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Admin</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Bookings</span>
+    </div>
+    <div id="gate-feature" style="display:none;" class="gate-wrap"><div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3></div></div>
+    <div class="portal-content" id="page-content" style="display:none;">
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="requests">Requests</button>
+        <button class="tab-btn" data-tab="schedule">Weekly Schedule</button>
+        <button class="tab-btn" data-tab="blocks">Blocked Dates</button>
+      </div>
+
+      <!-- Requests tab -->
+      <div class="tab-panel active" id="tab-requests">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Booking Requests</div>
+            <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+              <select id="filter-status" style="max-width:160px;">
+                <option value="">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="completed">Completed</option>
+              </select>
+              <button class="btn btn-primary btn-sm" id="btn-open-schedule-session">+ Schedule Session</button>
+            </div>
+          </div>
+          <div id="bookings-list"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+        </div>
+      </div>
+
+      <!-- Weekly Schedule tab -->
+      <div class="tab-panel" id="tab-schedule">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Weekly Availability</div>
+              <div class="card-subtitle">Click or drag to mark available time blocks. Changes only apply after saving.</div>
+            </div>
+          </div>
+          <div id="schedule-grid"></div>
+        </div>
+      </div>
+
+      <!-- Blocked Dates tab -->
+      <div class="tab-panel" id="tab-blocks">
+        <div style="display:grid; grid-template-columns:320px 1fr; gap:1.5rem; align-items:start;">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Add Block</div></div>
+            <form id="block-form" novalidate>
+              <div class="form-group">
+                <label>Block scope</label>
+                <div style="display:flex; gap:0.75rem; margin-top:0.25rem; flex-wrap:wrap;">
+                  <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:400;">
+                    <input type="radio" name="block-scope" value="single" checked/> Single date
+                  </label>
+                  <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:400;">
+                    <input type="radio" name="block-scope" value="daterange"/> Date range
+                  </label>
+                </div>
+              </div>
+              <div id="block-single-fields">
+                <div class="form-group">
+                  <label for="block-date">Date <span class="required">*</span></label>
+                  <input type="date" id="block-date"/>
+                </div>
+              </div>
+              <div id="block-range-fields" style="display:none;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+                  <div class="form-group">
+                    <label for="block-date-from">From <span class="required">*</span></label>
+                    <input type="date" id="block-date-from"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="block-date-to">To <span class="required">*</span></label>
+                    <input type="date" id="block-date-to"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Block type</label>
+                <div style="display:flex; gap:0.75rem; margin-top:0.25rem;">
+                  <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:400;">
+                    <input type="radio" name="block-type" value="day" checked/> All day
+                  </label>
+                  <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:400;">
+                    <input type="radio" name="block-type" value="range"/> Time range
+                  </label>
+                </div>
+              </div>
+              <div id="block-time-fields" style="display:none;">
+                <div class="form-group">
+                  <label for="block-start">Start time</label>
+                  <input type="time" id="block-start"/>
+                </div>
+                <div class="form-group">
+                  <label for="block-end">End time</label>
+                  <input type="time" id="block-end"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="block-reason">Reason (optional)</label>
+                <input type="text" id="block-reason" placeholder="e.g. Public holiday, Travel"/>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full" id="btn-add-block">
+                <span class="btn-spinner"></span><span class="btn-text">Add Block</span>
+              </button>
+            </form>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Upcoming Blocks</div></div>
+            <div id="blocks-list"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Schedule session modal -->
+<div class="modal-overlay" id="modal-schedule-session">
+  <div class="modal" style="max-width:460px;">
+    <div class="modal-header"><div class="modal-title">Schedule Session</div><button class="modal-close">&times;</button></div>
+    <div class="form-group">
+      <label for="ss-client">Client <span class="required">*</span></label>
+      <select id="ss-client"><option value="">Loading clients…</option></select>
+    </div>
+    <div class="form-group">
+      <label for="ss-date">Date <span class="required">*</span></label>
+      <input type="date" id="ss-date"/>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+      <div class="form-group">
+        <label for="ss-start">Start time <span class="required">*</span></label>
+        <input type="time" id="ss-start"/>
+      </div>
+      <div class="form-group">
+        <label for="ss-end">End time <span class="required">*</span></label>
+        <input type="time" id="ss-end"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ss-link">Session link (optional)</label>
+      <input type="url" id="ss-link" placeholder="https://meet.google.com/…"/>
+    </div>
+    <div class="form-group">
+      <label for="ss-notes">Notes (optional)</label>
+      <textarea id="ss-notes" rows="2"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close">Cancel</button>
+      <button class="btn btn-primary" id="btn-confirm-schedule-session">
+        <span class="btn-spinner"></span><span class="btn-text">Schedule</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Manage booking modal -->
+<div class="modal-overlay" id="modal-booking">
+  <div class="modal" style="max-width:500px;">
+    <div class="modal-header"><div class="modal-title" id="modal-booking-title">Booking</div><button class="modal-close">&times;</button></div>
+    <div id="modal-booking-info" style="color:var(--muted); font-size:0.875rem; margin-bottom:1rem;"></div>
+    <div id="booking-alert" class="alert" style="display:none;"></div>
+    <div class="form-group">
+      <label for="coach-notes">Coach Notes (private)</label>
+      <textarea id="coach-notes" rows="2"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close">Cancel</button>
+      <button class="btn btn-secondary" id="btn-open-reschedule" style="display:none;">Reschedule</button>
+      <button class="btn btn-secondary" id="btn-reject" style="color:#f87171;border-color:#f8717140;">Reject</button>
+      <button class="btn btn-secondary" id="btn-approve" style="color:#4ade80;border-color:#4ade8040;">Approve</button>
+      <button class="btn btn-primary"  id="btn-save-link" style="display:none;">Save Notes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reschedule modal -->
+<div class="modal-overlay" id="modal-reschedule">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-reschedule-title">Reschedule Booking</div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div id="modal-reschedule-info" style="color:var(--muted); font-size:0.875rem; margin-bottom:1.25rem;"></div>
+    <div class="form-group">
+      <label for="reschedule-date">New date <span class="required">*</span></label>
+      <input type="date" id="reschedule-date"/>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+      <div class="form-group">
+        <label for="reschedule-start">Start time <span class="required">*</span></label>
+        <input type="time" id="reschedule-start"/>
+      </div>
+      <div class="form-group">
+        <label for="reschedule-end">End time <span class="required">*</span></label>
+        <input type="time" id="reschedule-end"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="reschedule-coach-notes">Coach notes (optional)</label>
+      <textarea id="reschedule-coach-notes" rows="2"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close">Cancel</button>
+      <button class="btn btn-primary" id="btn-confirm-reschedule">
+        <span class="btn-spinner"></span><span class="btn-text">Save</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAdmin, initSidebar, escapeHtml, toast, openModal, initModals, setBusy, weekStartMonday, addCalendarDays } from '/assets/portal.js';
+import { FEATURES } from '/assets/features.js';
+
+await requireAdmin();
+await initSidebar();
+initModals();
+
+if (!FEATURES.adminBookings) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  document.getElementById('page-content').style.display = 'block';
+  setupTabs();
+  loadRequests();
+  loadSchedule();
+  loadBlocks();
+  setupBlockForm();
+  setupScheduleSession();
+}
+
+// ─── Tabs ──────────────────────────────────────────────────────────────────
+function setupTabs() {
+  function activateTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    const btn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+    if (btn) { btn.classList.add('active'); document.getElementById('tab-' + tabId)?.classList.add('active'); }
+  }
+
+  // Restore tab from URL hash
+  const hash = location.hash.replace('#', '');
+  if (['requests','schedule','blocks'].includes(hash)) activateTab(hash);
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activateTab(btn.dataset.tab);
+      history.replaceState(null, '', '#' + btn.dataset.tab);
+    });
+  });
+  document.getElementById('filter-status').addEventListener('change', loadRequests);
+}
+
+// ─── Requests ─────────────────────────────────────────────────────────────
+let editBookingId  = null;
+let schedWeekStart = weekStartMonday(new Date());
+
+async function loadRequests() {
+  const statusFilter = document.getElementById('filter-status').value;
+  let query = supabase
+    .from('bookings')
+    .select('*, profiles!bookings_client_id_fkey(full_name, email)')
+    .order('booking_date', { ascending: false })
+    .order('start_time',   { ascending: false })
+    .limit(60);
+  if (statusFilter) query = query.eq('status', statusFilter);
+
+  const { data: bookings } = await query;
+  const el = document.getElementById('bookings-list');
+
+  if (!bookings?.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; padding:0.5rem 0;">No bookings found.</div>';
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Client</th><th>Date</th><th>Time</th><th>Status</th><th>Notes</th><th></th></tr></thead>
+        <tbody>
+          ${bookings.map(b => {
+            const dateStr = b.booking_date
+              ? new Date(b.booking_date + 'T00:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' })
+              : '-';
+            const timeStr = b.start_time
+              ? b.start_time.slice(0,5) + (b.end_time ? ' - ' + b.end_time.slice(0,5) : '')
+              : '-';
+            return `
+              <tr>
+                <td>
+                  <div style="font-weight:600;">${escapeHtml(b.profiles?.full_name || '-')}</div>
+                  <div style="font-size:0.75rem; color:var(--muted);">${escapeHtml(b.profiles?.email || '')}</div>
+                </td>
+                <td>${escapeHtml(dateStr)}</td>
+                <td>${escapeHtml(timeStr)}</td>
+                <td><span class="badge badge-${b.status}">${b.status}</span></td>
+                <td style="max-width:160px; font-size:0.8rem; color:var(--muted);">${escapeHtml(b.client_notes || '-')}</td>
+                <td>
+                  <button class="btn btn-secondary btn-sm btn-manage"
+                    data-id="${b.id}"
+                    data-status="${b.status}"
+                    data-link="${escapeHtml(b.session_link || '')}"
+                    data-notes="${escapeHtml(b.coach_notes || '')}"
+                    data-client="${escapeHtml(b.profiles?.full_name || '')}"
+                    data-date="${escapeHtml(dateStr)}"
+                    data-time="${escapeHtml(timeStr)}"
+                    data-raw-date="${escapeHtml(b.booking_date || '')}"
+                    data-raw-start="${escapeHtml(b.start_time ? b.start_time.slice(0,5) : '')}"
+                    data-raw-end="${escapeHtml(b.end_time ? b.end_time.slice(0,5) : '')}">Manage</button>
+                </td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  el.querySelectorAll('.btn-manage').forEach(btn => {
+    btn.addEventListener('click', () => openBookingModal(btn.dataset));
+  });
+}
+
+// Store raw booking values for reschedule modal
+let rescheduleData = {};
+
+function openBookingModal(d) {
+  editBookingId = d.id;
+  // Save raw values for reschedule modal
+  rescheduleData = { id: d.id, client: d.client, date: d.date, time: d.time, rawDate: d.rawDate, rawStart: d.rawStart, rawEnd: d.rawEnd, notes: d.notes };
+
+  document.getElementById('modal-booking-title').textContent = d.client || 'Booking';
+  document.getElementById('modal-booking-info').textContent  = d.date + ' · ' + d.time;
+  document.getElementById('coach-notes').value   = d.notes;
+  document.getElementById('booking-alert').style.display = 'none';
+
+  const isPending  = d.status === 'pending';
+  const isApproved = d.status === 'approved';
+  const isRejected = d.status === 'rejected';
+  document.getElementById('btn-approve').style.display      = (isPending || isRejected) ? '' : 'none';
+  document.getElementById('btn-reject').style.display       = (isPending || isApproved) ? '' : 'none';
+  document.getElementById('btn-save-link').style.display    = isApproved ? '' : 'none';
+  document.getElementById('btn-open-reschedule').style.display = (isPending || isApproved || isRejected) ? '' : 'none';
+  openModal('modal-booking');
+}
+
+document.getElementById('btn-approve').addEventListener('click',   () => updateBooking('approved'));
+document.getElementById('btn-reject').addEventListener('click',    () => updateBooking('rejected'));
+document.getElementById('btn-save-link').addEventListener('click', () => updateBooking(null));
+
+// Reschedule: open dedicated modal
+document.getElementById('btn-open-reschedule').addEventListener('click', () => {
+  const d = rescheduleData;
+  document.getElementById('modal-booking').classList.remove('open');
+  document.getElementById('modal-reschedule-title').textContent = 'Reschedule: ' + (d.client || 'Booking');
+  document.getElementById('modal-reschedule-info').textContent  = 'Current: ' + d.date + ' · ' + d.time;
+  document.getElementById('reschedule-date').value            = d.rawDate  || '';
+  document.getElementById('reschedule-start').value           = d.rawStart || '';
+  document.getElementById('reschedule-end').value             = d.rawEnd   || '';
+  document.getElementById('reschedule-coach-notes').value     = d.notes    || '';
+  openModal('modal-reschedule');
+});
+
+document.getElementById('btn-confirm-reschedule').addEventListener('click', async () => {
+  const btn   = document.getElementById('btn-confirm-reschedule');
+  const date  = document.getElementById('reschedule-date').value;
+  const start = document.getElementById('reschedule-start').value;
+  const end   = document.getElementById('reschedule-end').value;
+
+  if (!date || !start || !end) { toast('Date, start time and end time are required.', 'error'); return; }
+
+  const [sh, sm] = start.split(':').map(Number);
+  const [eh, em] = end.split(':').map(Number);
+  if ((eh * 60 + em) <= (sh * 60 + sm)) { toast('End time must be after start time.', 'error'); return; }
+
+  if (!editBookingId) { toast('No booking selected.', 'error'); return; }
+
+  setBusy(btn, true);
+  const { error } = await supabase.from('bookings').update({
+    booking_date: date,
+    start_time:   start.length === 5 ? start + ':00' : start,
+    end_time:     end.length   === 5 ? end   + ':00' : end,
+    coach_notes:  document.getElementById('reschedule-coach-notes').value.trim() || null,
+  }).eq('id', editBookingId);
+  setBusy(btn, false);
+
+  if (error) { toast(error.message, 'error'); return; }
+
+  // Notify client
+  const { data: bk } = await supabase.from('bookings').select('client_id').eq('id', editBookingId).single();
+  if (bk?.client_id) {
+    await supabase.from('notifications').insert({
+      user_id:    bk.client_id,
+      type:       'booking_approved',
+      title:      'Session rescheduled',
+      body:       `Your session has been rescheduled to ${new Date(date + 'T12:00:00').toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' })} at ${start}.`,
+      created_at: new Date().toISOString(),
+    });
+  }
+
+  document.getElementById('modal-reschedule').classList.remove('open');
+  toast('Booking rescheduled', 'success');
+  loadRequests();
+});
+
+async function updateBooking(status) {
+  if (!editBookingId) return;
+  const update = {
+    coach_notes: document.getElementById('coach-notes').value.trim() || null,
+  };
+  if (status) update.status = status;
+
+  const { error } = await supabase.from('bookings').update(update).eq('id', editBookingId);
+  if (error) { toast(error.message, 'error'); return; }
+
+  if (status) {
+    const { data: bk } = await supabase.from('bookings').select('client_id').eq('id', editBookingId).single();
+    if (bk?.client_id) {
+      await supabase.from('notifications').insert({
+        user_id:    bk.client_id,
+        type:       status === 'approved' ? 'booking_approved' : 'booking_rejected',
+        title:      status === 'approved' ? 'Session confirmed' : 'Booking declined',
+        body:       status === 'approved' ? 'Your session has been confirmed. Check your bookings for the link.' : 'Your booking request was not accepted this time.',
+        created_at: new Date().toISOString(),
+      });
+    }
+  }
+
+  document.getElementById('modal-booking').classList.remove('open');
+  toast(status ? `Booking ${status}` : 'Saved', 'success');
+  loadRequests();
+}
+
+// ─── Weekly Schedule (calendar grid) ──────────────────────────────────────
+const DAYS      = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAYS_S    = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DAY_ORDER = [1,2,3,4,5,6,0]; // Mon → Sun
+
+const SLOT_START = 0;
+const SLOT_END   = 24 * 60;
+const SLOT_STEP  = 30;
+const ALL_SLOTS  = [];
+for (let m = SLOT_START; m < SLOT_END; m += SLOT_STEP) ALL_SLOTS.push(m);
+
+const selectedCells = new Set();
+function cellKey(dow, slot)  { return `${dow}:${slot}`; }
+function timeToMin(t)        { const [h,m] = (t+'').split(':').map(Number); return h*60+m; }
+function minToTimeStr(m)     { return `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`; }
+function minToLabel(m)       { if (m%60!==0) return ''; const h=Math.floor(m/60); return `${h%12||12}${h>=12?'pm':'am'}`; }
+
+function weekDates(ws) {
+  return Array.from({ length: 7 }, (_, i) => addCalendarDays(ws, i));
+}
+function fmtWeekLabel(ws) {
+  const dates = weekDates(ws);
+  const fmt = d => new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+  return `${fmt(dates[0])} - ${fmt(dates[6])}`;
+}
+
+async function loadSchedule() {
+  const { data: templates, error } = await supabase
+    .from('availability_templates').select('*').order('day_of_week').order('start_time');
+
+  const container = document.getElementById('schedule-grid');
+  if (error) {
+    container.innerHTML = '<div class="alert alert-error" style="margin:0;">Could not load schedule: ' + error.message + '</div>';
+    return;
+  }
+
+  selectedCells.clear();
+  (templates || []).forEach(t => {
+    const s = timeToMin(t.start_time), e = timeToMin(t.end_time);
+    for (let m = s; m < e; m += SLOT_STEP) selectedCells.add(cellKey(t.day_of_week, m));
+  });
+
+  // Fetch bookings + blocks for this week (best-effort, don't block on errors)
+  const bookedSlots  = {};
+  const blockedSlots = {};
+  const wd = weekDates(schedWeekStart);
+
+  const [{ data: weekBookings }, { data: weekBlocks }] = await Promise.all([
+    supabase.from('bookings')
+      .select('booking_date, start_time, end_time, status, client_id')
+      .in('booking_date', wd)
+      .in('status', ['pending', 'approved']),
+    supabase.from('availability_blocks')
+      .select('*')
+      .in('block_date', wd),
+  ]);
+
+  // Fetch client names separately
+  const clientIds = [...new Set((weekBookings || []).map(b => b.client_id).filter(Boolean))];
+  const clientNames = {};
+  if (clientIds.length) {
+    const { data: profiles } = await supabase.from('profiles').select('id, full_name').in('id', clientIds);
+    (profiles || []).forEach(p => { clientNames[p.id] = p.full_name; });
+  }
+
+  (weekBookings || []).forEach(b => {
+    if (!b.booking_date || !b.start_time) return;
+    const dow      = new Date(b.booking_date + 'T12:00:00').getDay();
+    const startMin = timeToMin(b.start_time);
+    const endMin   = b.end_time ? timeToMin(b.end_time) : startMin + 60;
+    const name     = clientNames[b.client_id] || 'Client';
+    for (let m = startMin; m < endMin; m += SLOT_STEP) {
+      bookedSlots[cellKey(dow, m)] = { name, status: b.status };
+    }
+  });
+
+  (weekBlocks || []).forEach(b => {
+    const dow = new Date(b.block_date + 'T12:00:00').getDay();
+    if (!b.start_time) {
+      // All-day block
+      for (let m = SLOT_START; m < SLOT_END; m += SLOT_STEP) {
+        blockedSlots[cellKey(dow, m)] = b.reason || 'Blocked';
+      }
+    } else {
+      const startMin = timeToMin(b.start_time);
+      const endMin   = b.end_time ? timeToMin(b.end_time) : startMin + 60;
+      for (let m = startMin; m < endMin; m += SLOT_STEP) {
+        blockedSlots[cellKey(dow, m)] = b.reason || 'Blocked';
+      }
+    }
+  });
+
+  // Day headers with actual dates for this week
+  const dates = weekDates(schedWeekStart);
+  const dayHdrs = DAY_ORDER.map((d, i) => {
+    const dateObj = new Date(dates[i] + 'T12:00:00');
+    const dateNum = dateObj.toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+    return `<div class="avail-cal-day-hdr has-date">${DAYS_S[d]}<span class="dow-date">${dateNum}</span></div>`;
+  }).join('');
+
+  // Build grid HTML (booking overlay applied after)
+  const cellRows = ALL_SLOTS.map(m => {
+    const timeDiv = '<div class="avail-cal-time ' + (m%60===0?'hour':'half') + '">' + minToLabel(m) + '</div>';
+    const cells   = DAY_ORDER.map(d => {
+      const cls = 'avail-cal-cell' + (selectedCells.has(cellKey(d,m)) ? ' sel' : '') + (m%60===0 ? ' hour-mark' : '');
+      return '<div class="' + cls + '" data-dow="' + d + '" data-slot="' + m + '"></div>';
+    }).join('');
+    return timeDiv + cells;
+  }).join('');
+
+  container.innerHTML =
+    '<div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.875rem;flex-wrap:wrap;">' +
+      '<button class="btn btn-secondary btn-sm" id="btn-prev-week">&#8249;</button>' +
+      '<span style="font-weight:600;font-size:0.875rem;min-width:160px;text-align:center;" id="week-label">' + fmtWeekLabel(schedWeekStart) + '</span>' +
+      '<button class="btn btn-secondary btn-sm" id="btn-next-week">&#8250;</button>' +
+      '<span style="font-size:0.75rem;color:var(--muted);margin-left:0.5rem;">Click or drag to edit availability</span>' +
+    '</div>' +
+    '<div style="display:flex;gap:1rem;font-size:0.72rem;color:var(--muted);margin-bottom:0.625rem;flex-wrap:wrap;">' +
+      '<span><span style="display:inline-block;width:10px;height:10px;background:var(--blue);border-radius:2px;margin-right:4px;vertical-align:middle;opacity:0.85;"></span>Available</span>' +
+      '<span><span style="display:inline-block;width:10px;height:10px;background:rgba(16,185,129,0.75);border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Booked (approved)</span>' +
+      '<span><span style="display:inline-block;width:10px;height:10px;background:rgba(245,158,11,0.7);border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Booked (pending)</span>' +
+      '<span><span style="display:inline-block;width:10px;height:10px;background:repeating-linear-gradient(45deg,rgba(239,68,68,0.4),rgba(239,68,68,0.4) 3px,transparent 3px,transparent 6px);border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Blocked</span>' +
+    '</div>' +
+    '<div class="avail-cal-wrap" id="avail-cal"><div class="avail-cal-grid">' +
+      '<div class="avail-cal-corner"></div>' + dayHdrs + cellRows +
+    '</div></div>' +
+    '<div style="display:flex;gap:0.75rem;margin-top:1rem;padding-top:0.875rem;border-top:1px solid var(--border);align-items:center;flex-wrap:wrap;">' +
+      '<button class="btn btn-primary" id="btn-save-schedule"><span class="btn-spinner"></span><span class="btn-text">Save Schedule</span></button>' +
+      '<button class="btn btn-secondary" id="btn-clear-schedule">Clear All</button>' +
+      '<span id="schedule-status" style="font-size:0.8rem;color:var(--muted);"></span>' +
+    '</div>';
+
+  // Overlay bookings onto rendered cells
+  Object.entries(bookedSlots).forEach(([key, bk]) => {
+    const cell = document.querySelector('.avail-cal-cell[data-dow="' + key.split(':')[0] + '"][data-slot="' + key.split(':')[1] + '"]');
+    if (!cell) return;
+    cell.classList.add(bk.status === 'approved' ? 'booked-approved' : 'booked-pending');
+    cell.title = bk.name + ' (' + bk.status + ')';
+  });
+
+  // Overlay blocked slots (don't override booked cells)
+  Object.entries(blockedSlots).forEach(([key, reason]) => {
+    const cell = document.querySelector('.avail-cal-cell[data-dow="' + key.split(':')[0] + '"][data-slot="' + key.split(':')[1] + '"]');
+    if (!cell) return;
+    if (cell.classList.contains('booked-approved') || cell.classList.contains('booked-pending')) return;
+    cell.classList.add('blocked');
+    cell.title = 'Blocked: ' + reason;
+  });
+
+  document.getElementById('btn-prev-week').addEventListener('click', () => {
+    schedWeekStart = addCalendarDays(schedWeekStart, -7);
+    loadSchedule();
+  });
+  document.getElementById('btn-next-week').addEventListener('click', () => {
+    schedWeekStart = addCalendarDays(schedWeekStart, 7);
+    loadSchedule();
+  });
+
+  // Scroll to 6am on load/navigation
+  const wrap = document.getElementById('avail-cal');
+  if (wrap) wrap.scrollTop = (6 * 60 - SLOT_START) / SLOT_STEP * 20;
+
+  setupCalendarInteractions(bookedSlots);
+  document.getElementById('btn-save-schedule').addEventListener('click', saveSchedule);
+  document.getElementById('btn-clear-schedule').addEventListener('click', () => {
+    selectedCells.clear();
+    document.querySelectorAll('.avail-cal-cell.sel').forEach(c => c.classList.remove('sel'));
+  });
+}
+
+function setupCalendarInteractions(bookedSlots = {}) {
+  const cal = document.getElementById('avail-cal');
+  let isDragging = false, dragMode = 'add', dragDow = null, dragStartSlot = null, savedSelection = null;
+
+  cal.addEventListener('mousedown', e => {
+    const cell = e.target.closest('.avail-cal-cell');
+    if (!cell) return;
+    // Don't let booked or blocked cells be dragged
+    if (cell.classList.contains('booked-approved') || cell.classList.contains('booked-pending') || cell.classList.contains('blocked')) return;
+    e.preventDefault();
+    isDragging     = true;
+    dragMode       = cell.classList.contains('sel') ? 'remove' : 'add';
+    dragDow        = Number(cell.dataset.dow);
+    dragStartSlot  = Number(cell.dataset.slot);
+    savedSelection = new Set(selectedCells);
+    applyRange(dragStartSlot, dragStartSlot);
+  });
+
+  cal.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const cell = e.target.closest('.avail-cal-cell');
+    if (!cell || Number(cell.dataset.dow) !== dragDow) return;
+    applyRange(dragStartSlot, Number(cell.dataset.slot));
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    selectedCells.clear();
+    document.querySelectorAll('.avail-cal-cell.sel').forEach(c => {
+      selectedCells.add(cellKey(Number(c.dataset.dow), Number(c.dataset.slot)));
+    });
+    savedSelection = null;
+  });
+
+  function applyRange(startSlot, curSlot) {
+    const lo = Math.min(startSlot, curSlot);
+    const hi = Math.max(startSlot, curSlot);
+    document.querySelectorAll(`.avail-cal-cell[data-dow="${dragDow}"]`).forEach(c => {
+      if (c.classList.contains('booked-approved') || c.classList.contains('booked-pending') || c.classList.contains('blocked')) return;
+      const s = Number(c.dataset.slot);
+      const inRange = s >= lo && s <= hi;
+      if (inRange) c.classList.toggle('sel', dragMode === 'add');
+      else         c.classList.toggle('sel', savedSelection.has(cellKey(dragDow, s)));
+    });
+  }
+}
+
+async function saveSchedule() {
+  const btn = document.getElementById('btn-save-schedule');
+  setBusy(btn, true);
+
+  const byDay = {};
+  DAY_ORDER.forEach(d => { byDay[d] = []; });
+  selectedCells.forEach(key => {
+    const [d, s] = key.split(':').map(Number);
+    byDay[d].push(s);
+  });
+
+  const { error: delErr } = await supabase.from('availability_templates').delete().gte('day_of_week', 0);
+  if (delErr) { setBusy(btn, false); toast(delErr.message, 'error'); return; }
+
+  const rows = [];
+  DAY_ORDER.forEach(d => {
+    const slots = byDay[d].sort((a,b) => a-b);
+    if (!slots.length) return;
+    let start = slots[0], end = slots[0] + SLOT_STEP;
+    for (let i = 1; i < slots.length; i++) {
+      if (slots[i] === end) { end += SLOT_STEP; }
+      else { rows.push({ day_of_week: d, start_time: minToTimeStr(start), end_time: minToTimeStr(end) }); start = slots[i]; end = slots[i] + SLOT_STEP; }
+    }
+    rows.push({ day_of_week: d, start_time: minToTimeStr(start), end_time: minToTimeStr(end) });
+  });
+
+  if (rows.length) {
+    const { error } = await supabase.from('availability_templates').insert(rows);
+    if (error) { setBusy(btn, false); toast(error.message, 'error'); return; }
+  }
+
+  setBusy(btn, false);
+  toast('Schedule saved', 'success');
+  document.getElementById('schedule-status').textContent = 'Saved at ' + new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+}
+
+// ─── Blocked Dates ─────────────────────────────────────────────────────────
+function setupBlockForm() {
+  const today = new Date().toISOString().split('T')[0];
+  ['block-date','block-date-from','block-date-to'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.min = today;
+  });
+
+  document.querySelectorAll('input[name="block-scope"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+      const isRange = e.target.value === 'daterange';
+      document.getElementById('block-single-fields').style.display = isRange ? 'none' : 'block';
+      document.getElementById('block-range-fields').style.display  = isRange ? 'block' : 'none';
+    });
+  });
+
+  document.querySelectorAll('input[name="block-type"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+      document.getElementById('block-time-fields').style.display = e.target.value === 'range' ? 'block' : 'none';
+    });
+  });
+
+  document.getElementById('block-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn    = document.getElementById('btn-add-block');
+    const scope  = document.querySelector('input[name="block-scope"]:checked').value;
+    const type   = document.querySelector('input[name="block-type"]:checked').value;
+    const start  = type === 'range' ? document.getElementById('block-start').value : null;
+    const end    = type === 'range' ? document.getElementById('block-end').value   : null;
+    const reason = document.getElementById('block-reason').value.trim() || null;
+
+    if (type === 'range') {
+      if (!start || !end) { toast('Enter both start and end time.', 'error'); return; }
+      const [sh,sm] = start.split(':').map(Number);
+      const [eh,em] = end.split(':').map(Number);
+      if ((eh*60+em) <= (sh*60+sm)) { toast('End time must be after start time.', 'error'); return; }
+    }
+
+    let dates = [];
+    if (scope === 'single') {
+      const date = document.getElementById('block-date').value;
+      if (!date) { toast('Date is required.', 'error'); return; }
+      dates = [date];
+    } else {
+      const from = document.getElementById('block-date-from').value;
+      const to   = document.getElementById('block-date-to').value;
+      if (!from || !to) { toast('Both from and to dates are required.', 'error'); return; }
+      if (to < from) { toast('To date must be on or after from date.', 'error'); return; }
+      // Expand date range into individual dates
+      const d = new Date(from + 'T12:00:00');
+      const last = new Date(to + 'T12:00:00');
+      while (d <= last) {
+        dates.push(d.toISOString().split('T')[0]);
+        d.setDate(d.getDate() + 1);
+      }
+      if (dates.length > 60) { toast('Date range cannot exceed 60 days.', 'error'); return; }
+    }
+
+    setBusy(btn, true);
+    const rows = dates.map(date => ({
+      block_date:  date,
+      start_time:  start,
+      end_time:    end,
+      reason,
+      created_at:  new Date().toISOString(),
+    }));
+    const { error } = await supabase.from('availability_blocks').insert(rows);
+    setBusy(btn, false);
+
+    if (error) { toast(error.message, 'error'); return; }
+    toast(dates.length === 1 ? 'Block added' : `${dates.length} days blocked`, 'success');
+    document.getElementById('block-form').reset();
+    document.getElementById('block-time-fields').style.display = 'none';
+    document.getElementById('block-range-fields').style.display = 'none';
+    document.getElementById('block-single-fields').style.display = 'block';
+    loadBlocks();
+    loadSchedule(); // refresh schedule overlay
+  });
+}
+
+async function loadBlocks() {
+  const today = new Date().toISOString().split('T')[0];
+  const { data: blocks, error } = await supabase
+    .from('availability_blocks')
+    .select('*')
+    .gte('block_date', today)
+    .order('block_date').order('start_time');
+
+  const el = document.getElementById('blocks-list');
+  if (error) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">Database setup required.</div>';
+    return;
+  }
+  if (!blocks?.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">No upcoming blocks.</div>';
+    return;
+  }
+
+  el.innerHTML = blocks.map(b => {
+    const dateStr = new Date(b.block_date + 'T00:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+    const timeStr = b.start_time ? b.start_time.slice(0,5) + ' - ' + (b.end_time || '').slice(0,5) : 'All day';
+    return `
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.625rem 0; border-bottom:1px solid var(--border);">
+        <div>
+          <div style="font-weight:600; font-size:0.875rem;">${escapeHtml(dateStr)}</div>
+          <div style="font-size:0.75rem; color:var(--muted);">${escapeHtml(timeStr)}${b.reason ? ' · ' + escapeHtml(b.reason) : ''}</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="deleteBlock('${b.id}')">Delete</button>
+      </div>
+    `;
+  }).join('');
+  el.querySelector('div:last-child').style.borderBottom = 'none';
+}
+
+window.deleteBlock = async id => {
+  await supabase.from('availability_blocks').delete().eq('id', id);
+  loadBlocks();
+  loadSchedule(); // refresh overlay on weekly schedule
+};
+
+// ─── Schedule Session (admin creates booking for a client) ──────────────────
+async function setupScheduleSession() {
+  // Load active clients into the select
+  const { data: plans } = await supabase
+    .from('plans')
+    .select('id, client_id, plan_type, profiles!plans_client_id_fkey(full_name, email)')
+    .in('status', ['active', 'pending'])
+    .order('created_at', { ascending: false });
+
+  const select = document.getElementById('ss-client');
+  if (!plans?.length) {
+    select.innerHTML = '<option value="">No active clients</option>';
+  } else {
+    select.innerHTML = '<option value="">Select client…</option>' +
+      plans.map(p => {
+        const name = p.profiles?.full_name || p.profiles?.email || 'Unknown';
+        return `<option value="${escapeHtml(p.client_id)}" data-plan="${escapeHtml(p.id)}">${escapeHtml(name)} (${escapeHtml(p.plan_type)})</option>`;
+      }).join('');
+  }
+
+  // Default date to tomorrow
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  document.getElementById('ss-date').value = tomorrow.toISOString().split('T')[0];
+  document.getElementById('ss-date').min   = new Date().toISOString().split('T')[0];
+
+  document.getElementById('btn-open-schedule-session').addEventListener('click', () => {
+    openModal('modal-schedule-session');
+  });
+
+  document.getElementById('btn-confirm-schedule-session').addEventListener('click', async () => {
+    const clientId  = select.value;
+    const planOpt   = select.options[select.selectedIndex];
+    const planId    = planOpt?.dataset.plan || null;
+    const date      = document.getElementById('ss-date').value;
+    const startTime = document.getElementById('ss-start').value;
+    const endTime   = document.getElementById('ss-end').value;
+    const link      = document.getElementById('ss-link').value.trim() || null;
+    const notes     = document.getElementById('ss-notes').value.trim() || null;
+
+    if (!clientId) { toast('Please select a client.', 'error'); return; }
+    if (!date)     { toast('Please pick a date.', 'error'); return; }
+    if (!startTime){ toast('Please set a start time.', 'error'); return; }
+    if (!endTime)  { toast('Please set an end time.', 'error'); return; }
+    if (endTime <= startTime) { toast('End time must be after start time.', 'error'); return; }
+
+    const btn = document.getElementById('btn-confirm-schedule-session');
+    setBusy(btn, true);
+
+    const { error } = await supabase.from('bookings').insert({
+      client_id:    clientId,
+      plan_id:      planId,
+      booking_date: date,
+      start_time:   startTime,
+      end_time:     endTime,
+      status:       'approved',
+      session_link: link,
+      coach_notes:  notes,
+      created_at:   new Date().toISOString(),
+    });
+
+    setBusy(btn, false);
+
+    if (error) {
+      toast(error.message || 'Could not create booking.', 'error');
+      return;
+    }
+
+    // Notify the client
+    await supabase.from('notifications').insert({
+      user_id:    clientId,
+      type:       'booking_approved',
+      title:      'Session scheduled',
+      body:       `A session has been scheduled for you on ${new Date(date + 'T12:00:00').toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' })} at ${startTime.slice(0,5)}.`,
+      created_at: new Date().toISOString(),
+    });
+
+    document.getElementById('modal-schedule-session').classList.remove('open');
+    toast('Session scheduled and client notified.', 'success');
+    loadRequests();
+  });
+}
+</script>
+</body>
+</html>

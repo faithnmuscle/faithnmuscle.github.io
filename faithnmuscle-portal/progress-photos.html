@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Progress Photos | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Progress Photos</span>
+    </div>
+
+    <div class="portal-content" id="page-content" style="display:none;">
+
+      <!-- Upload card -->
+      <div class="card mb-3">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Upload Photo</div>
+            <div class="card-subtitle" id="quota-text">Loading...</div>
+          </div>
+        </div>
+        <div id="upload-alert" class="alert" style="display:none;"></div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="photo-date">Date</label>
+            <input type="date" id="photo-date"/>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="photo-angle">Angle</label>
+            <select id="photo-angle">
+              <option value="front">Front</option>
+              <option value="side">Side</option>
+              <option value="back">Back</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="photo-file">Photo (JPEG, PNG, HEIC - max 5MB)</label>
+          <input type="file" id="photo-file" accept="image/*" style="padding:0.4rem;"/>
+        </div>
+
+        <div id="photo-preview" style="display:none; margin-bottom:1rem; display:flex; align-items:flex-start; gap:1rem;">
+          <img id="preview-img" style="width:100px; height:100px; object-fit:cover; border-radius:8px; border:1px solid var(--border);"/>
+          <div>
+            <div id="preview-original" style="font-size:0.8rem; color:var(--muted);"></div>
+            <div id="preview-compressed" style="font-size:0.8rem; color:var(--blue-light);"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="btn-upload" disabled>
+          <span class="btn-spinner"></span><span class="btn-text">Upload Photo</span>
+        </button>
+      </div>
+
+      <!-- Gallery card -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">My Photos</div></div>
+        <div id="photos-gallery">
+          <div style="color:var(--muted); font-size:0.875rem;">Loading...</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, escapeHtml, setBusy, toast, localCalendarDate } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+const profile = await getProfile();
+const plan    = await getActivePlan(profile.id);
+
+document.getElementById('page-content').style.display = 'block';
+
+// Default date to today
+const dateInput = document.getElementById('photo-date');
+dateInput.value  = localCalendarDate();
+
+let compressedBlob = null;
+let token = session.access_token;
+
+// ── Quota ─────────────────────────────────────────────────────────────────
+async function loadQuota(forDate) {
+  const monthStart = forDate.slice(0, 7) + '-01';
+  const nextMonth  = new Date(forDate.slice(0, 7) + '-01');
+  nextMonth.setMonth(nextMonth.getMonth() + 1);
+  const monthEnd = nextMonth.toISOString().split('T')[0];
+
+  const [dateRes, monthRes] = await Promise.all([
+    supabase.from('progress_photos').select('id', { count: 'exact', head: true })
+      .eq('client_id', profile.id).eq('photo_date', forDate),
+    supabase.from('progress_photos').select('photo_date')
+      .eq('client_id', profile.id).gte('photo_date', monthStart).lt('photo_date', monthEnd),
+  ]);
+
+  const dateCount = dateRes.count || 0;
+  const monthDates = new Set((monthRes.data || []).map(r => r.photo_date));
+  const monthCount = monthDates.size;
+  const thisDateInMonth = monthDates.has(forDate);
+  const monthQuotaUsed = !thisDateInMonth && monthCount >= 2;
+
+  const dateOk  = dateCount < 3;
+  const monthOk = thisDateInMonth || monthCount < 2;
+  const canUpload = dateOk && monthOk;
+
+  document.getElementById('quota-text').textContent =
+    `${dateCount}/3 photos this date · ${monthCount}/2 upload dates this month`;
+
+  document.getElementById('btn-upload').disabled = !canUpload || !compressedBlob;
+
+  if (!dateOk) showAlert('Max 3 photos for this date already uploaded.', 'error');
+  else if (!monthOk) showAlert('Max 2 upload dates per month reached. Choose one of your existing dates this month.', 'error');
+  else hideAlert();
+
+  return canUpload;
+}
+
+dateInput.addEventListener('change', () => loadQuota(dateInput.value));
+loadQuota(dateInput.value);
+
+// ── Image compression ──────────────────────────────────────────────────────
+async function compressImage(file) {
+  if (file.size > 5 * 1024 * 1024) throw new Error('Photo must be under 5MB');
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX = 1080;
+        let { width: w, height: h } = img;
+        if (w > MAX || h > MAX) {
+          if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
+          else        { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        canvas.toBlob(b => b ? resolve(b) : reject(new Error('Compression failed')), 'image/jpeg', 0.82);
+      };
+      img.onerror = () => reject(new Error('Could not read image'));
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function fmtSize(bytes) {
+  return bytes < 1024 * 1024
+    ? (bytes / 1024).toFixed(0) + ' KB'
+    : (bytes / 1024 / 1024).toFixed(1) + ' MB';
+}
+
+document.getElementById('photo-file').addEventListener('change', async e => {
+  const file = e.target.files?.[0];
+  if (!file) { compressedBlob = null; document.getElementById('photo-preview').style.display = 'none'; return; }
+
+  compressedBlob = null;
+  document.getElementById('btn-upload').disabled = true;
+  hideAlert();
+
+  try {
+    const blob = await compressImage(file);
+    compressedBlob = blob;
+    const url = URL.createObjectURL(blob);
+    document.getElementById('preview-img').src = url;
+    document.getElementById('preview-original').textContent   = 'Original: ' + fmtSize(file.size);
+    document.getElementById('preview-compressed').textContent = 'Compressed: ' + fmtSize(blob.size);
+    document.getElementById('photo-preview').style.display    = 'flex';
+    const canUpload = await loadQuota(dateInput.value);
+    document.getElementById('btn-upload').disabled = !canUpload;
+  } catch (err) {
+    showAlert(err.message, 'error');
+    document.getElementById('photo-preview').style.display = 'none';
+  }
+});
+
+// ── Upload ─────────────────────────────────────────────────────────────────
+document.getElementById('btn-upload').addEventListener('click', async () => {
+  if (!compressedBlob) return;
+  const canUpload = await loadQuota(dateInput.value);
+  if (!canUpload) return;
+
+  const btn = document.getElementById('btn-upload');
+  setBusy(btn, true);
+  hideAlert();
+
+  // Refresh token in case it expired
+  const { data: { session: s } } = await supabase.auth.getSession();
+  token = s?.access_token;
+
+  const fd = new FormData();
+  fd.append('file', compressedBlob, 'photo.jpg');
+  fd.append('photo_date', dateInput.value);
+  fd.append('angle',      document.getElementById('photo-angle').value);
+  if (plan?.id) fd.append('plan_id', plan.id);
+
+  const res = await fetch('/api/upload-photo', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${token}` },
+    body: fd,
+  });
+  const data = await res.json();
+
+  setBusy(btn, false);
+
+  if (!res.ok) {
+    showAlert(data.error || 'Upload failed', 'error');
+  } else {
+    toast('Photo uploaded!', 'success');
+    compressedBlob = null;
+    document.getElementById('photo-file').value = '';
+    document.getElementById('photo-preview').style.display = 'none';
+    document.getElementById('btn-upload').disabled = true;
+    await loadQuota(dateInput.value);
+    await loadGallery();
+  }
+});
+
+// ── Gallery ────────────────────────────────────────────────────────────────
+async function loadGallery() {
+  const gallery = document.getElementById('photos-gallery');
+  gallery.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">Loading...</div>';
+
+  const { data: photos } = await supabase
+    .from('progress_photos')
+    .select('id, photo_date, angle, notes, created_at')
+    .eq('client_id', profile.id)
+    .order('photo_date', { ascending: false })
+    .order('created_at', { ascending: true });
+
+  if (!photos?.length) {
+    gallery.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">No photos yet. Upload your first progress photo above.</div>';
+    return;
+  }
+
+  // Group by date
+  const byDate = {};
+  photos.forEach(p => {
+    if (!byDate[p.photo_date]) byDate[p.photo_date] = [];
+    byDate[p.photo_date].push(p);
+  });
+
+  // Refresh token
+  const { data: { session: s } } = await supabase.auth.getSession();
+  const t = s?.access_token;
+
+  gallery.innerHTML = '';
+
+  for (const date of Object.keys(byDate)) {
+    const group = byDate[date];
+    const dateLabel = new Date(date + 'T12:00:00').toLocaleDateString('en-GB', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+
+    const groupEl = document.createElement('div');
+    groupEl.style.cssText = 'margin-bottom:1.5rem;';
+    groupEl.innerHTML = `
+      <div style="font-size:0.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; padding-bottom:0.5rem; border-bottom:1px solid var(--border);">${escapeHtml(dateLabel)}</div>
+      <div class="photo-row" style="display:flex; gap:0.75rem; flex-wrap:wrap;"></div>
+    `;
+    gallery.appendChild(groupEl);
+    const row = groupEl.querySelector('.photo-row');
+
+    // Load each photo in parallel
+    await Promise.all(group.map(async photo => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:relative; display:inline-block;';
+      wrap.innerHTML = `
+        <div style="width:110px; height:110px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center;">
+          <span style="color:var(--muted); font-size:0.7rem;">Loading...</span>
+        </div>
+      `;
+      row.appendChild(wrap);
+
+      try {
+        const resp = await fetch(`/api/photo?photo_id=${photo.id}`, {
+          headers: { 'Authorization': `Bearer ${t}` }
+        });
+        if (resp.ok) {
+          const blob = await resp.blob();
+          const url  = URL.createObjectURL(blob);
+          wrap.innerHTML = `
+            <div style="position:relative;">
+              <img src="${url}" style="width:110px; height:110px; object-fit:cover; border-radius:10px; border:1px solid var(--border); display:block;" loading="lazy"/>
+              <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.55); color:#fff; font-size:0.7rem; text-align:center; border-radius:0 0 10px 10px; padding:0.2rem 0.3rem; text-transform:capitalize;">
+                ${escapeHtml(photo.angle)}
+              </div>
+              <button class="btn-icon-delete btn-del-photo" data-id="${escapeHtml(photo.id)}" title="Delete" style="position:absolute; top:4px; right:4px; background:rgba(0,0,0,0.6); border:none; cursor:pointer; padding:0.2rem 0.35rem; color:#f87171; font-size:1rem; line-height:1; border-radius:4px;">&times;</button>
+            </div>
+          `;
+          wrap.querySelector('.btn-del-photo').addEventListener('click', () => deletePhoto(photo.id));
+        } else {
+          wrap.innerHTML = `<div style="width:110px; height:110px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center;"><span style="color:#ef4444; font-size:0.7rem;">Error</span></div>`;
+        }
+      } catch {
+        wrap.innerHTML = `<div style="width:110px; height:110px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center;"><span style="color:#ef4444; font-size:0.7rem;">Error</span></div>`;
+      }
+    }));
+  }
+}
+
+// ── Delete photo ────────────────────────────────────────────────────────────
+async function deletePhoto(photoId) {
+  if (!confirm('Delete this photo? This cannot be undone.')) return;
+  const { data: { session: s } } = await supabase.auth.getSession();
+  const t = s?.access_token;
+  const res = await fetch(`/api/photo?photo_id=${photoId}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${t}` },
+  });
+  if (res.ok) {
+    toast('Photo deleted', 'success');
+    await loadQuota(dateInput.value);
+    await loadGallery();
+  } else {
+    const d = await res.json().catch(() => ({}));
+    toast(d.error || 'Delete failed', 'error');
+  }
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+function showAlert(msg, type = 'error') {
+  const el = document.getElementById('upload-alert');
+  el.className = 'alert alert-' + (type === 'error' ? 'error' : 'success');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideAlert() {
+  document.getElementById('upload-alert').style.display = 'none';
+}
+
+loadGallery();
+</script>
+</body>
+</html>

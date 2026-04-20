@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Check-Ins | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/clients.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients</a>
+      <a href="/admin/applications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Applications</a>
+      <a href="/admin/bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings</a>
+      <a href="/admin/checkins.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Check-Ins</a>
+      <a href="/admin/renewals.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Renewals</a>
+      <a href="/admin/payments.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments</a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Admin</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Weekly Check-Ins</span>
+    </div>
+    <div class="portal-content" id="page-content" style="display:none;">
+
+      <!-- Tabs -->
+      <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:0;">
+        <button class="tab-btn active" data-tab="weekly" style="background:none;border:none;color:var(--text);font-size:0.9rem;font-weight:600;padding:0.5rem 1rem;cursor:pointer;border-bottom:2px solid var(--blue-light);margin-bottom:-1px;">Weekly Check-Ins</button>
+        <button class="tab-btn" data-tab="daily" style="background:none;border:none;color:var(--muted);font-size:0.9rem;padding:0.5rem 1rem;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;">Daily Notes</button>
+      </div>
+
+      <!-- Weekly check-ins tab -->
+      <div id="tab-weekly">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Weekly Check-Ins</div>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <select id="filter-replied" style="max-width:160px;">
+                <option value="">All check-ins</option>
+                <option value="pending">Awaiting reply</option>
+                <option value="replied">Replied</option>
+              </select>
+              <select id="filter-client" style="max-width:200px;">
+                <option value="">All clients</option>
+              </select>
+            </div>
+          </div>
+          <div id="checkins-list"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+        </div>
+      </div>
+
+      <!-- Daily notes tab -->
+      <div id="tab-daily" style="display:none;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Daily Check-In Notes</div>
+            <select id="filter-daily-client" style="max-width:200px;">
+              <option value="">All clients</option>
+            </select>
+          </div>
+          <div id="daily-list"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Reply modal -->
+<div class="modal-overlay" id="modal-reply">
+  <div class="modal" style="max-width:520px;">
+    <div class="modal-header"><div class="modal-title">Reply to Check-In</div><button class="modal-close">&times;</button></div>
+    <div id="reply-ci-info" style="font-size:0.875rem; color:var(--muted); margin-bottom:1rem;"></div>
+    <div class="form-group">
+      <label for="reply-text">Your reply</label>
+      <textarea id="reply-text" rows="4" placeholder="Write your feedback, adjustments, encouragement..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close">Cancel</button>
+      <button class="btn btn-primary" id="btn-send-reply">
+        <span class="btn-spinner"></span><span class="btn-text">Send Reply</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, requireAdmin, initSidebar, escapeHtml, toast, openModal, initModals, setBusy, formatDate } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await requireAdmin();
+await initSidebar();
+initModals();
+
+document.getElementById('page-content').style.display = 'block';
+
+let allCheckins = [];
+let allDaily = [];
+let pendingReplyId = null;
+
+await loadClients();
+await Promise.all([loadCheckins(), loadDaily()]);
+
+document.getElementById('filter-replied').addEventListener('change', renderCheckins);
+document.getElementById('filter-client').addEventListener('change', renderCheckins);
+document.getElementById('filter-daily-client').addEventListener('change', renderDaily);
+
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.color = 'var(--muted)';
+      b.style.borderBottomColor = 'transparent';
+    });
+    btn.classList.add('active');
+    btn.style.color = 'var(--text)';
+    btn.style.borderBottomColor = 'var(--blue-light)';
+    document.getElementById('tab-weekly').style.display = btn.dataset.tab === 'weekly' ? '' : 'none';
+    document.getElementById('tab-daily').style.display  = btn.dataset.tab === 'daily'  ? '' : 'none';
+  });
+});
+
+async function loadClients() {
+  const { data: clients } = await supabase.from('profiles').select('id, full_name').neq('role', 'admin').order('full_name');
+  ['filter-client', 'filter-daily-client'].forEach(selId => {
+    const sel = document.getElementById(selId);
+    (clients || []).forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.full_name || c.id;
+      sel.appendChild(opt);
+    });
+  });
+}
+
+async function loadDaily() {
+  const { data } = await supabase
+    .from('progress_checkins')
+    .select('*, profiles(full_name)')
+    .not('energy_level', 'is', null)
+    .order('checkin_date', { ascending: false })
+    .limit(200);
+
+  allDaily = data || [];
+  renderDaily();
+}
+
+function renderDaily() {
+  const clientFilter = document.getElementById('filter-daily-client').value;
+  let filtered = allDaily;
+  if (clientFilter) filtered = filtered.filter(c => c.client_id === clientFilter);
+
+  const el = document.getElementById('daily-list');
+  if (!filtered.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; padding:1rem 0;">No daily check-ins found.</div>';
+    return;
+  }
+
+  el.innerHTML = filtered.map(ci => {
+    const clientName = ci.profiles?.full_name || 'Unknown';
+    const dateLabel  = new Date(ci.checkin_date + 'T12:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+    return `
+      <div style="padding:0.875rem 0; border-bottom:1px solid var(--border);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem; flex-wrap:wrap;">
+          <div>
+            <div style="font-weight:600; margin-bottom:0.25rem;">
+              ${escapeHtml(clientName)}
+              <span style="font-weight:400; color:var(--muted); font-size:0.875rem;"> - ${escapeHtml(dateLabel)}</span>
+            </div>
+            <div style="font-size:0.8rem; color:var(--muted);">
+              Energy: ${ci.energy_level ?? '-'}/10
+              &nbsp;&middot;&nbsp; Mood: ${ci.mood_level ?? '-'}/10
+              &nbsp;&middot;&nbsp; Sleep: ${ci.sleep_quality ?? '-'}/10
+            </div>
+            ${ci.notes ? `<div style="font-size:0.875rem; margin-top:0.4rem;">${escapeHtml(ci.notes)}</div>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  if (el.lastElementChild) el.lastElementChild.style.borderBottom = 'none';
+}
+
+async function loadCheckins() {
+  const { data } = await supabase
+    .from('weekly_checkins')
+    .select('*, profiles(full_name)')
+    .order('created_at', { ascending: false })
+    .limit(100);
+
+  allCheckins = data || [];
+  renderCheckins();
+}
+
+function renderCheckins() {
+  const replyFilter  = document.getElementById('filter-replied').value;
+  const clientFilter = document.getElementById('filter-client').value;
+
+  let filtered = allCheckins;
+  if (replyFilter === 'pending')  filtered = filtered.filter(c => !c.coach_reply);
+  if (replyFilter === 'replied')  filtered = filtered.filter(c =>  c.coach_reply);
+  if (clientFilter) filtered = filtered.filter(c => c.client_id === clientFilter);
+
+  const el = document.getElementById('checkins-list');
+  if (!filtered.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; padding:1rem 0;">No check-ins found.</div>';
+    return;
+  }
+
+  el.innerHTML = filtered.map(ci => {
+    const clientName = ci.profiles?.full_name || 'Unknown';
+    const weekLabel  = new Date(ci.week_start_date + 'T00:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+    const hasReply   = !!ci.coach_reply;
+    return `
+      <div style="padding:1rem 0; border-bottom:1px solid var(--border);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem; flex-wrap:wrap;">
+          <div>
+            <div style="font-weight:600; margin-bottom:0.2rem;">
+              ${escapeHtml(clientName)}
+              <span style="font-weight:400; color:var(--muted); font-size:0.875rem;"> - Week of ${escapeHtml(weekLabel)}</span>
+            </div>
+            <div style="font-size:0.8rem; color:var(--muted);">
+              Adherence: ${ci.adherence_pct != null ? ci.adherence_pct + '%' : '-'}
+              &nbsp;&middot;&nbsp; Energy: ${ci.energy_level}/10
+              &nbsp;&middot;&nbsp; Sleep: ${ci.sleep_quality}/10
+              &nbsp;&middot;&nbsp; Stress: ${ci.stress_level}/10
+            </div>
+            ${ci.client_note ? `<div style="font-size:0.875rem; margin-top:0.5rem;">${escapeHtml(ci.client_note)}</div>` : ''}
+            ${hasReply ? `
+              <div style="margin-top:0.625rem; background:rgba(0,74,173,0.1); border-left:3px solid var(--blue-light); padding:0.5rem 0.75rem; border-radius:0 6px 6px 0; font-size:0.8rem;">
+                <div style="font-size:0.7rem; color:var(--blue-light); font-weight:600; margin-bottom:0.2rem;">YOUR REPLY</div>
+                ${escapeHtml(ci.coach_reply)}
+              </div>
+            ` : '<div style="font-size:0.75rem; color:var(--muted); margin-top:0.4rem; font-style:italic;">No reply yet</div>'}
+          </div>
+          <button class="btn btn-secondary btn-sm btn-reply" data-id="${ci.id}" data-client="${escapeHtml(clientName)}" data-week="${escapeHtml(weekLabel)}" data-note="${escapeHtml(ci.client_note || '')}" data-reply="${escapeHtml(ci.coach_reply || '')}">
+            ${hasReply ? 'Edit Reply' : 'Reply'}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  el.querySelector('div:last-child').style.borderBottom = 'none';
+
+  el.querySelectorAll('.btn-reply').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pendingReplyId = btn.dataset.id;
+      document.getElementById('reply-ci-info').textContent =
+        btn.dataset.client + ' - Week of ' + btn.dataset.week +
+        (btn.dataset.note ? '\n"' + btn.dataset.note + '"' : '');
+      document.getElementById('reply-text').value = btn.dataset.reply || '';
+      openModal('modal-reply');
+    });
+  });
+}
+
+document.getElementById('btn-send-reply').addEventListener('click', async () => {
+  const reply = document.getElementById('reply-text').value.trim();
+  if (!reply) { toast('Reply cannot be empty.', 'error'); return; }
+
+  const btn = document.getElementById('btn-send-reply');
+  setBusy(btn, true);
+
+  const { error } = await supabase.from('weekly_checkins').update({
+    coach_reply:  reply,
+    reviewed_at:  new Date().toISOString(),
+  }).eq('id', pendingReplyId);
+
+  setBusy(btn, false);
+
+  if (error) {
+    toast(error.message, 'error');
+    return;
+  }
+
+  // Notify the client
+  const ci = allCheckins.find(c => c.id === pendingReplyId);
+  if (ci) {
+    await supabase.from('notifications').insert({
+      user_id:    ci.client_id,
+      type:       'checkin_reviewed',
+      title:      'Check-in reply from Bernil',
+      body:       'Bernil has replied to your weekly check-in.',
+      created_at: new Date().toISOString(),
+    });
+  }
+
+  document.getElementById('modal-reply').classList.remove('open');
+  toast('Reply sent!', 'success');
+
+  // Update local data and re-render
+  const idx = allCheckins.findIndex(c => c.id === pendingReplyId);
+  if (idx !== -1) {
+    allCheckins[idx].coach_reply  = reply;
+    allCheckins[idx].reviewed_at  = new Date().toISOString();
+  }
+  renderCheckins();
+});
+</script>
+</body>
+</html>

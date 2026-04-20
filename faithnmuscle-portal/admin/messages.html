@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messages | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+  <style>
+    .conv-layout { display:grid; grid-template-columns:280px 1fr; border:1px solid var(--border); border-radius:12px; overflow:hidden; height:calc(100vh - 160px); min-height:480px; }
+    .conv-list { border-right:1px solid var(--border); overflow-y:auto; background:var(--bg2); display:flex; flex-direction:column; }
+    .conv-list-empty { padding:1.5rem 1rem; color:var(--muted); font-size:0.875rem; text-align:center; }
+    .conv-item { padding:0.875rem 1rem; border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.12s; flex-shrink:0; }
+    .conv-item:hover { background:rgba(0,74,173,0.1); }
+    .conv-item.active { background:rgba(0,74,173,0.18); border-left:3px solid var(--blue); padding-left:calc(1rem - 3px); }
+    .conv-name { font-size:0.875rem; font-weight:600; display:flex; align-items:center; justify-content:space-between; gap:0.5rem; }
+    .conv-preview { font-size:0.75rem; color:var(--muted); margin-top:0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .conv-time { font-size:0.65rem; color:var(--muted); flex-shrink:0; white-space:nowrap; }
+    .conv-unread { background:var(--blue-light); color:#fff; font-size:0.65rem; font-weight:700; border-radius:10px; padding:0.1rem 0.4rem; min-width:18px; text-align:center; flex-shrink:0; }
+    .conv-panel { display:flex; flex-direction:column; background:var(--bg); }
+    .conv-panel-header { padding:0.875rem 1.25rem; border-bottom:1px solid var(--border); background:var(--bg2); display:flex; align-items:center; gap:0.75rem; flex-shrink:0; }
+    .conv-avatar { width:36px; height:36px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.875rem; flex-shrink:0; }
+    .conv-thread { flex:1; overflow-y:auto; padding:1rem 1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+    .conv-empty-panel { flex:1; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:0.875rem; flex-direction:column; gap:0.5rem; }
+    .conv-input-area { padding:0.75rem 1rem; border-top:1px solid var(--border); display:flex; gap:0.75rem; align-items:flex-end; background:var(--bg2); flex-shrink:0; }
+    .conv-input-area textarea { flex:1; resize:none; min-height:40px; max-height:120px; }
+    @media (max-width:680px) {
+      .conv-layout { grid-template-columns:1fr; height:auto; }
+      .conv-list { max-height:220px; border-right:none; border-bottom:1px solid var(--border); }
+      .conv-panel { height:480px; }
+    }
+  </style>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/clients.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients</a>
+      <a href="/admin/applications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Applications</a>
+      <a href="/admin/bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings</a>
+      <a href="/admin/checkins.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Check-Ins<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <a href="/admin/renewals.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Renewals</a>
+      <a href="/admin/payments.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments</a>
+      <a href="/admin/messages.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Admin</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Messages</span>
+    </div>
+
+    <div class="portal-content" style="padding-bottom:0;">
+      <div class="conv-layout">
+
+        <!-- Conversation list -->
+        <div class="conv-list" id="conv-list">
+          <div class="conv-list-empty" id="conv-loading">Loading…</div>
+        </div>
+
+        <!-- Chat panel -->
+        <div class="conv-panel" id="conv-panel">
+          <div class="conv-empty-panel" id="conv-empty">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--muted)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Select a conversation</span>
+          </div>
+          <!-- Header (hidden until conversation selected) -->
+          <div class="conv-panel-header" id="conv-header" style="display:none;">
+            <div class="conv-avatar" id="conv-header-avatar">?</div>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem;" id="conv-header-name">-</div>
+              <div style="font-size:0.75rem; color:var(--muted);" id="conv-header-sub">-</div>
+            </div>
+          </div>
+          <!-- Thread -->
+          <div class="conv-thread" id="conv-thread" style="display:none;"></div>
+          <!-- Input -->
+          <div class="conv-input-area" id="conv-input" style="display:none;">
+            <textarea id="msg-input" placeholder="Type a reply…" rows="2"></textarea>
+            <button class="btn btn-primary" id="btn-send" style="white-space:nowrap;">
+              <span class="btn-spinner"></span><span class="btn-text">Send</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAdmin, initSidebar, getProfile, escapeHtml, setBusy, formatDateTime, toast, planTypeLabel } from '/assets/portal.js';
+
+const session = await requireAdmin();
+if (!session) throw new Error('not admin');
+await initSidebar();
+
+const adminProfile = await getProfile();
+const adminId = adminProfile.id;
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let plans = [];
+let allMsgs = [];
+let conversations = [];
+let activePlanId = null;
+let pollTimer = null;
+
+// ── Load all data ─────────────────────────────────────────────────────────────
+async function loadAll() {
+  const [plansRes, msgsRes] = await Promise.all([
+    supabase.from('plans')
+      .select('id, plan_type, client_id, status, profiles(full_name, email)')
+      .in('status', ['active', 'pending', 'expired']),
+    supabase.from('messages')
+      .select('id, plan_id, sender_id, body, is_read, created_at, deleted_at')
+      .or(`deleted_at.is.null,deleted_at.gte.${new Date(Date.now() - 10 * 60 * 1000).toISOString()}`)
+      .order('created_at', { ascending: true })
+      .limit(2000),
+  ]);
+
+  plans   = plansRes.data  || [];
+  allMsgs = msgsRes.data   || [];
+
+  buildConversations();
+  renderConvList();
+
+  // Re-open active conversation if one was selected
+  if (activePlanId) {
+    const conv = conversations.find(c => c.plan.id === activePlanId);
+    if (conv) renderThread(conv);
+  }
+}
+
+// ── Build conversations from plans + messages ─────────────────────────────────
+function buildConversations() {
+  const msgsByPlan = {};
+  for (const m of allMsgs) {
+    if (!msgsByPlan[m.plan_id]) msgsByPlan[m.plan_id] = [];
+    msgsByPlan[m.plan_id].push(m);
+  }
+
+  conversations = plans
+    .filter(p => msgsByPlan[p.id]?.length)
+    .map(p => {
+      const planMsgs = msgsByPlan[p.id];
+      const unread = planMsgs.filter(m => m.sender_id !== adminId && !m.is_read).length;
+      const lastMsg = planMsgs[planMsgs.length - 1]; // already sorted ascending
+      return {
+        plan: p,
+        clientName: p.profiles?.full_name || p.profiles?.email || 'Unknown',
+        messages: planMsgs,
+        lastMsg,
+        unread,
+      };
+    })
+    .sort((a, b) => new Date(b.lastMsg.created_at) - new Date(a.lastMsg.created_at));
+}
+
+// ── Render conversation list ───────────────────────────────────────────────────
+function renderConvList() {
+  const el = document.getElementById('conv-list');
+  if (!conversations.length) {
+    el.innerHTML = '<div class="conv-list-empty">No messages yet.</div>';
+    return;
+  }
+
+  el.innerHTML = conversations.map(c => {
+    const isActive  = c.plan.id === activePlanId;
+    const lastBody  = c.lastMsg.body.length > 50 ? c.lastMsg.body.slice(0, 50) + '…' : c.lastMsg.body;
+    const isByAdmin = c.lastMsg.sender_id === adminId;
+    const timeStr   = relativeTime(c.lastMsg.created_at);
+    return `
+      <div class="conv-item${isActive ? ' active' : ''}" data-plan="${escapeHtml(c.plan.id)}">
+        <div class="conv-name">
+          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(c.clientName)}</span>
+          <div style="display:flex;align-items:center;gap:0.35rem;flex-shrink:0;">
+            ${c.unread ? `<span class="conv-unread">${c.unread > 9 ? '9+' : c.unread}</span>` : ''}
+            <span class="conv-time">${escapeHtml(timeStr)}</span>
+          </div>
+        </div>
+        <div class="conv-preview">${isByAdmin ? 'You: ' : ''}${escapeHtml(lastBody)}</div>
+      </div>
+    `;
+  }).join('');
+
+  el.querySelectorAll('.conv-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const planId = item.dataset.plan;
+      const conv   = conversations.find(c => c.plan.id === planId);
+      if (conv) selectConversation(conv);
+    });
+  });
+}
+
+// ── Select conversation ────────────────────────────────────────────────────────
+function selectConversation(conv) {
+  activePlanId = conv.plan.id;
+  renderConvList(); // update active highlight + clear unread badge
+  renderThread(conv);
+  markRead(conv);
+}
+
+function renderThread(conv) {
+  // Update header
+  const initials = conv.clientName.split(' ').map(w => w[0] || '').slice(0, 2).join('').toUpperCase() || '?';
+  document.getElementById('conv-header-avatar').textContent = initials;
+  document.getElementById('conv-header-name').textContent   = conv.clientName;
+  document.getElementById('conv-header-sub').textContent    = planTypeLabel(conv.plan.plan_type) + ' · ' + conv.plan.status;
+  document.getElementById('conv-empty').style.display       = 'none';
+  document.getElementById('conv-header').style.display      = 'flex';
+  document.getElementById('conv-thread').style.display      = 'flex';
+  document.getElementById('conv-input').style.display       = 'flex';
+
+  // Render messages
+  const thread = document.getElementById('conv-thread');
+  if (!conv.messages.length) {
+    thread.innerHTML = '<div style="color:var(--muted);font-size:0.875rem;text-align:center;padding:2rem 0;">No messages yet.</div>';
+    return;
+  }
+
+  thread.innerHTML = conv.messages.map(m => {
+    const isAdmin = m.sender_id === adminId;
+    // Admin messages on left (theirs), client messages on right (mine)
+    return `
+      <div class="${isAdmin ? 'chat-theirs' : 'chat-mine'}">
+        <div class="chat-sender">${isAdmin ? 'You' : escapeHtml(conv.clientName)}</div>
+        <div class="${isAdmin ? 'chat-bubble-theirs' : 'chat-bubble-mine'}">${escapeHtml(m.body)}</div>
+        <div class="chat-meta">${escapeHtml(formatDateTime(m.created_at))}</div>
+      </div>
+    `;
+  }).join('');
+
+  thread.scrollTop = thread.scrollHeight;
+}
+
+async function markRead(conv) {
+  // Mark client messages in this conversation as read
+  const unreadIds = conv.messages.filter(m => m.sender_id !== adminId && !m.is_read).map(m => m.id);
+  if (!unreadIds.length) return;
+  await supabase.from('messages').update({ is_read: true }).in('id', unreadIds);
+  // Update local state
+  for (const m of allMsgs) {
+    if (unreadIds.includes(m.id)) m.is_read = true;
+  }
+  buildConversations();
+  renderConvList();
+}
+
+// ── Send reply ─────────────────────────────────────────────────────────────────
+document.getElementById('msg-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+});
+document.getElementById('btn-send').addEventListener('click', send);
+
+async function send() {
+  if (!activePlanId) return;
+  const input = document.getElementById('msg-input');
+  const body  = input.value.trim();
+  if (!body) return;
+
+  const btn = document.getElementById('btn-send');
+  setBusy(btn, true);
+  input.value = '';
+
+  const { error } = await supabase.from('messages').insert({
+    plan_id:    activePlanId,
+    sender_id:  adminId,
+    body,
+    created_at: new Date().toISOString(),
+  });
+
+  if (error) {
+    setBusy(btn, false);
+    input.value = body;
+    toast(error.message, 'error');
+    return;
+  }
+
+  // Notify the client
+  const conv = conversations.find(c => c.plan.id === activePlanId);
+  if (conv) {
+    await supabase.from('notifications').insert({
+      user_id:    conv.plan.client_id,
+      type:       'message',
+      title:      'New message from Bernil',
+      body:       body.slice(0, 120),
+      created_at: new Date().toISOString(),
+    });
+  }
+
+  setBusy(btn, false);
+  await loadAll();
+}
+
+// ── Polling ────────────────────────────────────────────────────────────────────
+pollTimer = setInterval(loadAll, 10000);
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function relativeTime(isoStr) {
+  const diff = Date.now() - new Date(isoStr).getTime();
+  const min  = Math.floor(diff / 60000);
+  if (min < 1)   return 'now';
+  if (min < 60)  return min + 'm';
+  const hrs = Math.floor(min / 60);
+  if (hrs < 24)  return hrs + 'h';
+  const days = Math.floor(hrs / 24);
+  if (days < 7)  return days + 'd';
+  return new Date(isoStr).toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+await loadAll();
+</script>
+</body>
+</html>

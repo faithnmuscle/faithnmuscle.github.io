@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Client | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="/admin/clients.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clients
+      </a>
+      <a href="/admin/applications.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Applications
+      </a>
+      <a href="/admin/bookings.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Bookings
+      </a>
+      <a href="/admin/checkins.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Check-Ins
+        <span class="nav-badge" id="notif-badge" style="display:none"></span>
+      </a>
+      <a href="/admin/renewals.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Renewals
+      </a>
+      <a href="/admin/payments.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Payments
+      </a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">?</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="sidebar-name">Loading…</div>
+          <div class="sidebar-user-role" id="sidebar-role">Admin</div>
+        </div>
+      </div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title" id="topbar-name">Client</span>
+      <div class="topbar-actions">
+        <a href="/admin/clients.html" class="btn btn-secondary btn-sm">← Back</a>
+      </div>
+    </div>
+
+    <div class="portal-content" id="page-content" style="display:none">
+
+      <!-- Pinned note -->
+      <div id="pinned-note-wrap" class="pinned-note" style="display:none;">
+        <span class="pinned-note-icon">📌</span>
+        <span id="pinned-note-text"></span>
+        <button id="btn-edit-note" style="margin-left:auto; background:none; border:none; color:var(--warning); cursor:pointer; font-size:0.8rem; white-space:nowrap;">Edit</button>
+      </div>
+
+      <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem;">
+        <button id="btn-add-note" class="btn btn-secondary btn-sm" style="display:none;">+ Add Note</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start;">
+
+        <!-- Profile card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Profile</div>
+            <button class="btn btn-secondary btn-sm" id="btn-edit-profile">Edit</button>
+          </div>
+          <div id="profile-info" style="font-size:0.875rem; display:grid; gap:0.625rem;"></div>
+        </div>
+
+        <!-- Active plan card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Active Plan</div>
+            <button class="btn btn-secondary btn-sm" id="btn-new-plan">+ New Plan</button>
+          </div>
+          <div id="plan-info" style="font-size:0.875rem;"></div>
+        </div>
+
+      </div>
+
+      <!-- Upload document -->
+      <div class="card mt-3">
+        <div class="card-header">
+          <div class="card-title">Documents</div>
+          <button class="btn btn-primary btn-sm" id="btn-upload-doc">Upload Document</button>
+        </div>
+        <div id="docs-list" style="font-size:0.875rem;"></div>
+      </div>
+
+      <!-- Recent workout logs -->
+      <div class="card mt-3" id="workout-card" style="display:none;">
+        <div class="card-header">
+          <div class="card-title">Recent Workouts</div>
+          <a id="workout-view-all" href="#" class="btn btn-secondary btn-sm">View All</a>
+        </div>
+        <div id="workout-list" style="font-size:0.875rem;"></div>
+      </div>
+
+      <!-- Recent meal logs -->
+      <div class="card mt-3" id="meal-card" style="display:none;">
+        <div class="card-header">
+          <div class="card-title">Recent Meal Logs</div>
+          <a id="meal-view-all" href="#" class="btn btn-secondary btn-sm">View All</a>
+        </div>
+        <div id="meal-list" style="font-size:0.875rem;"></div>
+      </div>
+
+    </div>
+
+    <div id="page-loading" style="padding:3rem; color:var(--muted);">Loading…</div>
+    <div id="page-error" style="display:none; padding:3rem;" class="alert alert-error">Client not found.</div>
+  </main>
+</div>
+
+<!-- Pinned note modal -->
+<div class="modal-overlay" id="modal-note">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Pinned Note</div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div class="form-group">
+      <label for="note-input">Note (visible only to you)</label>
+      <textarea id="note-input" rows="3" placeholder="e.g. Knee injury - avoid deep squats. Prefers morning sessions."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close">Cancel</button>
+      <button class="btn btn-primary" id="btn-save-note">
+        <span class="btn-spinner"></span>
+        <span class="btn-text">Save Note</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit profile modal -->
+<div class="modal-overlay" id="modal-edit-profile">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Edit Profile</div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div id="edit-profile-alert" class="alert" style="display:none;"></div>
+    <form id="edit-profile-form" novalidate>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label for="ep-name">Full Name *</label>
+          <input type="text" id="ep-name" required/>
+        </div>
+        <div class="form-group">
+          <label for="ep-email">Email</label>
+          <input type="email" id="ep-email"/>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label for="ep-phone">Phone</label>
+          <input type="tel" id="ep-phone" placeholder="+94 76 000 0000"/>
+        </div>
+        <div class="form-group" style="display:flex; align-items:flex-end;">
+          <p style="font-size:0.75rem; color:var(--muted); margin-bottom:1.25rem;">Changing email updates both login and profile.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label for="ep-age">Age</label>
+          <input type="number" id="ep-age" min="10" max="100"/>
+        </div>
+        <div class="form-group">
+          <label for="ep-sex">Sex</label>
+          <select id="ep-sex">
+            <option value="">Not specified</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label for="ep-height">Height (cm)</label>
+          <input type="number" id="ep-height" min="100" max="250" step="0.1"/>
+        </div>
+        <div class="form-group">
+          <label for="ep-weight">Weight (kg)</label>
+          <input type="number" id="ep-weight" min="30" max="300" step="0.1"/>
+        </div>
+        <div class="form-group">
+          <label for="ep-target">Target (kg)</label>
+          <input type="number" id="ep-target" min="30" max="300" step="0.1"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ep-timezone">Timezone</label>
+        <input type="text" id="ep-timezone" placeholder="e.g. Asia/Colombo"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btn-save-profile">
+          <span class="btn-spinner"></span>
+          <span class="btn-text">Save Changes</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- New plan modal -->
+<div class="modal-overlay" id="modal-plan">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Assign New Plan</div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div id="plan-alert" class="alert" style="display:none;"></div>
+    <form id="plan-form" novalidate>
+      <div class="form-group">
+        <label for="plan-type">Plan Type *</label>
+        <select id="plan-type" required>
+          <option value="">Select a plan</option>
+          <option value="coaching">Online 1-on-1 Coaching</option>
+          <option value="workout">Detailed Workout Plan</option>
+          <option value="meal">Detailed Meal Plan</option>
+          <option value="athletes">Youth &amp; School Athletes Training</option>
+          <option value="rehab">Rehab &amp; Flexibility</option>
+        </select>
+        <div class="form-error" id="plan-type-error"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label for="plan-start">Start Date</label>
+          <input type="date" id="plan-start"/>
+        </div>
+        <div class="form-group">
+          <label for="plan-end">End Date</label>
+          <input type="date" id="plan-end"/>
+          <div class="form-hint">Leave blank for monthly (open-ended)</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="plan-price">Price (LKR)</label>
+        <div style="display:flex; align-items:center; gap:0.625rem;">
+          <input type="number" id="plan-price" placeholder="e.g. 10000" min="0" style="flex:1;"/>
+          <span id="plan-period-hint" style="color:var(--muted); font-size:0.85rem; white-space:nowrap;"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="plan-notes">Notes (private)</label>
+        <textarea id="plan-notes" rows="2" placeholder="Internal notes about this plan"></textarea>
+      </div>
+      <div style="border-top:1px solid var(--border); margin-top:0.5rem; padding-top:1rem;">
+        <div style="font-weight:600; font-size:0.875rem; margin-bottom:0.75rem; color:var(--text);">Attach Plan Document</div>
+        <div class="form-group">
+          <label for="plan-doc-file">File (PDF / DOC / XLSX, max 10MB) <span class="required">*</span></label>
+          <input type="file" id="plan-doc-file" accept=".pdf,.doc,.docx,.xlsx" required
+            style="background:var(--bg2);border:1px dashed var(--border);padding:0.75rem;border-radius:8px;width:100%;color:var(--text);cursor:pointer;"/>
+        </div>
+        <input type="hidden" id="plan-doc-type" value="general"/>
+        <div class="form-group" style="margin:0;">
+          <label for="plan-doc-desc">Description</label>
+          <input type="text" id="plan-doc-desc" placeholder="e.g. Week 1-4 PPL"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btn-save-plan">
+          <span class="btn-spinner"></span>
+          <span class="btn-text">Assign Plan</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Upload document modal -->
+<div class="modal-overlay" id="modal-upload">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Upload Document</div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div id="upload-alert" class="alert" style="display:none;"></div>
+    <form id="upload-form">
+      <div class="form-group">
+        <label for="doc-file">File (PDF, max 10MB) *</label>
+        <input type="file" id="doc-file" accept=".pdf,.doc,.docx,.xlsx" required
+          style="background:var(--bg2);border:1px dashed var(--border);padding:1rem;border-radius:8px;width:100%;color:var(--text);cursor:pointer;"/>
+      </div>
+      <div class="form-group">
+        <label for="doc-type">Document Type</label>
+        <select id="doc-type">
+          <option value="general">General</option>
+          <option value="workout_program">Workout Program</option>
+          <option value="meal_program">Meal Program</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="doc-desc">Description (optional)</label>
+        <input type="text" id="doc-desc" placeholder="e.g. Week 1-4 Push Pull Legs"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="btn-upload">
+          <span class="btn-spinner"></span>
+          <span class="btn-text">Upload</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import {
+  requireAdmin, initSidebar, getProfile, formatDate, planTypeLabel, PLAN_DEFAULTS,
+  escapeHtml, setBusy, toast, openModal, initModals
+} from '/assets/portal.js';
+
+const session = await requireAdmin();
+if (!session) throw new Error('not admin');
+await initSidebar();
+initModals();
+
+const clientId = new URLSearchParams(location.search).get('id');
+if (!clientId) {
+  document.getElementById('page-loading').style.display = 'none';
+  document.getElementById('page-error').style.display   = 'block';
+  throw new Error('no client id');
+}
+
+// Load client data
+const [profileRes, plansRes] = await Promise.all([
+  supabase.from('profiles').select('*').eq('id', clientId).single(),
+  supabase.from('plans').select('*').eq('client_id', clientId).order('created_at', { ascending: false }),
+]);
+
+document.getElementById('page-loading').style.display = 'none';
+
+if (profileRes.error || !profileRes.data) {
+  document.getElementById('page-error').style.display = 'block';
+  throw new Error('client not found');
+}
+
+const client = profileRes.data;
+const plans  = plansRes.data || [];
+const activePlan = plans.find(p => p.status === 'active') || plans[0] || null;
+
+document.getElementById('page-content').style.display = 'block';
+document.getElementById('topbar-name').textContent = client.full_name || client.email;
+document.getElementById('workout-view-all').href = `/admin/client-workouts.html?id=${clientId}`;
+document.getElementById('meal-view-all').href    = `/admin/client-meals.html?id=${clientId}`;
+
+// ── Pinned note ──
+renderPinnedNote(client.pinned_note);
+
+document.getElementById('btn-add-note')?.addEventListener('click', openNoteModal);
+document.getElementById('btn-edit-note')?.addEventListener('click', openNoteModal);
+
+function openNoteModal() {
+  document.getElementById('note-input').value = client.pinned_note || '';
+  openModal('modal-note');
+}
+
+document.getElementById('btn-save-note').addEventListener('click', async () => {
+  const btn  = document.getElementById('btn-save-note');
+  const note = document.getElementById('note-input').value.trim();
+  setBusy(btn, true);
+
+  const { error } = await supabase.from('profiles').update({ pinned_note: note || null, updated_at: new Date().toISOString() }).eq('id', clientId);
+  setBusy(btn, false);
+
+  if (error) { toast(error.message, 'error'); return; }
+  client.pinned_note = note || null;
+  renderPinnedNote(client.pinned_note);
+  document.querySelector('#modal-note').classList.remove('open');
+  toast('Note saved', 'success');
+});
+
+function renderPinnedNote(note) {
+  const wrap    = document.getElementById('pinned-note-wrap');
+  const textEl  = document.getElementById('pinned-note-text');
+  const addBtn  = document.getElementById('btn-add-note');
+  if (note) {
+    wrap.style.display   = 'flex';
+    textEl.textContent   = note;
+    if (addBtn) addBtn.style.display = 'none';
+  } else {
+    wrap.style.display   = 'none';
+    if (addBtn) addBtn.style.display = 'inline-flex';
+  }
+}
+
+// ── Profile info ──
+renderProfileInfo();
+
+// ── Active plan ──
+const planInfoEl = document.getElementById('plan-info');
+if (activePlan) {
+  planInfoEl.innerHTML = `
+    <div style="display:grid; gap:0.5rem;">
+      <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+        <strong>${escapeHtml(planTypeLabel(activePlan.plan_type))}</strong>
+        <span class="badge badge-${activePlan.status}">${activePlan.status}</span>
+      </div>
+      ${activePlan.start_date ? `<div style="color:var(--muted);">Start: ${escapeHtml(formatDate(activePlan.start_date))}</div>` : ''}
+      ${activePlan.end_date   ? `<div style="color:var(--muted);">End: ${escapeHtml(formatDate(activePlan.end_date))}</div>` : ''}
+      ${activePlan.price_lkr  ? `<div style="color:var(--muted);">Price: LKR ${Number(activePlan.price_lkr).toLocaleString()}</div>` : ''}
+    </div>
+  `;
+} else {
+  planInfoEl.innerHTML = '<div style="color:var(--muted);">No active plan.</div>';
+}
+
+// ── Edit profile ──
+document.getElementById('btn-edit-profile').addEventListener('click', () => {
+  document.getElementById('ep-name').value     = client.full_name    || '';
+  document.getElementById('ep-email').value    = client.email        || '';
+  document.getElementById('ep-phone').value    = client.contact_phone || '';
+  document.getElementById('ep-age').value      = client.age          || '';
+  document.getElementById('ep-sex').value      = client.sex          || '';
+  document.getElementById('ep-height').value   = client.height_cm    || '';
+  document.getElementById('ep-weight').value   = client.weight_kg    || '';
+  document.getElementById('ep-target').value   = client.target_weight_kg || '';
+  document.getElementById('ep-timezone').value = client.timezone     || '';
+  document.getElementById('edit-profile-alert').style.display = 'none';
+  openModal('modal-edit-profile');
+});
+
+document.getElementById('edit-profile-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const alertEl = document.getElementById('edit-profile-alert');
+  const btn     = document.getElementById('btn-save-profile');
+  alertEl.style.display = 'none';
+
+  const newEmail = document.getElementById('ep-email').value.trim();
+  const updates  = {
+    full_name:         document.getElementById('ep-name').value.trim() || null,
+    contact_phone:     document.getElementById('ep-phone').value.trim() || null,
+    age:               Number(document.getElementById('ep-age').value)   || null,
+    sex:               document.getElementById('ep-sex').value           || null,
+    height_cm:         Number(document.getElementById('ep-height').value) || null,
+    weight_kg:         Number(document.getElementById('ep-weight').value) || null,
+    target_weight_kg:  Number(document.getElementById('ep-target').value) || null,
+    timezone:          document.getElementById('ep-timezone').value.trim() || null,
+    updated_at:        new Date().toISOString(),
+  };
+
+  setBusy(btn, true);
+
+  // If email changed, update auth user via function (needs service role)
+  if (newEmail && newEmail !== client.email) {
+    const { data: { session: s } } = await supabase.auth.getSession();
+    const res = await fetch('/api/update-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${s.access_token}` },
+      body: JSON.stringify({ user_id: clientId, email: newEmail }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      setBusy(btn, false);
+      alertEl.className = 'alert alert-error';
+      alertEl.textContent = err.error || 'Failed to update email';
+      alertEl.style.display = 'block';
+      return;
+    }
+    updates.email = newEmail;
+  }
+
+  const { error } = await supabase.from('profiles').update(updates).eq('id', clientId);
+  setBusy(btn, false);
+
+  if (error) {
+    alertEl.className = 'alert alert-error';
+    alertEl.textContent = error.message;
+    alertEl.style.display = 'block';
+    return;
+  }
+
+  // Update local client object and re-render profile info
+  Object.assign(client, updates);
+  if (updates.email) client.email = updates.email;
+  renderProfileInfo();
+  document.getElementById('modal-edit-profile').classList.remove('open');
+  toast('Profile updated', 'success');
+});
+
+function renderProfileInfo() {
+  const infoEl = document.getElementById('profile-info');
+  const rows = [
+    ['Email',   client.email],
+    ['Phone',   client.contact_phone],
+    ['Age',     client.age],
+    ['Sex',     client.sex],
+    ['Height',  client.height_cm   ? client.height_cm + ' cm'   : null],
+    ['Weight',  client.weight_kg   ? client.weight_kg + ' kg'   : null],
+    ['Target',  client.target_weight_kg ? client.target_weight_kg + ' kg' : null],
+    ['Timezone', client.timezone],
+    ['Joined',  formatDate(client.created_at)],
+  ];
+  infoEl.innerHTML = rows.filter(r => r[1]).map(([label, val]) => `
+    <div style="display:flex; gap:0.5rem;">
+      <span style="color:var(--muted); min-width:80px; flex-shrink:0;">${escapeHtml(label)}</span>
+      <span>${escapeHtml(String(val))}</span>
+    </div>
+  `).join('');
+}
+
+// ── New plan ──
+document.getElementById('plan-type').addEventListener('change', (e) => {
+  const def = PLAN_DEFAULTS[e.target.value];
+  document.getElementById('plan-price').value    = def ? def.price : '';
+  document.getElementById('plan-period-hint').textContent = def ? '/ ' + def.period : '';
+  // Auto-select doc type based on plan
+  const docType = { coaching: 'workout_program', workout: 'workout_program', meal: 'meal_program', athletes: 'workout_program', rehab: 'workout_program' }[e.target.value] || 'general';
+  document.getElementById('plan-doc-type').value = docType;
+});
+
+document.getElementById('btn-new-plan').addEventListener('click', () => {
+  document.getElementById('plan-form').reset();
+  document.getElementById('plan-alert').style.display = 'none';
+  document.getElementById('plan-period-hint').textContent = '';
+  document.getElementById('plan-start').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('plan-doc-type').value = 'general';
+  document.getElementById('plan-doc-desc').value = '';
+  openModal('modal-plan');
+});
+
+document.getElementById('plan-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const alertEl  = document.getElementById('plan-alert');
+  const btn      = document.getElementById('btn-save-plan');
+  alertEl.style.display = 'none';
+
+  const planType = document.getElementById('plan-type').value;
+  if (!planType) {
+    alertEl.className = 'alert alert-error';
+    alertEl.textContent = 'Please select a plan type.';
+    alertEl.style.display = 'block';
+    return;
+  }
+
+  const docFile = document.getElementById('plan-doc-file').files?.[0];
+  if (!docFile) {
+    alertEl.className = 'alert alert-error';
+    alertEl.textContent = 'Please attach a document before assigning the plan.';
+    alertEl.style.display = 'block';
+    return;
+  }
+
+  setBusy(btn, true);
+  const { data: newPlan, error } = await supabase.from('plans').insert({
+    client_id:  clientId,
+    plan_type:  planType,
+    status:     'active',
+    start_date: document.getElementById('plan-start').value || null,
+    end_date:   document.getElementById('plan-end').value   || null,
+    price_lkr:  Number(document.getElementById('plan-price').value) || null,
+    notes:      document.getElementById('plan-notes').value.trim() || null,
+    created_at: new Date().toISOString(),
+  }).select().single();
+  setBusy(btn, false);
+
+  if (error) {
+    alertEl.className = 'alert alert-error';
+    alertEl.textContent = error.message;
+    alertEl.style.display = 'block';
+    return;
+  }
+
+  // Notify client
+  await supabase.from('notifications').insert({
+    user_id:    clientId,
+    type:       'plan_assigned',
+    title:      'New plan assigned',
+    body:       `Your ${planTypeLabel(planType)} plan has been activated.`,
+    created_at: new Date().toISOString(),
+  });
+
+  // Upload document
+  if (docFile) {
+    setBusy(btn, true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const fd = new FormData();
+      fd.append('file',        docFile);
+      fd.append('plan_id',     newPlan.id);
+      fd.append('file_type',   document.getElementById('plan-doc-type').value);
+      fd.append('description', document.getElementById('plan-doc-desc').value.trim());
+      const res = await fetch('/api/upload-document', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${session.access_token}` },
+        body: fd,
+      });
+      if (!res.ok) {
+        const r = await res.json().catch(() => ({}));
+        toast('Plan assigned but document upload failed: ' + (r.error || res.status), 'error');
+      } else {
+        toast('Plan assigned and document uploaded', 'success');
+      }
+    } catch (e) {
+      toast('Plan assigned but document upload failed: ' + e.message, 'error');
+    } finally {
+      setBusy(btn, false);
+    }
+  } else {
+    toast('Plan assigned successfully', 'success');
+  }
+
+  document.getElementById('modal-plan').classList.remove('open');
+
+  // Refresh page to show new plan
+  window.location.reload();
+});
+
+// ── Documents ──
+await loadDocuments();
+
+document.getElementById('btn-upload-doc').addEventListener('click', () => openModal('modal-upload'));
+
+async function loadDocuments() {
+  if (!activePlan) { document.getElementById('docs-list').innerHTML = '<div style="color:var(--muted);">Assign a plan first.</div>'; return; }
+
+  const { data: docs } = await supabase
+    .from('plan_documents')
+    .select('*')
+    .eq('plan_id', activePlan.id)
+    .order('created_at', { ascending: false });
+
+  const el = document.getElementById('docs-list');
+  if (!docs || docs.length === 0) {
+    el.innerHTML = '<div style="color:var(--muted); padding:0.5rem 0;">No documents uploaded yet.</div>';
+    return;
+  }
+
+  el.innerHTML = docs.map(d => `
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:0.625rem 0; border-bottom:1px solid var(--border);">
+      <div>
+        <div style="font-weight:600;">${escapeHtml(d.file_name)}</div>
+        <div style="color:var(--muted); font-size:0.75rem;">${escapeHtml(d.file_type || 'general')} &middot; ${escapeHtml(formatDate(d.created_at))}</div>
+      </div>
+    </div>
+  `).join('');
+  el.querySelector('div:last-child').style.borderBottom = 'none';
+}
+
+// ── Upload document ──
+const uploadForm  = document.getElementById('upload-form');
+const uploadAlert = document.getElementById('upload-alert');
+const btnUpload   = document.getElementById('btn-upload');
+
+uploadForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  uploadAlert.style.display = 'none';
+
+  if (!activePlan) { uploadAlert.className='alert alert-error'; uploadAlert.textContent='No active plan to attach documents to.'; uploadAlert.style.display='block'; return; }
+
+  const file = document.getElementById('doc-file').files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) {
+    uploadAlert.className = 'alert alert-error';
+    uploadAlert.textContent = 'File must be under 10MB.';
+    uploadAlert.style.display = 'block';
+    return;
+  }
+
+  setBusy(btnUpload, true);
+
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('plan_id',     activePlan.id);
+    formData.append('file_type',   document.getElementById('doc-type').value);
+    formData.append('description', document.getElementById('doc-desc').value.trim());
+
+    const res = await fetch('/api/upload-document', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${session.access_token}` },
+      body: formData,
+    });
+
+    let result = {};
+    try { result = await res.json(); } catch {}
+    if (!res.ok) throw new Error(result.error || `Upload failed (${res.status})`);
+
+    toast('Document uploaded', 'success');
+    uploadForm.reset();
+    document.getElementById('modal-upload').classList.remove('open');
+    await loadDocuments();
+  } catch (err) {
+    uploadAlert.className = 'alert alert-error';
+    uploadAlert.textContent = err.message;
+    uploadAlert.style.display = 'block';
+  } finally {
+    setBusy(btnUpload, false);
+  }
+});
+
+// ── Recent logs (gated by plan type) ──
+if (activePlan && ['coaching','workout','athletes','rehab'].includes(activePlan.plan_type)) {
+  document.getElementById('workout-card').style.display = 'block';
+  const { data: workouts } = await supabase
+    .from('workout_logs')
+    .select('id, log_date, session_name, duration_min, perceived_effort, body_weight_kg, overall_notes, workout_exercises(exercise_name, sets_completed, reps_per_set, weight_kg, notes, sort_order)')
+    .eq('client_id', clientId)
+    .order('log_date', { ascending: false })
+    .limit(10);
+
+  const wEl = document.getElementById('workout-list');
+  if (!workouts?.length) {
+    wEl.innerHTML = '<div style="color:var(--muted);">No workouts logged yet.</div>';
+  } else {
+    wEl.innerHTML = '';
+    workouts.forEach((w, i) => {
+      const exs = (w.workout_exercises || []).sort((a,b) => (a.sort_order||0)-(b.sort_order||0));
+      const exRows = exs.map(e => `
+        <tr>
+          <td>${escapeHtml(e.exercise_name)}</td>
+          <td style="text-align:center;">${e.sets_completed ?? '-'}</td>
+          <td style="text-align:center;">${escapeHtml(e.reps_per_set || '-')}</td>
+          <td style="text-align:center;">${e.weight_kg != null ? e.weight_kg + ' kg' : '-'}</td>
+          <td style="color:var(--muted);">${escapeHtml(e.notes || '')}</td>
+        </tr>
+      `).join('');
+
+      const row = document.createElement('div');
+      row.style.cssText = `border-bottom:1px solid var(--border);${i === workouts.length-1 ? 'border-bottom:none;' : ''}`;
+      row.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:0.625rem 0; cursor:pointer;" class="log-toggle">
+          <div>
+            <div style="font-weight:600; font-size:0.875rem;">${escapeHtml(w.session_name || 'Workout')}</div>
+            <div style="color:var(--muted);font-size:0.75rem;">${escapeHtml(formatDate(w.log_date))}${w.duration_min ? ` · ${w.duration_min} min` : ''}${w.body_weight_kg ? ` · ${w.body_weight_kg} kg BW` : ''}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            ${w.perceived_effort ? `<span style="color:var(--blue-light);font-size:0.8rem;">RPE ${w.perceived_effort}</span>` : ''}
+            <span style="color:var(--muted);font-size:0.75rem;">${exs.length} exercise${exs.length!==1?'s':''}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" class="chevron" style="color:var(--muted);transition:transform 0.15s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="log-detail" style="display:none; padding-bottom:0.75rem;">
+          ${exs.length ? `
+            <div class="table-wrap" style="margin-top:0.25rem;">
+              <table style="font-size:0.8rem;">
+                <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Weight</th><th>Notes</th></tr></thead>
+                <tbody>${exRows}</tbody>
+              </table>
+            </div>
+          ` : '<div style="color:var(--muted);font-size:0.8rem;padding:0.25rem 0;">No exercises recorded.</div>'}
+          ${w.overall_notes ? `<div style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem;font-style:italic;">${escapeHtml(w.overall_notes)}</div>` : ''}
+        </div>
+      `;
+      row.querySelector('.log-toggle').addEventListener('click', () => {
+        const detail = row.querySelector('.log-detail');
+        const chevron = row.querySelector('.chevron');
+        const open = detail.style.display === 'none';
+        detail.style.display = open ? 'block' : 'none';
+        chevron.style.transform = open ? 'rotate(180deg)' : '';
+      });
+      wEl.appendChild(row);
+    });
+  }
+}
+
+if (activePlan && ['coaching','meal'].includes(activePlan.plan_type)) {
+  document.getElementById('meal-card').style.display = 'block';
+  const { data: meals } = await supabase
+    .from('meal_logs')
+    .select('id, log_date, water_ml, overall_notes, meal_log_entries(meal_slot, food_items, portion_notes, calories_kcal, protein_g, carbs_g, fat_g, sort_order)')
+    .eq('client_id', clientId)
+    .order('log_date', { ascending: false })
+    .limit(10);
+
+  const mEl = document.getElementById('meal-list');
+  if (!meals?.length) {
+    mEl.innerHTML = '<div style="color:var(--muted);">No meals logged yet.</div>';
+  } else {
+    mEl.innerHTML = '';
+    meals.forEach((m, i) => {
+      const entries = (m.meal_log_entries || []).sort((a,b) => (a.sort_order||0)-(b.sort_order||0));
+      const entryRows = entries.map(e => `
+        <div style="padding:0.4rem 0; border-bottom:1px solid var(--border);">
+          <div style="font-weight:600;font-size:0.75rem;color:var(--blue-light);">${escapeHtml(e.meal_slot)}</div>
+          <div style="font-size:0.8rem;margin-top:0.15rem;">${escapeHtml(e.food_items || '')}</div>
+          ${e.portion_notes ? `<div style="font-size:0.75rem;color:var(--muted);">${escapeHtml(e.portion_notes)}</div>` : ''}
+          ${(e.calories_kcal||e.protein_g) ? `<div style="font-size:0.72rem;color:var(--muted);">${e.calories_kcal?e.calories_kcal+' kcal':''}${e.protein_g?' · P:'+e.protein_g+'g':''}${e.carbs_g?' · C:'+e.carbs_g+'g':''}${e.fat_g?' · F:'+e.fat_g+'g':''}</div>` : ''}
+        </div>
+      `).join('');
+
+      const row = document.createElement('div');
+      row.style.cssText = `border-bottom:1px solid var(--border);${i === meals.length-1 ? 'border-bottom:none;' : ''}`;
+      row.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:0.625rem 0; cursor:pointer;" class="log-toggle">
+          <div style="font-weight:600;font-size:0.875rem;">${escapeHtml(formatDate(m.log_date))}</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <span style="color:var(--muted);font-size:0.75rem;">${entries.length} meal${entries.length!==1?'s':''}${m.water_ml?' · '+m.water_ml+' ml':''}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" class="chevron" style="color:var(--muted);transition:transform 0.15s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="log-detail" style="display:none; padding-bottom:0.75rem;">
+          ${entries.length ? entryRows : '<div style="color:var(--muted);font-size:0.8rem;">No entries recorded.</div>'}
+          ${m.overall_notes ? `<div style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem;font-style:italic;">${escapeHtml(m.overall_notes)}</div>` : ''}
+        </div>
+      `;
+      row.querySelector('.log-toggle').addEventListener('click', () => {
+        const detail = row.querySelector('.log-detail');
+        const chevron = row.querySelector('.chevron');
+        const open = detail.style.display === 'none';
+        detail.style.display = open ? 'block' : 'none';
+        chevron.style.transform = open ? 'rotate(180deg)' : '';
+      });
+      mEl.appendChild(row);
+    });
+  }
+}
+</script>
+</body>
+</html>

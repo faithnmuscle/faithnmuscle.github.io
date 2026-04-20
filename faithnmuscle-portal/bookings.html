@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Session | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Book Session</span>
+    </div>
+    <div id="gate-feature" style="display:none;" class="gate-wrap"><div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3></div></div>
+    <div id="gate-plan" style="display:none;" class="gate-wrap"><div class="empty-state"><div class="empty-state-icon">📋</div><h3>Coaching Plan Required</h3><p>Session booking is available on the Online 1-on-1 Coaching plan.</p></div></div>
+    <div class="portal-content" id="page-content" style="display:none;">
+
+      <!-- Reschedule banner -->
+      <div id="reschedule-banner" style="display:none; background:rgba(0,74,173,0.12); border:1px solid rgba(0,74,173,0.5); border-radius:8px; padding:0.875rem 1rem; margin-bottom:1rem; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+        <div style="font-size:0.875rem;">Rescheduling: <strong id="reschedule-orig-label"></strong><br/><span style="font-size:0.775rem; color:var(--muted);">Pick a new date and time below</span></div>
+        <button class="btn btn-secondary btn-sm" id="btn-cancel-reschedule">Cancel</button>
+      </div>
+
+      <!-- Step 1: Pick a date -->
+      <div class="card mb-3">
+        <div class="card-header"><div class="card-title">Pick a Date</div></div>
+        <div id="date-strip" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
+      </div>
+
+      <!-- Step 2 & 3: Pick time + duration -->
+      <div class="card mb-3" id="time-card" style="display:none;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Pick a Time</div>
+            <div class="card-subtitle" id="selected-date-label"></div>
+          </div>
+        </div>
+        <div id="time-slots" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;"></div>
+        <div id="duration-section" style="display:none; border-top:1px solid var(--border); padding-top:0.875rem; margin-top:0.5rem;">
+          <div style="font-weight:600; font-size:0.875rem; margin-bottom:0.5rem;">Duration <span id="duration-from-label" style="font-weight:400; color:var(--muted);"></span></div>
+          <div id="duration-slots" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
+        </div>
+        <div id="book-cta" style="display:none; margin-top:1rem;">
+          <button class="btn btn-primary" id="btn-open-confirm">Confirm Booking</button>
+        </div>
+      </div>
+
+      <!-- My bookings -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">My Bookings</div></div>
+        <div id="my-bookings"><div style="color:var(--muted); font-size:0.875rem;">Loading...</div></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Confirm modal -->
+<div class="modal-overlay" id="modal-confirm">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-header"><div class="modal-title" id="confirm-modal-title">Confirm Booking</div><button class="modal-close">&times;</button></div>
+    <div id="confirm-info" style="color:var(--muted); margin-bottom:1rem; font-size:0.9rem;"></div>
+    <div class="form-group">
+      <label for="booking-notes">Notes for Bernil (optional)</label>
+      <textarea id="booking-notes" rows="2" placeholder="Any topics you'd like to cover?"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close">Cancel</button>
+      <button class="btn btn-primary" id="btn-confirm">
+        <span class="btn-spinner"></span><span class="btn-text">Request Booking</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, getSettings, getFeatures, gateClientNav, escapeHtml, toast, openModal, initModals, setBusy } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+initModals();
+const profile  = await getProfile();
+const FEATURES = await getFeatures();
+const settings = await getSettings();
+
+// ─── State ─────────────────────────────────────────────────────────────────
+let templates    = [];
+let blocks       = [];
+let allBookings  = [];
+let myBookings   = [];
+let selectedDate = null;
+let selectedStart= null;
+let selectedDur  = null;
+let currentPlan  = null;
+let rescheduleBookingId = null;
+
+const windowDays  = Number(settings?.booking_window_days    ?? 21);
+const maxDurMin   = Number(settings?.max_slot_duration_min  ?? 120);
+
+// ─── Time utils ────────────────────────────────────────────────────────────
+const toMin   = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+const fromMin = m => `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;
+const fmt12   = t => { const [h,m] = t.split(':').map(Number); return `${h%12||12}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`; };
+
+if (!FEATURES.bookings) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  const plan = await getActivePlan(profile.id);
+  if (!plan || plan.plan_type !== 'coaching') {
+    document.getElementById('gate-plan').style.display = 'block';
+  } else {
+    document.getElementById('page-content').style.display = 'block';
+    await init(plan);
+  }
+}
+
+function subtractRange(ranges, bs, be) {
+  const out = [];
+  for (const r of ranges) {
+    if (be <= r.s || bs >= r.e) { out.push(r); continue; }
+    if (bs > r.s) out.push({ s: r.s, e: bs });
+    if (be < r.e) out.push({ s: be, e: r.e });
+  }
+  return out;
+}
+
+function getFreeRanges(dateStr) {
+  const dow = new Date(dateStr + 'T12:00:00').getDay();
+  const dayTpls = templates.filter(t => t.day_of_week === dow && t.is_active);
+  if (!dayTpls.length) return [];
+
+  let ranges = dayTpls.map(t => ({ s: toMin(t.start_time), e: toMin(t.end_time) }));
+
+  // Whole-day blocks
+  if (blocks.some(b => b.block_date === dateStr && !b.start_time)) return [];
+
+  // Time-range blocks
+  for (const b of blocks.filter(b => b.block_date === dateStr && b.start_time)) {
+    ranges = subtractRange(ranges, toMin(b.start_time), toMin(b.end_time));
+  }
+
+  // Existing bookings on this date
+  for (const b of allBookings.filter(b => b.booking_date === dateStr && ['pending','approved'].includes(b.status) && b.id !== rescheduleBookingId)) {
+    if (b.start_time && b.end_time) ranges = subtractRange(ranges, toMin(b.start_time), toMin(b.end_time));
+  }
+
+  return ranges;
+}
+
+function getStartTimes(ranges) {
+  const times = [];
+  for (const r of ranges) {
+    for (let t = r.s; t + 30 <= r.e; t += 30) times.push(t);
+  }
+  return [...new Set(times)].sort((a,b) => a-b);
+}
+
+function getMaxDuration(startMin, ranges) {
+  for (const r of ranges) {
+    if (startMin >= r.s && startMin < r.e) return Math.min(r.e - startMin, maxDurMin);
+  }
+  return 0;
+}
+
+// ─── Init ──────────────────────────────────────────────────────────────────
+async function init(plan) {
+  currentPlan = plan;
+
+  const today  = new Date().toISOString().split('T')[0];
+  const future = new Date(Date.now() + windowDays * 86400000).toISOString().split('T')[0];
+
+  try {
+    const [tplRes, blkRes, bkRes, myBkRes] = await Promise.all([
+      supabase.from('availability_templates').select('*').eq('is_active', true),
+      supabase.from('availability_blocks').select('*').gte('block_date', today).lte('block_date', future),
+      supabase.from('bookings').select('id, booking_date, start_time, end_time, status').gte('booking_date', today).lte('booking_date', future).in('status', ['pending','approved']),
+      supabase.from('bookings').select('*').eq('client_id', profile.id).order('booking_date', { ascending: false }).limit(20),
+    ]);
+
+    templates   = tplRes.data  || [];
+    blocks      = blkRes.data  || [];
+    allBookings = bkRes.data   || [];
+    myBookings  = myBkRes.data || [];
+
+    if (tplRes.error) console.error('templates:', tplRes.error);
+    if (blkRes.error) console.error('blocks:', blkRes.error);
+    if (bkRes.error)  console.error('allBookings:', bkRes.error);
+    if (myBkRes.error) console.error('myBookings:', myBkRes.error);
+  } catch (e) {
+    console.error('init error:', e);
+  }
+
+  renderDateStrip();
+  renderMyBookings();
+  setupConfirm();
+}
+
+// ─── Date strip ────────────────────────────────────────────────────────────
+function clientBookedOnDate(dateStr) {
+  // Returns true if client already has a pending/approved booking on this date
+  // (excluding the booking currently being rescheduled)
+  return myBookings.some(b =>
+    b.booking_date === dateStr &&
+    ['pending', 'approved'].includes(b.status) &&
+    b.id !== rescheduleBookingId
+  );
+}
+
+function renderDateStrip() {
+  const strip = document.getElementById('date-strip');
+  strip.innerHTML = '';
+
+  for (let i = 0; i < windowDays; i++) {
+    const d    = new Date(Date.now() + i * 86400000);
+    const str  = d.toISOString().split('T')[0];
+    const free = getFreeRanges(str);
+    const avail = free.some(r => r.e - r.s >= 30);
+    const booked = clientBookedOnDate(str);
+    const canBook = avail && !booked;
+
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-secondary date-btn';
+    btn.style.cssText = `flex-shrink:0; min-width:64px; padding:0.5rem 0.375rem; text-align:center; flex-direction:column; display:flex; gap:0.1rem; opacity:${canBook ? '1' : '0.35'}; cursor:${canBook ? 'pointer' : 'not-allowed'};`;
+    btn.disabled = !canBook;
+    btn.dataset.date = str;
+    btn.title = booked ? 'You already have a booking on this day' : '';
+    btn.innerHTML = `
+      <span style="font-size:0.65rem; color:var(--muted); text-transform:uppercase; font-weight:600;">${d.toLocaleDateString('en-GB', { weekday:'short' })}</span>
+      <span style="font-size:1rem; font-weight:700; line-height:1;">${d.getDate()}</span>
+      <span style="font-size:0.65rem; color:${booked ? 'rgba(245,158,11,0.9)' : 'var(--muted)'};">${booked ? 'booked' : d.toLocaleDateString('en-GB', { month:'short' })}</span>
+    `;
+    if (canBook) {
+      btn.addEventListener('click', () => selectDate(str, d));
+    }
+    strip.appendChild(btn);
+  }
+}
+
+function selectDate(dateStr, dateObj) {
+  // Highlight selected
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.date-btn[data-date="${dateStr}"]`)?.classList.add('active');
+
+  selectedDate  = dateStr;
+  selectedStart = null;
+  selectedDur   = null;
+
+  document.getElementById('selected-date-label').textContent =
+    dateObj.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
+
+  renderTimeSlots();
+  document.getElementById('duration-section').style.display = 'none';
+  document.getElementById('book-cta').style.display = 'none';
+  document.getElementById('time-card').style.display = 'block';
+  document.getElementById('time-card').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+// ─── Time slots ────────────────────────────────────────────────────────────
+function renderTimeSlots() {
+  const ranges = getFreeRanges(selectedDate);
+  const starts = getStartTimes(ranges);
+  const el = document.getElementById('time-slots');
+
+  if (!starts.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">No available times on this date.</div>';
+    return;
+  }
+
+  el.innerHTML = '';
+  starts.forEach(min => {
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-secondary';
+    btn.style.cssText = 'min-width:90px;';
+    btn.textContent = fmt12(fromMin(min));
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#time-slots .btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedStart = min;
+      selectedDur   = null;
+      renderDurations(ranges);
+      document.getElementById('duration-section').style.display = 'block';
+      document.getElementById('book-cta').style.display = 'none';
+    });
+    el.appendChild(btn);
+  });
+}
+
+// ─── Duration ──────────────────────────────────────────────────────────────
+function renderDurations(ranges) {
+  const maxDur = getMaxDuration(selectedStart, ranges);
+  const options = [30, 60, 90, 120].filter(d => d <= maxDur);
+  const el = document.getElementById('duration-slots');
+  el.innerHTML = '';
+  document.getElementById('duration-from-label').textContent = '- starting ' + fmt12(fromMin(selectedStart));
+
+  if (!options.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">Not enough time for a booking from this start time.</div>';
+    return;
+  }
+
+  options.forEach(min => {
+    const label = min < 60 ? min + ' min' : (min / 60) + (min === 60 ? ' hour' : ' hours');
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-secondary';
+    btn.textContent = label;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#duration-slots .btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedDur = min;
+      document.getElementById('book-cta').style.display = 'block';
+    });
+    el.appendChild(btn);
+  });
+}
+
+// ─── Confirm ───────────────────────────────────────────────────────────────
+function setupConfirm() {
+  document.getElementById('btn-open-confirm').addEventListener('click', () => {
+    if (!selectedDate || selectedStart === null || !selectedDur) return;
+    const endMin  = selectedStart + selectedDur;
+    const dateObj = new Date(selectedDate + 'T12:00:00');
+    const dateStr = dateObj.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
+    document.getElementById('confirm-info').textContent =
+      `${dateStr} · ${fmt12(fromMin(selectedStart))} - ${fmt12(fromMin(endMin))}`;
+    document.getElementById('booking-notes').value = '';
+    document.getElementById('confirm-modal-title').textContent =
+      rescheduleBookingId ? 'Confirm Reschedule' : 'Confirm Booking';
+    document.getElementById('btn-confirm').querySelector('.btn-text').textContent =
+      rescheduleBookingId ? 'Confirm Reschedule' : 'Request Booking';
+    openModal('modal-confirm');
+  });
+
+  document.getElementById('btn-confirm').addEventListener('click', async () => {
+    const btn = document.getElementById('btn-confirm');
+    setBusy(btn, true);
+
+    const endMin = selectedStart + selectedDur;
+
+    if (rescheduleBookingId) {
+      // ─── Reschedule existing booking ──────────────────────────────────
+      // Guard: check for another booking on the same day (not the one being rescheduled)
+      const { data: existingOnDay } = await supabase.from('bookings')
+        .select('id')
+        .eq('client_id', profile.id)
+        .eq('booking_date', selectedDate)
+        .in('status', ['pending', 'approved'])
+        .neq('id', rescheduleBookingId)
+        .limit(1);
+      if (existingOnDay?.length) {
+        setBusy(btn, false);
+        document.getElementById('modal-confirm').classList.remove('open');
+        toast('You already have a booking on that day.', 'error');
+        return;
+      }
+
+      const { error } = await supabase.from('bookings').update({
+        booking_date: selectedDate,
+        start_time:   fromMin(selectedStart),
+        end_time:     fromMin(endMin),
+        status:       'pending',
+      }).eq('id', rescheduleBookingId);
+
+      setBusy(btn, false);
+      document.getElementById('modal-confirm').classList.remove('open');
+
+      if (error) {
+        toast(error.message || 'Reschedule failed. Please try again.', 'error');
+      } else {
+        toast('Reschedule request sent - awaiting approval.', 'success');
+        const rid = rescheduleBookingId;
+        rescheduleBookingId = null;
+        document.getElementById('reschedule-banner').style.display = 'none';
+        document.getElementById('btn-open-confirm').textContent = 'Confirm Booking';
+        selectedDate = null; selectedStart = null; selectedDur = null;
+        document.getElementById('time-card').style.display = 'none';
+        await init(currentPlan);
+      }
+    } else {
+      // ─── New booking ───────────────────────────────────────────────────
+      // Server-side guard: check for existing booking on the same day
+      const { data: existing } = await supabase.from('bookings')
+        .select('id')
+        .eq('client_id', profile.id)
+        .eq('booking_date', selectedDate)
+        .in('status', ['pending', 'approved'])
+        .limit(1);
+      if (existing?.length) {
+        setBusy(btn, false);
+        document.getElementById('modal-confirm').classList.remove('open');
+        toast('You already have a booking on this day.', 'error');
+        await init(currentPlan);
+        return;
+      }
+
+      const { error } = await supabase.from('bookings').insert({
+        client_id:    profile.id,
+        plan_id:      currentPlan.id,
+        booking_date: selectedDate,
+        start_time:   fromMin(selectedStart),
+        end_time:     fromMin(endMin),
+        status:       'pending',
+        client_notes: document.getElementById('booking-notes').value.trim() || null,
+        created_at:   new Date().toISOString(),
+      });
+
+      setBusy(btn, false);
+      document.getElementById('modal-confirm').classList.remove('open');
+
+      if (error) {
+        toast(error.message || 'Booking failed. Please try again.', 'error');
+      } else {
+        toast('Booking request sent!', 'success');
+        await supabase.from('notifications').insert({
+          user_id:    profile.id,
+          type:       'booking_request',
+          title:      'Booking requested',
+          body:       `Session on ${selectedDate} at ${fmt12(fromMin(selectedStart))} is pending approval.`,
+          created_at: new Date().toISOString(),
+        });
+        selectedDate = null; selectedStart = null; selectedDur = null;
+        document.getElementById('time-card').style.display = 'none';
+        await init(currentPlan);
+      }
+    }
+  });
+
+  document.getElementById('btn-cancel-reschedule').addEventListener('click', cancelReschedule);
+}
+
+// ─── My bookings ───────────────────────────────────────────────────────────
+function canRescheduleBooking(b) {
+  if (!['approved', 'pending'].includes(b.status)) return false;
+  if (!b.booking_date || !b.start_time) return false;
+  const bookingTime = new Date(b.booking_date + 'T' + b.start_time.slice(0, 5));
+  return bookingTime > new Date(Date.now() + 3 * 3600 * 1000);
+}
+
+function canCancelBooking(b) {
+  if (!['approved', 'pending'].includes(b.status)) return false;
+  if (!b.booking_date) return true; // pending without date - always cancellable
+  const bookingTime = new Date(b.booking_date + 'T' + (b.start_time?.slice(0, 5) || '00:00'));
+  return bookingTime > new Date();
+}
+
+function renderMyBookings() {
+  const el = document.getElementById('my-bookings');
+  if (!myBookings.length) {
+    el.innerHTML = '<div style="color:var(--muted); font-size:0.875rem;">No bookings yet.</div>';
+    return;
+  }
+  el.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Time</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          ${myBookings.map(b => {
+            const dateStr = b.booking_date
+              ? new Date(b.booking_date + 'T00:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' })
+              : '-';
+            const timeStr = b.start_time
+              ? fmt12(b.start_time.slice(0,5)) + (b.end_time ? ' - ' + fmt12(b.end_time.slice(0,5)) : '')
+              : '-';
+            const showReschedule = canRescheduleBooking(b);
+            const showCancel     = canCancelBooking(b);
+            return `
+              <tr>
+                <td>${escapeHtml(dateStr)}</td>
+                <td>${escapeHtml(timeStr)}</td>
+                <td><span class="badge badge-${b.status}">${b.status}</span></td>
+                <td style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                  ${showReschedule ? `<button class="btn btn-secondary btn-sm btn-reschedule" data-id="${escapeHtml(b.id)}" data-orig="${escapeHtml(dateStr + ' · ' + timeStr)}">Reschedule</button>` : ''}
+                  ${showCancel    ? `<button class="btn btn-sm btn-cancel-booking" data-id="${escapeHtml(b.id)}" style="background:none;border:1px solid #ef4444;color:#ef4444;border-radius:6px;padding:0.25rem 0.6rem;cursor:pointer;font-size:0.8rem;">Cancel</button>` : ''}
+                </td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  el.querySelectorAll('.btn-reschedule').forEach(btn => {
+    btn.addEventListener('click', () => startReschedule(btn.dataset.id, btn.dataset.orig));
+  });
+
+  el.querySelectorAll('.btn-cancel-booking').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Cancel this booking?')) return;
+      btn.disabled = true;
+      btn.textContent = '…';
+      const { error } = await supabase.from('bookings')
+        .update({ status: 'cancelled' })
+        .eq('id', btn.dataset.id)
+        .eq('client_id', profile.id);
+      if (error) {
+        toast('Could not cancel booking. Please try again.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Cancel';
+      } else {
+        toast('Booking cancelled.', 'success');
+        await init(currentPlan);
+      }
+    });
+  });
+}
+
+function startReschedule(bookingId, origLabel) {
+  rescheduleBookingId = bookingId;
+  document.getElementById('reschedule-orig-label').textContent = origLabel;
+  document.getElementById('reschedule-banner').style.display = 'flex';
+  document.getElementById('btn-open-confirm').textContent = 'Confirm Reschedule';
+  // Reset any prior selections
+  selectedDate = null; selectedStart = null; selectedDur = null;
+  document.getElementById('time-card').style.display = 'none';
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+  // Reload date strip so the rescheduled slot shows as free
+  renderDateStrip();
+  document.querySelector('.portal-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function cancelReschedule() {
+  rescheduleBookingId = null;
+  document.getElementById('reschedule-banner').style.display = 'none';
+  document.getElementById('btn-open-confirm').textContent = 'Confirm Booking';
+  selectedDate = null; selectedStart = null; selectedDur = null;
+  document.getElementById('time-card').style.display = 'none';
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+  renderDateStrip();
+}
+</script>
+</body>
+</html>

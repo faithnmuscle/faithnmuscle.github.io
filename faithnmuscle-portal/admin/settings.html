@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/clients.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients</a>
+      <a href="/admin/applications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Applications</a>
+      <a href="/admin/bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings</a>
+      <a href="/admin/checkins.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Check-Ins</a>
+      <a href="/admin/renewals.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Renewals</a>
+      <a href="/admin/payments.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments</a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Admin</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Settings</span>
+    </div>
+    <div class="portal-content" id="page-content" style="display:none; max-width:680px;">
+      <div id="settings-alert" class="alert" style="display:none; margin-bottom:1rem;"></div>
+      <div id="settings-sections"></div>
+      <div style="margin-top:1.5rem;">
+        <button class="btn btn-primary" id="btn-save-settings">
+          <span class="btn-spinner"></span><span class="btn-text">Save All Settings</span>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAdmin, initSidebar, escapeHtml, toast, setBusy } from '/assets/portal.js';
+
+await requireAdmin();
+await initSidebar();
+document.getElementById('page-content').style.display = 'block';
+
+// ─── Settings definition ───────────────────────────────────────────────────
+// To add a new setting: add one object here. That's all.
+// Types: 'boolean' renders a toggle, 'number' renders a number input, 'text' a text input.
+const SETTINGS_CONFIG = [
+  {
+    section: 'Bookings',
+    settings: [
+      { key: 'booking_window_days',       label: 'Booking window',          description: 'How many days ahead clients can see available slots',                  type: 'number',  default: '21',  min: 1,   max: 90,  unit: 'days'    },
+      { key: 'max_slot_duration_min',     label: 'Max slot duration',       description: 'Maximum length allowed for a single booking slot',                     type: 'number',  default: '120', min: 15,  max: 480, unit: 'minutes' },
+      { key: 'booking_min_notice_hours',  label: 'Minimum notice',          description: 'Clients must book at least this many hours before the slot start time', type: 'number',  default: '12',  min: 0,   max: 72,  unit: 'hours'   },
+      { key: 'booking_cancellation_hours',label: 'Cancellation window',     description: 'Clients can cancel a booking up to this many hours before it starts',  type: 'number',  default: '6',   min: 0,   max: 48,  unit: 'hours'   },
+    ],
+  },
+  {
+    section: 'Applications',
+    settings: [
+      { key: 'applications_open',          label: 'Accept new applications',  description: 'New applications can be submitted from the website',                   type: 'boolean', default: 'true'  },
+      { key: 'application_archive_days',   label: 'Auto-archive after',       description: 'Pending applications older than this are moved to archived status',    type: 'number',  default: '30',  min: 7,   max: 180, unit: 'days'    },
+    ],
+  },
+  {
+    section: 'Client Features',
+    settings: [
+      { key: 'feature_bookings',           label: 'Session booking',          description: 'Coaching clients can request sessions',                               type: 'boolean', default: 'true'  },
+      { key: 'feature_workout_logging',    label: 'Workout logging',          description: 'Clients can log workout sessions and exercises',                      type: 'boolean', default: 'true'  },
+      { key: 'feature_meal_logging',       label: 'Meal logging',             description: 'Clients can log daily meals and macros',                              type: 'boolean', default: 'true'  },
+      { key: 'feature_progress_checkin',   label: 'Progress check-ins',       description: 'Clients can submit body measurements and stats',                      type: 'boolean', default: 'true'  },
+      { key: 'feature_weekly_checkin',     label: 'Weekly check-in',          description: 'Weekly adherence, energy, sleep, and stress form',                   type: 'boolean', default: 'true'  },
+      { key: 'feature_messages',           label: 'Messaging',                description: 'In-portal chat between clients and Bernil',                           type: 'boolean', default: 'true'  },
+      { key: 'feature_progress_photos',    label: 'Progress photos',          description: 'Photo uploads (requires Cloudflare R2 to be set up)',                 type: 'boolean', default: 'false' },
+      { key: 'feature_notifications',      label: 'In-portal notifications',  description: 'System notification feed shown to clients',                           type: 'boolean', default: 'true'  },
+    ],
+  },
+  {
+    section: 'Client Limits',
+    settings: [
+      { key: 'photo_uploads_per_date',     label: 'Photos per upload date',   description: 'Maximum photos a client can upload on a single date (front/side/back)', type: 'number', default: '3',  min: 1, max: 10, unit: 'photos' },
+      { key: 'photo_dates_per_month',      label: 'Upload dates per month',   description: 'Maximum distinct dates a client can upload photos each calendar month', type: 'number', default: '2',  min: 1, max: 31, unit: 'dates'  },
+      { key: 'workout_edit_window_days',   label: 'Workout edit window',      description: 'Clients can edit or delete workout logs within this many days of logging', type: 'number', default: '7',  min: 1, max: 30, unit: 'days'   },
+      { key: 'meal_delete_window_days',    label: 'Meal delete window',       description: 'Clients can delete meal logs within this many days of logging',          type: 'number', default: '7',  min: 1, max: 30, unit: 'days'   },
+    ],
+  },
+  {
+    section: 'Session',
+    settings: [
+      { key: 'idle_logout_minutes',        label: 'Idle logout timeout',      description: 'Automatically sign out clients after this many minutes of inactivity',  type: 'number', default: '30', min: 5, max: 120, unit: 'minutes' },
+    ],
+  },
+  {
+    section: 'Admin Features',
+    settings: [
+      { key: 'feature_admin_bookings',     label: 'Bookings management',      description: 'Availability and booking request management',                          type: 'boolean', default: 'true' },
+      { key: 'feature_admin_checkins',     label: 'Check-in review',          description: 'Review and reply to client weekly check-ins',                         type: 'boolean', default: 'true' },
+      { key: 'feature_admin_payments',     label: 'Payment logging',          description: 'Payment ledger and history',                                           type: 'boolean', default: 'true' },
+      { key: 'feature_admin_renewals',     label: 'Renewal alerts',           description: 'Plans expiring soon and WhatsApp reminder links',                      type: 'boolean', default: 'true' },
+      { key: 'feature_admin_applications', label: 'Applications management',  description: 'Review and manage incoming coaching applications',                      type: 'boolean', default: 'true' },
+      { key: 'renewal_alert_days',         label: 'Renewal alert window',     description: 'Show renewal alerts for plans expiring within this many days',          type: 'number',  default: '7',  min: 1, max: 30, unit: 'days'   },
+    ],
+  },
+];
+// ─── End settings definition ───────────────────────────────────────────────
+
+// Load current values from DB
+const { data: rows } = await supabase.from('portal_settings').select('key, value');
+const current = {};
+(rows || []).forEach(r => { current[r.key] = r.value; });
+
+// Render sections
+const container = document.getElementById('settings-sections');
+SETTINGS_CONFIG.forEach(section => {
+  const card = document.createElement('div');
+  card.className = 'card mb-3';
+  card.innerHTML = `
+    <div class="card-header"><div class="card-title">${escapeHtml(section.section)}</div></div>
+    <div class="settings-list">
+      ${section.settings.map(s => {
+        const val = current[s.key] ?? s.default;
+        if (s.type === 'boolean') {
+          const checked = val === 'true' ? 'checked' : '';
+          return `
+            <div class="settings-row" data-key="${s.key}">
+              <div class="settings-info">
+                <div class="settings-label">${escapeHtml(s.label)}</div>
+                <div class="settings-desc">${escapeHtml(s.description)}</div>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" data-key="${s.key}" ${checked}/>
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+          `;
+        }
+        return `
+          <div class="settings-row" data-key="${s.key}">
+            <div class="settings-info">
+              <div class="settings-label">${escapeHtml(s.label)}</div>
+              <div class="settings-desc">${escapeHtml(s.description)}</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <input type="number" data-key="${s.key}" value="${escapeHtml(val)}"
+                min="${s.min ?? ''}" max="${s.max ?? ''}"
+                style="width:90px; text-align:right;"/>
+              ${s.unit ? `<span style="font-size:0.8rem; color:var(--muted);">${escapeHtml(s.unit)}</span>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+// Save
+document.getElementById('btn-save-settings').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-save-settings');
+  setBusy(btn, true);
+
+  const upserts = [];
+  SETTINGS_CONFIG.forEach(section => {
+    section.settings.forEach(s => {
+      const el = document.querySelector(`[data-key="${s.key}"]`);
+      if (!el) return;
+      let value;
+      if (s.type === 'boolean') {
+        value = el.checked ? 'true' : 'false';
+      } else {
+        const raw = Number(el.value);
+        if (s.min !== undefined && raw < s.min) { toast(`${s.label} must be at least ${s.min}.`, 'error'); setBusy(btn, false); return; }
+        if (s.max !== undefined && raw > s.max) { toast(`${s.label} must be at most ${s.max}.`, 'error'); setBusy(btn, false); return; }
+        value = String(raw);
+      }
+      upserts.push({ key: s.key, value, updated_at: new Date().toISOString() });
+    });
+  });
+
+  // Fix: querySelector returns the wrapper div for booleans, but we bound data-key on the input too
+  // Rebuild using input elements directly
+  const upserts2 = [];
+  document.querySelectorAll('[data-key]').forEach(el => {
+    if (el.tagName === 'INPUT') {
+      const key = el.dataset.key;
+      const conf = SETTINGS_CONFIG.flatMap(s => s.settings).find(s => s.key === key);
+      if (!conf) return;
+      let value;
+      if (conf.type === 'boolean') {
+        value = el.checked ? 'true' : 'false';
+      } else {
+        const raw = Number(el.value);
+        value = String(raw);
+      }
+      upserts2.push({ key, value, updated_at: new Date().toISOString() });
+    }
+  });
+
+  const { error } = await supabase.from('portal_settings').upsert(upserts2, { onConflict: 'key' });
+  setBusy(btn, false);
+
+  if (error) {
+    toast(error.message, 'error');
+  } else {
+    toast('Settings saved!', 'success');
+  }
+});
+</script>
+</body>
+</html>

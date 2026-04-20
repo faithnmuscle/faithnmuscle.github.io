@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meal History | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Meal History</span>
+      <div class="topbar-actions">
+        <a href="/log-meal.html" class="btn btn-primary btn-sm">+ Log Today</a>
+      </div>
+    </div>
+    <div id="gate-feature" style="display:none;" class="gate-wrap"><div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3></div></div>
+    <div id="gate-plan" style="display:none;" class="gate-wrap"><div class="empty-state"><div class="empty-state-icon">📋</div><h3>Not in Your Plan</h3><p>Meal logging is available with Coaching or Meal Plan.</p></div></div>
+    <div class="portal-content" id="page-content" style="display:none;">
+      <div id="loading" style="color:var(--muted); font-size:0.875rem;">Loading...</div>
+      <div id="empty" style="display:none;"><div class="empty-state"><div class="empty-state-icon">🥗</div><h3>No Meals Logged Yet</h3><p>Start tracking your daily nutrition.</p><a href="/log-meal.html" class="btn btn-primary">Log Today</a></div></div>
+      <div id="history-list" style="display:none; flex-direction:column; gap:0.75rem;"></div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDate, escapeHtml, toast } from '/assets/portal.js';
+import { FEATURES } from '/assets/features.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+
+const profile = await getProfile();
+
+const cutoff = new Date();
+cutoff.setDate(cutoff.getDate() - 7);
+const cutoffStr = cutoff.toISOString().slice(0, 10);
+
+if (!FEATURES.mealLogging) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  const plan = await getActivePlan(profile.id);
+  if (!plan || !['coaching','meal'].includes(plan.plan_type)) {
+    document.getElementById('gate-plan').style.display = 'block';
+  } else {
+    document.getElementById('page-content').style.display = 'block';
+    gateClientNav(plan.plan_type);
+    await loadHistory(profile.id);
+  }
+}
+
+async function deleteMealLog(id, dateLabel, cardEl) {
+  if (!confirm(`Delete meal log for ${dateLabel}? This cannot be undone.`)) return;
+  const { error } = await supabase.from('meal_logs').delete().eq('id', id);
+  if (error) { toast(error.message, 'error'); return; }
+  cardEl.remove();
+  toast('Meal log deleted', 'success');
+  const list = document.getElementById('history-list');
+  if (!list.children.length) {
+    list.style.display = 'none';
+    document.getElementById('empty').style.display = 'block';
+  }
+}
+
+async function loadHistory(userId) {
+  const { data: logs } = await supabase
+    .from('meal_logs')
+    .select('*, meal_log_entries(*)')
+    .eq('client_id', userId)
+    .order('log_date', { ascending: false })
+    .limit(60);
+
+  document.getElementById('loading').style.display = 'none';
+  if (!logs?.length) { document.getElementById('empty').style.display = 'block'; return; }
+
+  const list = document.getElementById('history-list');
+  list.style.display = 'flex';
+  list.innerHTML = '';
+
+  logs.forEach(log => {
+    const editable = log.log_date >= cutoffStr;
+    const entries  = (log.meal_log_entries || []);
+    const slots    = entries.map(e => `
+      <div style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
+        <div style="font-weight:600; font-size:0.8rem; color:var(--blue-light);">${escapeHtml(e.meal_slot)}</div>
+        <div style="font-size:0.85rem; margin-top:0.2rem;">${escapeHtml(e.food_items || '')}</div>
+        ${e.portion_notes ? `<div style="font-size:0.75rem; color:var(--muted);">${escapeHtml(e.portion_notes)}</div>` : ''}
+        ${(e.calories_kcal || e.protein_g) ? `<div style="font-size:0.75rem; color:var(--muted); margin-top:0.2rem;">${e.calories_kcal ? e.calories_kcal + ' kcal' : ''}${e.protein_g ? ' &middot; P: ' + e.protein_g + 'g' : ''}${e.carbs_g ? ' &middot; C: ' + e.carbs_g + 'g' : ''}${e.fat_g ? ' &middot; F: ' + e.fat_g + 'g' : ''}</div>` : ''}
+      </div>
+    `).join('');
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.padding = '1.25rem';
+    card.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;" class="card-toggle">
+        <div>
+          <div style="font-weight:700;">${escapeHtml(formatDate(log.log_date))}</div>
+          <div style="color:var(--muted); font-size:0.8rem;">${entries.length} meal${entries.length !== 1 ? 's' : ''}${log.water_ml ? ' &middot; ' + log.water_ml + ' ml water' : ''}</div>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+          ${editable ? `<a href="/log-meal.html?date=${log.log_date}" class="btn btn-secondary btn-sm" onclick="event.stopPropagation()">Edit</a>` : ''}
+          ${editable ? `<button class="btn-icon-delete btn-delete-meal" title="Delete" onclick="event.stopPropagation()" style="background:none;border:none;cursor:pointer;padding:0.25rem;color:var(--muted);font-size:1.1rem;line-height:1;">&times;</button>` : ''}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color:var(--muted);"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="meal-detail" style="display:none; margin-top:0.75rem;">
+        ${slots || '<div style="color:var(--muted); font-size:0.85rem;">No entries recorded.</div>'}
+        ${log.overall_notes ? `<div style="margin-top:0.5rem; font-size:0.8rem; color:var(--muted); font-style:italic;">${escapeHtml(log.overall_notes)}</div>` : ''}
+      </div>
+    `;
+
+    card.querySelector('.card-toggle').addEventListener('click', () => {
+      const detail = card.querySelector('.meal-detail');
+      detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+    });
+
+    const deleteBtn = card.querySelector('.btn-delete-meal');
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', () => deleteMealLog(log.id, formatDate(log.log_date), card));
+    }
+
+    list.appendChild(card);
+  });
+}
+</script>
+</body>
+</html>

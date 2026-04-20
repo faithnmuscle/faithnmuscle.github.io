@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notifications | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+  <style>
+    .notif-row { border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.12s; }
+    .notif-row:last-child { border-bottom:none; }
+    .notif-row:hover { background:rgba(255,255,255,0.03); }
+    .notif-header { display:flex; gap:0.875rem; align-items:center; padding:0.875rem 0; }
+    .notif-icon { font-size:1.2rem; flex-shrink:0; }
+    .notif-title { flex:1; min-width:0; font-size:0.9rem; }
+    .notif-meta { font-size:0.7rem; color:var(--muted); margin-top:0.15rem; }
+    .notif-chevron { flex-shrink:0; color:var(--muted); transition:transform 0.2s; font-size:0.75rem; }
+    .notif-row.expanded .notif-chevron { transform:rotate(180deg); }
+    .notif-body { display:none; padding:0 0 0.875rem 2.2rem; font-size:0.875rem; color:var(--text); line-height:1.55; }
+    .notif-row.expanded .notif-body { display:block; }
+    .notif-toggle { background:none; border:none; cursor:pointer; padding:0.25rem; font-size:0.85rem; flex-shrink:0; line-height:1; border-radius:4px; color:var(--muted); }
+    .notif-toggle:hover { background:rgba(255,255,255,0.08); }
+    .notif-toggle.unread { color:var(--blue-light); }
+  </style>
+</head>
+<body>
+<div class="portal-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+        <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">?</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="sidebar-name">Loading…</div>
+          <div class="sidebar-user-role" id="sidebar-role">Client</div>
+        </div>
+      </div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title">Notifications</span>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-mark-all">Mark all read</button>
+      </div>
+    </div>
+
+    <div class="portal-content">
+      <div id="loading" style="color:var(--muted);padding:2rem 0;">Loading…</div>
+
+      <div id="empty" style="display:none" class="empty-state">
+        <div class="empty-state-icon">🔔</div>
+        <h3>All Caught Up</h3>
+        <p>No notifications yet.</p>
+      </div>
+
+      <div class="card" id="notif-card" style="display:none">
+        <div id="notif-list"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDateTime, escapeHtml, toast } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('not authenticated');
+await initSidebar();
+const profile = await getProfile();
+const activePlan = await getActivePlan(profile.id);
+gateClientNav(activePlan?.plan_type || (profile.role === 'admin' ? 'coaching' : null));
+
+const notifIcons = {
+  booking_approved:  '✅',
+  booking_rejected:  '❌',
+  plan_assigned:     '📋',
+  document_uploaded: '📄',
+  booking_request:   '📅',
+  message:           '💬',
+  checkin_reviewed:  '📝',
+};
+
+await loadNotifications();
+
+document.getElementById('btn-mark-all').addEventListener('click', async () => {
+  await supabase
+    .from('notifications')
+    .update({ is_read: true })
+    .eq('user_id', profile.id)
+    .eq('is_read', false);
+  toast('All marked as read', 'success');
+  await loadNotifications();
+});
+
+async function loadNotifications() {
+  const { data, error } = await supabase
+    .from('notifications')
+    .select('*')
+    .eq('user_id', profile.id)
+    .order('created_at', { ascending: false })
+    .limit(50);
+
+  document.getElementById('loading').style.display = 'none';
+
+  if (error || !data || data.length === 0) {
+    document.getElementById('empty').style.display = 'block';
+    document.getElementById('notif-card').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('empty').style.display = 'none';
+  document.getElementById('notif-card').style.display = 'block';
+
+  const listEl = document.getElementById('notif-list');
+  listEl.innerHTML = data.map(n => {
+    const link = notifLink(n);
+    return `
+      <div class="notif-row" data-id="${escapeHtml(n.id)}" data-read="${n.is_read}" style="opacity:${n.is_read ? '0.6' : '1'};">
+        <div class="notif-header">
+          <span class="notif-icon">${notifIcons[n.type] || '🔔'}</span>
+          <div class="notif-title">
+            <div style="font-weight:${n.is_read ? '400' : '600'};">${escapeHtml(n.title)}</div>
+            <div class="notif-meta">${formatDateTime(n.created_at)}</div>
+          </div>
+          <button class="notif-toggle${n.is_read ? '' : ' unread'}" title="${n.is_read ? 'Mark as unread' : 'Mark as read'}" data-action="toggle">●</button>
+          ${n.body || link ? '<span class="notif-chevron">▾</span>' : ''}
+        </div>
+        ${n.body || link ? `
+          <div class="notif-body">
+            ${n.body ? `<p style="margin:0 0 0.75rem;">${escapeHtml(n.body)}</p>` : ''}
+            ${link ? `<a href="${escapeHtml(link.href)}" class="btn btn-secondary btn-sm">${escapeHtml(link.label)}</a>` : ''}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+
+  listEl.querySelectorAll('.notif-row').forEach(row => {
+    // Expand / collapse on row click
+    const hasBody = row.querySelector('.notif-body');
+    if (hasBody) {
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('[data-action="toggle"]')) return; // handled separately
+        row.classList.toggle('expanded');
+      });
+    }
+
+    // Toggle read / unread on dot button click
+    const toggleBtn = row.querySelector('[data-action="toggle"]');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const isRead = row.dataset.read === 'true';
+        const newRead = !isRead;
+        await supabase.from('notifications').update({ is_read: newRead }).eq('id', row.dataset.id);
+        row.dataset.read = String(newRead);
+        row.style.opacity = newRead ? '0.6' : '1';
+        row.querySelector('.notif-title div:first-child').style.fontWeight = newRead ? '400' : '600';
+        toggleBtn.classList.toggle('unread', !newRead);
+        toggleBtn.title = newRead ? 'Mark as unread' : 'Mark as read';
+      });
+    }
+  });
+}
+
+function notifLink(n) {
+  switch (n.type) {
+    case 'booking_approved':
+    case 'booking_rejected':
+    case 'booking_request':   return { href: '/bookings.html',       label: 'View Bookings' };
+    case 'plan_assigned':
+    case 'document_uploaded': return { href: '/my-plan.html',        label: 'View My Plan' };
+    case 'message':           return { href: '/messages.html',       label: 'Open Messages' };
+    case 'checkin_reviewed':  return { href: '/progress.html',       label: 'View Progress' };
+    default:                  return null;
+  }
+}
+</script>
+</body>
+</html>

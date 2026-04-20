@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messages | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+  <style>
+    .chat-actions { display:none; gap:0.3rem; margin-top:0.2rem; justify-content:flex-end; }
+    .chat-mine:hover .chat-actions { display:flex; }
+    .chat-action-btn { background:none; border:none; cursor:pointer; padding:0.2rem 0.4rem; border-radius:4px; font-size:0.72rem; color:var(--muted); line-height:1; }
+    .chat-action-btn:hover { background:rgba(255,255,255,0.08); color:var(--text); }
+    .chat-action-btn.del:hover { color:#ef4444; }
+    .chat-edit-wrap { display:flex; flex-direction:column; gap:0.4rem; min-width:180px; }
+    .chat-edit-wrap textarea { resize:none; background:var(--bg); border:1px solid var(--blue); border-radius:8px; padding:0.5rem 0.75rem; color:var(--text); font-size:0.9rem; font-family:inherit; width:100%; box-sizing:border-box; }
+  </style>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Messages</span>
+    </div>
+    <div id="gate-feature" style="display:none;" class="gate-wrap"><div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3></div></div>
+    <div id="gate-plan" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">💬</div><h3>No Active Plan</h3><p>You need an active plan to send messages to Bernil.</p></div>
+    </div>
+    <div class="portal-content" id="page-content" style="display:none; max-width:760px;">
+      <div class="card" style="padding:0; overflow:hidden;">
+        <div style="padding:1rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:0.75rem; background:var(--bg2);">
+          <div style="width:36px; height:36px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.875rem;">B</div>
+          <div>
+            <div style="font-weight:600;">Bernil</div>
+            <div style="font-size:0.75rem; color:var(--muted);">Your Coach</div>
+          </div>
+        </div>
+        <div class="chat-wrap" style="height:460px;">
+          <div class="chat-thread" id="chat-thread" style="padding:1rem 1.5rem;">
+            <div style="color:var(--muted); font-size:0.875rem; text-align:center;">Loading messages...</div>
+          </div>
+          <div class="chat-input-area" style="padding:0 1rem 1rem;">
+            <textarea id="msg-input" placeholder="Type a message..." rows="2"></textarea>
+            <button class="btn btn-primary" id="btn-send" style="align-self:flex-end; white-space:nowrap;">
+              <span class="btn-spinner"></span><span class="btn-text">Send</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, escapeHtml, setBusy, formatDateTime, toast } from '/assets/portal.js';
+import { FEATURES } from '/assets/features.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+const profile = await getProfile();
+
+let lastCount = 0;
+let pollTimer = null;
+let isEditing  = false;
+
+if (!FEATURES.messages) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  const plan = await getActivePlan(profile.id);
+  if (!plan) {
+    document.getElementById('gate-plan').style.display = 'block';
+  } else {
+    document.getElementById('page-content').style.display = 'block';
+    gateClientNav(plan.plan_type);
+    init(plan);
+  }
+}
+
+function init(plan) {
+  loadMessages(plan.id);
+  pollTimer = setInterval(() => loadMessages(plan.id), 10000);
+
+  // Mark unread messages as read when page opens
+  supabase.from('messages').update({ is_read: true }).eq('plan_id', plan.id).neq('sender_id', profile.id);
+
+  const input = document.getElementById('msg-input');
+  const btnSend = document.getElementById('btn-send');
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(plan); }
+  });
+  btnSend.addEventListener('click', () => send(plan));
+
+  // Edit / delete event delegation
+  document.getElementById('chat-thread').addEventListener('click', async (e) => {
+    const btn    = e.target.closest('[data-action]');
+    if (!btn) return;
+    const msgDiv = btn.closest('[data-msg-id]');
+    if (!msgDiv) return;
+    const msgId  = msgDiv.dataset.msgId;
+    switch (btn.dataset.action) {
+      case 'edit':   startEdit(msgDiv);                    break;
+      case 'cancel': cancelEdit(msgDiv);                   break;
+      case 'save':   await saveEdit(msgId, msgDiv, plan);  break;
+      case 'delete': await deleteMsg(msgId, msgDiv, plan); break;
+      case 'undo':   await undoDelete(msgId, plan);        break;
+    }
+  });
+}
+
+async function send(plan) {
+  const input = document.getElementById('msg-input');
+  const body  = input.value.trim();
+  if (!body) return;
+
+  const btn = document.getElementById('btn-send');
+  setBusy(btn, true);
+  input.value = '';
+
+  const { error } = await supabase.from('messages').insert({
+    plan_id:    plan.id,
+    sender_id:  profile.id,
+    body,
+    created_at: new Date().toISOString(),
+  });
+
+  setBusy(btn, false);
+  if (!error) await loadMessages(plan.id);
+}
+
+async function loadMessages(planId) {
+  if (isEditing) return; // don't clobber an in-progress edit
+
+  const UNDO_WINDOW_MS = 10 * 60 * 1000;
+
+  // Fetch active + recently soft-deleted (for undo display)
+  const cutoff = new Date(Date.now() - UNDO_WINDOW_MS).toISOString();
+  const { data: msgs, error } = await supabase
+    .from('messages')
+    .select('*')
+    .eq('plan_id', planId)
+    .or(`deleted_at.is.null,deleted_at.gte.${cutoff}`)
+    .order('created_at', { ascending: true })
+    .limit(100);
+
+  const thread = document.getElementById('chat-thread');
+  if (error || !msgs) {
+    thread.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; text-align:center; padding:2rem 0;">No messages yet. Say hello to Bernil!</div>';
+    return;
+  }
+  if (msgs.length === lastCount && msgs.length > 0) return;
+  lastCount = msgs.length;
+
+  if (!msgs.length) {
+    thread.innerHTML = '<div style="color:var(--muted); font-size:0.875rem; text-align:center; padding:2rem 0;">No messages yet. Say hello to Bernil!</div>';
+    return;
+  }
+
+  const EDIT_WINDOW_MS = 10 * 60 * 1000;
+  thread.innerHTML = msgs.map(m => {
+    const isMine   = m.sender_id === profile.id;
+    const age      = Date.now() - new Date(m.created_at).getTime();
+    const editable = isMine && !m.deleted_at && age < EDIT_WINDOW_MS;
+
+    if (m.deleted_at) {
+      // Soft-deleted - show undo placeholder (only own messages)
+      return `
+        <div class="chat-mine" data-msg-id="${escapeHtml(m.id)}">
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.8rem;color:var(--muted);padding:0.15rem 0;">
+            <span>Message deleted</span>
+            <button style="background:none;border:none;color:var(--blue-light);cursor:pointer;font-size:inherit;padding:0;text-decoration:underline;" data-action="undo">Undo</button>
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="${isMine ? 'chat-mine' : 'chat-theirs'}" data-msg-id="${escapeHtml(m.id)}" data-msg-body="${escapeHtml(m.body)}">
+        <div class="chat-sender">${isMine ? 'You' : 'Bernil'}</div>
+        <div class="${isMine ? 'chat-bubble-mine' : 'chat-bubble-theirs'}">${escapeHtml(m.body)}</div>
+        ${editable ? `
+          <div class="chat-actions">
+            <button class="chat-action-btn" data-action="edit" title="Edit">Edit</button>
+            <button class="chat-action-btn del" data-action="delete" title="Delete">Delete</button>
+          </div>
+        ` : ''}
+        <div class="chat-meta">${new Date(m.created_at).toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' })}</div>
+      </div>
+    `;
+  }).join('');
+
+  thread.scrollTop = thread.scrollHeight;
+}
+
+function startEdit(msgDiv) {
+  const bubble   = msgDiv.querySelector('[class*="chat-bubble"]');
+  const origBody = msgDiv.dataset.msgBody;
+  isEditing = true;
+  bubble.innerHTML = `
+    <div class="chat-edit-wrap">
+      <textarea rows="3">${escapeHtml(origBody)}</textarea>
+      <div style="display:flex;gap:0.5rem;justify-content:flex-end;">
+        <button class="btn btn-secondary btn-sm" data-action="cancel">Cancel</button>
+        <button class="btn btn-primary btn-sm" data-action="save">Save</button>
+      </div>
+    </div>
+  `;
+  const ta = bubble.querySelector('textarea');
+  ta.focus();
+  ta.setSelectionRange(ta.value.length, ta.value.length);
+  const actions = msgDiv.querySelector('.chat-actions');
+  if (actions) actions.style.display = 'none';
+}
+
+function cancelEdit(msgDiv) {
+  const bubble = msgDiv.querySelector('[class*="chat-bubble"]');
+  bubble.innerHTML = escapeHtml(msgDiv.dataset.msgBody);
+  const actions = msgDiv.querySelector('.chat-actions');
+  if (actions) actions.style.display = '';
+  isEditing = false;
+}
+
+async function saveEdit(msgId, msgDiv, plan) {
+  const bubble  = msgDiv.querySelector('[class*="chat-bubble"]');
+  const ta      = bubble.querySelector('textarea');
+  if (!ta) return;
+  const newBody = ta.value.trim();
+  if (!newBody) return;
+
+  const { error } = await supabase.from('messages').update({ body: newBody }).eq('id', msgId).eq('sender_id', profile.id);
+  if (error) { toast(error.message, 'error'); return; }
+
+  msgDiv.dataset.msgBody = newBody;
+  bubble.innerHTML = escapeHtml(newBody);
+  const actions = msgDiv.querySelector('.chat-actions');
+  if (actions) actions.style.display = '';
+  isEditing = false;
+  lastCount = 0; // force full refresh on next poll
+}
+
+async function undoDelete(msgId, plan) {
+  const { error } = await supabase.from('messages')
+    .update({ deleted_at: null })
+    .eq('id', msgId).eq('sender_id', profile.id);
+  if (error) { toast('Could not restore message.', 'error'); return; }
+  lastCount = 0;
+  await loadMessages(plan.id);
+}
+
+async function deleteMsg(msgId, msgDiv, plan) {
+  // Soft-delete: set deleted_at so undo works across page navigations
+  const { error } = await supabase.from('messages')
+    .update({ deleted_at: new Date().toISOString() })
+    .eq('id', msgId).eq('sender_id', profile.id);
+  if (error) {
+    console.error('Delete failed:', error);
+    toast('Could not delete message. Please try again.', 'error');
+    return;
+  }
+  lastCount = 0;
+  await loadMessages(plan.id);
+}
+</script>
+</body>
+</html>

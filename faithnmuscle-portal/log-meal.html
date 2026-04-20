@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log Meals | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Log Meals</span>
+      <div class="topbar-actions">
+        <a href="/meal-history.html" class="btn btn-secondary btn-sm">History</a>
+      </div>
+    </div>
+
+    <div id="gate-feature" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3><p>Meal logging is currently disabled.</p></div>
+    </div>
+    <div id="gate-plan" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">📋</div><h3>Not in Your Plan</h3><p>Meal logging is available with Coaching or Meal Plan.</p></div>
+    </div>
+
+    <div class="portal-content" id="page-content" style="display:none;">
+      <!-- Date + Water -->
+      <div class="card mb-3">
+        <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+          <div class="form-group" style="margin:0; flex:1; min-width:160px;">
+            <label for="meal-date">Date</label>
+            <input type="date" id="meal-date"/>
+          </div>
+          <div class="form-group" style="margin:0; flex:1; min-width:160px;">
+            <label for="water-ml">Water Intake (ml)</label>
+            <input type="number" id="water-ml" placeholder="e.g. 2000" min="0" max="10000" step="100"/>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-top:1rem;">
+            <span id="save-status" style="font-size:0.8rem; color:var(--muted);"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meal slots -->
+      <div id="meals-container"></div>
+
+      <!-- Overall notes -->
+      <div class="card">
+        <div class="form-group" style="margin:0;">
+          <label for="meal-notes">Daily Notes (optional)</label>
+          <textarea id="meal-notes" rows="2" placeholder="How did you feel today? Any cravings?"></textarea>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav } from '/assets/portal.js';
+import { FEATURES } from '/assets/features.js';
+
+const MEAL_SLOTS = ['Breakfast','Morning Snack','Lunch','Afternoon Snack','Dinner','Evening Snack'];
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+
+const profile = await getProfile();
+
+let saveTimer = null;
+let currentLogId = null;
+
+if (!FEATURES.mealLogging) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  const plan = await getActivePlan(profile.id);
+  if (!plan || !['coaching','meal'].includes(plan.plan_type)) {
+    document.getElementById('gate-plan').style.display = 'block';
+  } else {
+    document.getElementById('page-content').style.display = 'block';
+    gateClientNav(plan.plan_type);
+    init(plan);
+  }
+}
+
+function init(plan) {
+  const dateInput = document.getElementById('meal-date');
+  dateInput.value = new Date().toISOString().slice(0, 10);
+  buildMealSlots();
+  loadDay(dateInput.value, plan);
+
+  dateInput.addEventListener('change', () => loadDay(dateInput.value, plan));
+
+  // Auto-save on any input change
+  document.getElementById('page-content').addEventListener('input', () => scheduleSave(plan));
+}
+
+function buildMealSlots() {
+  const container = document.getElementById('meals-container');
+  container.innerHTML = MEAL_SLOTS.map(slot => `
+    <div class="meal-slot" id="slot-${slot.replace(/\s/g,'-')}" data-slot="${slot}">
+      <div class="meal-slot-header" onclick="this.parentElement.classList.toggle('open')">
+        <span style="font-weight:600; font-size:0.9rem;">${slot}</span>
+        <span class="meal-slot-toggle">▼</span>
+      </div>
+      <div class="meal-slot-body">
+        <div class="form-group">
+          <label>Food Items</label>
+          <textarea class="slot-foods" rows="2" placeholder="e.g. 2 eggs, oats with banana, black coffee"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Portion Notes</label>
+          <input type="text" class="slot-portion" placeholder="e.g. large bowl, half portion"/>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:0.75rem;">
+          <div class="form-group"><label>Calories</label><input type="number" class="slot-cal" placeholder="kcal" min="0"/></div>
+          <div class="form-group"><label>Protein (g)</label><input type="number" class="slot-protein" placeholder="0" min="0" step="0.1"/></div>
+          <div class="form-group"><label>Carbs (g)</label><input type="number" class="slot-carbs" placeholder="0" min="0" step="0.1"/></div>
+          <div class="form-group"><label>Fat (g)</label><input type="number" class="slot-fat" placeholder="0" min="0" step="0.1"/></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function loadDay(dateStr, plan) {
+  currentLogId = null;
+  clearSlots();
+  document.getElementById('water-ml').value = '';
+  document.getElementById('meal-notes').value = '';
+
+  const { data: logs } = await supabase.from('meal_logs').select('*, meal_log_entries(*)').eq('client_id', profile.id).eq('log_date', dateStr);
+  const log = logs?.[0];
+  if (!log) return;
+
+  currentLogId = log.id;
+  document.getElementById('water-ml').value = log.water_ml || '';
+  document.getElementById('meal-notes').value = log.overall_notes || '';
+
+  (log.meal_log_entries || []).forEach(entry => {
+    const slotId = 'slot-' + entry.meal_slot.replace(/\s/g,'-');
+    const el = document.getElementById(slotId);
+    if (!el) return;
+    el.querySelector('.slot-foods').value   = entry.food_items    || '';
+    el.querySelector('.slot-portion').value = entry.portion_notes || '';
+    el.querySelector('.slot-cal').value     = entry.calories_kcal || '';
+    el.querySelector('.slot-protein').value = entry.protein_g     || '';
+    el.querySelector('.slot-carbs').value   = entry.carbs_g       || '';
+    el.querySelector('.slot-fat').value     = entry.fat_g         || '';
+    if (entry.food_items) el.classList.add('open');
+  });
+}
+
+function clearSlots() {
+  document.querySelectorAll('.meal-slot').forEach(el => {
+    el.querySelectorAll('input, textarea').forEach(i => i.value = '');
+    el.classList.remove('open');
+  });
+}
+
+function scheduleSave(plan) {
+  clearTimeout(saveTimer);
+  setSaveStatus('Saving...');
+  saveTimer = setTimeout(() => save(plan), 1500);
+}
+
+async function save(plan) {
+  const dateStr = document.getElementById('meal-date').value;
+  if (!dateStr) return;
+
+  const logData = {
+    client_id:     profile.id,
+    plan_id:       plan.id,
+    log_date:      dateStr,
+    water_ml:      Number(document.getElementById('water-ml').value) || null,
+    overall_notes: document.getElementById('meal-notes').value.trim() || null,
+  };
+
+  let logId = currentLogId;
+  if (!logId) {
+    const { data, error } = await supabase.from('meal_logs').insert({ ...logData, created_at: new Date().toISOString() }).select().single();
+    if (error) { setSaveStatus('Save failed'); return; }
+    logId = data.id;
+    currentLogId = logId;
+  } else {
+    const { error: upErr } = await supabase.from('meal_logs').update(logData).eq('id', logId);
+    if (upErr) { setSaveStatus('Save failed'); return; }
+  }
+
+  // Upsert each meal slot entry
+  for (const slot of MEAL_SLOTS) {
+    const slotId = 'slot-' + slot.replace(/\s/g,'-');
+    const el = document.getElementById(slotId);
+    const foods = el.querySelector('.slot-foods').value.trim();
+    if (!foods) continue;
+
+    const entryData = {
+      meal_log_id:   logId,
+      meal_slot:     slot,
+      food_items:    foods,
+      portion_notes: el.querySelector('.slot-portion').value.trim() || null,
+      calories_kcal: Number(el.querySelector('.slot-cal').value)     || null,
+      protein_g:     Number(el.querySelector('.slot-protein').value) || null,
+      carbs_g:       Number(el.querySelector('.slot-carbs').value)   || null,
+      fat_g:         Number(el.querySelector('.slot-fat').value)     || null,
+    };
+
+    // Check if entry exists
+    const { data: existing } = await supabase.from('meal_log_entries').select('id').eq('meal_log_id', logId).eq('meal_slot', slot).maybeSingle();
+    let entryErr;
+    if (existing) {
+      ({ error: entryErr } = await supabase.from('meal_log_entries').update(entryData).eq('id', existing.id));
+    } else {
+      ({ error: entryErr } = await supabase.from('meal_log_entries').insert(entryData));
+    }
+    if (entryErr) { setSaveStatus('Save failed'); return; }
+  }
+
+  setSaveStatus('Saved ' + new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' }));
+}
+
+function setSaveStatus(msg) {
+  document.getElementById('save-status').textContent = msg;
+}
+</script>
+</body>
+</html>

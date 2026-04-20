@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workout History | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Workout History</span>
+      <div class="topbar-actions">
+        <a href="/log-workout.html" class="btn btn-primary btn-sm">+ Log Workout</a>
+      </div>
+    </div>
+
+    <div id="gate-feature" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3><p>Workout logging is currently disabled.</p></div>
+    </div>
+    <div id="gate-plan" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">📋</div><h3>Not in Your Plan</h3><p>Workout logging is available with Coaching, Workout, Athletes, or Rehab plans.</p></div>
+    </div>
+
+    <div class="portal-content" id="page-content" style="display:none;">
+      <div id="loading" style="color:var(--muted); font-size:0.875rem; padding:1rem 0;">Loading workouts...</div>
+      <div id="empty" style="display:none;">
+        <div class="empty-state"><div class="empty-state-icon">💪</div><h3>No Workouts Yet</h3><p>Log your first session to start tracking progress.</p><a href="/log-workout.html" class="btn btn-primary">Log Workout</a></div>
+      </div>
+
+      <!-- Exercise progress: rows = exercises; columns = day / week / month -->
+      <div id="progress-card" class="card" style="display:none; margin-bottom:1.25rem; padding:0; overflow:hidden;">
+        <div style="padding:1rem 1.25rem 0.75rem; border-bottom:1px solid var(--border);">
+          <div class="card-title">Exercise Progress</div>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem 1rem; margin-top:0.5rem;">
+            <label for="ex-progress-granularity" style="font-size:0.78rem; color:var(--muted); margin:0;">Group by</label>
+            <select id="ex-progress-granularity" style="max-width:200px; padding:0.35rem 0.6rem; border-radius:6px; border:1px solid var(--border); background:var(--bg2); color:var(--text); font-size:0.8rem;">
+              <option value="day" selected>Day</option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+            </select>
+          </div>
+          <div id="ex-progress-help" style="font-size:0.78rem; color:var(--muted); margin-top:0.4rem;"></div>
+        </div>
+        <div id="ex-progress-scroll" style="overflow-x:auto; overflow-y:visible; padding:0.75rem 1rem 1rem;">
+          <div id="ex-progress-table-host"></div>
+        </div>
+      </div>
+
+      <div id="history-list" style="display:none; display:flex; flex-direction:column; gap:0.875rem;"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Edit workout modal -->
+<div class="modal-overlay" id="modal-edit">
+  <div class="modal" style="max-width:680px; width:95%;">
+    <div class="modal-header">
+      <div class="modal-title">Edit Workout</div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+      <div class="form-group"><label>Session Name</label><input type="text" id="e-name" placeholder="e.g. Push Day A"/></div>
+      <div class="form-group"><label>Date</label><input type="date" id="e-date"/></div>
+      <div class="form-group"><label>Duration (min)</label><input type="number" id="e-duration" placeholder="60" min="1" max="300"/></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+      <div class="form-group">
+        <label>Perceived Effort (RPE 1-10) <span id="e-rpe-val" style="color:var(--blue-light); font-weight:700;">7</span></label>
+        <input type="range" id="e-rpe" min="1" max="10" value="7"/>
+      </div>
+      <div class="form-group"><label>Body Weight (kg)</label><input type="number" id="e-bw" placeholder="e.g. 75.5" min="30" max="300" step="0.1"/></div>
+      <div class="form-group"><label>Avg Heart Rate (BPM)</label><input type="number" id="e-bpm" placeholder="e.g. 145" min="40" max="220"/></div>
+    </div>
+    <div style="margin-bottom:0.75rem;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;">
+        <label style="margin:0;">Exercises</label>
+        <button type="button" class="btn btn-secondary btn-sm" id="e-btn-add-ex">+ Add Exercise</button>
+      </div>
+      <div style="font-size:0.7rem; color:var(--muted); display:grid; grid-template-columns:1fr 60px 90px 90px 1fr auto; gap:0.5rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border);">
+        <span>Exercise</span><span>Sets</span><span>Reps</span><span>Weight (kg)</span><span>Notes</span><span></span>
+      </div>
+      <div id="e-exercises-container"></div>
+    </div>
+    <div class="form-group"><label>Session Notes</label><textarea id="e-notes" rows="2" placeholder="How did it feel?"></textarea></div>
+    <div id="e-alert" class="alert" style="display:none;"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close">Cancel</button>
+      <button class="btn btn-primary" id="btn-save-edit">
+        <span class="btn-spinner"></span><span class="btn-text">Save Changes</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDate, escapeHtml, setBusy, toast, openModal, initModals } from '/assets/portal.js';
+import { FEATURES } from '/assets/features.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+initModals();
+
+const profile = await getProfile();
+
+let allLogs = [];
+let exProgressGranularityBound = false;
+
+const EX_PROGRESS_GROUP_STORAGE = 'faithnmuscle_workout_history_group_by';
+const EX_PROGRESS_MODES = ['day', 'week', 'month'];
+
+function getStoredExerciseGroupBy() {
+  try {
+    const v = localStorage.getItem(EX_PROGRESS_GROUP_STORAGE);
+    if (EX_PROGRESS_MODES.includes(v)) return v;
+  } catch (_) {}
+  return 'day';
+}
+
+function setStoredExerciseGroupBy(v) {
+  if (!EX_PROGRESS_MODES.includes(v)) return;
+  try {
+    localStorage.setItem(EX_PROGRESS_GROUP_STORAGE, v);
+  } catch (_) {}
+}
+
+function applyExerciseGroupBySelect() {
+  const sel = document.getElementById('ex-progress-granularity');
+  if (sel) sel.value = getStoredExerciseGroupBy();
+}
+let editingLogId = null;
+
+if (!FEATURES.workoutLogging) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  const plan = await getActivePlan(profile.id);
+  const allowed = ['coaching','workout','athletes','rehab'];
+  if (!plan || !allowed.includes(plan.plan_type)) {
+    document.getElementById('gate-plan').style.display = 'block';
+  } else {
+    document.getElementById('page-content').style.display = 'block';
+    gateClientNav(plan.plan_type);
+    await loadHistory(profile.id);
+  }
+}
+
+// RPE slider live label
+document.getElementById('e-rpe').addEventListener('input', e => {
+  document.getElementById('e-rpe-val').textContent = e.target.value;
+});
+
+// Add exercise row in edit modal
+document.getElementById('e-btn-add-ex').addEventListener('click', () => addEditExRow());
+
+// ── Save edit ──
+document.getElementById('btn-save-edit').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-save-edit');
+  const alertEl = document.getElementById('e-alert');
+  alertEl.style.display = 'none';
+  setBusy(btn, true);
+
+  const { error: logErr } = await supabase.from('workout_logs').update({
+    session_name:     document.getElementById('e-name').value.trim() || 'Workout',
+    log_date:         document.getElementById('e-date').value,
+    duration_min:     Number(document.getElementById('e-duration').value) || null,
+    perceived_effort: Number(document.getElementById('e-rpe').value),
+    body_weight_kg:       Number(document.getElementById('e-bw').value) || null,
+    avg_heart_rate_bpm:   Number(document.getElementById('e-bpm').value) || null,
+    overall_notes:        document.getElementById('e-notes').value.trim() || null,
+  }).eq('id', editingLogId).eq('client_id', profile.id);
+
+  if (logErr) {
+    setBusy(btn, false);
+    alertEl.className = 'alert alert-error';
+    alertEl.textContent = logErr.message;
+    alertEl.style.display = 'block';
+    return;
+  }
+
+  // Replace exercises: delete then re-insert
+  await supabase.from('workout_exercises').delete().eq('log_id', editingLogId);
+  const exRows = collectEditExercises(editingLogId);
+  if (exRows.length) await supabase.from('workout_exercises').insert(exRows);
+
+  setBusy(btn, false);
+  document.getElementById('modal-edit').classList.remove('open');
+  toast('Workout updated!', 'success');
+  await loadHistory(profile.id);
+});
+
+// ── Load history ──
+async function loadHistory(userId) {
+  const { data: logs } = await supabase
+    .from('workout_logs')
+    .select('*, workout_exercises(*)')
+    .eq('client_id', userId)
+    .order('log_date', { ascending: false })
+    .limit(60);
+
+  document.getElementById('loading').style.display = 'none';
+
+  if (!logs?.length) {
+    document.getElementById('empty').style.display = 'block';
+    return;
+  }
+
+  allLogs = logs;
+  initExerciseChart(logs);
+
+  const list = document.getElementById('history-list');
+  list.style.display = 'flex';
+  list.innerHTML = '';
+
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 7);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
+
+  // Group logs by week (Monday)
+  const weeks = new Map();
+  logs.forEach(log => {
+    const d = new Date(log.log_date + 'T12:00:00');
+    const day = d.getDay();
+    const offset = day === 0 ? -6 : 1 - day;
+    d.setDate(d.getDate() + offset);
+    const wk = d.toLocaleDateString('en-CA'); // YYYY-MM-DD local
+    if (!weeks.has(wk)) weeks.set(wk, []);
+    weeks.get(wk).push(log);
+  });
+
+  weeks.forEach((weekLogs, wkStart) => {
+    const wkEnd = new Date(wkStart + 'T12:00:00');
+    wkEnd.setDate(wkEnd.getDate() + 6);
+    const realDays = new Set(weekLogs.filter(l => !l.is_rest_day).map(l => l.log_date)).size;
+
+    // Week header
+    const wkHeader = document.createElement('div');
+    wkHeader.style.cssText = 'display:flex; align-items:baseline; gap:0.75rem; margin-top:0.25rem;';
+    wkHeader.innerHTML = `
+      <div style="font-size:0.8rem; font-weight:700; color:var(--text); letter-spacing:0.03em;">
+        ${new Date(wkStart + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short' })}
+        &ndash;
+        ${wkEnd.toLocaleDateString('en-GB', { day:'numeric', month:'short' })}
+      </div>
+      <div style="font-size:0.75rem; color:var(--muted);">${realDays} workout day${realDays !== 1 ? 's' : ''}</div>
+    `;
+    list.appendChild(wkHeader);
+
+    weekLogs.forEach(log => {
+      const exs = (log.workout_exercises || []).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+      const editable = log.log_date >= cutoffStr;
+      const isRest = log.is_rest_day;
+
+      const chip = (icon, text, color = 'var(--muted)') =>
+        `<span style="display:inline-flex; align-items:center; gap:0.25rem; background:var(--bg2); border:1px solid var(--border); border-radius:20px; padding:0.2rem 0.6rem; font-size:0.73rem; color:${color};">${icon} ${text}</span>`;
+
+      const chips = [
+        log.duration_min    ? chip('⏱', log.duration_min + ' min') : '',
+        log.perceived_effort ? chip('💪', 'RPE ' + log.perceived_effort, rpeColor(log.perceived_effort)) : '',
+        log.avg_heart_rate_bpm ? chip('❤️', log.avg_heart_rate_bpm + ' bpm') : '',
+        log.body_weight_kg  ? chip('⚖️', log.body_weight_kg + ' kg') : '',
+      ].filter(Boolean).join('');
+
+      const exTable = exs.length ? `
+        <div style="margin-top:1rem; font-size:0.8rem;">
+          <div style="display:grid; grid-template-columns:1fr 48px 80px 80px; gap:0.5rem; color:var(--muted); padding-bottom:0.375rem; border-bottom:1px solid var(--border); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em;">
+            <span>Exercise</span><span>Sets</span><span>Reps</span><span>Weight</span>
+          </div>
+          ${exs.map(ex => `
+            <div style="display:grid; grid-template-columns:1fr 48px 80px 80px; gap:0.5rem; padding:0.4rem 0; border-bottom:1px solid var(--border);">
+              <span style="font-weight:500;">${escapeHtml(ex.exercise_name || '')}</span>
+              <span style="color:var(--muted);">${ex.sets_completed || '-'}</span>
+              <span style="color:var(--muted);">${escapeHtml(ex.reps_per_set || '-')}</span>
+              <span style="color:var(--muted);">${ex.weight_kg != null && ex.weight_kg !== '' ? ex.weight_kg + ' kg' : '-'}</span>
+            </div>
+          `).join('')}
+          ${log.overall_notes ? `<div style="margin-top:0.6rem; font-size:0.78rem; color:var(--muted); font-style:italic;">${escapeHtml(log.overall_notes)}</div>` : ''}
+        </div>
+      ` : (log.overall_notes ? `<div style="margin-top:0.75rem; font-size:0.8rem; color:var(--muted); font-style:italic;">${escapeHtml(log.overall_notes)}</div>` : '');
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.cssText = isRest
+        ? 'padding:1rem 1.25rem; border-left:3px solid rgba(99,102,241,0.5); opacity:0.75;'
+        : 'padding:1rem 1.25rem;';
+
+      const dateLabel = new Date(log.log_date + 'T12:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' });
+
+      card.innerHTML = isRest ? `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+          <div>
+            <div style="font-size:0.75rem; color:var(--muted);">${dateLabel}</div>
+            <div style="font-size:0.875rem; color:var(--muted); margin-top:0.15rem; font-style:italic;">Rest Day${log.overall_notes ? ' &middot; ' + escapeHtml(log.overall_notes) : ''}</div>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            ${editable ? `<button class="btn btn-secondary btn-sm btn-edit-workout" data-id="${escapeHtml(log.id)}" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Edit</button>` : ''}
+            ${editable ? `<button class="btn-icon-delete btn-delete-workout" data-id="${escapeHtml(log.id)}" title="Delete" style="background:none;border:none;cursor:pointer;padding:0.25rem;color:var(--muted);font-size:1.1rem;line-height:1;">&times;</button>` : ''}
+          </div>
+        </div>
+      ` : `
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;">
+          <div style="flex:1; min-width:0;">
+            <div style="font-size:0.72rem; color:var(--muted); margin-bottom:0.2rem;">${dateLabel}</div>
+            <div style="font-weight:700; font-size:1rem; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" class="card-toggle">${escapeHtml(log.session_name || 'Workout')}</div>
+            ${chips ? `<div style="display:flex; flex-wrap:wrap; gap:0.375rem; margin-top:0.5rem;">${chips}</div>` : ''}
+          </div>
+          <div style="display:flex; gap:0.4rem; align-items:center; flex-shrink:0; margin-top:0.1rem;">
+            ${exs.length ? `<span style="color:var(--muted); font-size:0.73rem; white-space:nowrap;">${exs.length} ex</span>` : ''}
+            ${editable ? `<button class="btn btn-secondary btn-sm btn-edit-workout" data-id="${escapeHtml(log.id)}" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Edit</button>` : ''}
+            ${editable ? `<button class="btn-icon-delete btn-delete-workout" data-id="${escapeHtml(log.id)}" title="Delete" style="background:none;border:none;cursor:pointer;padding:0.25rem;color:var(--muted);font-size:1.1rem;line-height:1;">&times;</button>` : ''}
+            ${exs.length || log.overall_notes ? `<svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" style="color:var(--muted); cursor:pointer; flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>` : ''}
+          </div>
+        </div>
+        <div class="ex-detail" style="display:none;">${exTable}</div>
+      `;
+
+      // Expand/collapse
+      card.querySelectorAll('.card-toggle').forEach(el => {
+        el.addEventListener('click', () => {
+          const detail = card.querySelector('.ex-detail');
+          if (detail) detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+        });
+      });
+
+      // Edit button
+      const editBtn = card.querySelector('.btn-edit-workout');
+      if (editBtn) editBtn.addEventListener('click', ev => { ev.stopPropagation(); openEditModal(log); });
+
+      // Delete button
+      const deleteBtn = card.querySelector('.btn-delete-workout');
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', async ev => {
+          ev.stopPropagation();
+          if (!confirm(`Delete "${log.session_name || 'Workout'}" on ${formatDate(log.log_date)}? This cannot be undone.`)) return;
+          const { error } = await supabase.from('workout_logs').delete().eq('id', log.id).eq('client_id', profile.id);
+          if (error) { toast(error.message, 'error'); return; }
+          card.remove();
+          toast('Workout deleted', 'success');
+          if (!document.getElementById('history-list').children.length) {
+            document.getElementById('history-list').style.display = 'none';
+            document.getElementById('empty').style.display = 'block';
+          }
+        });
+      }
+
+      list.appendChild(card);
+    });
+  });
+}
+
+function rpeColor(rpe) {
+  if (rpe <= 4) return '#34d399';
+  if (rpe <= 6) return '#fbbf24';
+  if (rpe <= 8) return '#f97316';
+  return '#f87171';
+}
+
+// ── Exercise progress table (rows = exercises; group by day / week / month) ─
+
+function weekStartMondayKey(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const day = d.getDay();
+  d.setDate(d.getDate() + (day === 0 ? -6 : 1 - day));
+  return d.toLocaleDateString('en-CA');
+}
+
+function monthStartKey(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const start = new Date(d.getFullYear(), d.getMonth(), 1, 12, 0, 0, 0);
+  return start.toLocaleDateString('en-CA');
+}
+
+function bucketKeyForMode(logDate, mode) {
+  if (mode === 'day') return new Date(logDate + 'T12:00:00').toLocaleDateString('en-CA');
+  if (mode === 'month') return monthStartKey(logDate);
+  return weekStartMondayKey(logDate);
+}
+
+/** Earliest / latest workout log date (non–rest days only). */
+function getWorkoutLogDateBounds(logs) {
+  let minD = null;
+  let maxD = null;
+  logs.forEach(log => {
+    if (log.is_rest_day) return;
+    const ld = log.log_date;
+    if (!ld) return;
+    if (minD === null || ld < minD) minD = ld;
+    if (maxD === null || ld > maxD) maxD = ld;
+  });
+  return { minD, maxD };
+}
+
+function enumerateDayKeys(minStr, maxStr) {
+  const keys = [];
+  const d = new Date(minStr + 'T12:00:00');
+  const end = new Date(maxStr + 'T12:00:00');
+  while (d <= end) {
+    keys.push(d.toLocaleDateString('en-CA'));
+    d.setDate(d.getDate() + 1);
+  }
+  return keys;
+}
+
+function enumerateWeekKeys(monKeyStart, monKeyEnd) {
+  const keys = [];
+  const d = new Date(monKeyStart + 'T12:00:00');
+  const end = new Date(monKeyEnd + 'T12:00:00');
+  while (d <= end) {
+    keys.push(d.toLocaleDateString('en-CA'));
+    d.setDate(d.getDate() + 7);
+  }
+  return keys;
+}
+
+function enumerateMonthKeys(firstKey, lastKey) {
+  const keys = [];
+  const d = new Date(firstKey + 'T12:00:00');
+  const end = new Date(lastKey + 'T12:00:00');
+  while (d <= end) {
+    keys.push(new Date(d.getFullYear(), d.getMonth(), 1, 12, 0, 0, 0).toLocaleDateString('en-CA'));
+    d.setMonth(d.getMonth() + 1);
+  }
+  return keys;
+}
+
+/** Columns only between first and last logged workout; capped if the span is huge. */
+function buildProgressColumnKeys(mode, logs) {
+  const { minD, maxD } = getWorkoutLogDateBounds(logs);
+  if (!minD || !maxD) return [];
+
+  if (mode === 'day') {
+    let keys = enumerateDayKeys(minD, maxD);
+    if (keys.length > 60) keys = keys.slice(-60);
+    return keys;
+  }
+  if (mode === 'month') {
+    let keys = enumerateMonthKeys(monthStartKey(minD), monthStartKey(maxD));
+    if (keys.length > 18) keys = keys.slice(-18);
+    return keys;
+  }
+  let keys = enumerateWeekKeys(weekStartMondayKey(minD), weekStartMondayKey(maxD));
+  if (keys.length > 24) keys = keys.slice(-24);
+  return keys;
+}
+
+function columnHeaderLabel(key, mode) {
+  const d = new Date(key + 'T12:00:00');
+  if (mode === 'month') return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+  if (mode === 'week') {
+    const start = new Date(key + 'T12:00:00');
+    const end = new Date(start);
+    end.setDate(end.getDate() + 6);
+    const y0 = start.getFullYear();
+    const y1 = end.getFullYear();
+    const m0 = start.getMonth();
+    const m1 = end.getMonth();
+    if (y0 === y1 && m0 === m1) {
+      const dayStart = start.toLocaleDateString('en-GB', { day: 'numeric' });
+      const dayEnd = end.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      return `${dayStart} – ${dayEnd}`;
+    }
+    if (y0 === y1) {
+      const a = start.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      const b = end.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      return `${a} – ${b}`;
+    }
+    const a = start.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    const b = end.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    return `${a} – ${b}`;
+  }
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+function columnHeaderTitle(key, mode) {
+  if (mode === 'day') return `Day ${key}`;
+  if (mode === 'month') return `Month starting ${key}`;
+  if (mode === 'week') {
+    const start = new Date(key + 'T12:00:00');
+    const end = new Date(start);
+    end.setDate(end.getDate() + 6);
+    return `Week Mon ${start.toLocaleDateString('en-CA')} – Sun ${end.toLocaleDateString('en-CA')}`;
+  }
+  return `Week starting ${key} (Monday)`;
+}
+
+function thMinWidth(mode) {
+  if (mode === 'day') return '7.5rem';
+  if (mode === 'month') return '4.25rem';
+  if (mode === 'week') return '8.25rem';
+  return '5.25rem';
+}
+
+function thMaxWidth(mode) {
+  if (mode === 'week') return '11rem';
+  return '7rem';
+}
+
+function syncExProgressHelp(mode) {
+  const el = document.getElementById('ex-progress-help');
+  if (!el) return;
+  const tail = ' vs the previous column: ↑ higher (green), ↓ lower (red); no mark means unchanged. Reps: each segment uses the midpoint of a range (e.g. 8–10 → 9); with several segments (10 · 9) the rep arrow compares their sum (19).';
+  const agg = ' Same exercise more than once in that period: sets are added, kg is heaviest; reps show each distinct value in order (e.g. 10 · 9).';
+  const lines = {
+    day: 'Columns cover only from your first workout day to your latest; periods before you started are not shown. Days where nothing has sets, reps, or kg are hidden.' + agg + tail,
+    week: 'Columns cover only from your first workout week to your latest (weeks start Monday). Weeks with no usable exercise data are hidden.' + agg + tail,
+    month: 'Columns cover only months from your first workout to your latest. Months with no usable exercise data are hidden.' + agg + tail,
+  };
+  el.textContent = lines[mode] || lines.day;
+}
+
+function getExerciseNamesSorted(logs) {
+  const freq = {};
+  const anyName = new Set();
+  logs.forEach(log => {
+    (log.workout_exercises || []).forEach(ex => {
+      if (!ex.exercise_name) return;
+      anyName.add(ex.exercise_name);
+      if (ex.weight_kg) freq[ex.exercise_name] = (freq[ex.exercise_name] || 0) + 1;
+    });
+  });
+  return [...anyName].sort((a, b) => (freq[b] || 0) - (freq[a] || 0));
+}
+
+function rowIsLater(a, b) {
+  const d = (a.log.log_date || '').localeCompare(b.log.log_date || '');
+  if (d !== 0) return d > 0;
+  return (a.ex.sort_order || 0) > (b.ex.sort_order || 0);
+}
+
+/** Heaviest line for max kg; ties → later log / higher sort_order. */
+function pickHeaviestLine(entries) {
+  let best = null;
+  for (const e of entries) {
+    const w = e.ex.weight_kg != null && e.ex.weight_kg !== '' ? Number(e.ex.weight_kg) : null;
+    if (w == null || Number.isNaN(w)) continue;
+    if (!best) {
+      best = e;
+      continue;
+    }
+    const bw = Number(best.ex.weight_kg);
+    if (w > bw) best = e;
+    else if (w === bw && rowIsLater(e, best)) best = e;
+  }
+  return best;
+}
+
+/** Distinct rep strings in workout order (date, then sort_order), joined for display. */
+function mergeRepsForBucket(entries) {
+  const ordered = [...entries].sort((a, b) => {
+    const d = (a.log.log_date || '').localeCompare(b.log.log_date || '');
+    if (d !== 0) return d;
+    return (a.ex.sort_order || 0) - (b.ex.sort_order || 0);
+  });
+  const seen = new Set();
+  const parts = [];
+  for (const { ex } of ordered) {
+    const r = ex.reps_per_set && String(ex.reps_per_set).trim();
+    if (!r || seen.has(r)) continue;
+    seen.add(r);
+    parts.push(r);
+  }
+  if (!parts.length) return null;
+  return parts.join(' · ');
+}
+
+/**
+ * Same exercise name can appear on multiple lines in a period (bucket).
+ * Sets summed; kg = heaviest logged; reps = each distinct value in order (e.g. 10 · 9).
+ */
+function aggregateExerciseLinesForBucket(entries) {
+  if (!entries?.length) return null;
+  let totalSets = 0;
+  let anySet = false;
+  for (const { ex } of entries) {
+    if (ex.sets_completed != null && ex.sets_completed !== '') {
+      const n = Number(ex.sets_completed);
+      if (!Number.isNaN(n)) {
+        totalSets += n;
+        anySet = true;
+      }
+    }
+  }
+  const heavy = pickHeaviestLine(entries);
+  let weight_kg = null;
+  if (heavy) {
+    const w = Number(heavy.ex.weight_kg);
+    weight_kg = !Number.isNaN(w) ? w : null;
+  }
+  const repsMerged = mergeRepsForBucket(entries);
+  return {
+    weight_kg,
+    sets_completed: anySet ? totalSets : null,
+    reps_per_set: repsMerged,
+  };
+}
+
+function cellHasDisplayableContent(ex) {
+  if (!ex) return false;
+  return (ex.weight_kg != null && ex.weight_kg !== '') ||
+    (ex.sets_completed != null && ex.sets_completed !== '') ||
+    !!(ex.reps_per_set && String(ex.reps_per_set).trim());
+}
+
+/** Midpoint of "8-10" or leading number for reps trend compare. */
+function parseRepsComparable(repsStr) {
+  if (repsStr == null || repsStr === '') return null;
+  const s = String(repsStr).trim();
+  const range = s.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+  if (range) return (Number(range[1]) + Number(range[2])) / 2;
+  const one = s.match(/^(\d+)/);
+  return one ? Number(one[1]) : null;
+}
+
+/** Rep ↑↓ vs last column: sum of each segment’s comparable value (range → midpoint). */
+function parseMergedRepsSumForTrend(repsDisplay) {
+  if (repsDisplay == null || repsDisplay === '') return null;
+  const s = String(repsDisplay).trim();
+  const parts = s.includes('·')
+    ? s.split(/\s*·\s*/).map(p => p.trim()).filter(Boolean)
+    : [s];
+  const vals = parts.map(parseRepsComparable).filter(v => v != null && !Number.isNaN(v));
+  if (!vals.length) return null;
+  return vals.reduce((a, b) => a + b, 0);
+}
+
+function trendArrowHtml(cur, prev) {
+  if (prev == null || cur == null || Number.isNaN(cur) || Number.isNaN(prev)) return '';
+  if (cur > prev) {
+    return '<span style="color:#34d399;font-size:0.85em;vertical-align:0.05em;margin-left:0.15em;" title="Higher than previous column">↑</span>';
+  }
+  if (cur < prev) {
+    return '<span style="color:#f87171;font-size:0.85em;vertical-align:0.05em;margin-left:0.15em;" title="Lower than previous column">↓</span>';
+  }
+  return '';
+}
+
+/** prevEx = same exercise row in the previous visible table column (or null). */
+function formatExerciseProgressCell(ex, prevEx) {
+  if (!cellHasDisplayableContent(ex)) return null;
+  const parts = [];
+  if (ex.weight_kg != null && ex.weight_kg !== '') {
+    const c = Number(ex.weight_kg);
+    const p = prevEx && prevEx.weight_kg != null && prevEx.weight_kg !== '' ? Number(prevEx.weight_kg) : null;
+    let seg = `<span style="color:var(--blue-light);font-weight:600">${escapeHtml(String(ex.weight_kg))}</span> kg`;
+    if (p != null && !Number.isNaN(c) && !Number.isNaN(p)) seg += trendArrowHtml(c, p);
+    parts.push(seg);
+  }
+  if (ex.sets_completed != null && ex.sets_completed !== '') {
+    const c = Number(ex.sets_completed);
+    const p = prevEx && prevEx.sets_completed != null && prevEx.sets_completed !== '' ? Number(prevEx.sets_completed) : null;
+    let seg = `${escapeHtml(String(ex.sets_completed))} sets`;
+    if (p != null && !Number.isNaN(c) && !Number.isNaN(p)) seg += trendArrowHtml(c, p);
+    parts.push(seg);
+  }
+  if (ex.reps_per_set && String(ex.reps_per_set).trim()) {
+    const raw = String(ex.reps_per_set).trim();
+    const c = parseMergedRepsSumForTrend(raw);
+    const p = prevEx && prevEx.reps_per_set ? parseMergedRepsSumForTrend(String(prevEx.reps_per_set).trim()) : null;
+    let seg = `${escapeHtml(raw)} reps`;
+    if (p != null && c != null && !Number.isNaN(c) && !Number.isNaN(p)) seg += trendArrowHtml(c, p);
+    parts.push(seg);
+  }
+  if (!parts.length) return null;
+  return `<span style="display:inline-block;max-width:100%;font-size:0.72rem;line-height:1.35;text-align:center;white-space:nowrap;">${parts.join(' · ')}</span>`;
+}
+
+function renderExerciseProgressTable() {
+  const logs = allLogs;
+  const names = getExerciseNamesSorted(logs);
+  const host = document.getElementById('ex-progress-table-host');
+  if (!names.length) {
+    if (host) host.innerHTML = '';
+    return;
+  }
+
+  const sel = document.getElementById('ex-progress-granularity');
+  const mode = (sel && sel.value) || getStoredExerciseGroupBy();
+  syncExProgressHelp(mode);
+
+  let columnKeys = buildProgressColumnKeys(mode, logs);
+  const colSet = new Set(columnKeys);
+  const mw = thMinWidth(mode);
+  const mxw = thMaxWidth(mode);
+
+  /** @type {Map<string, Array<{ log: object, ex: object }>>} */
+  const rowsByExBucket = new Map();
+  logs.forEach(log => {
+    if (log.is_rest_day) return;
+    const bk = bucketKeyForMode(log.log_date, mode);
+    if (!colSet.has(bk)) return;
+    (log.workout_exercises || []).forEach(ex => {
+      if (!ex.exercise_name) return;
+      const k = ex.exercise_name + '\0' + bk;
+      if (!rowsByExBucket.has(k)) rowsByExBucket.set(k, []);
+      rowsByExBucket.get(k).push({ log, ex });
+    });
+  });
+
+  columnKeys = columnKeys.filter(bk =>
+    names.some(n => {
+      const agg = aggregateExerciseLinesForBucket(rowsByExBucket.get(n + '\0' + bk) || []);
+      return agg && formatExerciseProgressCell(agg, null);
+    })
+  );
+
+  if (!columnKeys.length) {
+    host.innerHTML = '<p style="font-size:0.85rem;color:var(--muted);margin:0;">No sets, reps, or weight in this range to show in the grid.</p>';
+    return;
+  }
+
+  const thCols = columnKeys.map(key => {
+    const lbl = columnHeaderLabel(key, mode);
+    const title = columnHeaderTitle(key, mode);
+    return `<th title="${escapeHtml(title)}" style="position:sticky;top:0;z-index:1;font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;padding:0.4rem 0.3rem;border-bottom:1px solid var(--border);white-space:nowrap;min-width:${mw};max-width:${mxw};background:var(--bg3);">${lbl}</th>`;
+  }).join('');
+
+  const rows = names.map(name => {
+    const cells = columnKeys.map((bk, colIdx) => {
+      const prevBk = colIdx > 0 ? columnKeys[colIdx - 1] : null;
+      const prevAgg = prevBk ? aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + prevBk) || []) : null;
+      const prevEx = prevAgg && cellHasDisplayableContent(prevAgg) ? prevAgg : null;
+      const agg = aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + bk) || []);
+      const inner = agg ? formatExerciseProgressCell(agg, prevEx) : null;
+      const text = inner || '—';
+      const color = inner ? 'var(--text)' : 'var(--muted)';
+      return `<td style="font-size:0.72rem;text-align:center;padding:0.5rem 0.35rem;border-bottom:1px solid var(--border);color:${color};vertical-align:top;">${text}</td>`;
+    }).join('');
+    return `<tr>
+      <td style="position:sticky;left:0;z-index:1;font-size:0.78rem;font-weight:600;padding:0.45rem 0.6rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:middle;max-width:14rem;background:var(--bg3);box-shadow:1px 0 0 var(--border);">${escapeHtml(name)}</td>
+      ${cells}
+    </tr>`;
+  }).join('');
+
+  host.innerHTML = `
+    <table style="width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;">
+      <thead>
+        <tr>
+          <th style="position:sticky;left:0;top:0;z-index:3;background:var(--bg3);box-shadow:1px 1px 0 var(--border);font-size:0.68rem;font-weight:700;text-align:left;padding:0.45rem 0.6rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:bottom;min-width:8rem;">Exercise</th>
+          ${thCols}
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function initExerciseChart(logs) {
+  const names = getExerciseNamesSorted(logs);
+  if (!names.length) {
+    document.getElementById('progress-card').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('progress-card').style.display = '';
+  applyExerciseGroupBySelect();
+
+  if (!exProgressGranularityBound) {
+    document.getElementById('ex-progress-granularity').addEventListener('change', e => {
+      setStoredExerciseGroupBy(e.target.value);
+      renderExerciseProgressTable();
+    });
+    exProgressGranularityBound = true;
+  }
+
+  renderExerciseProgressTable();
+}
+
+function openEditModal(log) {
+  editingLogId = log.id;
+  document.getElementById('e-name').value     = log.session_name || '';
+  document.getElementById('e-date').value     = log.log_date || '';
+  document.getElementById('e-duration').value = log.duration_min || '';
+  document.getElementById('e-rpe').value      = log.perceived_effort || 7;
+  document.getElementById('e-rpe-val').textContent = log.perceived_effort || 7;
+  document.getElementById('e-bw').value       = log.body_weight_kg || '';
+  document.getElementById('e-bpm').value      = log.avg_heart_rate_bpm || '';
+  document.getElementById('e-notes').value    = log.overall_notes || '';
+  document.getElementById('e-alert').style.display = 'none';
+
+  // Populate exercises
+  const container = document.getElementById('e-exercises-container');
+  container.innerHTML = '';
+  const exs = (log.workout_exercises || []).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  if (exs.length) {
+    exs.forEach(ex => addEditExRow(ex));
+  } else {
+    addEditExRow(); addEditExRow(); addEditExRow();
+  }
+
+  openModal('modal-edit');
+}
+
+function addEditExRow(ex = {}) {
+  const container = document.getElementById('e-exercises-container');
+  const row = document.createElement('div');
+  row.className = 'exercise-row';
+  row.innerHTML = `
+    <input type="text" placeholder="Exercise name" class="ex-name" value="${escapeHtml(ex.exercise_name || '')}"/>
+    <input type="number" placeholder="3" min="1" max="20" class="ex-sets" value="${ex.sets_completed || ''}"/>
+    <input type="text" placeholder="8-10" class="ex-reps" value="${escapeHtml(ex.reps_per_set || '')}"/>
+    <input type="number" placeholder="kg" min="0" max="500" step="0.5" class="ex-weight" value="${ex.weight_kg || ''}"/>
+    <input type="text" placeholder="Notes" class="ex-notes" value="${escapeHtml(ex.notes || '')}"/>
+    <button type="button" class="btn btn-secondary btn-sm" style="padding:0.35rem 0.6rem;" onclick="this.closest('.exercise-row').remove()">x</button>
+  `;
+  container.appendChild(row);
+}
+
+function collectEditExercises(logId) {
+  const rows = document.querySelectorAll('#e-exercises-container .exercise-row');
+  const result = [];
+  rows.forEach((row, i) => {
+    const name = row.querySelector('.ex-name').value.trim();
+    if (!name) return;
+    result.push({
+      log_id:         logId,
+      exercise_name:  name,
+      sets_completed: Number(row.querySelector('.ex-sets').value) || null,
+      reps_per_set:   row.querySelector('.ex-reps').value.trim() || null,
+      weight_kg:      Number(row.querySelector('.ex-weight').value) || null,
+      notes:          row.querySelector('.ex-notes').value.trim() || null,
+      sort_order:     i,
+    });
+  });
+  return result;
+}
+</script>
+</body>
+</html>

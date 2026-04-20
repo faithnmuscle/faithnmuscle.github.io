@@ -1,0 +1,14 @@
+name = "faithnmuscle-portal"
+compatibility_date = "2024-04-01"
+pages_build_output_dir = "."
+
+# R2 bucket bindings - uncomment after creating buckets in Cloudflare R2 dashboard
+# and binding them in Cloudflare Pages → Settings → Functions → R2 bucket bindings
+#
+# [[r2_buckets]]
+# binding = "PLAN_DOCUMENTS"
+# bucket_name = "plan-documents"
+#
+# [[r2_buckets]]
+# binding = "PROGRESS_PHOTOS"
+# bucket_name = "progress-photos"

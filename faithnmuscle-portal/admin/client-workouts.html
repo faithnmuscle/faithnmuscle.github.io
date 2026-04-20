@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workout History | Faith n Muscle Admin</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/admin/dashboard.html" class="sidebar-logo"><span>F&M Admin</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Admin</div>
+      <a href="/admin/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/clients.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients</a>
+      <a href="/admin/applications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Applications</a>
+      <a href="/admin/bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings</a>
+      <a href="/admin/checkins.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Check-Ins</a>
+      <a href="/admin/renewals.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Renewals</a>
+      <a href="/admin/payments.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments</a>
+      <a href="/admin/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <a href="/admin/settings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">?</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="sidebar-name">Loading…</div>
+          <div class="sidebar-user-role" id="sidebar-role">Admin</div>
+        </div>
+      </div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title" id="topbar-title">Workout History</span>
+      <div class="topbar-actions">
+        <a id="back-link" href="/admin/clients.html" class="btn btn-secondary btn-sm">← Back</a>
+      </div>
+    </div>
+
+    <div class="portal-content">
+      <div id="loading" style="color:var(--muted); font-size:0.875rem;">Loading…</div>
+      <div id="empty" style="display:none;">
+        <div class="empty-state"><div class="empty-state-icon">💪</div><h3>No Workouts Logged</h3></div>
+      </div>
+      <div id="history-list" style="display:none; flex-direction:column; gap:0.75rem;"></div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAdmin, initSidebar, formatDate, escapeHtml } from '/assets/portal.js';
+
+const session = await requireAdmin();
+if (!session) throw new Error('not admin');
+await initSidebar();
+
+const clientId = new URLSearchParams(location.search).get('id');
+if (!clientId) { document.getElementById('loading').textContent = 'No client ID.'; throw new Error('no id'); }
+
+// Set back link
+document.getElementById('back-link').href = `/admin/client-detail.html?id=${clientId}`;
+
+// Load client name
+const { data: profile } = await supabase.from('profiles').select('full_name, email').eq('id', clientId).single();
+if (profile) document.getElementById('topbar-title').textContent = `${profile.full_name || profile.email} - Workouts`;
+
+// Load all workouts
+const { data: workouts } = await supabase
+  .from('workout_logs')
+  .select('*, workout_exercises(exercise_name, sets_completed, reps_per_set, weight_kg, notes, sort_order)')
+  .eq('client_id', clientId)
+  .order('log_date', { ascending: false });
+
+document.getElementById('loading').style.display = 'none';
+
+if (!workouts?.length) {
+  document.getElementById('empty').style.display = 'block';
+} else {
+  const list = document.getElementById('history-list');
+  list.style.display = 'flex';
+
+  workouts.forEach(w => {
+    const exs = (w.workout_exercises || []).sort((a,b) => (a.sort_order||0)-(b.sort_order||0));
+    const exRows = exs.map(e => `
+      <tr>
+        <td>${escapeHtml(e.exercise_name)}</td>
+        <td style="text-align:center;">${e.sets_completed ?? '-'}</td>
+        <td style="text-align:center;">${escapeHtml(e.reps_per_set || '-')}</td>
+        <td style="text-align:center;">${e.weight_kg != null ? e.weight_kg + ' kg' : '-'}</td>
+        <td style="color:var(--muted);">${escapeHtml(e.notes || '')}</td>
+      </tr>
+    `).join('');
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.padding = '1.25rem';
+    card.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;" class="card-toggle">
+        <div>
+          <div style="font-weight:700;">${escapeHtml(w.session_name || 'Workout')}</div>
+          <div style="color:var(--muted); font-size:0.8rem;">
+            ${escapeHtml(formatDate(w.log_date))}
+            ${w.duration_min ? ' · ' + w.duration_min + ' min' : ''}
+            ${w.body_weight_kg ? ' · ' + w.body_weight_kg + ' kg BW' : ''}
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          ${w.perceived_effort ? `<span style="color:var(--blue-light); font-size:0.8rem;">RPE ${w.perceived_effort}</span>` : ''}
+          <span style="color:var(--muted); font-size:0.75rem;">${exs.length} exercise${exs.length!==1?'s':''}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="chevron" style="color:var(--muted); transition:transform 0.15s;"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="ex-detail" style="display:none; margin-top:0.75rem;">
+        ${exs.length ? `
+          <div class="table-wrap">
+            <table style="font-size:0.825rem;">
+              <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Weight</th><th>Notes</th></tr></thead>
+              <tbody>${exRows}</tbody>
+            </table>
+          </div>
+        ` : '<div style="color:var(--muted); font-size:0.85rem;">No exercises recorded.</div>'}
+        ${w.overall_notes ? `<div style="font-size:0.8rem; color:var(--muted); margin-top:0.5rem; font-style:italic;">${escapeHtml(w.overall_notes)}</div>` : ''}
+      </div>
+    `;
+
+    card.querySelector('.card-toggle').addEventListener('click', () => {
+      const detail  = card.querySelector('.ex-detail');
+      const chevron = card.querySelector('.chevron');
+      const open = detail.style.display === 'none';
+      detail.style.display = open ? 'block' : 'none';
+      chevron.style.transform = open ? 'rotate(180deg)' : '';
+    });
+
+    list.appendChild(card);
+  });
+}
+</script>
+</body>
+</html>

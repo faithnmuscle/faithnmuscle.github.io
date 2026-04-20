@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="portal-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav" id="client-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="/my-plan.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        My Plan
+      </a>
+      <a href="/notifications.html" class="nav-item" id="nav-notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Notifications
+        <span class="nav-badge" id="notif-badge" style="display:none"></span>
+      </a>
+
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Session
+      </a>
+      <a href="/log-workout.html" class="nav-item nav-workout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        Log Workout
+      </a>
+      <a href="/workout-history.html" class="nav-item nav-workout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Workout History
+      </a>
+
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+        Log Meals
+      </a>
+      <a href="/meal-history.html" class="nav-item nav-meal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Meal History
+      </a>
+
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Progress
+      </a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Photos
+      </a>
+      <a href="/messages.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span>
+      </a>
+
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Profile
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">?</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="sidebar-name">Loading…</div>
+          <div class="sidebar-user-role" id="sidebar-role">Client</div>
+        </div>
+      </div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title">Dashboard</span>
+      <div class="topbar-actions">
+        <a href="/notifications.html" class="topbar-notif-btn" aria-label="Notifications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-dot" id="topbar-notif-dot" style="display:none"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="portal-content">
+      <h1 class="page-title" id="greeting">Welcome back</h1>
+      <p class="page-sub" id="plan-summary">Loading your plan…</p>
+
+      <!-- Stat cards -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">Plan Status</div>
+          <div class="stat-value" id="stat-status">-</div>
+        </div>
+        <div class="stat-card" id="stat-card-days" style="display:none">
+          <div class="stat-label">Days Left</div>
+          <div class="stat-value" id="stat-days">-</div>
+        </div>
+        <div class="stat-card" id="stat-card-workouts" style="display:none">
+          <div class="stat-label">Workouts This Week</div>
+          <div class="stat-value" id="stat-workouts">0</div>
+        </div>
+        <div class="stat-card" id="stat-card-workout-streak" style="display:none">
+          <div class="stat-label">Workout Streak</div>
+          <div class="stat-value" id="stat-workout-streak">0</div>
+          <div class="stat-sub" id="stat-workout-streak-sub"></div>
+        </div>
+        <div class="stat-card" id="stat-card-meal-streak" style="display:none">
+          <div class="stat-label">Meal Streak</div>
+          <div class="stat-value" id="stat-meal-streak">0</div>
+          <div class="stat-sub" id="stat-meal-streak-sub"></div>
+        </div>
+      </div>
+
+      <!-- Active plan card -->
+      <div id="plan-card" style="display:none" class="card mb-3">
+        <div class="card-header">
+          <div>
+            <div class="card-title" id="plan-card-title">Your Plan</div>
+            <div class="card-subtitle" id="plan-card-dates"></div>
+          </div>
+          <span class="badge" id="plan-card-badge"></span>
+        </div>
+        <div id="plan-card-body" style="font-size:0.875rem; color:var(--muted);"></div>
+      </div>
+
+      <!-- No plan state -->
+      <div id="no-plan" style="display:none" class="card">
+        <div class="empty-state">
+          <div class="empty-state-icon">📋</div>
+          <h3>No Active Plan</h3>
+          <p>You don't have an active plan yet. Contact Bernil to get started.</p>
+          <a href="https://wa.me/94761167303" target="_blank" rel="noopener" class="btn btn-primary">WhatsApp Bernil</a>
+        </div>
+      </div>
+
+      <!-- Upcoming booking -->
+      <div id="upcoming-booking" style="display:none" class="card mb-3">
+        <div class="card-header">
+          <div class="card-title">Next Session</div>
+          <a href="/bookings.html" class="btn btn-secondary btn-sm">View All</a>
+        </div>
+        <div id="upcoming-booking-body" style="font-size:0.875rem; color:var(--muted);"></div>
+      </div>
+
+      <!-- Recent notifications -->
+      <div id="recent-notifs" style="display:none" class="card">
+        <div class="card-header">
+          <div class="card-title">Recent Notifications</div>
+          <a href="/notifications.html" class="btn btn-secondary btn-sm">View All</a>
+        </div>
+        <div id="notifs-list"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, formatDate, planTypeLabel, escapeHtml, weekStartMonday, addCalendarDays } from '/assets/portal.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+
+const profile = await getProfile();
+const firstName = (profile.full_name || '').split(' ')[0] || 'back';
+document.getElementById('greeting').textContent = `Welcome back, ${firstName}`;
+
+// Load active plan
+const { data: plans } = await supabase
+  .from('plans')
+  .select('*')
+  .eq('client_id', profile.id)
+  .in('status', ['active', 'pending'])
+  .order('created_at', { ascending: false })
+  .limit(1);
+
+const plan = plans?.[0];
+
+if (!plan) {
+  document.getElementById('no-plan').style.display = 'block';
+  document.getElementById('stat-status').textContent = 'None';
+  document.getElementById('plan-summary').textContent = 'No active plan - contact Bernil to get started.';
+} else {
+  document.getElementById('plan-card').style.display = 'block';
+  document.getElementById('plan-card-title').textContent = planTypeLabel(plan.plan_type);
+  document.getElementById('plan-summary').textContent = planTypeLabel(plan.plan_type) + ' plan';
+
+  const badge = document.getElementById('plan-card-badge');
+  badge.textContent = plan.status.charAt(0).toUpperCase() + plan.status.slice(1);
+  badge.className   = 'badge badge-' + plan.status;
+
+  document.getElementById('stat-status').textContent =
+    plan.status.charAt(0).toUpperCase() + plan.status.slice(1);
+
+  if (plan.end_date) {
+    const daysLeft = Math.ceil((new Date(plan.end_date) - new Date()) / 86400000);
+    document.getElementById('stat-card-days').style.display = 'block';
+    document.getElementById('stat-days').textContent = Math.max(0, daysLeft);
+    document.getElementById('plan-card-dates').textContent =
+      `${formatDate(plan.start_date)} → ${formatDate(plan.end_date)}`;
+  } else if (plan.start_date) {
+    document.getElementById('plan-card-dates').textContent = `Started ${formatDate(plan.start_date)}`;
+  }
+
+  gateNav(plan.plan_type);
+
+  if (['coaching','workout','athletes','rehab'].includes(plan.plan_type)) {
+    await loadWorkoutStats(profile.id);
+  }
+  await loadStreak(profile.id, plan.plan_type);
+
+  if (plan.plan_type === 'coaching') {
+    await loadUpcomingBooking(plan.id);
+  }
+}
+
+await loadNotifications(profile.id);
+
+// ── Nav gating ──
+function gateNav(type) {
+  const hasWorkout = ['coaching','workout','athletes','rehab'].includes(type);
+  const hasMeal    = ['coaching','meal'].includes(type);
+
+  if (type === 'coaching' || hasWorkout) {
+    document.querySelectorAll('.nav-section-training').forEach(el => el.style.display = '');
+  }
+  if (type === 'coaching') {
+    document.querySelectorAll('.nav-coaching').forEach(el => el.style.display = '');
+  }
+  if (hasWorkout) {
+    document.querySelectorAll('.nav-workout').forEach(el => el.style.display = '');
+    document.getElementById('stat-card-workouts').style.display = 'block';
+  }
+  if (hasMeal) {
+    document.querySelectorAll('.nav-section-nutrition').forEach(el => el.style.display = '');
+    document.querySelectorAll('.nav-meal').forEach(el => el.style.display = '');
+  }
+  if (['coaching','workout','athletes','rehab'].includes(type)) {
+    document.querySelectorAll('.nav-progress, .nav-photos').forEach(el => el.style.display = '');
+  }
+}
+
+// ── Workout count this week ──
+async function loadWorkoutStats(userId) {
+  const weekStart = weekStartMonday();
+  const { data } = await supabase
+    .from('workout_logs')
+    .select('log_date')
+    .eq('client_id', userId)
+    .eq('is_rest_day', false)
+    .gte('log_date', weekStart);
+  const days = new Set((data || []).map(r => r.log_date)).size;
+  document.getElementById('stat-workouts').textContent = days;
+}
+
+// ── Streaks ──
+
+// Count consecutive weeks (going back from current week) with at least one logged date
+function calcWeekStreak(dates) {
+  let streak = 0;
+  let wk = weekStartMonday();
+  while (true) {
+    const wkEnd = addCalendarDays(wk, 6);
+    const hasEntry = [...dates].some(d => d >= wk && d <= wkEnd);
+    if (!hasEntry) break;
+    streak++;
+    wk = addCalendarDays(wk, -7);
+  }
+  return streak;
+}
+
+// Consecutive calendar days with a log, counting back from today (local date)
+function calcDayStreak(dates) {
+  let d = localDate(new Date());
+  let streak = 0;
+  while (dates.has(d)) {
+    streak++;
+    d = addCalendarDays(d, -1);
+  }
+  return streak;
+}
+
+async function loadStreak(userId, planType) {
+  const hasWorkout = ['coaching','workout','athletes','rehab'].includes(planType);
+  const hasMeal    = ['coaching','meal'].includes(planType);
+  if (!hasWorkout && !hasMeal) return;
+
+  const cutoff = addCalendarDays(weekStartMonday(), -52 * 7); // look back up to 1 year
+
+  if (hasWorkout) {
+    const { data } = await supabase.from('workout_logs').select('log_date, is_rest_day')
+      .eq('client_id', userId).gte('log_date', cutoff);
+    const workoutDates = new Set((data || []).filter(r => !r.is_rest_day).map(r => r.log_date));
+    const streak = calcWeekStreak(workoutDates);
+    document.getElementById('stat-card-workout-streak').style.display = 'block';
+    document.getElementById('stat-workout-streak').textContent = streak;
+    document.getElementById('stat-workout-streak-sub').textContent =
+      streak === 1 ? 'week streak' : streak > 1 ? 'week streak' : 'Log this week!';
+  }
+
+  if (hasMeal) {
+    const { data } = await supabase.from('meal_logs').select('log_date')
+      .eq('client_id', userId).gte('log_date', cutoff);
+    const dates = new Set((data || []).map(r => r.log_date));
+    const streak = calcDayStreak(dates);
+    document.getElementById('stat-card-meal-streak').style.display = 'block';
+    document.getElementById('stat-meal-streak').textContent = streak;
+    document.getElementById('stat-meal-streak-sub').textContent =
+      streak === 1 ? 'day streak' : streak > 1 ? 'day streak' : 'Log today!';
+  }
+}
+
+// ── Upcoming booking ──
+async function loadUpcomingBooking(planId) {
+  const today = new Date().toISOString().split('T')[0];
+  const { data } = await supabase
+    .from('bookings')
+    .select('*, availability_slots(slot_date, start_time)')
+    .eq('plan_id', planId)
+    .in('status', ['pending','approved'])
+    .gte('booking_date', today)
+    .order('booking_date', { ascending: true })
+    .order('start_time',   { ascending: true })
+    .limit(1);
+  if (!data?.length) return;
+
+  const b        = data[0];
+  const dateStr  = b.availability_slots?.slot_date || b.booking_date;
+  const timeStr  = (b.availability_slots?.start_time || b.start_time)?.slice(0, 5);
+  document.getElementById('upcoming-booking').style.display = 'block';
+  document.getElementById('upcoming-booking-body').innerHTML = `
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+      <span class="badge badge-${b.status}">${escapeHtml(b.status)}</span>
+      <span>${escapeHtml(formatDate(dateStr))} at ${escapeHtml(timeStr || '-')}</span>
+    </div>
+    ${b.session_link ? `<a href="${escapeHtml(b.session_link)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Join Session</a>` : ''}
+  `;
+}
+
+// ── Recent notifications ──
+async function loadNotifications(userId) {
+  const { data } = await supabase
+    .from('notifications')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('is_read', false)
+    .order('created_at', { ascending: false })
+    .limit(5);
+  if (!data?.length) return;
+
+  document.getElementById('recent-notifs').style.display = 'block';
+  document.getElementById('topbar-notif-dot').style.display = 'block';
+  document.getElementById('notifs-list').innerHTML = data.map(n => `
+    <div style="padding:0.75rem 0;border-bottom:1px solid var(--border);font-size:0.875rem;display:flex;gap:0.75rem;align-items:flex-start;">
+      <span style="width:8px;height:8px;background:var(--blue-light);border-radius:50%;flex-shrink:0;margin-top:6px;"></span>
+      <div>
+        <div style="font-weight:600;">${escapeHtml(n.title)}</div>
+        ${n.body ? `<div style="color:var(--muted);margin-top:0.15rem;font-size:0.8rem;">${escapeHtml(n.body)}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function localDate(d) { return d.toLocaleDateString('en-CA'); }
+</script>
+</body>
+</html>
