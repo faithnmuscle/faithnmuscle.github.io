@@ -1,4 +1,4 @@
-// Faith n Muscle — Shared form handler
+// Faith n Muscle - Shared form handler
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   form.addEventListener('change', function (e) {
     var input = e.target;
-    // Radio group — clear all siblings once one is picked
+    // Radio group - clear all siblings once one is picked
     if (input.type === 'radio' || input.type === 'checkbox') {
       form.querySelectorAll('input[name="' + input.name + '"]').forEach(function (r) {
         var parent = r.parentElement;
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!firstError) firstError = el;
     }
 
-    // Required radio groups — at least one must be selected
+    // Required radio groups - at least one must be selected
     var seenRadioNames = {};
     form.querySelectorAll('input[type="radio"][required]').forEach(function (radio) {
       if (seenRadioNames[radio.name]) return;
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // Required checkboxes — groups need at least one; single (consent) must be checked
+    // Required checkboxes - groups need at least one; single (consent) must be checked
     var seenCbNames = {};
     form.querySelectorAll('input[type="checkbox"][required]').forEach(function (cb) {
       if (cb.name === 'botcheck') return;

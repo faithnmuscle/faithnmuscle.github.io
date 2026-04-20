@@ -1,4 +1,4 @@
-/* Faith n Muscle — Shared form page styles */
+/* Faith n Muscle - Shared form page styles */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -171,7 +171,7 @@ nav {
 .check-label:has(input:checked) .check-icon { border-color: var(--blue-light); background: var(--blue-light); }
 .check-label:has(input:checked) .check-icon::after { content: '✓'; }
 
-/* ── SCALE 1–10 ── */
+/* ── SCALE 1-10 ── */
 .scale-group { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .scale-label {
   display: flex; align-items: center; justify-content: center;
