@@ -57,7 +57,7 @@
 
 <script type="module">
 import { supabase } from '/assets/supabase-client.js';
-import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDate, escapeHtml, toast } from '/assets/portal.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDate, escapeHtml, toast, localCalendarDate, addCalendarDays } from '/assets/portal.js';
 import { FEATURES } from '/assets/features.js';
 
 const session = await requireAuth();
@@ -66,9 +66,36 @@ await initSidebar();
 
 const profile = await getProfile();
 
-const cutoff = new Date();
-cutoff.setDate(cutoff.getDate() - 7);
-const cutoffStr = cutoff.toISOString().slice(0, 10);
+const cutoffStr = addCalendarDays(localCalendarDate(), -7);
+
+function mealLogDateYMD(log) {
+  const raw = String(log?.log_date || '').trim();
+  if (!raw) return '';
+  return raw.slice(0, 10);
+}
+
+function mealEntriesList(log) {
+  if (!log) return [];
+  if (Array.isArray(log.meal_log_entries)) return log.meal_log_entries;
+  if (log.meal_log_entries && typeof log.meal_log_entries === 'object') return [log.meal_log_entries];
+  return [];
+}
+
+function mealLogHasDisplayableContent(log) {
+  const ymd = mealLogDateYMD(log);
+  const entries = mealEntriesList(log);
+  const hasEntries = entries.some(e =>
+    (e?.food_items && String(e.food_items).trim()) ||
+    (e?.portion_notes && String(e.portion_notes).trim()) ||
+    Number(e?.calories_kcal) > 0 ||
+    Number(e?.protein_g) > 0 ||
+    Number(e?.carbs_g) > 0 ||
+    Number(e?.fat_g) > 0
+  );
+  const hasWater = Number(log?.water_ml) > 0;
+  const hasNotes = !!(log?.overall_notes && String(log.overall_notes).trim());
+  return !!ymd && (hasEntries || hasWater || hasNotes);
+}
 
 if (!FEATURES.mealLogging) {
   document.getElementById('gate-feature').style.display = 'block';
@@ -97,7 +124,7 @@ async function deleteMealLog(id, dateLabel, cardEl) {
 }
 
 async function loadHistory(userId) {
-  const { data: logs } = await supabase
+  const { data: rawLogs } = await supabase
     .from('meal_logs')
     .select('*, meal_log_entries(*)')
     .eq('client_id', userId)
@@ -105,15 +132,18 @@ async function loadHistory(userId) {
     .limit(60);
 
   document.getElementById('loading').style.display = 'none';
-  if (!logs?.length) { document.getElementById('empty').style.display = 'block'; return; }
+  const logs = (rawLogs || []).filter(mealLogHasDisplayableContent);
+  if (!logs.length) { document.getElementById('empty').style.display = 'block'; return; }
 
   const list = document.getElementById('history-list');
+  document.getElementById('empty').style.display = 'none';
   list.style.display = 'flex';
   list.innerHTML = '';
 
   logs.forEach(log => {
-    const editable = log.log_date >= cutoffStr;
-    const entries  = (log.meal_log_entries || []);
+    const ymd = mealLogDateYMD(log);
+    const editable = ymd >= cutoffStr;
+    const entries = mealEntriesList(log);
     const slots    = entries.map(e => `
       <div style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
         <div style="font-weight:600; font-size:0.8rem; color:var(--blue-light);">${escapeHtml(e.meal_slot)}</div>
@@ -129,11 +159,11 @@ async function loadHistory(userId) {
     card.innerHTML = `
       <div style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;" class="card-toggle">
         <div>
-          <div style="font-weight:700;">${escapeHtml(formatDate(log.log_date))}</div>
+          <div style="font-weight:700;">${escapeHtml(formatDate(ymd))}</div>
           <div style="color:var(--muted); font-size:0.8rem;">${entries.length} meal${entries.length !== 1 ? 's' : ''}${log.water_ml ? ' &middot; ' + log.water_ml + ' ml water' : ''}</div>
         </div>
         <div style="display:flex; gap:0.5rem; align-items:center;">
-          ${editable ? `<a href="/log-meal.html?date=${log.log_date}" class="btn btn-secondary btn-sm" onclick="event.stopPropagation()">Edit</a>` : ''}
+          ${editable ? `<a href="/log-meal.html?date=${encodeURIComponent(ymd)}" class="btn btn-secondary btn-sm" onclick="event.stopPropagation()">Edit</a>` : ''}
           ${editable ? `<button class="btn-icon-delete btn-delete-meal" title="Delete" onclick="event.stopPropagation()" style="background:none;border:none;cursor:pointer;padding:0.25rem;color:var(--muted);font-size:1.1rem;line-height:1;">&times;</button>` : ''}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color:var(--muted);"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
@@ -146,12 +176,12 @@ async function loadHistory(userId) {
 
     card.querySelector('.card-toggle').addEventListener('click', () => {
       const detail = card.querySelector('.meal-detail');
-      detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+      detail.style.display = getComputedStyle(detail).display === 'none' ? 'block' : 'none';
     });
 
     const deleteBtn = card.querySelector('.btn-delete-meal');
     if (deleteBtn) {
-      deleteBtn.addEventListener('click', () => deleteMealLog(log.id, formatDate(log.log_date), card));
+      deleteBtn.addEventListener('click', () => deleteMealLog(log.id, formatDate(ymd), card));
     }
 
     list.appendChild(card);

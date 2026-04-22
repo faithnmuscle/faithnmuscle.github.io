@@ -72,6 +72,18 @@ h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; lin
 .nav-item.active { color: var(--blue-light); border-left-color: var(--blue-light); background: rgba(66,133,244,0.08); }
 .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.7; }
 .nav-item.active svg { opacity: 1; }
+/* Messages: hidden in HTML until JS adds body.portal-messaging-on (avoids a flash when feature_messages is off) */
+body:not(.portal-messaging-on) .sidebar-nav a[href="/messages.html"],
+body:not(.portal-messaging-on) .sidebar-nav a[href="/admin/messages.html"] {
+  display: none !important;
+}
+body:not(.portal-messaging-on) #msgs-badge {
+  display: none !important;
+}
+/* Progress photos: hidden until body.portal-photos-on (avoids flash when feature_progress_photos is off) */
+body:not(.portal-photos-on) .sidebar-nav a[href="/progress-photos.html"] {
+  display: none !important;
+}
 .nav-badge { margin-left: auto; background: var(--blue); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 10px; min-width: 18px; text-align: center; }
 .sidebar-footer { padding: 1rem; border-top: 1px solid var(--border); }
 .sidebar-user { display: flex; align-items: center; gap: 0.625rem; padding: 0.5rem 0; margin-bottom: 0.5rem; }
@@ -95,6 +107,17 @@ h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; lin
 .form-group { margin-bottom: 1.25rem; }
 label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem; }
 input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"], input[type="time"], input[type="tel"], input[type="search"], select, textarea { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 0.625rem 0.875rem; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; transition: border-color 0.15s; outline: none; }
+/* Native date/time controls default to a dark calendar/clock glyph on our dark inputs */
+input[type="date"],
+input[type="time"] {
+  color-scheme: dark;
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(1) brightness(1.2);
+  opacity: 0.92;
+}
 input:focus, select:focus, textarea:focus { border-color: var(--blue-light); }
 input::placeholder, textarea::placeholder { color: var(--muted); }
 textarea { resize: vertical; min-height: 100px; }

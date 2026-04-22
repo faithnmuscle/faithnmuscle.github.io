@@ -299,11 +299,14 @@ document.getElementById('btn-confirm-convert').addEventListener('click', async (
     try {
       result = raw ? JSON.parse(raw) : {};
     } catch {
+      const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
       throw new Error(
         res.status === 404
           ? 'API endpoint not found — deploy Cloudflare Pages with Functions or use wrangler pages dev.'
           : res.status === 501
-            ? 'Server could not run this request (501). Confirm Pages Functions are deployed and try again.'
+            ? (isLocal
+                ? 'Server could not run this request (501). Localhost static servers do not run Pages Functions. Start with: cd faithnmuscle-portal && npx wrangler pages dev .'
+                : 'Server could not run this request (501). Confirm Pages Functions are deployed and try again.')
             : `Server error (${res.status})`
       );
     }

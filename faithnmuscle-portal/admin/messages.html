@@ -59,7 +59,11 @@
       <span class="topbar-title">Messages</span>
     </div>
 
-    <div class="portal-content" style="padding-bottom:0;">
+    <div id="gate-msgs-disabled" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Messaging Unavailable</h3><p style="margin-top:0.75rem;font-size:0.9rem;color:var(--muted);max-width:28rem;">Messaging is turned off in admin settings.</p></div>
+    </div>
+
+    <div class="portal-content" id="msgs-admin-content" style="padding-bottom:0;">
       <div class="conv-layout">
 
         <!-- Conversation list -->
@@ -99,14 +103,19 @@
 
 <script type="module">
 import { supabase } from '/assets/supabase-client.js';
-import { requireAdmin, initSidebar, getProfile, escapeHtml, setBusy, formatDateTime, toast, planTypeLabel } from '/assets/portal.js';
+import { requireAdmin, initSidebar, getProfile, escapeHtml, setBusy, formatDateTime, toast, planTypeLabel, getFeatures } from '/assets/portal.js';
 
 const session = await requireAdmin();
 if (!session) throw new Error('not admin');
 await initSidebar();
 
-const adminProfile = await getProfile();
-const adminId = adminProfile.id;
+const features = await getFeatures();
+if (!features.messages) {
+  document.getElementById('gate-msgs-disabled').style.display = 'block';
+  document.getElementById('msgs-admin-content').style.display = 'none';
+} else {
+  const adminProfile = await getProfile();
+  const adminId = adminProfile.id;
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let plans = [];
@@ -320,6 +329,7 @@ function relativeTime(isoStr) {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 await loadAll();
+}
 </script>
 </body>
 </html>

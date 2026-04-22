@@ -23,8 +23,17 @@ export async function onRequestOptions() {
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY || !env.SUPABASE_ANON_KEY) {
-    return json({ error: 'Server not configured - set SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and SUPABASE_ANON_KEY in Cloudflare Pages environment variables' }, 500);
+  const missingEnv = [
+    !env.SUPABASE_URL && 'SUPABASE_URL',
+    !env.SUPABASE_SERVICE_ROLE_KEY && 'SUPABASE_SERVICE_ROLE_KEY',
+    !env.SUPABASE_ANON_KEY && 'SUPABASE_ANON_KEY',
+  ].filter(Boolean);
+
+  if (missingEnv.length) {
+    return json({
+      error: `Server not configured - missing environment variable(s): ${missingEnv.join(', ')}`,
+      missing: missingEnv,
+    }, 500);
   }
 
   // -- Auth check --

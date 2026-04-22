@@ -530,8 +530,8 @@ function thMaxWidth(mode) {
 function syncExProgressHelp(mode) {
   const el = document.getElementById('ex-progress-help');
   if (!el) return;
-  const tail = ' vs the previous column: ↑ higher (green), ↓ lower (red); no mark means unchanged. Reps: each segment uses the midpoint of a range (e.g. 8–10 → 9); with several segments (10 · 9) the rep arrow compares their sum (19).';
-  const agg = ' Same exercise more than once in that period: sets are added, kg is heaviest; reps show each distinct value in order (e.g. 10 · 9).';
+  const tail = ' vs the previous column: ↑ higher (green), ↓ lower (red); no mark means unchanged. Reps: each segment uses the midpoint of a range (e.g. 8–10 -> 9); with several segments (10 · 9) the rep arrow compares their sum (19).';
+  const agg = ' Same exercise more than once in that period: sets are averaged for week/month (summed for day), and kg/reps are shown by position order (1st with 1st, 2nd with 2nd, etc.).';
   const lines = {
     day: 'Columns cover only from your first workout day to your latest; periods before you started are not shown. Days where nothing has sets, reps, or kg are hidden.' + agg + tail,
     week: 'Columns cover only from your first workout week to your latest (weeks start Monday). Weeks with no usable exercise data are hidden.' + agg + tail,
@@ -553,82 +553,155 @@ function getExerciseNamesSorted(logs) {
   return [...anyName].sort((a, b) => (freq[b] || 0) - (freq[a] || 0));
 }
 
-function rowIsLater(a, b) {
-  const d = (a.log.log_date || '').localeCompare(b.log.log_date || '');
-  if (d !== 0) return d > 0;
-  return (a.ex.sort_order || 0) > (b.ex.sort_order || 0);
-}
-
-/** Heaviest line for max kg; ties → later log / higher sort_order. */
-function pickHeaviestLine(entries) {
-  let best = null;
-  for (const e of entries) {
-    const w = e.ex.weight_kg != null && e.ex.weight_kg !== '' ? Number(e.ex.weight_kg) : null;
-    if (w == null || Number.isNaN(w)) continue;
-    if (!best) {
-      best = e;
-      continue;
-    }
-    const bw = Number(best.ex.weight_kg);
-    if (w > bw) best = e;
-    else if (w === bw && rowIsLater(e, best)) best = e;
+/**
+ * Parse a reps token like "10", "8-10", "30s", "2min" → {value, suffix}.
+ * Returns null if not parseable.
+ */
+function parseRepToken(token) {
+  const s = String(token || '').trim();
+  if (!s) return null;
+  const range = s.match(/^(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)(.*)$/i);
+  if (range) {
+    const a = Number(range[1]), b = Number(range[2]);
+    if (!Number.isNaN(a) && !Number.isNaN(b))
+      return { value: (a + b) / 2, suffix: (range[3] || '').trim() };
   }
-  return best;
-}
-
-/** Distinct rep strings in workout order (date, then sort_order), joined for display. */
-function mergeRepsForBucket(entries) {
-  const ordered = [...entries].sort((a, b) => {
-    const d = (a.log.log_date || '').localeCompare(b.log.log_date || '');
-    if (d !== 0) return d;
-    return (a.ex.sort_order || 0) - (b.ex.sort_order || 0);
-  });
-  const seen = new Set();
-  const parts = [];
-  for (const { ex } of ordered) {
-    const r = ex.reps_per_set && String(ex.reps_per_set).trim();
-    if (!r || seen.has(r)) continue;
-    seen.add(r);
-    parts.push(r);
-  }
-  if (!parts.length) return null;
-  return parts.join(' · ');
+  const one = s.match(/^(\d+(?:\.\d+)?)(.*)$/i);
+  if (!one) return null;
+  const n = Number(one[1]);
+  if (Number.isNaN(n)) return null;
+  return { value: n, suffix: (one[2] || '').trim() };
 }
 
 /**
- * Same exercise name can appear on multiple lines in a period (bucket).
- * Sets summed; kg = heaviest logged; reps = each distinct value in order (e.g. 10 · 9).
+ * Each workout_exercises row is one "entry" for an exercise.
+ * In day mode: entries are sorted by sort_order → slots listed in order (sum sets).
+ * In week/month mode: group by session (log_id), sort each session by sort_order,
+ * then average slot-i with slot-i across sessions.
  */
-function aggregateExerciseLinesForBucket(entries) {
+function aggregateExerciseLinesForBucket(entries, mode = 'day') {
   if (!entries?.length) return null;
-  let totalSets = 0;
-  let anySet = false;
-  for (const { ex } of entries) {
-    if (ex.sets_completed != null && ex.sets_completed !== '') {
+
+  const fmtNum = v => v == null || Number.isNaN(v) ? null :
+    Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
+
+  const sortExs = exs => [...exs].sort((a, b) => {
+    const as = Number(a.ex.sort_order), bs = Number(b.ex.sort_order);
+    const aOk = !Number.isNaN(as), bOk = !Number.isNaN(bs);
+    if (aOk && bOk && as !== bs) return as - bs;
+    if (aOk !== bOk) return aOk ? -1 : 1;
+    return String(a.ex.id || '').localeCompare(String(b.ex.id || ''));
+  });
+
+  // Expand one exercise row into an array of slots: [{kg, reps, sfx}]
+  const expandEntry = ({ ex }) => {
+    const setsNum = Number(ex.sets_completed);
+    const hasSets = !Number.isNaN(setsNum) && setsNum > 0;
+    const slots = hasSets ? Math.max(1, Math.ceil(setsNum)) : 1;
+    const w = Number(ex.weight_kg);
+    const kg = (!Number.isNaN(w) && w > 0) ? w : null;
+    const repsTxt = (ex.reps_per_set && String(ex.reps_per_set).trim()) || '';
+    const tokens = repsTxt
+      ? repsTxt.split(/\s*·\s*|\s*,\s*/).map(x => x.trim()).filter(Boolean).map(parseRepToken).filter(Boolean)
+      : [];
+    const result = [];
+    for (let i = 0; i < slots; i++) {
+      const t = tokens[i] || tokens[tokens.length - 1] || null;
+      result.push({ kg, reps: t ? t.value : null, sfx: t ? t.suffix : '', sets: hasSets ? setsNum : null });
+    }
+    return result;
+  };
+
+  if (mode === 'day') {
+    // Sort all entries by sort_order, expand in order, concatenate
+    const ordered = sortExs(entries);
+    const allSlots = ordered.flatMap(e => expandEntry(e));
+    if (!allSlots.length) return null;
+
+    const totalSets = ordered.reduce((sum, { ex }) => {
       const n = Number(ex.sets_completed);
-      if (!Number.isNaN(n)) {
-        totalSets += n;
-        anySet = true;
-      }
+      return sum + ((!Number.isNaN(n) && n > 0) ? n : 0);
+    }, 0);
+    const setsCompleted = totalSets > 0 ? totalSets : null;
+
+    const kgVals = allSlots.map(s => s.kg).filter(v => v != null);
+    const repsVals = allSlots.map(s => s.reps).filter(v => v != null);
+    const sfxs = allSlots.filter(s => s.reps != null).map(s => s.sfx);
+
+    const repsMerged = repsVals.length
+      ? repsVals.map((v, i) => `${fmtNum(v)}${sfxs[i] || ''}`).join(' · ')
+      : null;
+
+    return {
+      weight_kg: kgVals.length ? kgVals[0] : null,
+      weight_values: kgVals,
+      sets_completed: setsCompleted,
+      reps_values: repsVals,
+      reps_per_set: repsMerged,
+    };
+  }
+
+  // Week / Month: group by session, sort within session, average slot-i with slot-i
+  const sessionMap = new Map();
+  for (const e of entries) {
+    const key = e.log.id || e.log.log_date || '';
+    if (!sessionMap.has(key)) sessionMap.set(key, []);
+    sessionMap.get(key).push(e);
+  }
+
+  // Build per-session flat slot arrays
+  const sessionSlots = [];
+  const sessionSetTotals = [];
+  for (const ses of sessionMap.values()) {
+    const ordered = sortExs(ses);
+    const slots = ordered.flatMap(e => expandEntry(e));
+    sessionSlots.push(slots);
+    const tot = ordered.reduce((sum, { ex }) => {
+      const n = Number(ex.sets_completed);
+      return sum + ((!Number.isNaN(n) && n > 0) ? n : 0);
+    }, 0);
+    sessionSetTotals.push(tot || 0);
+  }
+
+  // Average set count across sessions
+  const avgSets = sessionSetTotals.reduce((a, b) => a + b, 0) / sessionSetTotals.length;
+  const displaySlots = Math.max(1, Math.ceil(avgSets));
+
+  // Bucket slot-i values across sessions
+  const kgBuckets = Array.from({ length: displaySlots }, () => []);
+  const repsBuckets = Array.from({ length: displaySlots }, () => []);
+  const sfxBuckets = Array.from({ length: displaySlots }, () => []);
+
+  for (const slots of sessionSlots) {
+    for (let i = 0; i < displaySlots; i++) {
+      // If session has fewer slots, use last one (fill forward)
+      const s = slots.length ? slots[Math.min(i, slots.length - 1)] : null;
+      if (!s) continue;
+      if (s.kg != null) kgBuckets[i].push(s.kg);
+      if (s.reps != null) { repsBuckets[i].push(s.reps); sfxBuckets[i].push(s.sfx || ''); }
     }
   }
-  const heavy = pickHeaviestLine(entries);
-  let weight_kg = null;
-  if (heavy) {
-    const w = Number(heavy.ex.weight_kg);
-    weight_kg = !Number.isNaN(w) ? w : null;
-  }
-  const repsMerged = mergeRepsForBucket(entries);
+
+  const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+  const weightValues = kgBuckets.map(avg).filter(v => v != null);
+  const repsValues = repsBuckets.map(avg).filter(v => v != null);
+
+  const repsMerged = repsValues.length
+    ? repsValues.map((v, i) => `${fmtNum(v)}${(sfxBuckets[i] || [])[0] || ''}`).join(' · ')
+    : null;
+
   return {
-    weight_kg,
-    sets_completed: anySet ? totalSets : null,
+    weight_kg: weightValues.length ? weightValues[0] : null,
+    weight_values: weightValues,
+    sets_completed: avgSets,
+    reps_values: repsValues,
     reps_per_set: repsMerged,
   };
 }
 
 function cellHasDisplayableContent(ex) {
   if (!ex) return false;
-  return (ex.weight_kg != null && ex.weight_kg !== '') ||
+  return (ex.weight_kg != null && ex.weight_kg !== '' && Number(ex.weight_kg) > 0) ||
     (ex.sets_completed != null && ex.sets_completed !== '') ||
     !!(ex.reps_per_set && String(ex.reps_per_set).trim());
 }
@@ -670,25 +743,36 @@ function trendArrowHtml(cur, prev) {
 function formatExerciseProgressCell(ex, prevEx) {
   if (!cellHasDisplayableContent(ex)) return null;
   const parts = [];
-  if (ex.weight_kg != null && ex.weight_kg !== '') {
-    const c = Number(ex.weight_kg);
-    const p = prevEx && prevEx.weight_kg != null && prevEx.weight_kg !== '' ? Number(prevEx.weight_kg) : null;
-    let seg = `<span style="color:var(--blue-light);font-weight:600">${escapeHtml(String(ex.weight_kg))}</span> kg`;
-    if (p != null && !Number.isNaN(c) && !Number.isNaN(p)) seg += trendArrowHtml(c, p);
-    parts.push(seg);
-  }
+  const fmt = (v) => {
+    if (v == null || Number.isNaN(v)) return null;
+    return Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
+  };
   if (ex.sets_completed != null && ex.sets_completed !== '') {
     const c = Number(ex.sets_completed);
     const p = prevEx && prevEx.sets_completed != null && prevEx.sets_completed !== '' ? Number(prevEx.sets_completed) : null;
-    let seg = `${escapeHtml(String(ex.sets_completed))} sets`;
+    const setLabel = Math.abs(c - 1) < 0.05 ? 'set' : 'sets';
+    let seg = `<span style="color:var(--blue-light);font-weight:600">${escapeHtml(String(fmt(c) ?? ex.sets_completed))} ${setLabel}</span>`;
+    if (p != null && !Number.isNaN(c) && !Number.isNaN(p)) seg += trendArrowHtml(c, p);
+    parts.push(seg);
+  }
+  if (ex.weight_kg != null && ex.weight_kg !== '') {
+    const curWs = Array.isArray(ex.weight_values) && ex.weight_values.length ? ex.weight_values : [Number(ex.weight_kg)];
+    const prevWs = prevEx && Array.isArray(prevEx.weight_values) ? prevEx.weight_values : [];
+    const c = curWs.length ? curWs.reduce((a, b) => a + b, 0) / curWs.length : null;
+    const p = prevWs.length ? prevWs.reduce((a, b) => a + b, 0) / prevWs.length : null;
+    const wTxt = curWs.map(fmt).filter(Boolean).join(' · ');
+    let seg = `${escapeHtml(wTxt || String(ex.weight_kg))} kg`;
     if (p != null && !Number.isNaN(c) && !Number.isNaN(p)) seg += trendArrowHtml(c, p);
     parts.push(seg);
   }
   if (ex.reps_per_set && String(ex.reps_per_set).trim()) {
-    const raw = String(ex.reps_per_set).trim();
-    const c = parseMergedRepsSumForTrend(raw);
-    const p = prevEx && prevEx.reps_per_set ? parseMergedRepsSumForTrend(String(prevEx.reps_per_set).trim()) : null;
-    let seg = `${escapeHtml(raw)} reps`;
+    // reps_per_set already has formatted values + suffixes (e.g. "10 · 30s")
+    const displayTxt = String(ex.reps_per_set).trim();
+    const curRs = Array.isArray(ex.reps_values) && ex.reps_values.length ? ex.reps_values : [];
+    const prevRs = prevEx && Array.isArray(prevEx.reps_values) ? prevEx.reps_values : [];
+    const c = curRs.length ? curRs.reduce((a, b) => a + b, 0) : null;
+    const p = prevRs.length ? prevRs.reduce((a, b) => a + b, 0) : null;
+    let seg = `${escapeHtml(displayTxt)} reps`;
     if (p != null && c != null && !Number.isNaN(c) && !Number.isNaN(p)) seg += trendArrowHtml(c, p);
     parts.push(seg);
   }
@@ -730,7 +814,7 @@ function renderExerciseProgressTable() {
 
   columnKeys = columnKeys.filter(bk =>
     names.some(n => {
-      const agg = aggregateExerciseLinesForBucket(rowsByExBucket.get(n + '\0' + bk) || []);
+      const agg = aggregateExerciseLinesForBucket(rowsByExBucket.get(n + '\0' + bk) || [], mode);
       return agg && formatExerciseProgressCell(agg, null);
     })
   );
@@ -743,15 +827,15 @@ function renderExerciseProgressTable() {
   const thCols = columnKeys.map(key => {
     const lbl = columnHeaderLabel(key, mode);
     const title = columnHeaderTitle(key, mode);
-    return `<th title="${escapeHtml(title)}" style="position:sticky;top:0;z-index:1;font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;padding:0.4rem 0.3rem;border-bottom:1px solid var(--border);white-space:nowrap;min-width:${mw};max-width:${mxw};background:var(--bg3);">${lbl}</th>`;
+    return `<th title="${escapeHtml(title)}" style="position:sticky;z-index:1;font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;padding:0.4rem 0.3rem;border-bottom:1px solid var(--border);white-space:nowrap;min-width:${mw};max-width:${mxw};background:var(--bg3);">${lbl}</th>`;
   }).join('');
 
   const rows = names.map(name => {
     const cells = columnKeys.map((bk, colIdx) => {
       const prevBk = colIdx > 0 ? columnKeys[colIdx - 1] : null;
-      const prevAgg = prevBk ? aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + prevBk) || []) : null;
+      const prevAgg = prevBk ? aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + prevBk) || [], mode) : null;
       const prevEx = prevAgg && cellHasDisplayableContent(prevAgg) ? prevAgg : null;
-      const agg = aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + bk) || []);
+      const agg = aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + bk) || [], mode);
       const inner = agg ? formatExerciseProgressCell(agg, prevEx) : null;
       const text = inner || '—';
       const color = inner ? 'var(--text)' : 'var(--muted)';
@@ -767,7 +851,7 @@ function renderExerciseProgressTable() {
     <table style="width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;">
       <thead>
         <tr>
-          <th style="position:sticky;left:0;top:0;z-index:3;background:var(--bg3);box-shadow:1px 1px 0 var(--border);font-size:0.68rem;font-weight:700;text-align:left;padding:0.45rem 0.6rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:bottom;min-width:8rem;">Exercise</th>
+          <th style="position:sticky;left:0;z-index:3;background:var(--bg3);box-shadow:1px 1px 0 var(--border);font-size:0.68rem;font-weight:700;text-align:left;padding:0.45rem 0.6rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:bottom;min-width:8rem;">Exercise</th>
           ${thCols}
         </tr>
       </thead>
