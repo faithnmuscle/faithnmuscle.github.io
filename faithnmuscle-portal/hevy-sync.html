@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sync from Hevy | Faith n Muscle Portal</title>
+  <link rel="stylesheet" href="/assets/portal.css"/>
+  <meta name="robots" content="noindex"/>
+  <style>
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--bg3);
+    }
+    .drop-zone:hover, .drop-zone.drag-over {
+      border-color: var(--blue-light);
+      background: #0d1a2e;
+    }
+    .drop-zone input[type="file"] {
+      display: none;
+    }
+    .drop-zone-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--muted);
+    }
+    .drop-zone-label {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .drop-zone-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .preview-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 0.75rem;
+    }
+    .preview-table th {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 500;
+      padding: 0.4rem 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .preview-table td {
+      padding: 0.4rem 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .badge-new {
+      display: inline-block;
+      background: #0d2a1a;
+      color: #4ade80;
+      border: 1px solid #166534;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      padding: 0 0.4rem;
+      font-weight: 600;
+    }
+    .badge-skip {
+      display: inline-block;
+      background: var(--bg3);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.7rem;
+      padding: 0 0.4rem;
+    }
+    .badge-changed {
+      display: inline-block;
+      background: #2a1a00;
+      color: #fb923c;
+      border: 1px solid #92400e;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      padding: 0 0.4rem;
+      font-weight: 600;
+    }
+    .progress-bar-wrap {
+      background: var(--bg3);
+      border-radius: 999px;
+      height: 6px;
+      overflow: hidden;
+      margin: 0.75rem 0 0.5rem;
+    }
+    .progress-bar {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 999px;
+      transition: width 0.3s;
+      width: 0%;
+    }
+    #section-instructions { }
+    #section-preview { display: none; }
+    #section-done { display: none; }
+  </style>
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="sidebar" id="sidebar">
+    <a href="/dashboard.html" class="sidebar-logo"><span>Faith n Muscle</span></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="/dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/my-plan.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>My Plan</a>
+      <a href="/notifications.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications<span class="nav-badge" id="notif-badge" style="display:none"></span></a>
+      <div class="nav-section-label nav-section-training">Training</div>
+      <a href="/bookings.html" class="nav-item nav-coaching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Session</a>
+      <a href="/log-workout.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Log Workout</a>
+      <a href="/workout-history.html" class="nav-item nav-workout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Workout History</a>
+      <div class="nav-section-label nav-section-nutrition">Nutrition</div>
+      <a href="/log-meal.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>Log Meals</a>
+      <a href="/meal-history.html" class="nav-item nav-meal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Meal History</a>
+      <div class="nav-section-label">Body Stats</div>
+      <a href="/progress.html" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Check-In</a>
+      <a href="/progress.html#trends" class="nav-item nav-progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trends</a>
+      <a href="/progress-photos.html" class="nav-item nav-photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</a>
+      <a href="/messages.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span class="nav-badge" id="msgs-badge" style="display:none"></span></a>
+      <div class="nav-section-label">Account</div>
+      <a href="/profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="sidebar-avatar" id="sidebar-avatar">?</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebar-name">Loading...</div><div class="sidebar-user-role" id="sidebar-role">Client</div></div></div>
+      <button class="btn-signout" id="btn-signout">Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <div class="portal-topbar">
+      <button class="sidebar-toggle" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <span class="topbar-title">Sync from Hevy</span>
+      <div class="topbar-actions">
+        <a href="/workout-history.html" class="btn btn-secondary btn-sm">Workout History</a>
+      </div>
+    </div>
+
+    <div id="gate-feature" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">🔒</div><h3>Feature Unavailable</h3><p>Workout logging is currently disabled.</p></div>
+    </div>
+    <div id="gate-plan" style="display:none;" class="gate-wrap">
+      <div class="empty-state"><div class="empty-state-icon">📋</div><h3>Not in Your Plan</h3><p>Workout logging is available with Coaching, Workout, Athletes, or Rehab plans.</p></div>
+    </div>
+
+    <div class="portal-content" id="page-content" style="display:none;">
+
+      <!-- Instructions + upload -->
+      <div id="section-instructions">
+        <div class="card" style="margin-bottom:1.25rem;">
+          <div class="card-title" style="margin-bottom:1rem;">How to export from Hevy</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div>Open the <strong>Hevy app</strong> on your phone</div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div>Go to <strong>Profile</strong> tab &rarr; tap the <strong>settings icon</strong> (top right)</div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div>Scroll down to <strong>Export Data</strong> &rarr; tap <strong>Export Workouts (CSV)</strong></div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div>Save the file and <strong>upload it below</strong></div>
+            </div>
+          </div>
+
+          <label class="drop-zone" id="drop-zone">
+            <input type="file" id="csv-file" accept=".csv"/>
+            <div class="drop-zone-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="drop-zone-label">Drop your Hevy CSV here</div>
+            <div class="drop-zone-sub">or click to select file</div>
+          </label>
+          <div id="parse-error" class="alert alert-error" style="display:none; margin-top:1rem;"></div>
+        </div>
+      </div>
+
+      <!-- Preview -->
+      <div id="section-preview">
+        <div class="card" style="margin-bottom:1.25rem;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+            <div class="card-title" style="margin:0;">Preview</div>
+            <button class="btn btn-secondary btn-sm" id="btn-change-file">Change file</button>
+          </div>
+          <div id="preview-summary" style="font-size:0.875rem; color:var(--muted); margin-bottom:0.75rem;"></div>
+          <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--muted); cursor:pointer; margin-bottom:1rem;">
+            <input type="checkbox" id="chk-overwrite" style="width:14px; height:14px; cursor:pointer;"/>
+            Re-sync already imported sessions (overwrites existing data)
+          </label>
+          <div style="overflow-x:auto;">
+            <table class="preview-table" id="preview-table">
+              <thead><tr><th style="width:32px;"><input type="checkbox" id="chk-select-all" title="Select all" style="cursor:pointer;"/></th><th>Date</th><th>Session</th><th>Duration</th><th>Exercises</th><th></th></tr></thead>
+              <tbody id="preview-body"></tbody>
+            </table>
+          </div>
+          <div id="import-error" class="alert alert-error" style="display:none; margin-top:1rem;"></div>
+          <div style="margin-top:1.25rem; display:flex; gap:0.75rem; align-items:center;">
+            <button class="btn btn-primary" id="btn-import" style="display:none;">
+              <span class="btn-spinner"></span><span class="btn-text">Import</span>
+            </button>
+            <div id="import-progress-wrap" style="display:none; flex:1;">
+              <div style="font-size:0.8rem; color:var(--muted);" id="import-progress-label">Importing...</div>
+              <div class="progress-bar-wrap"><div class="progress-bar" id="import-progress-bar"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Done -->
+      <div id="section-done">
+        <div class="card" style="text-align:center; padding:3rem 2rem;">
+          <div style="font-size:2.5rem; margin-bottom:0.75rem;">✓</div>
+          <div style="font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;" id="done-title">Import complete</div>
+          <div style="font-size:0.875rem; color:var(--muted); margin-bottom:1.5rem;" id="done-sub"></div>
+          <a href="/workout-history.html" class="btn btn-primary">View Workout History</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { supabase } from '/assets/supabase-client.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav } from '/assets/portal.js';
+import { FEATURES } from '/assets/features.js';
+
+const session = await requireAuth();
+if (!session) throw new Error('unauthenticated');
+await initSidebar();
+
+const profile = await getProfile();
+let activePlan = null;
+
+if (!FEATURES.workoutLogging) {
+  document.getElementById('gate-feature').style.display = 'block';
+} else {
+  const plan = await getActivePlan(profile.id);
+  const allowed = ['coaching', 'workout', 'athletes', 'rehab'];
+  if (!plan || !allowed.includes(plan.plan_type)) {
+    document.getElementById('gate-plan').style.display = 'block';
+  } else {
+    activePlan = plan;
+    document.getElementById('page-content').style.display = 'block';
+    gateClientNav(plan.plan_type);
+  }
+}
+
+// ---- CSV parser ----
+function parseCSVRow(line) {
+  const result = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { inQ = !inQ; }
+    else if (ch === ',' && !inQ) { result.push(cur); cur = ''; }
+    else { cur += ch; }
+  }
+  result.push(cur);
+  return result;
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = parseCSVRow(lines[0]).map(h => h.trim());
+  if (!headers.includes('title') || !headers.includes('exercise_title')) {
+    throw new Error('This does not look like a Hevy workout export. Make sure to export "Workouts" (not routines).');
+  }
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = parseCSVRow(line);
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i] ?? '').trim());
+    return obj;
+  });
+}
+
+function toLogDate(str) {
+  const d = new Date(str);
+  if (isNaN(d)) return null;
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function durationMin(start, end) {
+  const ms = new Date(end) - new Date(start);
+  if (isNaN(ms) || ms < 0) return null;
+  return Math.round(ms / 60000) || null;
+}
+
+function fmtTime(str) {
+  const d = new Date(str);
+  if (isNaN(d)) return null;
+  return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
+function buildSessions(rows) {
+  const sessionMap = new Map();
+  rows.forEach(r => {
+    const key = r.title + '||' + r.start_time;
+    if (!sessionMap.has(key)) {
+      sessionMap.set(key, { name: r.title, startTime: r.start_time, endTime: r.end_time, description: r.description, exerciseRows: [] });
+    }
+    sessionMap.get(key).exerciseRows.push(r);
+  });
+
+  const sessions = [];
+  sessionMap.forEach(s => {
+    const date = toLogDate(s.startTime);
+    if (!date) return;
+
+    // Build superset map: superset_id -> [exercise names]
+    const supersetMap = new Map();
+    s.exerciseRows.forEach(r => {
+      if (!r.superset_id) return;
+      if (!supersetMap.has(r.superset_id)) supersetMap.set(r.superset_id, new Set());
+      supersetMap.get(r.superset_id).add(r.exercise_title);
+    });
+
+    // RPE: average of non-zero values across all sets
+    const rpeVals = s.exerciseRows.map(r => Number(r.rpe)).filter(v => !isNaN(v) && v > 0);
+    const perceivedEffort = rpeVals.length
+      ? Math.round(rpeVals.reduce((a, b) => a + b, 0) / rpeVals.length)
+      : null;
+
+    // overall_notes: description + time window
+    const timePart = [fmtTime(s.startTime), fmtTime(s.endTime)].filter(Boolean).join(' - ');
+    const noteParts = [s.description, timePart ? `Time: ${timePart}` : null].filter(Boolean);
+    const overallNotes = noteParts.join(' | ') || null;
+
+    // Group by exercise_title preserving order
+    const exMap = new Map();
+    const exOrder = [];
+    s.exerciseRows.forEach(r => {
+      if (!exMap.has(r.exercise_title)) { exMap.set(r.exercise_title, []); exOrder.push(r.exercise_title); }
+      exMap.get(r.exercise_title).push(r);
+    });
+
+    // Build per-set rows - one DB row per Hevy set
+    let sortIndex = 0;
+    const exercises = [];
+    exOrder.forEach(exName => {
+      const sets = exMap.get(exName);
+
+      // Superset note
+      let supersetNote = null;
+      const sid = sets[0]?.superset_id;
+      if (sid && supersetMap.has(sid)) {
+        const partners = [...supersetMap.get(sid)].filter(n => n !== exName);
+        if (partners.length) supersetNote = `Superset with: ${partners.join(', ')}`;
+      }
+
+      const exNotes = sets.map(r => r.exercise_notes).filter(Boolean).join('; ') || null;
+      const notes = [supersetNote, exNotes].filter(Boolean).join(' | ') || null;
+
+      sets.forEach(r => {
+        exercises.push({
+          exercise_name:    exName,
+          set_index:        Number(r.set_index) || 0,
+          set_type:         r.set_type || 'normal',
+          reps:             (r.reps !== '' && r.reps != null) ? (Number(r.reps) || null) : null,
+          weight_kg:        Number(r.weight_kg) || null,
+          distance_km:      Number(r.distance_km) || null,
+          duration_seconds: Number(r.duration_seconds) || null,
+          rpe:              Number(r.rpe) || null,
+          notes,
+          sort_order:       sortIndex,
+        });
+      });
+      sortIndex++;
+    });
+
+    sessions.push({
+      name: s.name,
+      date,
+      durationMin:      durationMin(s.startTime, s.endTime),
+      perceivedEffort,
+      overallNotes,
+      exercises,
+    });
+  });
+
+  sessions.sort((a, b) => b.date.localeCompare(a.date) || b.name.localeCompare(a.name));
+  return sessions;
+}
+
+// ---- UI state ----
+let parsedSessions = [];
+let newSessions = [];
+let sessionStatus = new Map();
+
+function show(id) {
+  ['section-instructions', 'section-preview', 'section-done'].forEach(s => {
+    document.getElementById(s).style.display = s === id ? 'block' : 'none';
+  });
+}
+
+async function handleFile(file) {
+  const errEl = document.getElementById('parse-error');
+  errEl.style.display = 'none';
+
+  if (!file || !file.name.endsWith('.csv')) {
+    errEl.textContent = 'Please select a .csv file.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  let text;
+  try {
+    text = await file.text();
+  } catch (_) {
+    errEl.textContent = 'Could not read the file.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  let rows;
+  try {
+    rows = parseCSV(text);
+  } catch (e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+    return;
+  }
+
+  if (!rows.length) {
+    errEl.textContent = 'No workout rows found in the file.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  parsedSessions = buildSessions(rows);
+
+  const normName = str => str.replace(/[^\x00-\x7F]/g, '').trim().toLowerCase();
+  const sessionKey = s => `${s.date}||${normName(s.name)}`;
+
+  // Fetch existing sessions with exercises for the dates in the CSV
+  const csvDates = [...new Set(parsedSessions.map(s => s.date))];
+  const { data: existing } = await supabase
+    .from('workout_logs')
+    .select('id, log_date, session_name, workout_exercises(exercise_name)')
+    .eq('client_id', profile.id)
+    .in('log_date', csvDates);
+
+  // Build lookup: normKey -> DB session
+  const dbMap = new Map();
+  (existing || []).forEach(l => dbMap.set(`${l.log_date}||${normName(l.session_name || '')}`, l));
+
+  // Classify each CSV session: 'new' | 'changed' | 'synced'
+  sessionStatus = new Map();
+  parsedSessions.forEach(s => {
+    const key = sessionKey(s);
+    const dbSession = dbMap.get(key);
+    if (!dbSession) { sessionStatus.set(key, 'new'); return; }
+
+    const dbExs = dbSession.workout_exercises || [];
+
+    // Fingerprint: sorted list of "name:sets:weight" per row — handles multiple rows per exercise
+    const exFingerprint = rows => {
+      const counts = {};
+      rows.forEach(e => { const n = normName(e.exercise_name || ''); counts[n] = (counts[n] || 0) + 1; });
+      return Object.entries(counts).map(([n, c]) => `${n}:${c}`).sort().join('|');
+    };
+
+    const changed = exFingerprint(s.exercises) !== exFingerprint(dbExs);
+    sessionStatus.set(key, changed ? 'changed' : 'synced');
+  });
+
+  newSessions = parsedSessions.filter(s => sessionStatus.get(sessionKey(s)) === 'new');
+
+  renderPreview(parsedSessions, sessionKey, sessionStatus);
+  show('section-preview');
+}
+
+function renderPreview(sessions, sessionKey, sessionStatus) {
+  const tbody = document.getElementById('preview-body');
+  tbody.innerHTML = '';
+
+  sessions.forEach((s, idx) => {
+    const status = sessionStatus.get(sessionKey(s)) ?? 'synced';
+    const autoCheck = status === 'new' || status === 'changed';
+    const badge = status === 'new'
+      ? '<span class="badge-new">NEW</span>'
+      : status === 'changed'
+        ? '<span class="badge-changed">CHANGED</span>'
+        : '<span class="badge-skip">synced</span>';
+    const tr = document.createElement('tr');
+    tr.dataset.idx = idx;
+    tr.innerHTML = `
+      <td><input type="checkbox" class="chk-session" data-idx="${idx}" style="cursor:pointer;" ${autoCheck ? 'checked' : ''}/></td>
+      <td>${s.date}</td>
+      <td>${escHtml(s.name)}</td>
+      <td style="color:var(--muted);">${s.durationMin ? s.durationMin + ' min' : '-'}</td>
+      <td style="color:var(--muted);">${new Set(s.exercises.map(e => e.exercise_name)).size}</td>
+      <td>${badge}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  updateImportButton();
+
+  // Select-all checkbox
+  const selectAll = document.getElementById('chk-select-all');
+  selectAll.checked = sessions.every((_, i) => tbody.querySelector(`[data-idx="${i}"]`)?.checked);
+  selectAll.onchange = () => {
+    tbody.querySelectorAll('.chk-session').forEach(chk => chk.checked = selectAll.checked);
+    updateImportButton();
+  };
+  tbody.addEventListener('change', () => {
+    const all = tbody.querySelectorAll('.chk-session');
+    selectAll.checked = [...all].every(c => c.checked);
+    updateImportButton();
+  });
+
+  const summaryEl = document.getElementById('preview-summary');
+  summaryEl.textContent = `${sessions.length} sessions found - ${newSessions.length} new, ${sessions.length - newSessions.length} already synced.`;
+}
+
+function updateImportButton() {
+  const checked = document.querySelectorAll('.chk-session:checked');
+  const btn = document.getElementById('btn-import');
+  if (checked.length === 0) {
+    btn.style.display = 'none';
+  } else {
+    btn.querySelector('.btn-text').textContent = `Import ${checked.length} session${checked.length === 1 ? '' : 's'}`;
+    btn.style.display = 'inline-flex';
+  }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// ---- File input / drag & drop ----
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('csv-file');
+
+// drop-zone is a <label> so clicking it already opens the file dialog natively — no extra .click() needed
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) handleFile(file);
+});
+
+document.getElementById('btn-change-file').addEventListener('click', () => {
+  fileInput.value = '';
+  show('section-instructions');
+});
+
+document.getElementById('chk-overwrite').addEventListener('change', e => {
+  if (e.target.checked) {
+    // Check all rows so synced sessions can be re-imported
+    document.querySelectorAll('.chk-session').forEach(chk => chk.checked = true);
+    document.getElementById('chk-select-all').checked = true;
+  } else {
+    // Revert to only new/changed sessions checked
+    const normName = str => str.replace(/[^\x00-\x7F]/g, '').trim().toLowerCase();
+    const sessionKey = s => `${s.date}||${normName(s.name)}`;
+    document.querySelectorAll('.chk-session').forEach(chk => {
+      const s = parsedSessions[Number(chk.dataset.idx)];
+      const status = sessionStatus?.get(sessionKey(s)) ?? 'synced';
+      chk.checked = status === 'new' || status === 'changed';
+    });
+    const all = document.querySelectorAll('.chk-session');
+    document.getElementById('chk-select-all').checked = [...all].every(c => c.checked);
+  }
+  updateImportButton();
+});
+
+// ---- Import ----
+document.getElementById('btn-import').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-import');
+  const errEl = document.getElementById('import-error');
+  errEl.style.display = 'none';
+
+  const overwrite = document.getElementById('chk-overwrite').checked;
+  const checkedIdxs = new Set([...document.querySelectorAll('.chk-session:checked')].map(c => Number(c.dataset.idx)));
+  const sessionsToImport = parsedSessions.filter((_, i) => checkedIdxs.has(i));
+
+  btn.disabled = true;
+  const progressWrap = document.getElementById('import-progress-wrap');
+  const progressBar = document.getElementById('import-progress-bar');
+  const progressLabel = document.getElementById('import-progress-label');
+  progressWrap.style.display = 'block';
+
+  let done = 0;
+  let failed = 0;
+
+  for (const s of sessionsToImport) {
+    progressLabel.textContent = `Importing ${done + 1} of ${sessionsToImport.length}...`;
+    progressBar.style.width = `${Math.round((done / sessionsToImport.length) * 100)}%`;
+
+    let logId = null;
+
+    const normS = str => str.replace(/[^\x00-\x7F]/g, '').trim().toLowerCase();
+    const status = sessionStatus.get(`${s.date}||${normS(s.name)}`) ?? 'new';
+    const shouldReplace = overwrite || status === 'changed';
+
+    if (shouldReplace) {
+      const { data: dayLogs } = await supabase
+        .from('workout_logs')
+        .select('id, session_name')
+        .eq('client_id', profile.id)
+        .eq('log_date', s.date);
+
+      const matches = (dayLogs || []).filter(l => normS(l.session_name || '') === normS(s.name));
+      for (const match of matches) {
+        await supabase.from('workout_exercises').delete().eq('log_id', match.id);
+        await supabase.from('workout_logs').delete().eq('id', match.id);
+      }
+    }
+
+    const { data: logRow, error: logErr } = await supabase
+      .from('workout_logs')
+      .insert({
+        client_id:          profile.id,
+        plan_id:            activePlan?.id ?? null,
+        log_date:           s.date,
+        is_rest_day:        false,
+        session_name:       s.name,
+        duration_min:       s.durationMin,
+        perceived_effort:   s.perceivedEffort,
+        body_weight_kg:     null,
+        avg_heart_rate_bpm: null,
+        overall_notes:      s.overallNotes,
+      })
+      .select('id')
+      .single();
+
+    if (logErr) {
+      errEl.textContent = `Failed to create log for "${s.name}" on ${s.date}: ${logErr.message}`;
+      errEl.style.display = 'block';
+      failed++; done++; continue;
+    }
+
+    if (s.exercises.length) {
+      const exRows = s.exercises.map(ex => ({ ...ex, log_id: logRow.id }));
+      const { error: exErr } = await supabase.from('workout_exercises').insert(exRows);
+      if (exErr) {
+        errEl.textContent = `Exercises saved for log but exercise insert failed for "${s.name}" on ${s.date}: ${exErr.message}`;
+        errEl.style.display = 'block';
+        failed++; done++; continue;
+      }
+
+      // Verify the rows actually landed
+      const { data: verifyRows, error: verifyErr } = await supabase
+        .from('workout_exercises')
+        .select('id')
+        .eq('log_id', logRow.id);
+      const savedCount = verifyRows?.length ?? 0;
+      if (savedCount === 0) {
+        errEl.textContent = `Insert reported OK for "${s.name}" on ${s.date} but 0 exercise rows readable back (RLS SELECT issue or silent trigger). Expected ${exRows.length}.`;
+        errEl.style.display = 'block';
+      } else if (savedCount !== exRows.length) {
+        errEl.textContent = `Partial save for "${s.name}" on ${s.date}: inserted ${exRows.length}, readable ${savedCount}.`;
+        errEl.style.display = 'block';
+      }
+    }
+
+    done++;
+  }
+
+  progressBar.style.width = '100%';
+
+  const imported = done - failed;
+  document.getElementById('done-title').textContent = imported === sessionsToImport.length
+    ? `${imported} session${imported === 1 ? '' : 's'} imported`
+    : `${imported} of ${sessionsToImport.length} imported`;
+  document.getElementById('done-sub').textContent = failed
+    ? `${failed} session${failed === 1 ? '' : 's'} failed - check the error above for details.`
+    : 'Your Hevy workouts are now in your workout history.';
+
+  show('section-done');
+});
+</script>
+</body>
+</html>

@@ -108,9 +108,7 @@
         <label style="margin:0;">Exercises</label>
         <button type="button" class="btn btn-secondary btn-sm" id="e-btn-add-ex">+ Add Exercise</button>
       </div>
-      <div style="font-size:0.7rem; color:var(--muted); display:grid; grid-template-columns:1fr 60px 90px 90px 1fr auto; gap:0.5rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border);">
-        <span>Exercise</span><span>Sets</span><span>Reps</span><span>Weight (kg)</span><span>Notes</span><span></span>
-      </div>
+      <div style="font-size:0.7rem; color:var(--muted); padding-bottom:0.4rem; border-bottom:1px solid var(--border);">Exercise name and per-set details</div>
       <div id="e-exercises-container"></div>
     </div>
     <div class="form-group"><label>Session Notes</label><textarea id="e-notes" rows="2" placeholder="How did it feel?"></textarea></div>
@@ -126,7 +124,7 @@
 
 <script type="module">
 import { supabase } from '/assets/supabase-client.js';
-import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDate, escapeHtml, setBusy, toast, openModal, initModals } from '/assets/portal.js';
+import { requireAuth, initSidebar, getProfile, getActivePlan, gateClientNav, formatDate, escapeHtml, setBusy, toast, openModal, initModals, localCalendarDate, addCalendarDays } from '/assets/portal.js';
 import { FEATURES } from '/assets/features.js';
 
 const session = await requireAuth();
@@ -183,7 +181,7 @@ document.getElementById('e-rpe').addEventListener('input', e => {
 });
 
 // Add exercise row in edit modal
-document.getElementById('e-btn-add-ex').addEventListener('click', () => addEditExRow());
+document.getElementById('e-btn-add-ex').addEventListener('click', () => addEditExBlock());
 
 // ── Save edit ──
 document.getElementById('btn-save-edit').addEventListener('click', async () => {
@@ -236,7 +234,6 @@ async function loadHistory(userId) {
     document.getElementById('empty').style.display = 'block';
     return;
   }
-
   allLogs = logs;
   initExerciseChart(logs);
 
@@ -244,9 +241,8 @@ async function loadHistory(userId) {
   list.style.display = 'flex';
   list.innerHTML = '';
 
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - 7);
-  const cutoffStr = cutoff.toISOString().slice(0, 10);
+  // Keep workout logs editable for the latest 14 days.
+  const cutoffStr = addCalendarDays(localCalendarDate(), -14);
 
   // Group logs by week (Monday)
   const weeks = new Map();
@@ -279,7 +275,8 @@ async function loadHistory(userId) {
     list.appendChild(wkHeader);
 
     weekLogs.forEach(log => {
-      const exs = (log.workout_exercises || []).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+      const exs = (log.workout_exercises || []).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0) || (a.set_index || 0) - (b.set_index || 0));
+      const uniqueExCount = new Set(exs.map(e => e.exercise_name).filter(Boolean)).size;
       const editable = log.log_date >= cutoffStr;
       const isRest = log.is_rest_day;
 
@@ -298,12 +295,12 @@ async function loadHistory(userId) {
           <div style="display:grid; grid-template-columns:1fr 48px 80px 80px; gap:0.5rem; color:var(--muted); padding-bottom:0.375rem; border-bottom:1px solid var(--border); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em;">
             <span>Exercise</span><span>Sets</span><span>Reps</span><span>Weight</span>
           </div>
-          ${exs.map(ex => `
+          ${groupExerciseRows(exs).map(g => `
             <div style="display:grid; grid-template-columns:1fr 48px 80px 80px; gap:0.5rem; padding:0.4rem 0; border-bottom:1px solid var(--border);">
-              <span style="font-weight:500;">${escapeHtml(ex.exercise_name || '')}</span>
-              <span style="color:var(--muted);">${ex.sets_completed || '-'}</span>
-              <span style="color:var(--muted);">${escapeHtml(ex.reps_per_set || '-')}</span>
-              <span style="color:var(--muted);">${ex.weight_kg != null && ex.weight_kg !== '' ? ex.weight_kg + ' kg' : '-'}</span>
+              <span style="font-weight:500;">${escapeHtml(g.name)}</span>
+              <span style="color:var(--muted);">${g.sets || '-'}</span>
+              <span style="color:var(--muted);">${escapeHtml(g.reps || '-')}</span>
+              <span style="color:var(--muted);">${g.weight || '-'}</span>
             </div>
           `).join('')}
           ${log.overall_notes ? `<div style="margin-top:0.6rem; font-size:0.78rem; color:var(--muted); font-style:italic;">${escapeHtml(log.overall_notes)}</div>` : ''}
@@ -337,7 +334,7 @@ async function loadHistory(userId) {
             ${chips ? `<div style="display:flex; flex-wrap:wrap; gap:0.375rem; margin-top:0.5rem;">${chips}</div>` : ''}
           </div>
           <div style="display:flex; gap:0.4rem; align-items:center; flex-shrink:0; margin-top:0.1rem;">
-            ${exs.length ? `<span style="color:var(--muted); font-size:0.73rem; white-space:nowrap;">${exs.length} ex</span>` : ''}
+            ${uniqueExCount ? `<span style="color:var(--muted); font-size:0.73rem; white-space:nowrap;">${uniqueExCount} ex</span>` : ''}
             ${editable ? `<button class="btn btn-secondary btn-sm btn-edit-workout" data-id="${escapeHtml(log.id)}" style="padding:0.25rem 0.5rem; font-size:0.75rem;">Edit</button>` : ''}
             ${editable ? `<button class="btn-icon-delete btn-delete-workout" data-id="${escapeHtml(log.id)}" title="Delete" style="background:none;border:none;cursor:pointer;padding:0.25rem;color:var(--muted);font-size:1.1rem;line-height:1;">&times;</button>` : ''}
             ${exs.length || log.overall_notes ? `<svg class="card-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" style="color:var(--muted); cursor:pointer; flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>` : ''}
@@ -463,16 +460,16 @@ function buildProgressColumnKeys(mode, logs) {
   if (mode === 'day') {
     let keys = enumerateDayKeys(minD, maxD);
     if (keys.length > 60) keys = keys.slice(-60);
-    return keys;
+    return keys.reverse();
   }
   if (mode === 'month') {
     let keys = enumerateMonthKeys(monthStartKey(minD), monthStartKey(maxD));
     if (keys.length > 18) keys = keys.slice(-18);
-    return keys;
+    return keys.reverse();
   }
   let keys = enumerateWeekKeys(weekStartMondayKey(minD), weekStartMondayKey(maxD));
   if (keys.length > 24) keys = keys.slice(-24);
-  return keys;
+  return keys.reverse();
 }
 
 function columnHeaderLabel(key, mode) {
@@ -541,161 +538,184 @@ function syncExProgressHelp(mode) {
 }
 
 function getExerciseNamesSorted(logs) {
-  const freq = {};
-  const anyName = new Set();
+  const maxKg = {};
   logs.forEach(log => {
     (log.workout_exercises || []).forEach(ex => {
       if (!ex.exercise_name) return;
-      anyName.add(ex.exercise_name);
-      if (ex.weight_kg) freq[ex.exercise_name] = (freq[ex.exercise_name] || 0) + 1;
+      if (ex.set_type === 'warmup') return;
+      const w = Number(ex.weight_kg);
+      if (!Number.isNaN(w) && w > 0) {
+        maxKg[ex.exercise_name] = Math.max(maxKg[ex.exercise_name] || 0, w);
+      } else if (!(ex.exercise_name in maxKg)) {
+        maxKg[ex.exercise_name] = 0;
+      }
     });
   });
-  return [...anyName].sort((a, b) => (freq[b] || 0) - (freq[a] || 0));
+  return Object.keys(maxKg).sort((a, b) => (maxKg[b] || 0) - (maxKg[a] || 0) || a.localeCompare(b));
 }
 
 /**
  * Parse a reps token like "10", "8-10", "30s", "2min" → {value, suffix}.
  * Returns null if not parseable.
  */
+function setRepVal(ex) {
+  if (ex.reps != null) return String(ex.reps);
+  const dur = Number(ex.duration_seconds);
+  if (dur > 0) return dur >= 60 ? Math.floor(dur / 60) + ' min' : dur + 's';
+  const dist = Number(ex.distance_km);
+  if (dist > 0) return dist + ' km';
+  return null;
+}
+
+function groupExerciseRows(exs) {
+  const groups = [];
+  exs.forEach(ex => {
+    const prev = groups[groups.length - 1];
+    const rv = setRepVal(ex);
+    if (prev && prev.name === (ex.exercise_name || '')) {
+      prev.sets++;
+      if (rv !== null) prev.repsArr.push(rv);
+      if (ex.weight_kg != null && Number(ex.weight_kg) > 0) prev.weightSet.add(Number(ex.weight_kg));
+    } else {
+      groups.push({
+        name: ex.exercise_name || '',
+        sets: 1,
+        repsArr: rv !== null ? [rv] : [],
+        weightSet: new Set(ex.weight_kg != null && Number(ex.weight_kg) > 0 ? [Number(ex.weight_kg)] : []),
+      });
+    }
+  });
+  return groups.map(g => ({
+    name: g.name,
+    sets: g.sets,
+    reps: g.repsArr.length ? g.repsArr.join(' · ') : '-',
+    weight: g.weightSet.size ? [...g.weightSet].join('/') + ' kg' : '-',
+  }));
+}
+
+function fmtReps(val) {
+  if (!val) return val;
+  return String(val)
+    .replace(/(\d+)s\b/g, (_, n) => {
+      const mins = Math.round(Number(n) / 60);
+      return mins >= 1 ? `${mins} min` : `${n}s`;
+    })
+    .replace(/\(?failure\)?/gi, '(F)')
+    .replace(/\(?warmup\)?/gi, '(W)')
+    .replace(/\(?dropset\)?/gi, '(D)');
+}
+
 function parseRepToken(token) {
   const s = String(token || '').trim();
   if (!s) return null;
+  const toSecs = (n, sfx) => /min/i.test(sfx) ? n * 60 : n;
   const range = s.match(/^(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)(.*)$/i);
   if (range) {
     const a = Number(range[1]), b = Number(range[2]);
-    if (!Number.isNaN(a) && !Number.isNaN(b))
-      return { value: (a + b) / 2, suffix: (range[3] || '').trim() };
+    const sfx = (range[3] || '').trim();
+    if (!Number.isNaN(a) && !Number.isNaN(b)) {
+      const mid = (a + b) / 2;
+      return { value: toSecs(mid, sfx), display: mid, suffix: sfx };
+    }
   }
   const one = s.match(/^(\d+(?:\.\d+)?)(.*)$/i);
   if (!one) return null;
   const n = Number(one[1]);
   if (Number.isNaN(n)) return null;
-  return { value: n, suffix: (one[2] || '').trim() };
+  const sfx = (one[2] || '').trim();
+  return { value: toSecs(n, sfx), display: n, suffix: sfx };
 }
 
-/**
- * Each workout_exercises row is one "entry" for an exercise.
- * In day mode: entries are sorted by sort_order → slots listed in order (sum sets).
- * In week/month mode: group by session (log_id), sort each session by sort_order,
- * then average slot-i with slot-i across sessions.
- */
 function aggregateExerciseLinesForBucket(entries, mode = 'day') {
   if (!entries?.length) return null;
 
-  const fmtNum = v => v == null || Number.isNaN(v) ? null :
-    Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
-
-  const sortExs = exs => [...exs].sort((a, b) => {
-    const as = Number(a.ex.sort_order), bs = Number(b.ex.sort_order);
-    const aOk = !Number.isNaN(as), bOk = !Number.isNaN(bs);
-    if (aOk && bOk && as !== bs) return as - bs;
-    if (aOk !== bOk) return aOk ? -1 : 1;
-    return String(a.ex.id || '').localeCompare(String(b.ex.id || ''));
-  });
-
-  // Expand one exercise row into an array of slots: [{kg, reps, sfx}]
-  const expandEntry = ({ ex }) => {
-    const setsNum = Number(ex.sets_completed);
-    const hasSets = !Number.isNaN(setsNum) && setsNum > 0;
-    const slots = hasSets ? Math.max(1, Math.ceil(setsNum)) : 1;
-    const w = Number(ex.weight_kg);
-    const kg = (!Number.isNaN(w) && w > 0) ? w : null;
-    const repsTxt = (ex.reps_per_set && String(ex.reps_per_set).trim()) || '';
-    const tokens = repsTxt
-      ? repsTxt.split(/\s*·\s*|\s*,\s*/).map(x => x.trim()).filter(Boolean).map(parseRepToken).filter(Boolean)
-      : [];
-    const result = [];
-    for (let i = 0; i < slots; i++) {
-      const t = tokens[i] || tokens[tokens.length - 1] || null;
-      result.push({ kg, reps: t ? t.value : null, sfx: t ? t.suffix : '', sets: hasSets ? setsNum : null });
-    }
-    return result;
+  const fmtNum = v => {
+    if (v == null || Number.isNaN(v)) return null;
+    return Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
   };
 
-  if (mode === 'day') {
-    // Sort all entries by sort_order, expand in order, concatenate
-    const ordered = sortExs(entries);
-    const allSlots = ordered.flatMap(e => expandEntry(e));
-    if (!allSlots.length) return null;
+  const setRepInfo = ex => {
+    if (ex.reps != null) return { value: Number(ex.reps), display: Number(ex.reps), suffix: '' };
+    const dur = Number(ex.duration_seconds);
+    if (dur > 0) return dur >= 60
+      ? { value: dur, display: Math.floor(dur / 60), suffix: ' min' }
+      : { value: dur, display: dur, suffix: 's' };
+    const dist = Number(ex.distance_km);
+    if (dist > 0) return { value: dist, display: dist, suffix: ' km' };
+    return null;
+  };
 
-    const totalSets = ordered.reduce((sum, { ex }) => {
-      const n = Number(ex.sets_completed);
-      return sum + ((!Number.isNaN(n) && n > 0) ? n : 0);
-    }, 0);
-    const setsCompleted = totalSets > 0 ? totalSets : null;
-
-    const kgVals = allSlots.map(s => s.kg).filter(v => v != null);
-    const repsVals = allSlots.map(s => s.reps).filter(v => v != null);
-    const sfxs = allSlots.filter(s => s.reps != null).map(s => s.sfx);
-
-    const repsMerged = repsVals.length
-      ? repsVals.map((v, i) => `${fmtNum(v)}${sfxs[i] || ''}`).join(' · ')
-      : null;
-
-    return {
-      weight_kg: kgVals.length ? kgVals[0] : null,
-      weight_values: kgVals,
-      sets_completed: setsCompleted,
-      reps_values: repsVals,
-      reps_per_set: repsMerged,
-    };
-  }
-
-  // Week / Month: group by session, sort within session, average slot-i with slot-i
   const sessionMap = new Map();
   for (const e of entries) {
     const key = e.log.id || e.log.log_date || '';
     if (!sessionMap.has(key)) sessionMap.set(key, []);
     sessionMap.get(key).push(e);
   }
-
-  // Build per-session flat slot arrays
-  const sessionSlots = [];
-  const sessionSetTotals = [];
-  for (const ses of sessionMap.values()) {
-    const ordered = sortExs(ses);
-    const slots = ordered.flatMap(e => expandEntry(e));
-    sessionSlots.push(slots);
-    const tot = ordered.reduce((sum, { ex }) => {
-      const n = Number(ex.sets_completed);
-      return sum + ((!Number.isNaN(n) && n > 0) ? n : 0);
-    }, 0);
-    sessionSetTotals.push(tot || 0);
+  for (const [, sets] of sessionMap) {
+    sets.sort((a, b) => (a.ex.set_index ?? 0) - (b.ex.set_index ?? 0));
   }
 
-  // Average set count across sessions
-  const avgSets = sessionSetTotals.reduce((a, b) => a + b, 0) / sessionSetTotals.length;
-  const displaySlots = Math.max(1, Math.ceil(avgSets));
+  if (mode === 'day') {
+    const allSets = [...sessionMap.values()].flatMap(s => s);
+    allSets.sort((a, b) => (a.ex.set_index ?? 0) - (b.ex.set_index ?? 0));
 
-  // Bucket slot-i values across sessions
-  const kgBuckets = Array.from({ length: displaySlots }, () => []);
+    const kgVals = allSets.map(e => Number(e.ex.weight_kg)).filter(v => !isNaN(v) && v > 0);
+    const repsInfos = allSets.map(e => setRepInfo(e.ex)).filter(v => v != null);
+    const repsMerged = repsInfos.length
+      ? repsInfos.map(r => `${fmtNum(r.display)}${r.suffix}`).join(' · ')
+      : null;
+
+    return {
+      weight_kg:      kgVals.length ? kgVals[0] : null,
+      weight_values:  kgVals,
+      sets_completed: allSets.length,
+      reps_values:    repsInfos.map(r => r.value),
+      reps_per_set:   repsMerged,
+    };
+  }
+
+  const sessions = [...sessionMap.values()];
+  const avgSets = sessions.reduce((sum, s) => sum + s.length, 0) / sessions.length;
+  const displaySlots = Math.max(1, Math.round(avgSets));
+
+  const kgBuckets   = Array.from({ length: displaySlots }, () => []);
   const repsBuckets = Array.from({ length: displaySlots }, () => []);
-  const sfxBuckets = Array.from({ length: displaySlots }, () => []);
+  const dispBuckets = Array.from({ length: displaySlots }, () => []);
+  const sfxBuckets  = Array.from({ length: displaySlots }, () => []);
 
-  for (const slots of sessionSlots) {
+  for (const sessionSets of sessions) {
+    const anyReps = sessionSets.some(e => setRepInfo(e.ex) != null);
     for (let i = 0; i < displaySlots; i++) {
-      // If session has fewer slots, use last one (fill forward)
-      const s = slots.length ? slots[Math.min(i, slots.length - 1)] : null;
-      if (!s) continue;
-      if (s.kg != null) kgBuckets[i].push(s.kg);
-      if (s.reps != null) { repsBuckets[i].push(s.reps); sfxBuckets[i].push(s.sfx || ''); }
+      const e = sessionSets[Math.min(i, sessionSets.length - 1)];
+      const kg = Number(e.ex.weight_kg);
+      if (!isNaN(kg) && kg > 0) kgBuckets[i].push(kg);
+      const ri = setRepInfo(e.ex);
+      if (ri) {
+        repsBuckets[i].push(ri.value);
+        dispBuckets[i].push(ri.display);
+        sfxBuckets[i].push(ri.suffix);
+      } else if (anyReps) {
+        repsBuckets[i].push(0);
+        dispBuckets[i].push(0);
+        sfxBuckets[i].push('');
+      }
     }
   }
 
   const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
   const weightValues = kgBuckets.map(avg).filter(v => v != null);
-  const repsValues = repsBuckets.map(avg).filter(v => v != null);
-
-  const repsMerged = repsValues.length
-    ? repsValues.map((v, i) => `${fmtNum(v)}${(sfxBuckets[i] || [])[0] || ''}`).join(' · ')
+  const repsValues   = repsBuckets.map(avg).filter(v => v != null);
+  const dispValues   = dispBuckets.map(avg).filter(v => v != null);
+  const repsMerged = dispValues.length
+    ? dispValues.map((v, i) => `${fmtNum(v)}${(sfxBuckets[i] || [])[0] || ''}`).join(' · ')
     : null;
 
   return {
-    weight_kg: weightValues.length ? weightValues[0] : null,
-    weight_values: weightValues,
+    weight_kg:      weightValues.length ? weightValues[0] : null,
+    weight_values:  weightValues,
     sets_completed: avgSets,
-    reps_values: repsValues,
-    reps_per_set: repsMerged,
+    reps_values:    repsValues,
+    reps_per_set:   repsMerged,
   };
 }
 
@@ -806,6 +826,7 @@ function renderExerciseProgressTable() {
     if (!colSet.has(bk)) return;
     (log.workout_exercises || []).forEach(ex => {
       if (!ex.exercise_name) return;
+      if (ex.set_type === 'warmup') return;
       const k = ex.exercise_name + '\0' + bk;
       if (!rowsByExBucket.has(k)) rowsByExBucket.set(k, []);
       rowsByExBucket.get(k).push({ log, ex });
@@ -832,23 +853,23 @@ function renderExerciseProgressTable() {
 
   const rows = names.map(name => {
     const cells = columnKeys.map((bk, colIdx) => {
-      const prevBk = colIdx > 0 ? columnKeys[colIdx - 1] : null;
+      const prevBk = colIdx < columnKeys.length - 1 ? columnKeys[colIdx + 1] : null;
       const prevAgg = prevBk ? aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + prevBk) || [], mode) : null;
       const prevEx = prevAgg && cellHasDisplayableContent(prevAgg) ? prevAgg : null;
       const agg = aggregateExerciseLinesForBucket(rowsByExBucket.get(name + '\0' + bk) || [], mode);
       const inner = agg ? formatExerciseProgressCell(agg, prevEx) : null;
       const text = inner || '—';
       const color = inner ? 'var(--text)' : 'var(--muted)';
-      return `<td style="font-size:0.72rem;text-align:center;padding:0.5rem 0.35rem;border-bottom:1px solid var(--border);color:${color};vertical-align:top;">${text}</td>`;
+      return `<td style="font-size:0.72rem;text-align:center;padding:0.5rem 0.35rem;border-bottom:1px solid var(--border);color:${color};vertical-align:top;background:var(--bg3);">${text}</td>`;
     }).join('');
     return `<tr>
-      <td style="position:sticky;left:0;z-index:1;font-size:0.78rem;font-weight:600;padding:0.45rem 0.6rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:middle;max-width:14rem;background:var(--bg3);box-shadow:1px 0 0 var(--border);">${escapeHtml(name)}</td>
+      <td style="position:sticky;left:0;z-index:2;font-size:0.78rem;font-weight:600;padding:0.45rem 0.75rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:middle;min-width:8rem;max-width:14rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--bg3);box-shadow:2px 0 4px var(--bg3),1px 0 0 var(--border);">${escapeHtml(name)}</td>
       ${cells}
     </tr>`;
   }).join('');
 
   host.innerHTML = `
-    <table style="width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;">
+    <table style="width:100%;border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums;">
       <thead>
         <tr>
           <th style="position:sticky;left:0;z-index:3;background:var(--bg3);box-shadow:1px 1px 0 var(--border);font-size:0.68rem;font-weight:700;text-align:left;padding:0.45rem 0.6rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:bottom;min-width:8rem;">Exercise</th>
@@ -893,49 +914,108 @@ function openEditModal(log) {
   document.getElementById('e-notes').value    = log.overall_notes || '';
   document.getElementById('e-alert').style.display = 'none';
 
-  // Populate exercises
+  // Populate exercises - group per-set rows into exercise blocks
   const container = document.getElementById('e-exercises-container');
   container.innerHTML = '';
-  const exs = (log.workout_exercises || []).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const exs = (log.workout_exercises || []).sort((a, b) =>
+    (a.sort_order || 0) - (b.sort_order || 0) || (a.set_index || 0) - (b.set_index || 0)
+  );
   if (exs.length) {
-    exs.forEach(ex => addEditExRow(ex));
+    const exGroups = new Map();
+    exs.forEach(ex => {
+      if (!exGroups.has(ex.exercise_name)) {
+        exGroups.set(ex.exercise_name, { sort_order: ex.sort_order || 0, notes: ex.notes, sets: [] });
+      }
+      exGroups.get(ex.exercise_name).sets.push(ex);
+    });
+    [...exGroups.entries()]
+      .sort((a, b) => a[1].sort_order - b[1].sort_order)
+      .forEach(([name, { notes, sets }]) => addEditExBlock(name, notes, sets));
   } else {
-    addEditExRow(); addEditExRow(); addEditExRow();
+    addEditExBlock(); addEditExBlock(); addEditExBlock();
   }
 
   openModal('modal-edit');
 }
 
-function addEditExRow(ex = {}) {
+function addEditExBlock(name = '', notesVal = '', sets = []) {
   const container = document.getElementById('e-exercises-container');
-  const row = document.createElement('div');
-  row.className = 'exercise-row';
-  row.innerHTML = `
-    <input type="text" placeholder="Exercise name" class="ex-name" value="${escapeHtml(ex.exercise_name || '')}"/>
-    <input type="number" placeholder="3" min="1" max="20" class="ex-sets" value="${ex.sets_completed || ''}"/>
-    <input type="text" placeholder="8-10" class="ex-reps" value="${escapeHtml(ex.reps_per_set || '')}"/>
-    <input type="number" placeholder="kg" min="0" max="500" step="0.5" class="ex-weight" value="${ex.weight_kg || ''}"/>
-    <input type="text" placeholder="Notes" class="ex-notes" value="${escapeHtml(ex.notes || '')}"/>
-    <button type="button" class="btn btn-secondary btn-sm" style="padding:0.35rem 0.6rem;" onclick="this.closest('.exercise-row').remove()">x</button>
+  const block = document.createElement('div');
+  block.dataset.exBlock = '1';
+  block.style.cssText = 'border-bottom:1px solid var(--border);padding:0.5rem 0;';
+  block.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:0.5rem;margin-bottom:0.35rem;align-items:center;">
+      <input type="text" placeholder="Exercise name" class="ex-name" list="exercise-list" autocomplete="off"/>
+      <input type="text" placeholder="Notes (optional)" class="ex-notes"/>
+      <button type="button" class="btn-remove-ex" title="Remove" style="background:none;border:none;cursor:pointer;padding:0.25rem;color:var(--muted);font-size:1.1rem;line-height:1;">&times;</button>
+    </div>
+    <div style="overflow-x:auto;"><div class="set-rows" style="display:flex;flex-direction:column;gap:0.2rem;margin-left:0.5rem;min-width:400px;"></div></div>
+    <button type="button" class="btn-add-set btn btn-secondary btn-sm" style="margin-left:0.5rem;margin-top:0.3rem;font-size:0.72rem;padding:0.2rem 0.5rem;">+ Set</button>
   `;
-  container.appendChild(row);
+  block.querySelector('.ex-name').value = name;
+  block.querySelector('.ex-notes').value = notesVal || '';
+  block.querySelector('.btn-remove-ex').addEventListener('click', () => block.remove());
+  const setsContainer = block.querySelector('.set-rows');
+  block.querySelector('.btn-add-set').addEventListener('click', () => addEditSetRow(setsContainer));
+  if (sets.length) {
+    sets.forEach(s => addEditSetRow(setsContainer, s));
+  } else {
+    addEditSetRow(setsContainer); addEditSetRow(setsContainer); addEditSetRow(setsContainer);
+  }
+  container.appendChild(block);
+}
+
+function addEditSetRow(setsContainer, set = {}) {
+  const row = document.createElement('div');
+  row.style.cssText = 'display:grid;grid-template-columns:82px 50px 58px 55px 55px 44px auto;gap:0.35rem;align-items:center;';
+  const type = set.set_type || 'normal';
+  row.innerHTML = `
+    <select class="set-type" style="padding:0.3rem 0.4rem;font-size:0.78rem;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);">
+      <option value="normal"${type==='normal'?' selected':''}>Normal</option>
+      <option value="warmup"${type==='warmup'?' selected':''}>Warm-up</option>
+      <option value="failure"${type==='failure'?' selected':''}>Failure</option>
+      <option value="dropset"${type==='dropset'?' selected':''}>Drop set</option>
+    </select>
+    <input type="number" placeholder="Reps" min="0" max="999" class="set-reps" value="${set.reps ?? ''}"/>
+    <input type="number" placeholder="kg" min="0" max="1000" step="0.5" class="set-weight" value="${set.weight_kg ?? ''}"/>
+    <input type="number" placeholder="km" min="0" max="1000" step="0.01" class="set-dist" value="${set.distance_km ?? ''}"/>
+    <input type="number" placeholder="sec" min="0" max="86400" class="set-dur" value="${set.duration_seconds ?? ''}"/>
+    <input type="number" placeholder="RPE" min="1" max="10" step="0.5" class="set-rpe" value="${set.rpe ?? ''}"/>
+    <button type="button" class="btn-remove-set" style="background:none;border:none;cursor:pointer;padding:0.2rem;color:var(--muted);font-size:0.9rem;line-height:1;">&times;</button>
+  `;
+  row.querySelector('.btn-remove-set').addEventListener('click', () => row.remove());
+  setsContainer.appendChild(row);
 }
 
 function collectEditExercises(logId) {
-  const rows = document.querySelectorAll('#e-exercises-container .exercise-row');
   const result = [];
-  rows.forEach((row, i) => {
-    const name = row.querySelector('.ex-name').value.trim();
+  let sortIdx = 0;
+  document.querySelectorAll('#e-exercises-container [data-ex-block]').forEach(block => {
+    const name = block.querySelector('.ex-name').value.trim();
     if (!name) return;
-    result.push({
-      log_id:         logId,
-      exercise_name:  name,
-      sets_completed: Number(row.querySelector('.ex-sets').value) || null,
-      reps_per_set:   row.querySelector('.ex-reps').value.trim() || null,
-      weight_kg:      Number(row.querySelector('.ex-weight').value) || null,
-      notes:          row.querySelector('.ex-notes').value.trim() || null,
-      sort_order:     i,
+    const notes = block.querySelector('.ex-notes').value.trim() || null;
+    block.querySelectorAll('.set-rows > div').forEach((row, idx) => {
+      const reps = Number(row.querySelector('.set-reps').value) || null;
+      const weight = Number(row.querySelector('.set-weight').value) || null;
+      const dist = Number(row.querySelector('.set-dist').value) || null;
+      const dur = Number(row.querySelector('.set-dur').value) || null;
+      const rpe = Number(row.querySelector('.set-rpe').value) || null;
+      if (reps == null && weight == null && dist == null && dur == null) return;
+      result.push({
+        log_id:           logId,
+        exercise_name:    name,
+        set_index:        idx,
+        set_type:         row.querySelector('.set-type').value || 'normal',
+        reps,
+        weight_kg:        weight,
+        distance_km:      dist,
+        duration_seconds: dur,
+        rpe,
+        notes,
+        sort_order:       sortIdx,
+      });
     });
+    sortIdx++;
   });
   return result;
 }

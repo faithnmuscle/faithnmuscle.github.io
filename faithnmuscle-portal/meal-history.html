@@ -50,6 +50,26 @@
     <div class="portal-content" id="page-content" style="display:none;">
       <div id="loading" style="color:var(--muted); font-size:0.875rem;">Loading...</div>
       <div id="empty" style="display:none;"><div class="empty-state"><div class="empty-state-icon">🥗</div><h3>No Meals Logged Yet</h3><p>Start tracking your daily nutrition.</p><a href="/log-meal.html" class="btn btn-primary">Log Today</a></div></div>
+
+      <!-- Macro progress: rows = macros; columns = day / week / month -->
+      <div id="progress-card" class="card" style="display:none; margin-bottom:1.25rem; padding:0; overflow:hidden;">
+        <div style="padding:1rem 1.25rem 0.75rem; border-bottom:1px solid var(--border);">
+          <div class="card-title">Macro Progress</div>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem 1rem; margin-top:0.5rem;">
+            <label for="macro-progress-granularity" style="font-size:0.78rem; color:var(--muted); margin:0;">Group by</label>
+            <select id="macro-progress-granularity" style="max-width:200px; padding:0.35rem 0.6rem; border-radius:6px; border:1px solid var(--border); background:var(--bg2); color:var(--text); font-size:0.8rem;">
+              <option value="day" selected>Day</option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+            </select>
+          </div>
+          <div id="macro-progress-help" style="font-size:0.78rem; color:var(--muted); margin-top:0.4rem;"></div>
+        </div>
+        <div id="macro-progress-scroll" style="overflow-x:auto; overflow-y:visible; padding:0.75rem 1rem 1rem;">
+          <div id="macro-progress-table-host"></div>
+        </div>
+      </div>
+
       <div id="history-list" style="display:none; flex-direction:column; gap:0.75rem;"></div>
     </div>
   </main>
@@ -67,6 +87,38 @@ await initSidebar();
 const profile = await getProfile();
 
 const cutoffStr = addCalendarDays(localCalendarDate(), -7);
+
+let allLogs = [];
+let macroProgressGranularityBound = false;
+
+const MACRO_PROGRESS_GROUP_STORAGE = 'faithnmuscle_meal_history_group_by';
+const MACRO_PROGRESS_MODES = ['day', 'week', 'month'];
+
+const MACRO_ROWS = [
+  { key: 'calories', label: 'Calories', unit: 'kcal', color: 'var(--blue-light)' },
+  { key: 'protein',  label: 'Protein',  unit: 'g',    color: '#34d399' },
+  { key: 'carbs',    label: 'Carbs',    unit: 'g',    color: '#fbbf24' },
+  { key: 'fat',      label: 'Fat',      unit: 'g',    color: '#f97316' },
+  { key: 'water',    label: 'Water',    unit: 'ml',   color: '#60a5fa' },
+];
+
+function getStoredMacroGroupBy() {
+  try {
+    const v = localStorage.getItem(MACRO_PROGRESS_GROUP_STORAGE);
+    if (MACRO_PROGRESS_MODES.includes(v)) return v;
+  } catch (_) {}
+  return 'day';
+}
+
+function setStoredMacroGroupBy(v) {
+  if (!MACRO_PROGRESS_MODES.includes(v)) return;
+  try { localStorage.setItem(MACRO_PROGRESS_GROUP_STORAGE, v); } catch (_) {}
+}
+
+function applyMacroGroupBySelect() {
+  const sel = document.getElementById('macro-progress-granularity');
+  if (sel) sel.value = getStoredMacroGroupBy();
+}
 
 function mealLogDateYMD(log) {
   const raw = String(log?.log_date || '').trim();
@@ -135,6 +187,9 @@ async function loadHistory(userId) {
   const logs = (rawLogs || []).filter(mealLogHasDisplayableContent);
   if (!logs.length) { document.getElementById('empty').style.display = 'block'; return; }
 
+  allLogs = logs;
+  initMacroChart(logs);
+
   const list = document.getElementById('history-list');
   document.getElementById('empty').style.display = 'none';
   list.style.display = 'flex';
@@ -186,6 +241,244 @@ async function loadHistory(userId) {
 
     list.appendChild(card);
   });
+}
+
+// ── Macro progress table ──
+
+function getMealLogTotals(log) {
+  const entries = mealEntriesList(log);
+  let calories = 0, protein = 0, carbs = 0, fat = 0;
+  entries.forEach(e => {
+    calories += Number(e.calories_kcal) || 0;
+    protein  += Number(e.protein_g)     || 0;
+    carbs    += Number(e.carbs_g)        || 0;
+    fat      += Number(e.fat_g)          || 0;
+  });
+  return {
+    calories: calories || null,
+    protein:  protein  || null,
+    carbs:    carbs     || null,
+    fat:      fat       || null,
+    water:    Number(log.water_ml) || null,
+  };
+}
+
+function weekStartMondayKey(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const day = d.getDay();
+  d.setDate(d.getDate() + (day === 0 ? -6 : 1 - day));
+  return d.toLocaleDateString('en-CA');
+}
+
+function monthStartKey(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return new Date(d.getFullYear(), d.getMonth(), 1, 12).toLocaleDateString('en-CA');
+}
+
+function bucketKeyForMode(dateStr, mode) {
+  if (mode === 'day')   return new Date(dateStr + 'T12:00:00').toLocaleDateString('en-CA');
+  if (mode === 'month') return monthStartKey(dateStr);
+  return weekStartMondayKey(dateStr);
+}
+
+function getMealLogDateBounds(logs) {
+  let minD = null, maxD = null;
+  logs.forEach(log => {
+    const ld = mealLogDateYMD(log);
+    if (!ld) return;
+    if (minD === null || ld < minD) minD = ld;
+    if (maxD === null || ld > maxD) maxD = ld;
+  });
+  return { minD, maxD };
+}
+
+function enumerateDayKeys(minStr, maxStr) {
+  const keys = [];
+  const d = new Date(minStr + 'T12:00:00');
+  const end = new Date(maxStr + 'T12:00:00');
+  while (d <= end) { keys.push(d.toLocaleDateString('en-CA')); d.setDate(d.getDate() + 1); }
+  return keys;
+}
+
+function enumerateWeekKeys(monStart, monEnd) {
+  const keys = [];
+  const d = new Date(monStart + 'T12:00:00');
+  const end = new Date(monEnd + 'T12:00:00');
+  while (d <= end) { keys.push(d.toLocaleDateString('en-CA')); d.setDate(d.getDate() + 7); }
+  return keys;
+}
+
+function enumerateMonthKeys(firstKey, lastKey) {
+  const keys = [];
+  const d = new Date(firstKey + 'T12:00:00');
+  const end = new Date(lastKey + 'T12:00:00');
+  while (d <= end) {
+    keys.push(new Date(d.getFullYear(), d.getMonth(), 1, 12).toLocaleDateString('en-CA'));
+    d.setMonth(d.getMonth() + 1);
+  }
+  return keys;
+}
+
+function buildMacroColumnKeys(mode, logs) {
+  const { minD, maxD } = getMealLogDateBounds(logs);
+  if (!minD || !maxD) return [];
+  if (mode === 'day') {
+    let keys = enumerateDayKeys(minD, maxD);
+    if (keys.length > 60) keys = keys.slice(-60);
+    return keys.reverse();
+  }
+  if (mode === 'month') {
+    let keys = enumerateMonthKeys(monthStartKey(minD), monthStartKey(maxD));
+    if (keys.length > 18) keys = keys.slice(-18);
+    return keys.reverse();
+  }
+  let keys = enumerateWeekKeys(weekStartMondayKey(minD), weekStartMondayKey(maxD));
+  if (keys.length > 24) keys = keys.slice(-24);
+  return keys.reverse();
+}
+
+function columnHeaderLabel(key, mode) {
+  const d = new Date(key + 'T12:00:00');
+  if (mode === 'month') return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+  if (mode === 'week') {
+    const start = new Date(key + 'T12:00:00');
+    const end = new Date(start); end.setDate(end.getDate() + 6);
+    if (start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth()) {
+      return `${start.toLocaleDateString('en-GB', { day:'numeric' })} - ${end.toLocaleDateString('en-GB', { day:'numeric', month:'short' })}`;
+    }
+    return `${start.toLocaleDateString('en-GB', { day:'numeric', month:'short' })} - ${end.toLocaleDateString('en-GB', { day:'numeric', month:'short' })}`;
+  }
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+function thMinWidthMacro(mode) {
+  if (mode === 'day')   return '7rem';
+  if (mode === 'month') return '5rem';
+  return '8rem';
+}
+
+function syncMacroProgressHelp(mode) {
+  const el = document.getElementById('macro-progress-help');
+  if (!el) return;
+  const tail = ' Trend arrows vs the previous column: up (green) = higher, down (red) = lower.';
+  const lines = {
+    day:   'Each column is one logged day. Days with no macro data are hidden.' + tail,
+    week:  'Each column is one week (Mon-Sun). Values are daily averages within the week. Weeks with no macro data are hidden.' + tail,
+    month: 'Each column is one month. Values are daily averages within the month. Months with no macro data are hidden.' + tail,
+  };
+  el.textContent = lines[mode] || lines.day;
+}
+
+/** For a bucket, aggregate macro totals across all logs in that bucket. Day = single value; week/month = average of daily totals. */
+function aggregateMacroForBucket(logsInBucket, macroKey, mode) {
+  const vals = logsInBucket.map(log => getMealLogTotals(log)[macroKey]).filter(v => v != null && v > 0);
+  if (!vals.length) return null;
+  if (mode === 'day') return vals[0];
+  return vals.reduce((a, b) => a + b, 0) / vals.length;
+}
+
+function trendArrowHtml(cur, prev) {
+  if (prev == null || cur == null) return '';
+  if (cur > prev) return '<span style="color:#34d399;font-size:0.85em;vertical-align:0.05em;margin-left:0.15em;">↑</span>';
+  if (cur < prev) return '<span style="color:#f87171;font-size:0.85em;vertical-align:0.05em;margin-left:0.15em;">↓</span>';
+  return '';
+}
+
+function fmtMacroVal(v) {
+  if (v == null) return null;
+  return Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
+}
+
+function renderMacroProgressTable() {
+  const logs = allLogs;
+  const host = document.getElementById('macro-progress-table-host');
+  const sel = document.getElementById('macro-progress-granularity');
+  const mode = (sel && sel.value) || getStoredMacroGroupBy();
+  syncMacroProgressHelp(mode);
+
+  let columnKeys = buildMacroColumnKeys(mode, logs);
+  if (!columnKeys.length) { if (host) host.innerHTML = ''; return; }
+
+  const colSet = new Set(columnKeys);
+
+  // Build bucket map: key -> [logs]
+  const bucketMap = new Map();
+  logs.forEach(log => {
+    const ymd = mealLogDateYMD(log);
+    if (!ymd) return;
+    const bk = bucketKeyForMode(ymd, mode);
+    if (!colSet.has(bk)) return;
+    if (!bucketMap.has(bk)) bucketMap.set(bk, []);
+    bucketMap.get(bk).push(log);
+  });
+
+  // Filter columns that have at least one macro with data
+  columnKeys = columnKeys.filter(bk => {
+    const logsInBucket = bucketMap.get(bk) || [];
+    return MACRO_ROWS.some(row => aggregateMacroForBucket(logsInBucket, row.key, mode) != null);
+  });
+
+  if (!columnKeys.length) {
+    if (host) host.innerHTML = '<p style="font-size:0.85rem;color:var(--muted);margin:0;">No macro data to display in this range.</p>';
+    return;
+  }
+
+  const mw = thMinWidthMacro(mode);
+  const thCols = columnKeys.map(key =>
+    `<th title="${escapeHtml(key)}" style="position:sticky;z-index:1;font-size:0.68rem;font-weight:600;color:var(--muted);text-align:center;padding:0.4rem 0.3rem;border-bottom:1px solid var(--border);white-space:nowrap;min-width:${mw};background:var(--bg3);">${escapeHtml(columnHeaderLabel(key, mode))}</th>`
+  ).join('');
+
+  const rows = MACRO_ROWS.map(row => {
+    const cells = columnKeys.map((bk, colIdx) => {
+      const logsInBucket = bucketMap.get(bk) || [];
+      const cur = aggregateMacroForBucket(logsInBucket, row.key, mode);
+      const prevBk = colIdx < columnKeys.length - 1 ? columnKeys[colIdx + 1] : null;
+      const prev = prevBk ? aggregateMacroForBucket(bucketMap.get(prevBk) || [], row.key, mode) : null;
+      if (cur == null) {
+        return `<td style="font-size:0.72rem;text-align:center;padding:0.5rem 0.35rem;border-bottom:1px solid var(--border);color:var(--muted);background:var(--bg3);">-</td>`;
+      }
+      const txt = `<span style="font-weight:600;color:${row.color};">${escapeHtml(fmtMacroVal(cur))}</span> <span style="color:var(--muted);font-size:0.68rem;">${row.unit}</span>${trendArrowHtml(cur, prev)}`;
+      return `<td style="font-size:0.72rem;text-align:center;padding:0.5rem 0.35rem;border-bottom:1px solid var(--border);color:var(--text);background:var(--bg3);">${txt}</td>`;
+    }).join('');
+
+    return `<tr>
+      <td style="position:sticky;left:0;z-index:2;font-size:0.78rem;font-weight:600;padding:0.45rem 0.75rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:middle;min-width:6rem;white-space:nowrap;background:var(--bg3);box-shadow:2px 0 4px var(--bg3),1px 0 0 var(--border);">${escapeHtml(row.label)}</td>
+      ${cells}
+    </tr>`;
+  }).join('');
+
+  host.innerHTML = `
+    <table style="width:100%;border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums;">
+      <thead>
+        <tr>
+          <th style="position:sticky;left:0;z-index:3;background:var(--bg3);box-shadow:1px 1px 0 var(--border);font-size:0.68rem;font-weight:700;text-align:left;padding:0.45rem 0.6rem 0.45rem 0;border-bottom:1px solid var(--border);vertical-align:bottom;min-width:6rem;">Macro</th>
+          ${thCols}
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function initMacroChart(logs) {
+  const hasMacros = logs.some(log => {
+    const t = getMealLogTotals(log);
+    return t.calories || t.protein || t.carbs || t.fat || t.water;
+  });
+  if (!hasMacros) { document.getElementById('progress-card').style.display = 'none'; return; }
+
+  document.getElementById('progress-card').style.display = '';
+  applyMacroGroupBySelect();
+
+  if (!macroProgressGranularityBound) {
+    document.getElementById('macro-progress-granularity').addEventListener('change', e => {
+      setStoredMacroGroupBy(e.target.value);
+      renderMacroProgressTable();
+    });
+    macroProgressGranularityBound = true;
+  }
+
+  renderMacroProgressTable();
 }
 </script>
 </body>

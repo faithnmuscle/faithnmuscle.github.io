@@ -727,7 +727,7 @@ if (activePlan && ['coaching','workout','athletes','rehab'].includes(activePlan.
   document.getElementById('workout-card').style.display = 'block';
   const { data: workouts } = await supabase
     .from('workout_logs')
-    .select('id, log_date, session_name, duration_min, perceived_effort, body_weight_kg, overall_notes, workout_exercises(exercise_name, sets_completed, reps_per_set, weight_kg, notes, sort_order)')
+    .select('id, log_date, session_name, duration_min, perceived_effort, body_weight_kg, overall_notes, workout_exercises(exercise_name, set_index, set_type, reps, weight_kg, notes, sort_order)')
     .eq('client_id', clientId)
     .order('log_date', { ascending: false })
     .limit(10);
@@ -738,14 +738,25 @@ if (activePlan && ['coaching','workout','athletes','rehab'].includes(activePlan.
   } else {
     wEl.innerHTML = '';
     workouts.forEach((w, i) => {
-      const exs = (w.workout_exercises || []).sort((a,b) => (a.sort_order||0)-(b.sort_order||0));
-      const exRows = exs.map(e => `
+      const exs = (w.workout_exercises || []).sort((a,b) => (a.sort_order||0)-(b.sort_order||0) || (a.set_index||0)-(b.set_index||0));
+      const exGroups = [];
+      exs.forEach(e => {
+        const prev = exGroups[exGroups.length - 1];
+        if (prev && prev.name === e.exercise_name) {
+          prev.sets++;
+          if (e.reps != null) prev.repsArr.push(e.reps);
+          if (e.weight_kg != null && Number(e.weight_kg) > 0) prev.weightSet.add(Number(e.weight_kg));
+        } else {
+          exGroups.push({ name: e.exercise_name, sets: 1, repsArr: e.reps != null ? [e.reps] : [], weightSet: new Set(e.weight_kg != null && Number(e.weight_kg) > 0 ? [Number(e.weight_kg)] : []), notes: e.notes });
+        }
+      });
+      const exRows = exGroups.map(g => `
         <tr>
-          <td>${escapeHtml(e.exercise_name)}</td>
-          <td style="text-align:center;">${e.sets_completed ?? '-'}</td>
-          <td style="text-align:center;">${escapeHtml(e.reps_per_set || '-')}</td>
-          <td style="text-align:center;">${e.weight_kg != null ? e.weight_kg + ' kg' : '-'}</td>
-          <td style="color:var(--muted);">${escapeHtml(e.notes || '')}</td>
+          <td>${escapeHtml(g.name)}</td>
+          <td style="text-align:center;">${g.sets}</td>
+          <td style="text-align:center;">${g.repsArr.join(' · ') || '-'}</td>
+          <td style="text-align:center;">${g.weightSet.size ? [...g.weightSet].join('/') + ' kg' : '-'}</td>
+          <td style="color:var(--muted);">${escapeHtml(g.notes || '')}</td>
         </tr>
       `).join('');
 
@@ -759,7 +770,7 @@ if (activePlan && ['coaching','workout','athletes','rehab'].includes(activePlan.
           </div>
           <div style="display:flex;align-items:center;gap:0.75rem;">
             ${w.perceived_effort ? `<span style="color:var(--blue-light);font-size:0.8rem;">RPE ${w.perceived_effort}</span>` : ''}
-            <span style="color:var(--muted);font-size:0.75rem;">${exs.length} exercise${exs.length!==1?'s':''}</span>
+            <span style="color:var(--muted);font-size:0.75rem;">${exGroups.length} exercise${exGroups.length!==1?'s':''}</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" class="chevron" style="color:var(--muted);transition:transform 0.15s;"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
         </div>

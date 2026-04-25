@@ -153,6 +153,39 @@
           </svg>
         </div>
 
+        <!-- Weekly training volume bar chart -->
+        <div class="card mb-3 nav-workout" id="volume-chart-card" style="display:none;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Weekly Training Volume</div>
+              <div class="card-subtitle">reps x weight per week - warmup sets excluded</div>
+            </div>
+            <div id="volume-avg" style="font-size:0.875rem; color:var(--muted);">last 12 weeks</div>
+          </div>
+          <svg id="chart-volume" viewBox="0 0 560 130" style="width:100%; height:auto;" preserveAspectRatio="xMidYMid meet">
+            <text x="280" y="68" text-anchor="middle" fill="#888" font-size="12">No data yet</text>
+          </svg>
+        </div>
+
+        <!-- Workout intensity - duration / RPE / heart rate weekly avgs -->
+        <div class="card mb-3" id="workout-intensity-card" style="display:none;">
+          <div class="card-header"><div class="card-title">Workout Intensity (weekly avg)</div></div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem;">
+            <div id="intensity-duration-wrap" style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Duration</div>
+              <svg id="chart-duration" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div id="intensity-rpe-wrap" style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Avg RPE</div>
+              <svg id="chart-rpe" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div id="intensity-hr-wrap" style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Avg Heart Rate</div>
+              <svg id="chart-hr" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+          </div>
+        </div>
+
         <!-- Meals per week - full width bar chart -->
         <div class="card mb-3" id="meals-chart-card" style="display:none;">
           <div class="card-header">
@@ -162,6 +195,33 @@
           <svg id="chart-meals-per-week" viewBox="0 0 560 130" style="width:100%; height:auto;" preserveAspectRatio="xMidYMid meet">
             <text x="280" y="68" text-anchor="middle" fill="#888" font-size="12">No data yet</text>
           </svg>
+        </div>
+
+        <!-- Nutrition trends - macros weekly daily avgs -->
+        <div class="card mb-3" id="nutrition-trends-card" style="display:none;">
+          <div class="card-header"><div class="card-title">Weekly Nutrition (daily avg)</div></div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem;">
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Calories</div>
+              <svg id="chart-calories" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Protein</div>
+              <svg id="chart-protein" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Carbs</div>
+              <svg id="chart-carbs" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Fat</div>
+              <svg id="chart-fat" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+            <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem;">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.3rem;">Water</div>
+              <svg id="chart-water" viewBox="0 0 180 90" style="width:100%;height:auto;" preserveAspectRatio="xMidYMid meet"><text x="90" y="48" text-anchor="middle" fill="#888" font-size="11">No data</text></svg>
+            </div>
+          </div>
         </div>
 
         <!-- Energy / Sleep / Mood weekly averages -->
@@ -393,14 +453,14 @@ async function loadHistory() {
       .limit(90),
     hasWorkout
       ? supabase.from('workout_logs')
-          .select('log_date, is_rest_day')
+          .select('log_date, is_rest_day, duration_min, perceived_effort, avg_heart_rate_bpm, workout_exercises(reps, weight_kg, set_type)')
           .eq('client_id', profile.id)
           .order('log_date', { ascending: true })
           .limit(300)
       : Promise.resolve({ data: [] }),
     hasMeal
       ? supabase.from('meal_logs')
-          .select('log_date')
+          .select('log_date, water_ml, meal_log_entries(calories_kcal, protein_g, carbs_g, fat_g)')
           .eq('client_id', profile.id)
           .order('log_date', { ascending: true })
           .limit(300)
@@ -452,8 +512,17 @@ async function loadHistory() {
   // ── Workouts per week bar chart ───────────────────────────────────────
   if (hasWorkout) renderWorkoutsPerWeek(workouts);
 
+  // ── Weekly training volume ────────────────────────────────────────────
+  if (hasWorkout) renderVolumePerWeek(workouts);
+
+  // ── Workout intensity (duration / RPE / HR) ───────────────────────────
+  if (hasWorkout) renderWorkoutIntensityCharts(workouts);
+
   // ── Meals per week bar chart ──────────────────────────────────────────
   if (hasMeal) renderMealsPerWeek(meals);
+
+  // ── Nutrition macro trends ────────────────────────────────────────────
+  if (hasMeal) renderNutritionTrendCharts(meals);
 
   // ── Wellbeing charts (weekly avg from daily check-ins) ────────────────
   renderWellbeingCharts(daily);
@@ -511,6 +580,69 @@ function renderWorkoutsPerWeek(workouts) {
   ).join('');
 
   document.getElementById('chart-workouts-per-week').innerHTML = bars + yLabels;
+}
+
+// ── Weekly training volume ────────────────────────────────────────────────
+function renderVolumePerWeek(workouts) {
+  const actual = workouts.filter(w => !w.is_rest_day);
+
+  // Build week buckets (last 12 weeks)
+  const buckets = {};
+  for (let i = 11; i >= 0; i--) {
+    const key = addCalendarDays(weekStartMonday(), -i * 7);
+    buckets[key] = 0;
+  }
+
+  actual.forEach(w => {
+    const key = weekStartMonday(new Date(w.log_date + 'T12:00:00'));
+    if (!(key in buckets)) return;
+    (w.workout_exercises || []).forEach(ex => {
+      if (ex.set_type === 'warmup') return;
+      const reps = Number(ex.reps);
+      const kg   = Number(ex.weight_kg);
+      if (reps > 0 && kg > 0) buckets[key] += reps * kg;
+    });
+  });
+
+  const weeks   = Object.keys(buckets);
+  const volumes = weeks.map(k => buckets[k]);
+  const nonZero = volumes.filter(v => v > 0);
+  if (!nonZero.length) return;
+
+  const maxVol = Math.max(...volumes, 1);
+  const avgVol = nonZero.reduce((a, b) => a + b, 0) / nonZero.length;
+  const fmtVol = v => v >= 1000 ? (v / 1000).toFixed(1) + 'k' : String(Math.round(v));
+
+  document.getElementById('volume-chart-card').style.display = '';
+  document.getElementById('volume-avg').textContent = `avg ${fmtVol(avgVol)} kg/week · last 12 weeks`;
+
+  const W = 560, H = 130;
+  const padL = 32, padR = 10, padT = 10, padB = 28;
+  const n     = weeks.length;
+  const slotW = (W - padL - padR) / n;
+  const barW  = Math.min(slotW * 0.55, 32);
+  const scaleY = v => padT + (1 - v / maxVol) * (H - padT - padB);
+
+  const bars = weeks.map((wk, i) => {
+    const v   = volumes[i];
+    const cx  = padL + (i + 0.5) * slotW;
+    const bh  = v === 0 ? 2 : (v / maxVol) * (H - padT - padB);
+    const by  = H - padB - bh;
+    const lbl = new Date(wk + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+    const isCurrentWeek = wk === weekStartMonday();
+    return `
+      <rect x="${cx - barW / 2}" y="${by}" width="${barW}" height="${bh}"
+            rx="3" fill="${isCurrentWeek ? '#a78bfa' : 'rgba(167,139,250,0.45)'}"/>
+      ${v > 0 ? `<text x="${cx}" y="${by - 3}" text-anchor="middle" fill="#ddd8fe" font-size="9">${fmtVol(v)}</text>` : ''}
+      ${i % 2 === 0 || n <= 8 ? `<text x="${cx}" y="${H - 5}" text-anchor="middle" fill="#666" font-size="8">${lbl}</text>` : ''}
+    `;
+  }).join('');
+
+  const yLabels = [0, Math.ceil(maxVol / 2), maxVol].map(v =>
+    `<text x="${padL - 3}" y="${scaleY(v) + 3}" text-anchor="end" fill="#555" font-size="9">${fmtVol(v)}</text>`
+  ).join('');
+
+  document.getElementById('chart-volume').innerHTML = bars + yLabels;
 }
 
 // ── Meals per week ────────────────────────────────────────────────────────
@@ -689,6 +821,135 @@ function drawIndexedChart(svg, points, nWeeks, color, W, H, maxVal) {
 }
 
 loadHistory();
+
+// ── Workout intensity: duration / RPE / heart rate weekly avgs ────────────
+function renderWorkoutIntensityCharts(workouts) {
+  const actual = workouts.filter(w => !w.is_rest_day);
+  const hasDuration = actual.some(w => w.duration_min);
+  const hasRPE      = actual.some(w => w.perceived_effort);
+  const hasHR       = actual.some(w => w.avg_heart_rate_bpm);
+  if (!hasDuration && !hasRPE && !hasHR) return;
+
+  document.getElementById('workout-intensity-card').style.display = '';
+
+  const byWeek = {};
+  for (let i = 11; i >= 0; i--) {
+    const key = addCalendarDays(weekStartMonday(), -i * 7);
+    byWeek[key] = { duration: [], rpe: [], hr: [] };
+  }
+  actual.forEach(w => {
+    const key = weekStartMonday(new Date(w.log_date + 'T12:00:00'));
+    if (!(key in byWeek)) return;
+    if (w.duration_min)        byWeek[key].duration.push(Number(w.duration_min));
+    if (w.perceived_effort)    byWeek[key].rpe.push(Number(w.perceived_effort));
+    if (w.avg_heart_rate_bpm)  byWeek[key].hr.push(Number(w.avg_heart_rate_bpm));
+  });
+
+  const weeks = Object.keys(byWeek).sort();
+  const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+  const n = weeks.length;
+
+  const durationPts = weeks.map((w, i) => ({ i, v: avg(byWeek[w].duration) })).filter(p => p.v != null);
+  const rpePts      = weeks.map((w, i) => ({ i, v: avg(byWeek[w].rpe) })).filter(p => p.v != null);
+  const hrPts       = weeks.map((w, i) => ({ i, v: avg(byWeek[w].hr) })).filter(p => p.v != null);
+
+  document.getElementById('intensity-duration-wrap').style.display = durationPts.length ? '' : 'none';
+  document.getElementById('intensity-rpe-wrap').style.display      = rpePts.length      ? '' : 'none';
+  document.getElementById('intensity-hr-wrap').style.display       = hrPts.length       ? '' : 'none';
+
+  if (durationPts.length) drawWeeklyLineChart(document.getElementById('chart-duration'), durationPts, n, '#4285f4', 180, 90, 'min');
+  if (rpePts.length)      drawIndexedChart(document.getElementById('chart-rpe'),         rpePts,      n, '#f97316', 180, 90, 10);
+  if (hrPts.length)       drawWeeklyLineChart(document.getElementById('chart-hr'),        hrPts,       n, '#f87171', 180, 90, 'bpm');
+}
+
+// ── Nutrition trends: macro daily avgs per week ───────────────────────────
+function renderNutritionTrendCharts(meals) {
+  if (!meals.length) return;
+  const hasAny = meals.some(m => {
+    const entries = m.meal_log_entries || [];
+    return m.water_ml || entries.some(e => e.calories_kcal || e.protein_g || e.carbs_g || e.fat_g);
+  });
+  if (!hasAny) return;
+
+  document.getElementById('nutrition-trends-card').style.display = '';
+
+  const byWeek = {};
+  for (let i = 11; i >= 0; i--) {
+    const key = addCalendarDays(weekStartMonday(), -i * 7);
+    byWeek[key] = { calories: [], protein: [], carbs: [], fat: [], water: [] };
+  }
+  meals.forEach(m => {
+    const key = weekStartMonday(new Date(m.log_date + 'T12:00:00'));
+    if (!(key in byWeek)) return;
+    const entries = m.meal_log_entries || [];
+    let cal = 0, prot = 0, carb = 0, fat = 0;
+    entries.forEach(e => {
+      cal  += Number(e.calories_kcal) || 0;
+      prot += Number(e.protein_g)     || 0;
+      carb += Number(e.carbs_g)        || 0;
+      fat  += Number(e.fat_g)          || 0;
+    });
+    if (cal  > 0) byWeek[key].calories.push(cal);
+    if (prot > 0) byWeek[key].protein.push(prot);
+    if (carb > 0) byWeek[key].carbs.push(carb);
+    if (fat  > 0) byWeek[key].fat.push(fat);
+    if (Number(m.water_ml) > 0) byWeek[key].water.push(Number(m.water_ml));
+  });
+
+  const weeks = Object.keys(byWeek).sort();
+  const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+  const n = weeks.length;
+
+  const MACROS = [
+    { key: 'calories', id: 'chart-calories', color: '#4285f4', unit: 'kcal' },
+    { key: 'protein',  id: 'chart-protein',  color: '#34d399', unit: 'g'    },
+    { key: 'carbs',    id: 'chart-carbs',    color: '#fbbf24', unit: 'g'    },
+    { key: 'fat',      id: 'chart-fat',      color: '#f97316', unit: 'g'    },
+    { key: 'water',    id: 'chart-water',    color: '#60a5fa', unit: 'ml'   },
+  ];
+
+  MACROS.forEach(m => {
+    const pts = weeks.map((w, i) => ({ i, v: avg(byWeek[w][m.key]) })).filter(p => p.v != null);
+    if (pts.length) drawWeeklyLineChart(document.getElementById(m.id), pts, n, m.color, 180, 90, m.unit);
+  });
+}
+
+// ── Chart helper: line chart over weekly-indexed points, auto-scaled ──────
+function drawWeeklyLineChart(svg, points, nWeeks, color, W, H, unit) {
+  if (!svg || !points.length) return;
+  const pad = { t: 8, r: 8, b: 16, l: 26 };
+  const values = points.map(p => p.v);
+  const minV = Math.min(...values);
+  const maxV = Math.max(...values);
+  const range = maxV - minV || 1;
+  const scaleX = i => pad.l + (nWeeks <= 1 ? (W - pad.l - pad.r) / 2 : i * (W - pad.l - pad.r) / (nWeeks - 1));
+  const scaleY = v => pad.t + (1 - (v - minV) / range) * (H - pad.t - pad.b);
+  const gradId = `wkl-${String(color).replace(/[^a-z0-9]/gi, 'x')}-${W}-${H}`;
+  const fmt = v => Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1);
+
+  if (points.length === 1) {
+    svg.innerHTML = `
+      <circle cx="${scaleX(points[0].i)}" cy="${H / 2 - 8}" r="3.5" fill="${color}"/>
+      <text x="${W / 2}" y="${H - 2}" text-anchor="middle" fill="#666" font-size="9">${fmt(points[0].v)} ${unit}</text>
+    `;
+    return;
+  }
+
+  const polyline = points.map(p => `${scaleX(p.i)},${scaleY(p.v)}`).join(' ');
+  const firstX = scaleX(points[0].i);
+  const lastX  = scaleX(points[points.length - 1].i);
+  svg.innerHTML = `
+    <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${color}" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${polyline} ${lastX},${H - pad.b} ${firstX},${H - pad.b}" fill="url(#${gradId})"/>
+    <polyline points="${polyline}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    ${points.map(p => `<circle cx="${scaleX(p.i)}" cy="${scaleY(p.v)}" r="2.2" fill="${color}"/>`).join('')}
+    <text x="${pad.l - 3}" y="${scaleY(maxV) + 3}" text-anchor="end" fill="#555" font-size="8">${fmt(maxV)} ${unit}</text>
+    ${maxV !== minV ? `<text x="${pad.l - 3}" y="${scaleY(minV) + 3}" text-anchor="end" fill="#555" font-size="8">${fmt(minV)}</text>` : ''}
+  `;
+}
 </script>
 </body>
 </html>
