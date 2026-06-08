@@ -138,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var json = await res.json();
 
       if (json.success) {
+        // Fire-and-forget save to portal DB (does not block or affect the user flow)
+        fetch('https://portal.faithnmuscle.com/api/apply', { method: 'POST', body: new FormData(form) }).catch(function(){});
         form.style.display = 'none';
         successEl.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
