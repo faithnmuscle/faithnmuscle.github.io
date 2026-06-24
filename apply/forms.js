@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var submitBtn = document.getElementById('submitBtn');
   var errEl = document.getElementById('formError');
   var successEl = document.getElementById('formSuccess');
+  var continueBtn = document.getElementById('continueBtn');
+  var paymentStep = document.getElementById('payment-step');
 
   if (!form) return;
 
@@ -68,11 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    errEl.style.display = 'none';
+  // Returns { hasErrors, firstError } - shared by Continue and Submit
+  function runValidation() {
     clearErrors();
-
     var hasErrors = false;
     var firstError = null;
 
@@ -123,8 +123,31 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    if (hasErrors) {
-      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return { hasErrors: hasErrors, firstError: firstError };
+  }
+
+  // "Continue to payment" - validate then reveal payment block
+  if (continueBtn && paymentStep) {
+    continueBtn.addEventListener('click', function () {
+      var result = runValidation();
+      if (result.hasErrors) {
+        if (result.firstError) result.firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      // All good - reveal payment step
+      continueBtn.style.display = 'none';
+      paymentStep.style.display = 'block';
+      paymentStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errEl.style.display = 'none';
+
+    var result = runValidation();
+    if (result.hasErrors) {
+      if (result.firstError) result.firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 

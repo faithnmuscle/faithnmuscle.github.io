@@ -41,7 +41,7 @@
 
     <div class="form-intro">
       <div class="form-intro-welcome">Hey there, thank you for choosing my athletes plan. Please fill out this form honestly so I can create a training plan suited to your sport, level, and goals.</div>
-      <p class="form-intro-policy"><strong>Please read before filling in:</strong> Submitting this form does not confirm your place. After reviewing your answers, I'll contact you with payment details. Your program will only be created after payment is completed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
+      <p class="form-intro-policy"><strong>Please read before filling in:</strong> Fill in the form honestly so I can build the right program for your athlete. Payment details will be shown at the end once you've completed everything. Your plan will only be created after payment is confirmed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
     </div>
 
     <!-- SECTION 1: PARQ - Athlete -->
@@ -234,16 +234,40 @@
     </div>
 
     <div class="form-submit-area">
-      <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
-      <p class="form-note">After submitting, I'll contact you on WhatsApp within 24 hours with payment details. Plan delivered within 48-72 hours of payment.</p>
-      <div class="form-error" id="formError">Something went wrong. Please try again or contact via WhatsApp.</div>
+      <button type="button" class="btn-submit" id="continueBtn">Continue to Payment</button>
+    </div>
+
+    <div id="payment-step" style="display:none;">
+      <div class="payment-block">
+        <p class="payment-block-label">Bank Transfer</p>
+        <h3 class="payment-block-heading">Transfer the payment to confirm your place</h3>
+        <div class="payment-details">
+          <span class="payment-label">Bank</span>
+          <span class="payment-value">HNB Bambalapitiya</span>
+          <span class="payment-label">Account name</span>
+          <span class="payment-value">W.D.B.S WICKRAMASINGHA</span>
+          <span class="payment-label">Account number</span>
+          <span class="payment-value payment-account">039020119599</span>
+          <span class="payment-label">Amount</span>
+          <span class="payment-value payment-amount">LKR 4,500</span>
+        </div>
+        <label class="payment-confirm-label">
+          <input type="checkbox" name="payment_acknowledged" value="yes"/>
+          <span>I have transferred LKR 4,500 to this account</span>
+        </label>
+      </div>
+      <div class="form-submit-area" style="margin-top:1.5rem;">
+        <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+        <p class="form-note">Your application and transfer will be reviewed. Plan delivered within 48-72 hours of payment confirmation.</p>
+        <div class="form-error" id="formError">Something went wrong. Please try again or contact via WhatsApp.</div>
+      </div>
     </div>
   </form>
 
   <div class="form-success" id="formSuccess">
     <div class="form-success-icon">✅</div>
     <h3>Application Received!</h3>
-    <p>Thank you for applying for the Athletes Plan. I'll review your details and reach out on WhatsApp within 24 hours with payment instructions.</p>
+    <p>Thank you for applying for the Athletes Plan. Once I confirm your payment, I'll get in touch on WhatsApp and your plan will be delivered within 48-72 hours.</p>
     <a href="../" class="back-link">← Back to Faith n Muscle</a>
   </div>
 </div>
