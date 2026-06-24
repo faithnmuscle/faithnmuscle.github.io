@@ -98,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var seenCbNames = {};
     form.querySelectorAll('input[type="checkbox"][required]').forEach(function (cb) {
       if (cb.name === 'botcheck') return;
+      // Skip payment checkbox while payment step is still hidden
+      if (cb.name === 'payment_acknowledged') {
+        var step = document.getElementById('payment-step');
+        if (!step || step.style.display === 'none') return;
+      }
       if (seenCbNames[cb.name]) return;
       seenCbNames[cb.name] = true;
       var allInGroup = form.querySelectorAll('input[type="checkbox"][name="' + cb.name + '"]');
