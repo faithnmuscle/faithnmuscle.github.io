@@ -49,7 +49,7 @@
           "@type": "OfferCatalog",
           "name": "Fitness Coaching Services",
           "itemListElement": [
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Online 1-on-1 Coaching"}, "price": "10000", "priceCurrency": "LKR"},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Online 1-on-1 Coaching"}, "price": "16000", "priceCurrency": "LKR"},
             {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Detailed Workout Plan"}, "price": "4500", "priceCurrency": "LKR"},
             {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Detailed Meal Plan"}, "price": "6000", "priceCurrency": "LKR"},
             {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Youth & School Athletes Training"}, "price": "4500", "priceCurrency": "LKR"},
@@ -257,7 +257,7 @@
 
     /* ── SERVICES ── */
     #services { background: var(--bg2); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .services-grid { display: grid; grid-template-columns: minmax(280px, 600px); gap: 1.5rem; justify-content: center; }
     .service-card {
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 8px; overflow: hidden;
@@ -310,9 +310,10 @@
     #apply { background: var(--bg2); }
     .apply-cards-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: minmax(280px, 480px);
       gap: 1.25rem;
       align-items: stretch;
+      justify-content: center;
     }
     .apply-card {
       background: var(--bg3); border: 1px solid var(--border);
@@ -622,8 +623,8 @@
 
 <!-- SERVICES -->
 <section id="services">
-  <p class="section-label">Programs & Pricing</p>
-  <h2 class="section-title">Choose Your Plan</h2>
+  <p class="section-label">Coaching & Pricing</p>
+  <h2 class="section-title">The Coaching Program</h2>
   <p class="section-sub">Every program is built from scratch for you. No templates, no one-size-fits-all.</p>
   <div class="services-grid">
 
@@ -634,7 +635,7 @@
       <div class="service-card-body">
         <h3>Online 1-on-1 Coaching</h3>
         <p>Full online coaching with daily check-ins, workout tracking and nutritional guidance. A personalised workout plan, nutrition plan and program tracking sheet - all managed through messages and video calls.</p>
-        <div class="service-price">LKR 10,000 <span>/ month</span></div>
+        <div class="service-price">LKR 16,000 <span>/ month</span></div>
         <ul>
           <li>Personalised workout program</li>
           <li>Custom nutrition plan</li>
@@ -643,24 +644,6 @@
           <li>Progress tracking sheet</li>
         </ul>
         <a href="apply/coaching.html" class="btn-primary">Apply for Coaching</a>
-      </div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-card-img">
-        <img src="images/svc-meal.jpg" alt="Custom nutrition and meal plan by certified coach Bernil" loading="lazy"/>
-      </div>
-      <div class="service-card-body">
-        <h3>Detailed Meal Plan</h3>
-        <p>Flexible and sustainable plans based on your goals, budget and lifestyle. Includes food alternatives so you can enjoy your meals while still making progress.</p>
-        <div class="service-price">LKR 6,000 <span>/ plan</span></div>
-        <ul>
-          <li>Custom calorie &amp; macro targets</li>
-          <li>Budget &amp; lifestyle friendly</li>
-          <li>Food alternatives included</li>
-          <li>Allergen considerations</li>
-        </ul>
-        <a href="apply/meal.html" class="btn-primary">Get Meal Plan</a>
       </div>
     </div>
 
@@ -725,20 +708,11 @@
 
     <div class="apply-card" id="form-coaching">
       <div class="apply-card-header">
-        <span class="apply-card-label">LKR 10,000 / mo</span>
+        <span class="apply-card-label">LKR 16,000 / mo</span>
         <h3>Online 1-on-1 Coaching</h3>
         <p>Full coaching with daily check-ins, workout plan, nutrition plan, progress tracking and WhatsApp support.</p>
       </div>
       <a href="apply/coaching.html" class="form-apply-btn">Apply Now</a>
-    </div>
-
-    <div class="apply-card" id="form-meal">
-      <div class="apply-card-header">
-        <span class="apply-card-label">LKR 6,000 one-time</span>
-        <h3>Meal Plan</h3>
-        <p>A flexible, sustainable nutrition plan tailored to your goals, budget and lifestyle.</p>
-      </div>
-      <a href="apply/meal.html" class="form-apply-btn">Apply Now</a>
     </div>
 
   </div>
@@ -887,10 +861,6 @@
       <div class="footer-col">
         <h5>Services</h5>
         <a href="apply/coaching.html">Online 1-on-1 Coaching</a>
-        <a href="apply/workout.html">Workout Plan</a>
-        <a href="apply/meal.html">Meal Plan</a>
-        <a href="apply/athletes.html">Youth &amp; School Athletes</a>
-        <a href="apply/rehab.html">Rehab &amp; Flexibility</a>
         <a href="#faq">FAQ</a>
       </div>
       <div class="footer-col">
