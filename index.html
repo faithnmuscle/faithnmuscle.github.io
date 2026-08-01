@@ -147,12 +147,35 @@
     .mobile-menu a:last-child { border-bottom: none; }
     .mobile-menu a:hover { color: var(--blue-light); }
 
+    /* ── TOP TESTIMONIAL STRIP ── */
+    .top-strip {
+      margin-top: 64px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 5%;
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      text-align: center; min-height: 2.5rem;
+    }
+    .top-strip-label {
+      font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--blue-light); font-weight: 600; flex-shrink: 0;
+    }
+    .top-strip-text {
+      font-size: 0.82rem; color: #ccc; font-style: italic;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 640px;
+      transition: opacity 0.35s ease;
+    }
+    @media (max-width: 640px) {
+      .top-strip-label { display: none; }
+      .top-strip-text { max-width: 82vw; }
+    }
+
     /* ── HERO ── */
     #hero {
       min-height: 70vh;
       display: flex; align-items: center;
       position: relative; overflow: hidden;
-      padding: 100px 5% 70px;
+      padding: 56px 5% 70px;
       background:
         linear-gradient(to bottom, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.78) 50%, rgba(10,10,10,0.96) 100%),
         url('images/hero-bg.jpg') center/cover no-repeat;
@@ -582,6 +605,12 @@
   <a href="#apply" onclick="toggleMenu()">Apply</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
+</div>
+
+<!-- TOP TESTIMONIAL STRIP -->
+<div class="top-strip">
+  <span class="top-strip-label">Client Feedback</span>
+  <span class="top-strip-text" id="top-strip-text"></span>
 </div>
 
 <!-- HERO -->
@@ -1084,6 +1113,33 @@
 
     prev.addEventListener('click', () => scrollByCard(-1));
     next.addEventListener('click', () => scrollByCard(1));
+  })();
+
+  // Auto-cycling testimonial strip below the nav
+  (function() {
+    const textEl = document.getElementById('top-strip-text');
+    if (!textEl) return;
+
+    let idx = 0;
+    function getQuotes() {
+      return Array.from(document.querySelectorAll('.testimonial-card p')).map(p => p.textContent.trim()).filter(Boolean);
+    }
+    function render() {
+      const quotes = getQuotes();
+      if (!quotes.length) return;
+      idx = idx % quotes.length;
+      textEl.textContent = '“' + quotes[idx] + '”';
+    }
+
+    render();
+    setInterval(() => {
+      textEl.style.opacity = '0';
+      setTimeout(() => {
+        idx++;
+        render();
+        textEl.style.opacity = '1';
+      }, 350);
+    }, 5000);
   })();
 </script>
 
