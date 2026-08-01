@@ -365,7 +365,10 @@
     .testimonials-nav-prev { left: -14px; }
     .testimonials-nav-next { right: -14px; }
     @media (max-width: 640px) {
-      .testimonials-nav { display: none; }
+      .testimonials-nav { width: 32px; height: 32px; background: rgba(23,23,23,0.85); }
+      .testimonials-nav svg { width: 15px; height: 15px; }
+      .testimonials-nav-prev { left: -8px; }
+      .testimonials-nav-next { right: -8px; }
     }
     @keyframes testimonialFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     .testimonial-quote-mark {
