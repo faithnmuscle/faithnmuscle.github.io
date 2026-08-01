@@ -322,6 +322,7 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2.5rem; line-height: 1; color: var(--blue-light);
     }
+    .testimonial-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 2px; }
     .testimonial-card p { color: #ccc; font-size: 0.92rem; line-height: 1.7; font-style: italic; }
     .testimonial-attribution {
       display: flex; align-items: center; gap: 0.5rem;
@@ -994,6 +995,44 @@
       }
     });
   });
+
+  // Load approved client reviews and show them above the anonymous quotes
+  (async function loadApprovedReviews() {
+    const SUPABASE_URL = 'https://omvsxvkwbufskkowqhlr.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9tdnN4dmt3YnVmc2trb3dxaGxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNTI2MjMsImV4cCI6MjA5MTgyODYyM30.HS5YKPWCf8omfWTu-Fe2sK_lP9jxkzwePl5mwjCn0JE';
+
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/approved_reviews?select=*&order=submitted_at.desc&limit=12`, {
+        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if (!res.ok) return;
+
+      const reviews = (await res.json()).filter(r => r.review_text || r.review_title);
+      if (!reviews.length) return;
+
+      const grid = document.querySelector('.testimonials-grid');
+      const frag = document.createDocumentFragment();
+
+      reviews.forEach(r => {
+        const stars = '&#9733;'.repeat(r.rating) + '&#9734;'.repeat(5 - r.rating);
+        const attribution = r.location ? `${esc(r.client_name)} &middot; ${esc(r.location)}` : esc(r.client_name);
+        const card = document.createElement('div');
+        card.className = 'testimonial-card';
+        card.innerHTML = `
+          <div class="testimonial-stars">${stars}</div>
+          <p>${esc(r.review_text || r.review_title)}</p>
+          <div class="testimonial-attribution">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            ${attribution}
+          </div>`;
+        frag.appendChild(card);
+      });
+
+      grid.insertBefore(frag, grid.firstChild);
+    } catch (e) { /* Supabase unreachable - anonymous testimonials still show */ }
+  })();
 </script>
 
 </body>
