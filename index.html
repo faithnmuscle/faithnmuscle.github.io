@@ -785,63 +785,7 @@
     <button type="button" class="testimonials-nav testimonials-nav-next" aria-label="Next review">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
-  <div class="testimonials-grid">
-
-    <div class="testimonial-card">
-      <div class="testimonial-quote-mark">&ldquo;</div>
-      <p>The lower back pain I'd dealt with for years finally went away, just from correcting my form on one lift. That alone made the program worth it.</p>
-      <div class="testimonial-attribution">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Verified Coaching Client
-      </div>
-    </div>
-
-    <div class="testimonial-card">
-      <div class="testimonial-quote-mark">&ldquo;</div>
-      <p>The change is showing up everywhere, not just the scale. My waist has visibly reduced, evenly on both sides.</p>
-      <div class="testimonial-attribution">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Verified Coaching Client
-      </div>
-    </div>
-
-    <div class="testimonial-card">
-      <div class="testimonial-quote-mark">&ldquo;</div>
-      <p>We finished a full body session in about an hour, and it hit harder than the two-hour sessions I used to do on my own. Programming really is everything.</p>
-      <div class="testimonial-attribution">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Verified Coaching Client
-      </div>
-    </div>
-
-    <div class="testimonial-card">
-      <div class="testimonial-quote-mark">&ldquo;</div>
-      <p>I used to grind through four exercises per muscle group and barely progress. Now it's one movement done right, and I'm making better gains than ever.</p>
-      <div class="testimonial-attribution">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Verified Coaching Client
-      </div>
-    </div>
-
-    <div class="testimonial-card">
-      <div class="testimonial-quote-mark">&ldquo;</div>
-      <p>No fad diet, no starving. Just smarter versions of the food I already love, and the results are actually sticking.</p>
-      <div class="testimonial-attribution">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Verified Coaching Client
-      </div>
-    </div>
-
-    <div class="testimonial-card">
-      <div class="testimonial-quote-mark">&ldquo;</div>
-      <p>People noticed the difference before I did. Strength built in the gym is finally showing up everywhere else in life.</p>
-      <div class="testimonial-attribution">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Verified Coaching Client
-      </div>
-    </div>
-
-  </div>
+  <div class="testimonials-grid" id="testimonials-grid"></div>
   </div>
 </section>
 
@@ -1061,7 +1005,7 @@
     const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/approved_reviews?select=*&order=submitted_at.desc&limit=12`, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/approved_reviews?select=*&order=submitted_at.desc&limit=24`, {
         headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
       });
       if (!res.ok) return;
@@ -1069,26 +1013,38 @@
       const reviews = (await res.json()).filter(r => r.review_text || r.review_title);
       if (!reviews.length) return;
 
-      const grid = document.querySelector('.testimonials-grid');
+      const grid = document.getElementById('testimonials-grid');
       const frag = document.createDocumentFragment();
 
       reviews.forEach(r => {
-        const stars = '&#9733;'.repeat(r.rating) + '&#9734;'.repeat(5 - r.rating);
-        const attribution = r.location ? `${esc(r.client_name)} &middot; ${esc(r.location)}` : esc(r.client_name);
         const card = document.createElement('div');
         card.className = 'testimonial-card is-loaded';
-        card.innerHTML = `
-          <div class="testimonial-stars">${stars}</div>
-          <p>${esc(r.review_text || r.review_title)}</p>
-          <div class="testimonial-attribution">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            ${attribution}
-          </div>`;
+
+        if (r.is_anonymous) {
+          card.innerHTML = `
+            <div class="testimonial-quote-mark">&ldquo;</div>
+            <p>${esc(r.review_text || r.review_title)}</p>
+            <div class="testimonial-attribution">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Verified Coaching Client
+            </div>`;
+        } else {
+          const stars = r.rating ? ('&#9733;'.repeat(r.rating) + '&#9734;'.repeat(5 - r.rating)) : '';
+          const attribution = r.location ? `${esc(r.client_name)} &middot; ${esc(r.location)}` : esc(r.client_name);
+          card.innerHTML = `
+            ${stars ? `<div class="testimonial-stars">${stars}</div>` : `<div class="testimonial-quote-mark">&ldquo;</div>`}
+            <p>${esc(r.review_text || r.review_title)}</p>
+            <div class="testimonial-attribution">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              ${attribution}
+            </div>`;
+        }
         frag.appendChild(card);
       });
 
-      grid.insertBefore(frag, grid.firstChild);
-    } catch (e) { /* Supabase unreachable - anonymous testimonials still show */ }
+      grid.appendChild(frag);
+      document.dispatchEvent(new CustomEvent('testimonials:loaded'));
+    } catch (e) { /* Supabase unreachable - section will be empty until retry */ }
   })();
 
   // Testimonials carousel arrows
@@ -1114,6 +1070,7 @@
     next.addEventListener('click', () => scrollByCard(1));
     grid.addEventListener('scroll', updateNavState);
     window.addEventListener('resize', updateNavState);
+    document.addEventListener('testimonials:loaded', updateNavState);
     updateNavState();
   })();
 
@@ -1134,6 +1091,7 @@
     }
 
     render();
+    document.addEventListener('testimonials:loaded', render);
     setInterval(() => {
       textEl.style.opacity = '0';
       setTimeout(() => {
