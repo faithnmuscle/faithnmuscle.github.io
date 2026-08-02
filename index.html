@@ -153,7 +153,7 @@
     .hero-testimonial-text {
       font-size: 0.85rem; color: #ddd; font-style: italic; line-height: 1.6;
       display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-      height: calc(1.6em * 3);
+      min-height: calc(1.6em * 3);
       transition: opacity 0.35s ease;
     }
 
@@ -321,6 +321,7 @@
     .testimonials-carousel { position: relative; }
     .testimonials-grid {
       display: flex;
+      align-items: flex-start;
       gap: 1.5rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
@@ -373,6 +374,12 @@
     .testimonial-card p {
       color: #ccc; font-size: 0.92rem; line-height: 1.7; font-style: italic;
       display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .testimonial-card p.is-expanded { -webkit-line-clamp: unset; overflow: visible; }
+    .testimonial-readmore {
+      background: none; border: none; padding: 0; margin-top: -0.6rem;
+      color: var(--blue-light); font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; align-self: flex-start; text-decoration: underline;
     }
     .testimonial-attribution {
       display: flex; align-items: center; gap: 0.5rem;
@@ -1058,6 +1065,22 @@
       });
 
       grid.appendChild(frag);
+
+      // Add a "Read more" toggle only for cards actually truncated by the line-clamp
+      grid.querySelectorAll('.testimonial-card p').forEach(p => {
+        if (p.scrollHeight > p.clientHeight + 2) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'testimonial-readmore';
+          btn.textContent = 'Read more';
+          btn.addEventListener('click', () => {
+            const expanded = p.classList.toggle('is-expanded');
+            btn.textContent = expanded ? 'Show less' : 'Read more';
+          });
+          p.insertAdjacentElement('afterend', btn);
+        }
+      });
+
       document.dispatchEvent(new CustomEvent('testimonials:loaded'));
     } catch (e) { /* Supabase unreachable - section will be empty until retry */ }
   })();
