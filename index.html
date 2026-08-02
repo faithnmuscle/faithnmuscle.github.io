@@ -366,6 +366,10 @@
       font-size: 2.5rem; line-height: 1; color: var(--blue-light);
     }
     .testimonial-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 2px; }
+    .testimonial-title {
+      font-weight: 700; font-style: normal; color: var(--text);
+      font-size: 0.98rem; line-height: 1.4; margin-top: -0.4rem;
+    }
     .testimonial-card p {
       color: #ccc; font-size: 0.92rem; line-height: 1.7; font-style: italic;
       display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
@@ -1027,9 +1031,12 @@
         const card = document.createElement('div');
         card.className = 'testimonial-card is-loaded';
 
+        const titleHtml = (r.review_title && r.review_text) ? `<div class="testimonial-title">${esc(r.review_title)}</div>` : '';
+
         if (r.is_anonymous) {
           card.innerHTML = `
             <div class="testimonial-quote-mark">&ldquo;</div>
+            ${titleHtml}
             <p>${esc(r.review_text || r.review_title)}</p>
             <div class="testimonial-attribution">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -1040,6 +1047,7 @@
           const attribution = r.location ? `${esc(r.client_name)} &middot; ${esc(r.location)}` : esc(r.client_name);
           card.innerHTML = `
             ${stars ? `<div class="testimonial-stars">${stars}</div>` : `<div class="testimonial-quote-mark">&ldquo;</div>`}
+            ${titleHtml}
             <p>${esc(r.review_text || r.review_title)}</p>
             <div class="testimonial-attribution">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
