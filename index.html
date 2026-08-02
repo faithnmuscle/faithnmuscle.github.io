@@ -371,15 +371,10 @@
       font-weight: 700; font-style: normal; color: var(--text);
       font-size: 0.98rem; line-height: 1.4; margin-top: -0.4rem;
     }
-    .testimonial-card p {
-      color: #ccc; font-size: 0.92rem; line-height: 1.7; font-style: italic;
-      display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
-    }
-    .testimonial-card p.is-expanded { -webkit-line-clamp: unset; overflow: visible; }
-    .testimonial-readmore {
-      background: none; border: none; padding: 0; margin-top: -0.6rem;
-      color: var(--blue-light); font-size: 0.8rem; font-weight: 600;
-      cursor: pointer; align-self: flex-start; text-decoration: underline;
+    .testimonial-card p { color: #ccc; font-size: 0.92rem; line-height: 1.7; font-style: italic; }
+    .testimonial-more {
+      color: var(--blue-light); font-weight: 700; font-style: normal;
+      cursor: pointer; text-decoration: none;
     }
     .testimonial-attribution {
       display: flex; align-items: center; gap: 0.5rem;
@@ -1034,17 +1029,27 @@
       const grid = document.getElementById('testimonials-grid');
       const frag = document.createDocumentFragment();
 
+      const CLAMP_CHARS = 220;
+      function quoteParagraphHtml(text) {
+        if (text.length <= CLAMP_CHARS) return `<p>${esc(text)}</p>`;
+        const cut = text.slice(0, CLAMP_CHARS);
+        const lastSpace = cut.lastIndexOf(' ');
+        const truncated = cut.slice(0, lastSpace > 40 ? lastSpace : CLAMP_CHARS);
+        return `<p data-full="${esc(text)}" data-truncated="${esc(truncated)}" data-expanded="false">${esc(truncated)}&hellip; <span class="testimonial-more">More</span></p>`;
+      }
+
       orderedReviews.forEach(r => {
         const card = document.createElement('div');
         card.className = 'testimonial-card is-loaded';
 
         const titleHtml = (r.review_title && r.review_text) ? `<div class="testimonial-title">${esc(r.review_title)}</div>` : '';
+        const bodyHtml = quoteParagraphHtml(r.review_text || r.review_title);
 
         if (r.is_anonymous) {
           card.innerHTML = `
             <div class="testimonial-quote-mark">&ldquo;</div>
             ${titleHtml}
-            <p>${esc(r.review_text || r.review_title)}</p>
+            ${bodyHtml}
             <div class="testimonial-attribution">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
               Verified Coaching Client
@@ -1055,7 +1060,7 @@
           card.innerHTML = `
             ${stars ? `<div class="testimonial-stars">${stars}</div>` : `<div class="testimonial-quote-mark">&ldquo;</div>`}
             ${titleHtml}
-            <p>${esc(r.review_text || r.review_title)}</p>
+            ${bodyHtml}
             <div class="testimonial-attribution">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
               ${attribution}
@@ -1066,18 +1071,17 @@
 
       grid.appendChild(frag);
 
-      // Add a "Read more" toggle only for cards actually truncated by the line-clamp
-      grid.querySelectorAll('.testimonial-card p').forEach(p => {
-        if (p.scrollHeight > p.clientHeight + 2) {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'testimonial-readmore';
-          btn.textContent = 'Read more';
-          btn.addEventListener('click', () => {
-            const expanded = p.classList.toggle('is-expanded');
-            btn.textContent = expanded ? 'Show less' : 'Read more';
-          });
-          p.insertAdjacentElement('afterend', btn);
+      grid.addEventListener('click', e => {
+        const more = e.target.closest('.testimonial-more');
+        if (!more) return;
+        const p = more.closest('p');
+        const expanded = p.dataset.expanded === 'true';
+        if (expanded) {
+          p.innerHTML = `${esc(p.dataset.truncated)}&hellip; <span class="testimonial-more">More</span>`;
+          p.dataset.expanded = 'false';
+        } else {
+          p.innerHTML = `${esc(p.dataset.full)} <span class="testimonial-more">Less</span>`;
+          p.dataset.expanded = 'true';
         }
       });
 
