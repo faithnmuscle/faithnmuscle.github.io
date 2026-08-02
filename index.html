@@ -366,7 +366,10 @@
       font-size: 2.5rem; line-height: 1; color: var(--blue-light);
     }
     .testimonial-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 2px; }
-    .testimonial-card p { color: #ccc; font-size: 0.92rem; line-height: 1.7; font-style: italic; }
+    .testimonial-card p {
+      color: #ccc; font-size: 0.92rem; line-height: 1.7; font-style: italic;
+      display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+    }
     .testimonial-attribution {
       display: flex; align-items: center; gap: 0.5rem;
       color: var(--muted); font-size: 0.78rem; letter-spacing: 0.5px; text-transform: uppercase;
@@ -1084,26 +1087,41 @@
     if (!textEl) return;
 
     let idx = 0;
+    let timer = null;
     function getQuotes() {
       return Array.from(document.querySelectorAll('.testimonial-card p')).map(p => p.textContent.trim()).filter(Boolean);
     }
+    function readingTimeMs(text) {
+      const words = text.split(/\s+/).filter(Boolean).length;
+      return Math.max(4000, Math.min(12000, (words / 200) * 60000 + 1500));
+    }
     function render() {
       const quotes = getQuotes();
-      if (!quotes.length) return;
+      if (!quotes.length) return null;
       idx = idx % quotes.length;
-      textEl.textContent = '“' + quotes[idx] + '”';
+      const text = quotes[idx];
+      textEl.textContent = '“' + text + '”';
+      return text;
+    }
+    function scheduleNext() {
+      clearTimeout(timer);
+      const quotes = getQuotes();
+      if (!quotes.length) return;
+      const currentText = quotes[idx % quotes.length];
+      timer = setTimeout(() => {
+        textEl.style.opacity = '0';
+        setTimeout(() => {
+          idx++;
+          render();
+          textEl.style.opacity = '1';
+          scheduleNext();
+        }, 350);
+      }, readingTimeMs(currentText));
     }
 
     render();
-    document.addEventListener('testimonials:loaded', render);
-    setInterval(() => {
-      textEl.style.opacity = '0';
-      setTimeout(() => {
-        idx++;
-        render();
-        textEl.style.opacity = '1';
-      }, 350);
-    }, 5000);
+    document.addEventListener('testimonials:loaded', () => { render(); scheduleNext(); });
+    scheduleNext();
   })();
 </script>
 
