@@ -1119,7 +1119,7 @@
     next.addEventListener('click', () => scrollByCard(1));
     grid.addEventListener('scroll', updateNavState);
     window.addEventListener('resize', updateNavState);
-    document.addEventListener('testimonials:loaded', updateNavState);
+    document.addEventListener('testimonials:loaded', () => requestAnimationFrame(updateNavState));
     updateNavState();
   })();
 
