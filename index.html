@@ -266,7 +266,7 @@
     /* ── PHOTO STRIP ── */
     #gallery { background: var(--bg); padding: 0; overflow: hidden; }
     .photo-strip { display: flex; height: 280px; }
-    .photo-strip img { flex: 1; object-fit: cover; filter: brightness(0.75); transition: flex 0.4s ease, filter 0.3s; }
+    .photo-strip img { flex: 1; min-width: 0; height: 100%; object-fit: cover; filter: brightness(0.75); transition: flex 0.4s ease, filter 0.3s; }
     .photo-strip img:hover { flex: 2.5; filter: brightness(1); }
 
     /* ── SERVICES ── */
@@ -776,7 +776,7 @@
       </div>
     </div>
     <div style="position:relative;">
-      <img src="images/photo2.webp" alt="Bernil demonstrating correct training form during an online coaching session" loading="lazy" width="1080" height="1080" style="width:100%; border-radius:8px; display:block; object-fit:cover; aspect-ratio:1/1; border:1px solid var(--border);"/>
+      <img src="images/photo2.webp" alt="Bernil demonstrating correct training form during an online coaching session" loading="lazy" width="1080" height="1080" style="width:100%; height:auto; border-radius:8px; display:block; object-fit:cover; aspect-ratio:1/1; border:1px solid var(--border);"/>
       <div style="position:absolute; bottom:0; left:0; right:0; padding:1.5rem; background:linear-gradient(to top, rgba(10,10,10,0.92) 0%, transparent 100%); border-radius:0 0 8px 8px;">
         <p style="color:#fff; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:1px; margin:0;">Personalised. Progressive. Results-driven.</p>
       </div>
