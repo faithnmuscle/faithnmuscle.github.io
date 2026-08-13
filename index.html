@@ -317,7 +317,7 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; background: var(--bg); z-index: 1;
     }
-    .step-content h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .step-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
     .step-content p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
 
     /* ── TESTIMONIALS ── */
@@ -457,14 +457,14 @@
     .contact-cta-card p { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.7; }
     .contact-cta-card .wa-btn {
       display: inline-flex; align-items: center; gap: 0.75rem;
-      background: #25D366; color: #fff; text-decoration: none;
+      background: #25D366; color: #064420; text-decoration: none;
       font-weight: 700; font-size: 1rem; padding: 1rem 1.75rem;
       border-radius: 8px; transition: background 0.2s, transform 0.15s;
       align-self: flex-start;
     }
     .contact-cta-card .wa-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
     .contact-cta-card .wa-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
-    .contact-cta-note { font-size: 0.8rem !important; color: rgba(255,255,255,0.45) !important; }
+    .contact-cta-note { font-size: 0.8rem !important; color: rgba(255,255,255,0.65) !important; }
 
     /* ── FOOTER ── */
     footer {
@@ -477,9 +477,9 @@
       border-bottom: 1px solid var(--border);
     }
     .footer-brand .nav-logo { display: inline-block; margin-bottom: 0.5rem; }
-    .footer-brand p { color: var(--muted); font-size: 0.85rem; max-width: 260px; line-height: 1.6; }
+    .footer-brand p { color: #a3a3a3; font-size: 0.85rem; max-width: 260px; line-height: 1.6; }
     .footer-links { display: flex; gap: 3rem; flex-wrap: wrap; }
-    .footer-col h5 { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 1rem; }
+    .footer-col h4 { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 1rem; }
     .footer-col a { display: block; color: var(--muted); text-decoration: none; font-size: 0.85rem; padding: 0.2rem 0; transition: color 0.2s; }
     .footer-col a:hover { color: var(--text); }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
@@ -490,7 +490,7 @@
     .footer-tagline {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(1.5rem, 4vw, 2.5rem);
-      letter-spacing: 2px; color: var(--blue);
+      letter-spacing: 2px; color: var(--blue-light);
       text-align: center; padding: 2rem 0;
       border-top: 1px solid var(--border); margin-top: 2rem;
     }
@@ -503,7 +503,7 @@
       padding: 1.35rem 0;
     }
     .faq-item:first-of-type { padding-top: 0; }
-    .faq-item h4 {
+    .faq-item h3 {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.15rem;
       letter-spacing: 0.5px;
@@ -613,6 +613,7 @@
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
 </div>
 
+<main>
 <!-- HERO -->
 <section id="hero">
   <div class="hero-content">
@@ -748,28 +749,28 @@
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <h4>Fill in the Questionnaire</h4>
+          <h3>Fill in the Questionnaire</h3>
           <p>Use the Apply section below to fill in the coaching application form. Tell me about your goals, fitness level, schedule, equipment and dietary preferences - the more detail, the better your program.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <h4>Transfer the Payment</h4>
+          <h3>Transfer the Payment</h3>
           <p>Payment details are shown at the end of the form. Transfer and submit. Your program begins once I confirm receipt.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h4>Receive Your Custom Program</h4>
+          <h3>Receive Your Custom Program</h3>
           <p>Your fully personalised plan is delivered - typically within 48-72 hours of payment confirmation. Built from scratch for you, not from a template.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <h4>Ongoing Support (1-on-1 Clients)</h4>
+          <h3>Ongoing Support (1-on-1 Clients)</h3>
           <p>Coaching clients receive daily check-ins plus program adjustments as you progress. I'm available on WhatsApp and for video calls throughout your journey.</p>
         </div>
       </div>
@@ -854,7 +855,7 @@
       <h3>Start Your Journey Today</h3>
       <p>Message me directly on WhatsApp. No waiting, no forms. Ask anything before applying, or just say hi. I reply personally.</p>
       <a href="https://wa.me/+94761167303?text=Hi%20Bernil%2C%20I%20found%20your%20website%20and%20I'm%20interested%20in%20coaching!" class="wa-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg viewBox="0 0 24 24" fill="#064420"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Chat on WhatsApp
       </a>
       <p class="contact-cta-note">Typical response: within a few hours &nbsp;·&nbsp; Available in English & Sinhala</p>
@@ -869,39 +870,39 @@
   <p class="section-sub">Quick answers about coaching, plans, payment and policies.</p>
   <div class="faq-list">
     <div class="faq-item">
-      <h4>How do I pay, and when does my program start?</h4>
+      <h3>How do I pay, and when does my program start?</h3>
       <p>Payment details are shown at the end of the application form. Transfer the amount and submit. Your program begins once I confirm your payment.</p>
     </div>
     <div class="faq-item">
-      <h4>How long until I receive my plan?</h4>
+      <h3>How long until I receive my plan?</h3>
       <p>Most custom plans are delivered within <strong>48-72 hours</strong> of payment confirmation. The more detail you put into your form, the faster and more accurate your plan will be.</p>
     </div>
     <div class="faq-item">
-      <h4>Can I cancel or get a refund after my plan is ready?</h4>
+      <h3>Can I cancel or get a refund after my plan is ready?</h3>
       <p>Because every plan is built from scratch for you personally, refunds aren't available once work has started. See the <a href="#refund-policy">Refund Policy</a> below for full details.</p>
     </div>
     <div class="faq-item">
-      <h4>Can I share or resell my plan?</h4>
+      <h3>Can I share or resell my plan?</h3>
       <p>No. All plans are for <strong>your personal use only</strong>. Sharing, copying or reselling any program content without permission isn't allowed.</p>
     </div>
     <div class="faq-item">
-      <h4>I have an injury or medical condition - can I still sign up?</h4>
+      <h3>I have an injury or medical condition - can I still sign up?</h3>
       <p>Yes, but please get clearance from your doctor first if the condition is serious. Your program will be built around what's safe for you. All plans are fitness guidance, not a substitute for medical advice.</p>
     </div>
     <div class="faq-item">
-      <h4>Do you coach clients outside Sri Lanka?</h4>
+      <h3>Do you coach clients outside Sri Lanka?</h3>
       <p>Absolutely. Coaching is available worldwide. Live video calls may not always work across time zones, but form-check videos, feedback and check-ins are all handled through WhatsApp or wherever you're comfortable.</p>
     </div>
     <div class="faq-item">
-      <h4>What equipment do I need?</h4>
+      <h3>What equipment do I need?</h3>
       <p>Just the basics, nothing fancy required. Equipment is flexible and we can work around what you have. We'll sort out the specifics when we connect after your application.</p>
     </div>
     <div class="faq-item">
-      <h4>How do check-ins work for 1-on-1 coaching?</h4>
+      <h3>How do check-ins work for 1-on-1 coaching?</h3>
       <p>Check-ins happen via WhatsApp, or whichever platform suits you. Instagram DM and Facebook Messenger are both fine if you'd rather not share your number.</p>
     </div>
     <div class="faq-item">
-      <h4>What language is coaching available in?</h4>
+      <h3>What language is coaching available in?</h3>
       <p>Coaching and plans are available in <strong>English</strong> and <strong>Sinhala</strong>.</p>
     </div>
   </div>
@@ -942,6 +943,7 @@
     </article>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -952,12 +954,12 @@
     </div>
     <div class="footer-links">
       <div class="footer-col">
-        <h5>Services</h5>
+        <h4>Services</h4>
         <a href="apply/coaching.html">Online 1-on-1 Coaching</a>
         <a href="#faq">FAQ</a>
       </div>
       <div class="footer-col">
-        <h5>Connect</h5>
+        <h4>Connect</h4>
         <a href="https://wa.me/+94761167303" target="_blank" rel="noopener">WhatsApp</a>
         <a href="https://instagram.com/bernil500b.c" target="_blank" rel="noopener">Instagram</a>
         <a href="https://tiktok.com/@ichbinbernil" target="_blank" rel="noopener">TikTok</a>
