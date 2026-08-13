@@ -79,6 +79,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
   <style>
+    /* Metric-matched fallback for Bebas Neue - shown while the real font loads (font-display:swap).
+       Sized/shaped to approximate Bebas Neue's condensed width so headings don't visibly reflow on swap. */
+    @font-face {
+      font-family: 'Bebas Neue Fallback';
+      src: local('Arial'), local('Helvetica'), local('sans-serif');
+      size-adjust: 58.04%;
+      ascent-override: 155.06%;
+      descent-override: 51.69%;
+      line-gap-override: 0%;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -109,7 +119,7 @@
     }
     .nav-logo {
       display: flex; align-items: center; gap: 0.6rem;
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 1.5rem; letter-spacing: 2px;
       color: var(--blue-light); text-decoration: none;
     }
@@ -181,7 +191,7 @@
       padding: 0.35rem 1rem; border-radius: 2px; margin-bottom: 1.5rem;
     }
     .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: clamp(3.5rem, 8vw, 6.5rem);
       line-height: 0.95; letter-spacing: 2px; margin-bottom: 1.5rem;
       text-shadow: 0 2px 12px rgba(0,0,0,0.7);
@@ -213,7 +223,7 @@
     .hero-stats { margin-top: 3.5rem; display: flex; gap: 2.5rem; flex-wrap: nowrap; }
     .hero-stat { min-width: 0; text-align: center; }
     .hero-stat-num {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 2.2rem; color: var(--blue-light); letter-spacing: 1px;
     }
     .hero-stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
@@ -227,7 +237,7 @@
     section { padding: 90px 5%; }
     .section-label { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 0.75rem; }
     .section-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: clamp(2.5rem, 5vw, 4rem);
       letter-spacing: 1px; line-height: 1; margin-bottom: 1rem;
     }
@@ -244,7 +254,7 @@
     }
     .about-photo img { width: 100%; height: auto; display: block; }
     .about-question {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: clamp(1.35rem, 2.5vw, 1.8rem);
       letter-spacing: 0.6px;
       line-height: 1.2;
@@ -286,12 +296,12 @@
     .service-card-body { padding: 1.75rem; display: flex; flex-direction: column; flex: 1; }
     .service-card .btn-primary { margin-top: auto; }
     .service-card-body h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 0.5rem;
     }
     .service-card-body p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
     .service-price {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 1.6rem; color: var(--blue-light); letter-spacing: 1px; margin-bottom: 1.25rem;
     }
     .service-price span { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); font-weight: 400; }
@@ -314,11 +324,11 @@
     .step-num {
       width: 44px; height: 44px; border-radius: 50%;
       border: 2px solid var(--blue-light); color: var(--blue-light);
-      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif; font-size: 1.1rem;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; background: var(--bg); z-index: 1;
     }
-    .step-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .step-content h3 { font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif; font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
     .step-content p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
 
     /* ── TESTIMONIALS ── */
@@ -368,7 +378,7 @@
     }
     @keyframes testimonialFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     .testimonial-quote-mark {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 2.5rem; line-height: 1; color: var(--blue-light);
     }
     .testimonial-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 2px; }
@@ -415,7 +425,7 @@
       margin-bottom: 0.6rem;
     }
     .apply-card-header h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 1.6rem; letter-spacing: 1px; color: #fff; margin-bottom: 0.4rem;
     }
     .apply-card-header p { color: rgba(255,255,255,0.8); font-size: 0.85rem; line-height: 1.5; }
@@ -452,7 +462,7 @@
       display: flex; flex-direction: column; gap: 1.25rem;
     }
     .contact-cta-card h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 2rem; letter-spacing: 1px; color: #fff; line-height: 1.1;
     }
     .contact-cta-card p { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.7; }
@@ -489,7 +499,7 @@
     .footer-bottom .legal-links a { color: var(--muted); font-size: 0.8rem; text-decoration: none; }
     .footer-bottom .legal-links a:hover { color: var(--text); }
     .footer-tagline {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: clamp(1.5rem, 4vw, 2.5rem);
       letter-spacing: 2px; color: var(--blue-light);
       text-align: center; padding: 2rem 0;
@@ -505,7 +515,7 @@
     }
     .faq-item:first-of-type { padding-top: 0; }
     .faq-item h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 1.15rem;
       letter-spacing: 0.5px;
       margin-bottom: 0.5rem;
@@ -542,7 +552,7 @@
       padding: 1.5rem;
     }
     .policy-item h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
       font-size: 1.6rem;
       letter-spacing: 1px;
       margin-bottom: 0.75rem;
@@ -692,17 +702,17 @@
   <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 2.5rem; max-width:1100px; margin:0 auto; text-align:center;">
     <div>
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:0.9rem;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">My Mission</h3>
+      <h3 style="font-family:'Bebas Neue','Bebas Neue Fallback',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">My Mission</h3>
       <p style="color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.7;">Help you become content with yourself by losing body fat, gaining strength and building muscle without extreme diets or fake fitness advice - with real and sustainable methods you can follow for life.</p>
     </div>
     <div>
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:0.9rem;"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">My Approach</h3>
+      <h3 style="font-family:'Bebas Neue','Bebas Neue Fallback',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">My Approach</h3>
       <p style="color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.7;">Training and nutrition don't need to be complicated. Progressive training, flexible and sustainable nutritional guidance, and consistent habits - to get realistic results without starving or overtraining.</p>
     </div>
     <div>
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:0.9rem;"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">What You Get</h3>
+      <h3 style="font-family:'Bebas Neue','Bebas Neue Fallback',sans-serif; font-size:1.6rem; letter-spacing:1px; margin-bottom:0.75rem; color:#fff;">What You Get</h3>
       <p style="color:rgba(255,255,255,0.8); font-size:0.9rem; line-height:1.7;">Personalised workout plans, detailed meal guides and honest coaching. Whether you choose full coaching or just a plan, everything is built to help you progress step by step.</p>
     </div>
   </div>
@@ -779,7 +789,7 @@
     <div style="position:relative;">
       <img src="images/photo2.webp" alt="Bernil demonstrating correct training form during an online coaching session" loading="lazy" width="1080" height="1080" style="width:100%; height:auto; border-radius:8px; display:block; object-fit:cover; aspect-ratio:1/1; border:1px solid var(--border);"/>
       <div style="position:absolute; bottom:0; left:0; right:0; padding:1.5rem; background:linear-gradient(to top, rgba(10,10,10,0.92) 0%, transparent 100%); border-radius:0 0 8px 8px;">
-        <p style="color:#fff; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:1px; margin:0;">Personalised. Progressive. Results-driven.</p>
+        <p style="color:#fff; font-family:'Bebas Neue','Bebas Neue Fallback',sans-serif; font-size:1.1rem; letter-spacing:1px; margin:0;">Personalised. Progressive. Results-driven.</p>
       </div>
     </div>
   </div>
