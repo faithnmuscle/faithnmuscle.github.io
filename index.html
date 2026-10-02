@@ -305,6 +305,9 @@
       font-size: 1.6rem; color: var(--blue-light); letter-spacing: 1px; margin-bottom: 1.25rem;
     }
     .service-price span { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+    .service-tiers { display: flex; flex-direction: column; gap: 0.35rem; margin: -0.75rem 0 1.25rem; font-size: 0.82rem; color: #bbb; }
+    .service-tiers strong { color: var(--text); margin-right: 0.35rem; }
+    .service-tiers .tier-save { margin-left: 0.4rem; font-size: 0.72rem; color: var(--blue-light); }
     .service-card ul { list-style: none; margin-bottom: 1.5rem; }
     .service-card ul li {
       color: #bbb; font-size: 0.85rem; padding: 0.3rem 0;
@@ -734,6 +737,10 @@
         <h3>Online 1-on-1 Coaching</h3>
         <p>Full online coaching with daily check-ins, workout tracking and nutritional guidance. A personalised workout plan, nutrition plan and program tracking sheet - all managed through messages and video calls.</p>
         <div class="service-price">LKR 16,000 <span>/ month</span></div>
+        <div class="service-tiers">
+          <div class="service-tier"><strong>3-Month</strong>45,000 LKR total<span class="tier-save">save 3,000</span></div>
+          <div class="service-tier"><strong>6-Month</strong>90,000 LKR total<span class="tier-save">save 6,000</span></div>
+        </div>
         <ul>
           <li>Personalised workout program</li>
           <li>Custom nutrition plan</li>
@@ -746,6 +753,10 @@
     </div>
 
   </div>
+  <p style="color:#d8d8d6; font-style:italic; font-size:0.95rem; line-height:1.7; max-width:700px; margin:2.5rem auto 0; padding-left:1.25rem; border-left:3px solid var(--blue-light);">
+    "I don't sell instant, temporary fixes or fake 30-day promises. Real muscle growth, strength, and sustainable fat loss require progressive adaptation and patience. Whether we work together for 3 or 6 months, you will see a real, significant change in your mirror and in your performance - built on actual exercise science, not quick tricks."
+    <span style="display:block; margin-top:0.6rem; font-style:normal; font-size:0.8rem; color:var(--muted);">- Bernil</span>
+  </p>
   <p style="color:var(--muted); font-size:0.82rem; margin:2rem auto 0; max-width:700px; border-top:1px solid var(--border); padding-top:1.5rem; line-height:1.6;">
     <strong style="color:var(--text);">Important:</strong> Programs will only be created after complete payment is confirmed. Filling the questionnaire does not guarantee service until payment has been completed. Once the plan has been prepared, cancellation is not allowed (see <a href="#refund-policy" style="color:var(--blue-light);">Refund Policy</a>). All plans are made for personal use only - copying, sharing, reselling or distributing without permission is strictly prohibited (see <a href="#terms-and-conditions" style="color:var(--blue-light);">Terms &amp; Conditions</a>). If you have a serious or medical condition, consult a doctor before starting (see <a href="#privacy-policy" style="color:var(--blue-light);">Privacy Policy</a> and Disclaimer).
   </p>
@@ -822,7 +833,7 @@
 
     <div class="apply-card" id="form-coaching">
       <div class="apply-card-header">
-        <span class="apply-card-label">LKR 16,000 / mo</span>
+        <span class="apply-card-label">From LKR 16,000 / mo</span>
         <h3>Online 1-on-1 Coaching</h3>
         <p>Full coaching with daily check-ins, workout plan, nutrition plan, progress tracking and WhatsApp support.</p>
       </div>

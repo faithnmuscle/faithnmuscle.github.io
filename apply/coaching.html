@@ -15,6 +15,36 @@
   <meta name="robots" content="noindex"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="forms.css?v=6"/>
+  <style>
+    .tier-options { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .tier-option {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .tier-option:has(input:checked) { border-color: var(--blue-light); }
+    .tier-head {
+      display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; cursor: pointer;
+    }
+    .tier-head input[type="radio"] { accent-color: var(--blue-light); width: 18px; height: 18px; flex-shrink: 0; }
+    .tier-head .tier-name { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+    .tier-head .tier-price { margin-left: auto; text-align: right; font-weight: 700; white-space: nowrap; color: var(--text); }
+    .tier-head .tier-price small { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
+    .tier-body { padding: 0 1.25rem 1.1rem 3.1rem; font-size: 0.85rem; color: #cfcfcd; }
+    .tier-body .tier-best-for { color: var(--text); margin-bottom: 0.6rem; }
+    .tier-body .tier-best-for b { color: var(--blue-light); font-weight: 600; }
+    .tier-reality summary { cursor: pointer; font-size: 0.78rem; color: var(--muted); list-style: none; margin-bottom: 0.6rem; }
+    .tier-reality summary::-webkit-details-marker { display: none; }
+    .tier-reality summary::before { content: "+ "; color: var(--blue-light); }
+    .tier-reality[open] summary::before { content: "\2013 "; }
+    .tier-reality p { margin-top: 0.5rem; color: #b8b8b6; font-size: 0.83rem; line-height: 1.6; }
+    .tier-includes { list-style: none; display: grid; gap: 0.3rem; }
+    .tier-includes li { padding-left: 1rem; position: relative; font-size: 0.82rem; color: #cfcfcd; }
+    .tier-includes li::before { content: "\2013"; position: absolute; left: 0; color: var(--blue-light); }
+    .coaching-philosophy {
+      background: var(--bg3); border-left: 3px solid var(--blue-light); border-radius: 8px;
+      padding: 1.1rem 1.25rem; margin-top: 1rem; font-style: italic; color: #d8d8d6; font-size: 0.88rem; line-height: 1.7;
+    }
+    .coaching-philosophy span { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.76rem; color: var(--muted); }
+  </style>
 </head>
 <body>
 
@@ -29,7 +59,7 @@
 <div class="form-page-header">
   <p class="form-page-label">Apply Now</p>
   <h1 class="form-page-title">Online 1-on-1 Coaching</h1>
-  <p class="form-page-price">LKR 16,000 / month · Full coaching with daily check-ins</p>
+  <p class="form-page-price">From LKR 16,000 / month · Choose your package below</p>
 </div>
 
 <div class="form-container">
@@ -43,6 +73,81 @@
     <div class="form-intro">
       <div class="form-intro-welcome">Hey there, thank you for choosing online coaching. Please fill out this form honestly so I can understand your goals, lifestyle, and training background before we get started.</div>
       <p class="form-intro-policy"><strong>Please read before filling in:</strong> Fill in the form honestly so I can understand your goals and build the right program for you. Payment details will be shown at the end once you've completed everything. Your program will only be created after payment is confirmed. <strong>Personalized plans are non-refundable once prepared.</strong></p>
+    </div>
+
+    <!-- PACKAGE SELECTION -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <h2 class="form-section-title">Choose Your Package</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="tier-options">
+
+          <label class="tier-option">
+            <div class="tier-head">
+              <input type="radio" name="commitment_months" value="1" checked/>
+              <span class="tier-name">Standard Monthly</span>
+              <span class="tier-price">16,000 LKR<small>every 30 days</small></span>
+            </div>
+            <div class="tier-body">
+              <p class="tier-best-for"><b>Best for:</b> short-term guidance or ongoing monthly flexibility.</p>
+              <ul class="tier-includes">
+                <li>Customized strength &amp; hypertrophy training program</li>
+                <li>Flexible nutrition &amp; macro guidance</li>
+                <li>Weekly check-ins and direct messaging support</li>
+              </ul>
+            </div>
+          </label>
+
+          <label class="tier-option">
+            <div class="tier-head">
+              <input type="radio" name="commitment_months" value="3"/>
+              <span class="tier-name">3-Month Transformation</span>
+              <span class="tier-price">45,000 LKR<small>total, save 3,000</small></span>
+            </div>
+            <div class="tier-body">
+              <p class="tier-best-for"><b>Best for:</b> individuals already at a moderate or lower body fat level, looking to lean out, build targeted muscle mass, and optimize strength and performance.</p>
+              <details class="tier-reality"><summary>The reality and expectations</summary>
+                <p>Three months (12 weeks) is a powerful block of time to make noticeable structural changes to your body. If you're already relatively lean, 90 days allows us to fine-tune your nutrition, execute structured progressive overload, and strip off that remaining layer of fat while putting on lean muscle. It's not a magic fix for years of inactivity - it's a focused sprint to elevate your baseline and build the foundation for long-term progress.</p>
+              </details>
+              <ul class="tier-includes">
+                <li>Customized strength &amp; hypertrophy training program</li>
+                <li>Flexible nutrition &amp; macro framework, no restrictive meal plans</li>
+                <li>Weekly form audits &amp; video analysis</li>
+                <li>Weekly check-ins &amp; program adjustments</li>
+                <li>Direct messaging support throughout your 90 days</li>
+              </ul>
+            </div>
+          </label>
+
+          <label class="tier-option">
+            <div class="tier-head">
+              <input type="radio" name="commitment_months" value="6"/>
+              <span class="tier-name">6-Month Total Physique Rebuild</span>
+              <span class="tier-price">90,000 LKR<small>total, save 6,000</small></span>
+            </div>
+            <div class="tier-body">
+              <p class="tier-best-for"><b>Best for:</b> higher body fat percentages wanting significant fat loss while building muscle, re-engineering baseline habits, and making a lasting transformation.</p>
+              <details class="tier-reality"><summary>The reality and expectations</summary>
+                <p>If you're starting with a higher body fat percentage, a 3-month window isn't long enough to safely and sustainably reach your peak physique. The 6-month program provides the runway to execute proper fat loss phases without crashing your energy, metabolism, or performance. A physique that takes 1 to 2 years to build can't be duplicated in 6 months - but this will give you a dramatic, high-impact transformation and the long-term habits to keep it for life.</p>
+              </details>
+              <ul class="tier-includes">
+                <li>Complete multi-phase periodized training across blocks</li>
+                <li>Advanced nutrition &amp; recomp strategy with refeeds</li>
+                <li>Priority weekly form audits &amp; movement coaching</li>
+                <li>Comprehensive weekly progress evaluations</li>
+                <li>Priority direct access and accountability throughout</li>
+              </ul>
+            </div>
+          </label>
+
+        </div>
+
+        <div class="coaching-philosophy">
+          "I don't sell instant, temporary fixes or fake 30-day promises. Real muscle growth, strength, and sustainable fat loss require progressive adaptation and patience. Whether we work together for 3 or 6 months, you will see a real, significant change in your mirror and in your performance - built on actual exercise science, not quick tricks."
+          <span>- Bernil, Coaching Philosophy</span>
+        </div>
+      </div>
     </div>
 
     <!-- SECTION 1: PARQ -->
@@ -464,11 +569,11 @@
           <span class="payment-label">Account number</span>
           <span class="payment-value payment-account">039020119599</span>
           <span class="payment-label">Amount</span>
-          <span class="payment-value payment-amount">LKR 16,000</span>
+          <span class="payment-value payment-amount" id="paymentAmount">LKR 16,000</span>
         </div>
         <label class="payment-confirm-label">
           <input type="checkbox" name="payment_acknowledged" value="yes"/>
-          <span>I have transferred LKR 16,000 to this account</span>
+          <span>I have transferred <span id="paymentConfirmAmount">LKR 16,000</span> to this account</span>
         </label>
       </div>
       <div class="form-submit-area" style="margin-top:1.5rem;">
@@ -493,5 +598,20 @@
 </footer>
 
 <script src="forms.js?v=6"></script>
+<script>
+  (function () {
+    var prices = { '1': 'LKR 16,000', '3': 'LKR 45,000', '6': 'LKR 90,000' };
+    var amountEl  = document.getElementById('paymentAmount');
+    var confirmEl = document.getElementById('paymentConfirmAmount');
+    document.querySelectorAll('input[name="commitment_months"]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        var text = prices[radio.value];
+        if (!text) return;
+        amountEl.textContent  = text;
+        confirmEl.textContent = text;
+      });
+    });
+  })();
+</script>
 </body>
 </html>
