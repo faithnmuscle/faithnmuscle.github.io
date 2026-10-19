@@ -473,13 +473,62 @@
             <label class="radio-label"><input type="radio" name="workout_location" value="Mix of both"/> Mix of both</label>
           </div>
         </div>
+
+        <div class="field">
+          <label>If you have been working out, or have worked out in the past, are there exercises from your routine you'd like to keep? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="exercise_keep_choice" value="I'm new to this, I don't know" required/> I'm new to this, I don't know</label>
+            <label class="radio-label"><input type="radio" name="exercise_keep_choice" value="I've been lifting for some time but I'm not sure"/> I've been lifting for some time but I'm not sure</label>
+            <label class="radio-label"><input type="radio" name="exercise_keep_choice" value="I'd like to specify below"/> I'd like to specify below</label>
+          </div>
+          <textarea name="exercise_keep_detail" placeholder="If you'd like to specify, list the exercises you want to keep"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Have you experienced pain performing an exercise in the past? If so, which exercise?</label>
+          <textarea name="exercise_pain_history" placeholder="e.g. lower back pain during deadlifts"></textarea>
+        </div>
+
+        <div class="field">
+          <label>If you've worked with a PT before and didn't improve on a certain exercise (weight or reps), which exercise was that?</label>
+          <textarea name="exercise_plateau" placeholder="e.g. bench press stayed the same for months"></textarea>
+        </div>
       </div>
     </div>
 
-    <!-- SECTION 6: Goals & Motivation -->
+    <!-- SECTION 6: Food Preferences -->
     <div class="form-section">
       <div class="form-section-header">
         <p class="form-section-number">Section 6</p>
+        <h2 class="form-section-title">Food Preferences</h2>
+      </div>
+      <div class="form-section-body">
+        <div class="field">
+          <label>What food items do you usually avoid?</label>
+          <textarea name="food_avoid" placeholder="e.g. dairy, seafood, spicy food"></textarea>
+        </div>
+
+        <div class="field">
+          <label>What food items do you usually consume on a daily basis?</label>
+          <textarea name="food_daily" placeholder="e.g. rice, eggs, chicken curry"></textarea>
+        </div>
+
+        <div class="field">
+          <label>What food items are easily available for you to purchase, given your weekly schedule?</label>
+          <textarea name="food_available" placeholder="e.g. what's near home, work, or on your commute"></textarea>
+        </div>
+
+        <div class="field">
+          <label>What food items do you really enjoy and want to keep while working towards your goals?</label>
+          <textarea name="food_enjoy" placeholder="e.g. foods you don't want cut out of your plan"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7: Goals & Motivation -->
+    <div class="form-section">
+      <div class="form-section-header">
+        <p class="form-section-number">Section 7</p>
         <h2 class="form-section-title">Goals & Motivation</h2>
       </div>
       <div class="form-section-body">
@@ -536,10 +585,10 @@
       </div>
     </div>
 
-    <!-- SECTION 7: Consent -->
+    <!-- SECTION 8: Consent -->
     <div class="form-section">
       <div class="form-section-header">
-        <p class="form-section-number">Section 7</p>
+        <p class="form-section-number">Section 8</p>
         <h2 class="form-section-title">Consent & Acknowledgement</h2>
       </div>
       <div class="form-section-body">
