@@ -245,6 +245,7 @@
     #testimonials .section-sub { margin-bottom: 1rem; }
     .testimonials-rating { color: var(--text); font-size: 1rem; font-weight: 600; margin: 0 0 2.5rem; min-height: calc(1.5em * 2); }
     .testimonials-rating .trs-stars { color: #f59e0b; letter-spacing: 2px; margin-right: 0.3rem; }
+    #hero .testimonials-rating { margin: 1.5rem 0 0; font-size: 0.9rem; min-height: 1.5em; }
 
     /* ── ABOUT ── */
     #about { background: var(--bg2); }
@@ -659,6 +660,7 @@
         <div class="hero-stat-label">Custom Programs</div>
       </div>
     </div>
+    <p class="testimonials-rating" id="hero-rating">Rated by real clients</p>
     <div class="hero-testimonial">
       <span class="hero-testimonial-text" id="top-strip-text">See what clients are saying below.</span>
     </div>
@@ -1122,11 +1124,6 @@
     } catch (e) { /* Supabase unreachable - section will be empty until retry */ }
   })();
 
-  // Shared with the auto-cycling hero strip below - set once the review stats
-  // fetch resolves, read fresh on every cycle so it slots into rotation
-  // whenever it's ready, regardless of which fetch finishes first.
-  let heroRatingText = null;
-
   // Load review count + average rating for the hero strip and testimonials header
   (async function loadReviewStats() {
     const SUPABASE_URL = 'https://omvsxvkwbufskkowqhlr.supabase.co';
@@ -1148,14 +1145,15 @@
       const avgText = avg.toFixed(1);
       const reviewWord = count === 1 ? 'review' : 'reviews';
 
-      heroRatingText = `${avgText}★ average from ${count} ${reviewWord}`;
+      const roundedStars = Math.round(avg);
+      const starsHtml = '&#9733;'.repeat(roundedStars) + '&#9734;'.repeat(5 - roundedStars);
+      const ratingHtml = `<span class="trs-stars">${starsHtml}</span> ${avgText} out of 5 &middot; ${count} ${reviewWord}`;
+
+      const heroRatingEl = document.getElementById('hero-rating');
+      if (heroRatingEl) heroRatingEl.innerHTML = ratingHtml;
 
       const ratingEl = document.getElementById('testimonials-rating');
-      if (ratingEl) {
-        const roundedStars = Math.round(avg);
-        const starsHtml = '&#9733;'.repeat(roundedStars) + '&#9734;'.repeat(5 - roundedStars);
-        ratingEl.innerHTML = `<span class="trs-stars">${starsHtml}</span> ${avgText} out of 5 &middot; ${count} ${reviewWord}`;
-      }
+      if (ratingEl) ratingEl.innerHTML = ratingHtml;
     } catch (e) { /* Supabase unreachable - fallback text stays as-is */ }
   })();
 
@@ -1193,31 +1191,26 @@
 
     let idx = 0;
     let timer = null;
-    // The review-stats rating (set by loadReviewStats above) slots in as item
-    // 0 and recurs in rotation alongside the real client quotes, rather than
-    // being overwritten the moment quotes become available.
-    function getItems() {
-      const quotes = Array.from(document.querySelectorAll('.testimonial-card p')).map(p => p.textContent.trim()).filter(Boolean).map(text => ({ text, raw: false }));
-      if (heroRatingText) quotes.unshift({ text: heroRatingText, raw: true });
-      return quotes;
+    function getQuotes() {
+      return Array.from(document.querySelectorAll('.testimonial-card p')).map(p => p.textContent.trim()).filter(Boolean);
     }
     function readingTimeMs(text) {
       const words = text.split(/\s+/).filter(Boolean).length;
       return Math.max(4000, Math.min(12000, (words / 200) * 60000 + 1500));
     }
     function render() {
-      const items = getItems();
-      if (!items.length) return null;
-      idx = idx % items.length;
-      const item = items[idx];
-      textEl.textContent = item.raw ? item.text : ('“' + item.text + '”');
-      return item.text;
+      const quotes = getQuotes();
+      if (!quotes.length) return null;
+      idx = idx % quotes.length;
+      const text = quotes[idx];
+      textEl.textContent = '“' + text + '”';
+      return text;
     }
     function scheduleNext() {
       clearTimeout(timer);
-      const items = getItems();
-      if (!items.length) return;
-      const current = items[idx % items.length];
+      const quotes = getQuotes();
+      if (!quotes.length) return;
+      const currentText = quotes[idx % quotes.length];
       timer = setTimeout(() => {
         textEl.style.opacity = '0';
         setTimeout(() => {
@@ -1226,7 +1219,7 @@
           textEl.style.opacity = '1';
           scheduleNext();
         }, 350);
-      }, readingTimeMs(current.text));
+      }, readingTimeMs(currentText));
     }
 
     render();
