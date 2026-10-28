@@ -1122,6 +1122,11 @@
     } catch (e) { /* Supabase unreachable - section will be empty until retry */ }
   })();
 
+  // Shared with the auto-cycling hero strip below - set once the review stats
+  // fetch resolves, read fresh on every cycle so it slots into rotation
+  // whenever it's ready, regardless of which fetch finishes first.
+  let heroRatingText = null;
+
   // Load review count + average rating for the hero strip and testimonials header
   (async function loadReviewStats() {
     const SUPABASE_URL = 'https://omvsxvkwbufskkowqhlr.supabase.co';
@@ -1143,8 +1148,7 @@
       const avgText = avg.toFixed(1);
       const reviewWord = count === 1 ? 'review' : 'reviews';
 
-      const heroEl = document.getElementById('top-strip-text');
-      if (heroEl) heroEl.textContent = `${avgText}★ average from ${count} ${reviewWord}`;
+      heroRatingText = `${avgText}★ average from ${count} ${reviewWord}`;
 
       const ratingEl = document.getElementById('testimonials-rating');
       if (ratingEl) {
@@ -1189,26 +1193,31 @@
 
     let idx = 0;
     let timer = null;
-    function getQuotes() {
-      return Array.from(document.querySelectorAll('.testimonial-card p')).map(p => p.textContent.trim()).filter(Boolean);
+    // The review-stats rating (set by loadReviewStats above) slots in as item
+    // 0 and recurs in rotation alongside the real client quotes, rather than
+    // being overwritten the moment quotes become available.
+    function getItems() {
+      const quotes = Array.from(document.querySelectorAll('.testimonial-card p')).map(p => p.textContent.trim()).filter(Boolean).map(text => ({ text, raw: false }));
+      if (heroRatingText) quotes.unshift({ text: heroRatingText, raw: true });
+      return quotes;
     }
     function readingTimeMs(text) {
       const words = text.split(/\s+/).filter(Boolean).length;
       return Math.max(4000, Math.min(12000, (words / 200) * 60000 + 1500));
     }
     function render() {
-      const quotes = getQuotes();
-      if (!quotes.length) return null;
-      idx = idx % quotes.length;
-      const text = quotes[idx];
-      textEl.textContent = '“' + text + '”';
-      return text;
+      const items = getItems();
+      if (!items.length) return null;
+      idx = idx % items.length;
+      const item = items[idx];
+      textEl.textContent = item.raw ? item.text : ('“' + item.text + '”');
+      return item.text;
     }
     function scheduleNext() {
       clearTimeout(timer);
-      const quotes = getQuotes();
-      if (!quotes.length) return;
-      const currentText = quotes[idx % quotes.length];
+      const items = getItems();
+      if (!items.length) return;
+      const current = items[idx % items.length];
       timer = setTimeout(() => {
         textEl.style.opacity = '0';
         setTimeout(() => {
@@ -1217,7 +1226,7 @@
           textEl.style.opacity = '1';
           scheduleNext();
         }, 350);
-      }, readingTimeMs(currentText));
+      }, readingTimeMs(current.text));
     }
 
     render();
