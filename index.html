@@ -242,6 +242,9 @@
       letter-spacing: 1px; line-height: 1; margin-bottom: 1rem;
     }
     .section-sub { color: var(--muted); max-width: 720px; line-height: 1.7; margin-bottom: 3rem; }
+    #testimonials .section-sub { margin-bottom: 1rem; }
+    .testimonials-rating { color: var(--text); font-size: 1rem; font-weight: 600; margin: 0 0 2.5rem; min-height: calc(1.5em * 2); }
+    .testimonials-rating .trs-stars { color: #f59e0b; letter-spacing: 2px; margin-right: 0.3rem; }
 
     /* ── ABOUT ── */
     #about { background: var(--bg2); }
@@ -812,6 +815,7 @@
   <p class="section-label">Client Results</p>
   <h2 class="section-title">In Their Words</h2>
   <p class="section-sub">Real feedback from coaching clients.</p>
+  <p class="testimonials-rating" id="testimonials-rating">Rated by real clients</p>
   <div class="testimonials-carousel">
     <button type="button" class="testimonials-nav testimonials-nav-prev" aria-label="Previous review">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1116,6 +1120,39 @@
 
       document.dispatchEvent(new CustomEvent('testimonials:loaded'));
     } catch (e) { /* Supabase unreachable - section will be empty until retry */ }
+  })();
+
+  // Load review count + average rating for the hero strip and testimonials header
+  (async function loadReviewStats() {
+    const SUPABASE_URL = 'https://omvsxvkwbufskkowqhlr.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9tdnN4dmt3YnVmc2trb3dxaGxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNTI2MjMsImV4cCI6MjA5MTgyODYyM30.HS5YKPWCf8omfWTu-Fe2sK_lP9jxkzwePl5mwjCn0JE';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/approved_reviews?select=rating`, {
+        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if (!res.ok) return;
+
+      const rows = await res.json();
+      const count = rows.length;
+      if (!count) return;
+
+      const rated = rows.filter(r => r.rating).map(r => r.rating);
+      if (!rated.length) return;
+      const avg = rated.reduce((sum, r) => sum + r, 0) / rated.length;
+      const avgText = avg.toFixed(1);
+      const reviewWord = count === 1 ? 'review' : 'reviews';
+
+      const heroEl = document.getElementById('top-strip-text');
+      if (heroEl) heroEl.textContent = `${avgText}★ average from ${count} ${reviewWord}`;
+
+      const ratingEl = document.getElementById('testimonials-rating');
+      if (ratingEl) {
+        const roundedStars = Math.round(avg);
+        const starsHtml = '&#9733;'.repeat(roundedStars) + '&#9734;'.repeat(5 - roundedStars);
+        ratingEl.innerHTML = `<span class="trs-stars">${starsHtml}</span> ${avgText} out of 5 &middot; ${count} ${reviewWord}`;
+      }
+    } catch (e) { /* Supabase unreachable - fallback text stays as-is */ }
   })();
 
   // Testimonials carousel arrows
